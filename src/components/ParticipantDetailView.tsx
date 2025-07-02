@@ -14,11 +14,70 @@ interface ParticipantDetailViewProps {
 const ParticipantDetailView = ({ open, onOpenChange, participantId }: ParticipantDetailViewProps) => {
   if (!participantId) return null;
 
-  // Mock detailed participant data
+  // Mock participant data that matches the table data
+  const participantData = {
+    P001: {
+      patientId: "P001",
+      token: "PTK-9283-WZ1",
+      enrollmentDate: "2024-10-15",
+      lastVisit: "2024-12-01",
+      nextVisit: "2024-12-15",
+      questionnairesCompleted: 8,
+      questionnairesTotal: 10,
+      visitStatus: 'scheduled' as const,
+      complianceRate: 96
+    },
+    P002: {
+      patientId: "P002",
+      token: "PTK-4751-QR3",
+      enrollmentDate: "2024-10-20",
+      lastVisit: "2024-12-05",
+      nextVisit: "2024-12-16",
+      questionnairesCompleted: 9,
+      questionnairesTotal: 10,
+      visitStatus: 'scheduled' as const,
+      complianceRate: 98
+    },
+    P003: {
+      patientId: "P003",
+      token: "PTK-8239-MN7",
+      enrollmentDate: "2024-10-18",
+      lastVisit: "2024-11-28",
+      nextVisit: "2024-12-12",
+      questionnairesCompleted: 7,
+      questionnairesTotal: 10,
+      visitStatus: 'overdue' as const,
+      complianceRate: 89
+    },
+    P004: {
+      patientId: "P004",
+      token: "PTK-5642-LP9",
+      enrollmentDate: "2024-11-01",
+      lastVisit: "2024-12-08",
+      nextVisit: "2024-12-20",
+      questionnairesCompleted: 6,
+      questionnairesTotal: 8,
+      visitStatus: 'completed' as const,
+      complianceRate: 94
+    },
+    P005: {
+      patientId: "P005",
+      token: "PTK-7194-KX2",
+      enrollmentDate: "2024-11-05",
+      lastVisit: "2024-12-02",
+      nextVisit: "2024-12-18",
+      questionnairesCompleted: 5,
+      questionnairesTotal: 8,
+      visitStatus: 'scheduled' as const,
+      complianceRate: 92
+    }
+  };
+
+  const participant = participantData[participantId as keyof typeof participantData];
+  if (!participant) return null;
+
   const participantDetails = {
-    patientId: participantId,
-    token: "PTK-9283-WZ1",
-    enrollmentDate: "2024-10-15",
+    ...participant,
     status: "Active",
     demographics: {
       age: 45,
@@ -31,26 +90,32 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
       preferredContact: "Email"
     },
     studyProgress: {
-      visitsCompleted: 8,
+      visitsCompleted: participant.visitStatus === 'completed' ? 8 : 7,
       visitsTotal: 12,
-      questionnairesCompleted: 15,
-      questionnairesTotal: 18,
-      complianceRate: 94
+      questionnairesCompleted: participant.questionnairesCompleted,
+      questionnairesTotal: participant.questionnairesTotal,
+      complianceRate: participant.complianceRate
     },
     recentActivity: [
-      { date: "2024-12-08", activity: "Completed Weekly Survey", type: "questionnaire" },
-      { date: "2024-12-05", activity: "Site Visit - Blood Draw", type: "visit" },
+      { date: participant.lastVisit, activity: "Site Visit - Blood Draw", type: "visit" },
       { date: "2024-12-02", activity: "Medication Adherence Survey", type: "questionnaire" },
-      { date: "2024-11-28", activity: "Follow-up Call", type: "call" }
+      { date: "2024-11-28", activity: "Follow-up Call", type: "call" },
+      { date: "2024-11-25", activity: "Weekly Survey", type: "questionnaire" }
     ],
     upcomingEvents: [
-      { date: "2024-12-15", activity: "Site Visit", time: "2:00 PM" },
-      { date: "2024-12-18", activity: "Weekly Survey Due", time: "End of day" }
+      { date: participant.nextVisit, activity: "Site Visit", time: "2:00 PM" },
+      { date: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], activity: "Weekly Survey Due", time: "End of day" }
     ],
-    alerts: [
-      { type: "warning", message: "Missed last diary entry" },
-      { type: "info", message: "Due for monthly assessment" }
-    ]
+    alerts: participant.visitStatus === 'overdue' 
+      ? [
+          { type: "warning", message: "Visit overdue" },
+          { type: "info", message: "Due for monthly assessment" }
+        ]
+      : participant.complianceRate < 95
+      ? [
+          { type: "info", message: "Due for monthly assessment" }
+        ]
+      : []
   };
 
   const getActivityTypeColor = (type: string) => {
@@ -58,6 +123,15 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
       case 'visit': return 'bg-red-100 text-red-800';
       case 'questionnaire': return 'bg-blue-100 text-blue-800';
       case 'call': return 'bg-purple-100 text-purple-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'completed': return 'bg-green-100 text-green-800';
+      case 'scheduled': return 'bg-blue-100 text-blue-800';
+      case 'overdue': return 'bg-red-100 text-red-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
@@ -112,8 +186,18 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                   <span>{new Date(participantDetails.enrollmentDate).toLocaleDateString()}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-studio-text-muted">Status:</span>
-                  <Badge className="bg-green-100 text-green-800">{participantDetails.status}</Badge>
+                  <span className="text-sm text-studio-text-muted">Visit Status:</span>
+                  <Badge className={getStatusColor(participantDetails.visitStatus)}>
+                    {participantDetails.visitStatus}
+                  </Badge>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-sm text-studio-text-muted">Last Visit:</span>
+                  <span>{new Date(participantDetails.lastVisit).toLocaleDateString()}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-sm text-studio-text-muted">Next Visit:</span>
+                  <span>{new Date(participantDetails.nextVisit).toLocaleDateString()}</span>
                 </div>
               </CardContent>
             </Card>

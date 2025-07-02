@@ -121,6 +121,12 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
     setShowScheduler(true);
   };
 
+  const handleBarcodeClick = (token: string) => {
+    // Generate a barcode image URL (using a barcode generation service)
+    const barcodeUrl = `https://barcode.tec-it.com/barcode.ashx?data=${encodeURIComponent(token)}&code=Code128&dpi=300&dataseparator=`;
+    window.open(barcodeUrl, '_blank', 'width=800,height=400');
+  };
+
   return (
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
@@ -170,10 +176,16 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
                         </TableCell>
                         <TableCell>
                           <div className="flex items-center space-x-2">
-                            <Barcode className="h-4 w-4 text-studio-text-muted" />
-                            <code className="font-mono text-sm">
-                              {participant.token}
-                            </code>
+                            <button
+                              onClick={() => handleBarcodeClick(participant.token)}
+                              className="flex items-center space-x-2 hover:bg-gray-100 p-1 rounded transition-colors cursor-pointer"
+                              title="Click to view barcode"
+                            >
+                              <Barcode className="h-4 w-4 text-studio-text-muted hover:text-blue-600" />
+                              <code className="font-mono text-sm hover:text-blue-600">
+                                {participant.token}
+                              </code>
+                            </button>
                           </div>
                         </TableCell>
                         <TableCell>
