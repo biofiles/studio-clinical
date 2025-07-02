@@ -17,7 +17,7 @@ const Header = ({ role, onLogout }: HeaderProps) => {
           {role && (
             <div className="flex items-center space-x-2">
               <span className="text-studio-text-muted">•</span>
-              <span className="text-sm text-studio-text-muted capitalize">
+              <span className="text-sm text-studio-text-muted capitalize text-center">
                 {role.replace('-', '/')}
               </span>
             </div>
