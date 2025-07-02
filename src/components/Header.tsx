@@ -7,10 +7,9 @@ import { useLanguage } from "@/contexts/LanguageContext";
 interface HeaderProps {
   role?: string;
   onLogout?: () => void;
-  hideSettings?: boolean;
 }
 
-const Header = ({ role, onLogout, hideSettings }: HeaderProps) => {
+const Header = ({ role, onLogout }: HeaderProps) => {
   const navigate = useNavigate();
   const { t } = useLanguage();
 
@@ -36,7 +35,7 @@ const Header = ({ role, onLogout, hideSettings }: HeaderProps) => {
           <h1 className="text-2xl font-light tracking-widest text-studio-text">
             STUDIO
           </h1>
-          {role && (
+          {role && role !== 'participant' && (
             <div className="flex items-center space-x-2">
               <span className="text-studio-text-muted">•</span>
               <span className="text-sm text-studio-text-muted capitalize ml-2 mt-1 mr-1">
@@ -47,16 +46,14 @@ const Header = ({ role, onLogout, hideSettings }: HeaderProps) => {
         </div>
 
         <div className="flex items-center space-x-3">
-          {!hideSettings && (
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleSettings}
-            >
-              <Settings className="h-4 w-4 mr-2" />
-              {t('header.settings')}
-            </Button>
-          )}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleSettings}
+          >
+            <Settings className="h-4 w-4 mr-2" />
+            {t('header.settings')}
+          </Button>
         </div>
       </div>
     </header>

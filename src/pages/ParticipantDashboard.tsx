@@ -82,7 +82,6 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
     <div className="min-h-screen bg-studio-bg">
       <Header
         role="participant"
-        hideSettings={true}
       />
 
 
@@ -171,8 +170,18 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                         <div className="flex-1">
                           <div className="flex items-center space-x-2 mb-1">
                             <p className="font-medium text-studio-text">{item.activity}</p>
-                            <Badge variant="outline">
-                              {item.type}
+                            <Badge 
+                              variant="secondary" 
+                              className={`text-xs ${
+                                item.type === 'visit' ? 'bg-red-100 text-red-800 border-red-200' :
+                                item.type === 'questionnaire' ? 'bg-blue-100 text-blue-800 border-blue-200' :
+                                item.type === 'diary' ? 'bg-green-100 text-green-800 border-green-200' :
+                                'bg-gray-100 text-gray-800 border-gray-200'
+                              }`}
+                            >
+                              {item.type === 'visit' ? 'Visita' :
+                               item.type === 'questionnaire' ? 'Cuestionario' :
+                               item.type === 'diary' ? 'Diario' : item.type}
                             </Badge>
                           </div>
                           <p className="text-sm text-studio-text-muted mb-2">{item.date} at {item.time}</p>
@@ -533,18 +542,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
         </Tabs>
       </main>
 
-      {/* Bottom actions section */}
-      <div className="fixed bottom-4 left-4 right-4 sm:left-6 sm:right-6 flex justify-between items-end">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => navigate('/settings')}
-          className="bg-white shadow-lg border-gray-200"
-        >
-          <Settings className="h-4 w-4 mr-2" />
-          {t('header.settings')}
-        </Button>
-        
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6">
         <Button
           onClick={() => setShowChatbot(true)}
           className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg"
