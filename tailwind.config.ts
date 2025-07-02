@@ -52,6 +52,13 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				studio: {
+					bg: 'hsl(var(--studio-bg))',
+					surface: 'hsl(var(--studio-surface))',
+					border: 'hsl(var(--studio-border))',
+					text: 'hsl(var(--studio-text))',
+					'text-muted': 'hsl(var(--studio-text-muted))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
