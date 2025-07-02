@@ -7,9 +7,10 @@ import { useLanguage } from "@/contexts/LanguageContext";
 interface HeaderProps {
   role?: string;
   onLogout?: () => void;
+  hideSettings?: boolean;
 }
 
-const Header = ({ role, onLogout }: HeaderProps) => {
+const Header = ({ role, onLogout, hideSettings }: HeaderProps) => {
   const navigate = useNavigate();
   const { t } = useLanguage();
 
@@ -46,14 +47,16 @@ const Header = ({ role, onLogout }: HeaderProps) => {
         </div>
 
         <div className="flex items-center space-x-3">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleSettings}
-          >
-            <Settings className="h-4 w-4 mr-2" />
-            {t('header.settings')}
-          </Button>
+          {!hideSettings && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleSettings}
+            >
+              <Settings className="h-4 w-4 mr-2" />
+              {t('header.settings')}
+            </Button>
+          )}
         </div>
       </div>
     </header>

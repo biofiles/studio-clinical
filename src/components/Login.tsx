@@ -17,20 +17,20 @@ const Login = ({ onRoleSelect }: LoginProps) => {
   const roles = [
     {
       id: 'participant' as const,
-      title: t('login.participant'),
-      description: t('login.participant.description') || 'Join as a study participant',
+      title: 'Participante',
+      description: 'Unirse como participante del estudio',
       icon: User
     },
     {
       id: 'investigator' as const,
-      title: t('login.investigator'),
-      description: t('login.investigator.description') || 'Access site management tools',
+      title: 'Investigador del Sitio',
+      description: 'Acceder a herramientas de gestión del sitio',
       icon: UserCheck
     },
     {
       id: 'cro-sponsor' as const,
-      title: t('login.cro.sponsor'),
-      description: t('login.cro.sponsor.description') || 'Monitor studies and sites',
+      title: 'CRO/Patrocinador',
+      description: 'Monitorear estudios y sitios',
       icon: Building
     }
   ];
@@ -68,7 +68,7 @@ const Login = ({ onRoleSelect }: LoginProps) => {
             STUDIO
           </h1>
           <p className="text-studio-text-muted text-sm">
-            {t('login.select.role.title') || 'Select your role to continue'}
+            Selecciona tu rol para continuar
           </p>
         </div>
 
@@ -97,12 +97,6 @@ const Login = ({ onRoleSelect }: LoginProps) => {
               </Card>
             );
           })}
-        </div>
-
-        <div className="text-center">
-          <p className="text-xs text-studio-text-muted">
-            {t('login.help') || 'Need help? Contact support'}
-          </p>
         </div>
       </div>
     </div>

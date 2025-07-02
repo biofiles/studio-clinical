@@ -82,6 +82,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
     <div className="min-h-screen bg-studio-bg">
       <Header
         role="participant"
+        hideSettings={true}
       />
 
 
