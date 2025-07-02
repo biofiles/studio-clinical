@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -10,17 +9,21 @@ import UserProfileDialog from "@/components/UserProfileDialog";
 import CalendarView from "@/components/CalendarView";
 import QuestionnairesView from "@/components/QuestionnairesView";
 import AIChatbot from "@/components/AIChatbot";
-import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode } from "lucide-react";
+import EConsentDialog from "@/components/EConsentDialog";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode, Signature } from "lucide-react";
 
 interface ParticipantDashboardProps {
   onLogout: () => void;
 }
 
 const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
+  const { t } = useLanguage();
   const [showCalendar, setShowCalendar] = useState(false);
   const [showQuestionnaires, setShowQuestionnaires] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showChatbot, setShowChatbot] = useState(false);
+  const [showEConsent, setShowEConsent] = useState(false);
   const [surveyCompleted, setSurveyCompleted] = useState(false);
 
   const studyProgress = 65;
@@ -29,7 +32,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
 
   const upcomingActivities = [
     { 
-      date: "Tomorrow", 
+      date: t('common.next'), 
       activity: "Weekly Survey", 
       time: "10:00 AM", 
       type: "questionnaire",
@@ -86,7 +89,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
           <div className="flex items-center space-x-2 mb-2 sm:mb-0">
             <User className="h-4 w-4 text-studio-text-muted" />
             <span className="text-sm font-medium text-studio-text">
-              Viewing Participant Dashboard - Study PROTO-2024-001
+              {t('common.welcome')} - Study PROTO-2024-001
             </span>
           </div>
           <div className="flex items-center space-x-4">
@@ -98,7 +101,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
             </div>
             <div className="flex items-center space-x-2 text-xs text-studio-text-muted">
               <Clock className="h-3 w-3" />
-              <span>Last activity: {new Date().toLocaleString()}</span>
+              <span>{t('common.active')}: {new Date().toLocaleString()}</span>
             </div>
           </div>
         </div>
@@ -108,10 +111,10 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
         {/* Welcome Section - Mobile first */}
         <div className="space-y-2 mb-6">
           <h2 className="text-xl sm:text-2xl font-medium text-studio-text">
-            Welcome back!
+            {t('common.welcome')}!
           </h2>
           <p className="text-studio-text-muted text-sm sm:text-base">
-            Phase II Clinical Trial | {daysLeft} days remaining
+            Phase II Clinical Trial | {daysLeft} {t('common.active')}
           </p>
         </div>
 
@@ -121,17 +124,17 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0">
               <div className="flex-1">
                 <div className="flex justify-between text-sm mb-2">
-                  <span className="text-studio-text-muted">Study Progress</span>
+                  <span className="text-studio-text-muted">{t('dashboard.study.progress')}</span>
                   <span className="text-studio-text font-medium">{studyProgress}%</span>
                 </div>
                 <Progress value={studyProgress} className="h-3 mb-2" />
                 <p className="text-xs text-studio-text-muted">
-                  Great progress! Keep up the excellent work.
+                  {t('common.loading')}
                 </p>
               </div>
               <div className="text-center sm:text-right sm:ml-6">
                 <p className="text-2xl sm:text-3xl font-bold text-studio-text">{daysLeft}</p>
-                <p className="text-xs text-studio-text-muted">DAYS LEFT</p>
+                <p className="text-xs text-studio-text-muted">{t('common.active')}</p>
               </div>
             </div>
           </CardContent>
@@ -139,22 +142,26 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
 
         {/* Main Sections - Mobile-first tabs */}
         <Tabs defaultValue="schedule" className="space-y-4">
-          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 h-auto">
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-5 h-auto">
             <TabsTrigger value="schedule" className="flex flex-col items-center space-y-1 h-16 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2">
               <Calendar className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-sm">Schedule</span>
+              <span className="text-xs sm:text-sm">{t('dashboard.manage.calendar')}</span>
             </TabsTrigger>
             <TabsTrigger value="questionnaires" className="flex flex-col items-center space-y-1 h-16 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2">
               <FileText className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-sm">Surveys</span>
+              <span className="text-xs sm:text-sm">{t('dashboard.questionnaires')}</span>
+            </TabsTrigger>
+            <TabsTrigger value="econsent" className="flex flex-col items-center space-y-1 h-16 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2">
+              <Signature className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-xs sm:text-sm">{t('econsent.title')}</span>
             </TabsTrigger>
             <TabsTrigger value="visits" className="flex flex-col items-center space-y-1 h-16 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2">
               <Activity className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-sm">Visits</span>
+              <span className="text-xs sm:text-sm">{t('dashboard.site.visits')}</span>
             </TabsTrigger>
             <TabsTrigger value="profile" className="flex flex-col items-center space-y-1 h-16 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2">
               <User className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-sm">Profile</span>
+              <span className="text-xs sm:text-sm">{t('details.demographics')}</span>
             </TabsTrigger>
           </TabsList>
 
@@ -268,6 +275,48 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                 )}
               </div>
             </div>
+          </TabsContent>
+
+          <TabsContent value="econsent" className="space-y-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
+              <h3 className="text-lg font-medium text-studio-text">{t('econsent.title')}</h3>
+              <Button 
+                variant="studio" 
+                size="sm"
+                onClick={() => setShowEConsent(true)}
+                className="w-full sm:w-auto"
+              >
+                <Signature className="h-4 w-4 mr-2" />
+                {t('econsent.view.signed')}
+              </Button>
+            </div>
+            
+            <Card className="bg-blue-50 border-blue-200">
+              <CardContent className="p-4">
+                <div className="flex items-start space-x-3">
+                  <Signature className="h-6 w-6 text-blue-600 mt-1" />
+                  <div className="flex-1">
+                    <p className="font-medium text-blue-800">{t('econsent.document.title')}</p>
+                    <p className="text-sm text-blue-700 mt-1">
+                      {t('econsent.subtitle')}
+                    </p>
+                    <ul className="text-xs text-blue-600 mt-2 space-y-1">
+                      <li>• {t('econsent.audio.play')} / {t('econsent.audio.pause')}</li>
+                      <li>• {t('econsent.search.placeholder')}</li>
+                      <li>• {t('econsent.signature.required')}</li>
+                    </ul>
+                    <Button
+                      size="sm"
+                      className="mt-3"
+                      onClick={() => setShowEConsent(true)}
+                    >
+                      <FileText className="h-4 w-4 mr-2" />
+                      {t('econsent.view.signed')}
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="visits" className="space-y-4">
@@ -396,6 +445,11 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
       <AIChatbot 
         open={showChatbot} 
         onOpenChange={setShowChatbot}
+      />
+
+      <EConsentDialog 
+        open={showEConsent} 
+        onOpenChange={setShowEConsent}
       />
     </div>
   );
