@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,6 +5,7 @@ import Header from "@/components/Header";
 import { Users, FileCheck, AlertTriangle, BarChart3, Calendar, UserCheck, MessageCircle, Download, Settings } from "lucide-react";
 import ParticipantList from "@/components/ParticipantList";
 import AIChatbot from "@/components/AIChatbot";
+import CalendarManagement from "@/components/CalendarManagement";
 
 interface InvestigatorDashboardProps {
   onLogout: () => void;
@@ -14,6 +14,7 @@ interface InvestigatorDashboardProps {
 const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
   const [showParticipantList, setShowParticipantList] = useState(false);
   const [showChatbot, setShowChatbot] = useState(false);
+  const [showCalendarManagement, setShowCalendarManagement] = useState(false);
 
   const nextEvents = [
     { date: "Dec 15, 2024", time: "2:00 PM", event: "P001 - Site Visit", type: "visit" },
@@ -23,10 +24,6 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
 
   const handleExportQuestionnaires = () => {
     alert("Exporting questionnaire data as PDF...");
-  };
-
-  const handleManageCalendar = () => {
-    alert("Opening calendar management interface...");
   };
 
   const handleQuestionnaires = () => {
@@ -142,7 +139,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
               <Button 
                 variant="studio" 
                 className="w-full justify-start"
-                onClick={handleManageCalendar}
+                onClick={() => setShowCalendarManagement(true)}
               >
                 <Calendar className="h-4 w-4 mr-2" />
                 Manage Calendar
@@ -167,7 +164,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
           </Card>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card className="bg-studio-surface border-studio-border">
             <CardHeader>
               <CardTitle className="text-studio-text">Study Progress</CardTitle>
@@ -187,16 +184,33 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
 
           <Card className="bg-studio-surface border-studio-border">
             <CardHeader>
-              <CardTitle className="text-studio-text">Compliance Rate</CardTitle>
+              <CardTitle className="text-studio-text">Diary Compliance</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-studio-text-muted">Overall</span>
-                  <span className="text-studio-text">94%</span>
+                  <span className="text-studio-text-muted">Daily Diaries</span>
+                  <span className="text-studio-text">89%</span>
                 </div>
                 <div className="w-full bg-studio-bg rounded-full h-2">
-                  <div className="bg-primary h-2 rounded-full" style={{ width: '94%' }}></div>
+                  <div className="bg-green-500 h-2 rounded-full" style={{ width: '89%' }}></div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-studio-surface border-studio-border">
+            <CardHeader>
+              <CardTitle className="text-studio-text">Visit Compliance</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                <div className="flex justify-between">
+                  <span className="text-studio-text-muted">Site Visits</span>
+                  <span className="text-studio-text">96%</span>
+                </div>
+                <div className="w-full bg-studio-bg rounded-full h-2">
+                  <div className="bg-blue-500 h-2 rounded-full" style={{ width: '96%' }}></div>
                 </div>
               </div>
             </CardContent>
@@ -219,6 +233,11 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
       <ParticipantList 
         open={showParticipantList}
         onOpenChange={setShowParticipantList}
+      />
+
+      <CalendarManagement
+        open={showCalendarManagement}
+        onOpenChange={setShowCalendarManagement}
       />
 
       <AIChatbot 
