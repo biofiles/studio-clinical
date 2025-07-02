@@ -83,47 +83,21 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
         onLogout={onLogout}
       />
 
-      {/* User Context Bar - Mobile optimized */}
-      <div className="bg-studio-surface border-b border-studio-border px-4 py-3">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between">
-          <div className="flex items-center space-x-2 mb-2 sm:mb-0">
-            <User className="h-4 w-4 text-studio-text-muted" />
-            <span className="text-sm font-medium text-studio-text">
-              {t('common.welcome')} - Study PROTO-2024-001
-            </span>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <Barcode className="h-4 w-4 text-studio-text-muted" />
-              <button 
-                onClick={() => setShowProfile(true)}
-                className="text-xs font-mono bg-gray-100 px-2 py-1 rounded hover:bg-gray-200 transition-colors cursor-pointer"
-              >
-                {participantToken}
-              </button>
-            </div>
-            <div className="flex items-center space-x-2 text-xs text-studio-text-muted">
-              <Clock className="h-3 w-3" />
-              <span>{t('common.active')}: {new Date().toLocaleString()}</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <main className="p-4 sm:p-6 max-w-6xl mx-auto">
+      <main className="p-3 sm:p-4 max-w-6xl mx-auto">{/* Reduced padding for mobile */}
         {/* Welcome Section - Mobile first */}
-        <div className="space-y-2 mb-6">
-          <h2 className="text-xl sm:text-2xl font-medium text-studio-text">
+        <div className="space-y-1 mb-4">
+          <h2 className="text-lg sm:text-xl font-medium text-studio-text">
             {t('common.welcome')}!
           </h2>
-          <p className="text-studio-text-muted text-sm sm:text-base">
+          <p className="text-studio-text-muted text-xs sm:text-sm">
             Phase II Clinical Trial | {daysLeft} {t('participant.days.remaining')}
           </p>
         </div>
 
         {/* Progress Overview - Mobile optimized */}
-        <Card className="bg-studio-surface border-studio-border mb-6">
-          <CardContent className="p-4 sm:p-6">
+        <Card className="bg-studio-surface border-studio-border mb-4">{/* Reduced margin */}
+          <CardContent className="p-3 sm:p-4">{/* Reduced padding */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0">
               <div className="flex-1">
                 <div className="flex justify-between text-sm mb-2">
@@ -141,40 +115,40 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
         </Card>
 
         {/* Main Sections - Mobile-first tabs */}
-        <Tabs defaultValue="schedule" className="space-y-4">
-          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-5 h-auto">
-            <TabsTrigger value="schedule" className="flex flex-col items-center space-y-1 h-16 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2">
-              <Calendar className="h-5 w-5 sm:h-4 sm:w-4" />
+        <Tabs defaultValue="schedule" className="space-y-3">{/* Reduced spacing */}
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-5 h-auto gap-1">{/* Added gap for mobile */}
+            <TabsTrigger value="schedule" className="flex flex-col items-center space-y-0.5 h-12 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-xs">
+              <Calendar className="h-4 w-4 sm:h-4 sm:w-4" />
               <span className="text-xs sm:text-sm">{t('dashboard.manage.calendar')}</span>
             </TabsTrigger>
-            <TabsTrigger value="questionnaires" className="flex flex-col items-center space-y-1 h-16 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2">
-              <FileText className="h-5 w-5 sm:h-4 sm:w-4" />
+            <TabsTrigger value="questionnaires" className="flex flex-col items-center space-y-0.5 h-12 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-xs">
+              <FileText className="h-4 w-4 sm:h-4 sm:w-4" />
               <span className="text-xs sm:text-sm">{t('dashboard.questionnaires')}</span>
             </TabsTrigger>
-            <TabsTrigger value="econsent" className="flex flex-col items-center space-y-1 h-16 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2">
-              <Signature className="h-5 w-5 sm:h-4 sm:w-4" />
+            <TabsTrigger value="econsent" className="flex flex-col items-center space-y-0.5 h-12 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-xs">
+              <Signature className="h-4 w-4 sm:h-4 sm:w-4" />
               <span className="text-xs sm:text-sm">{t('econsent.title')}</span>
             </TabsTrigger>
-            <TabsTrigger value="visits" className="flex flex-col items-center space-y-1 h-16 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2">
-              <Activity className="h-5 w-5 sm:h-4 sm:w-4" />
+            <TabsTrigger value="visits" className="flex flex-col items-center space-y-0.5 h-12 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-xs">
+              <Activity className="h-4 w-4 sm:h-4 sm:w-4" />
               <span className="text-xs sm:text-sm">{t('dashboard.site.visits')}</span>
             </TabsTrigger>
-            <TabsTrigger value="profile" className="flex flex-col items-center space-y-1 h-16 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2">
-              <User className="h-5 w-5 sm:h-4 sm:w-4" />
+            <TabsTrigger value="profile" className="flex flex-col items-center space-y-0.5 h-12 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-xs">
+              <User className="h-4 w-4 sm:h-4 sm:w-4" />
               <span className="text-xs sm:text-sm">{t('participant.profile')}</span>
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="schedule" className="space-y-4">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
-              <h3 className="text-lg font-medium text-studio-text">{t('participant.your.schedule')}</h3>
+          <TabsContent value="schedule" className="space-y-3">{/* Reduced spacing */}
+            <div className="flex flex-col space-y-2">{/* Mobile first layout */}
+              <h3 className="text-base font-medium text-studio-text">{t('participant.your.schedule')}</h3>{/* Smaller title */}
               <Button 
                 variant="studio" 
                 size="sm"
                 onClick={() => setShowCalendar(true)}
-                className="w-full sm:w-auto"
+                className="w-full text-xs"
               >
-                <Calendar className="h-4 w-4 mr-2" />
+                <Calendar className="h-3 w-3 mr-1" />
                 View Full Calendar
               </Button>
             </div>
