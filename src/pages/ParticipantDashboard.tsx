@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -11,7 +12,7 @@ import QuestionnairesView from "@/components/QuestionnairesView";
 import AIChatbot from "@/components/AIChatbot";
 import EConsentDialog from "@/components/EConsentDialog";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode, Signature, Building } from "lucide-react";
+import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode, Signature, Building, Settings } from "lucide-react";
 
 interface ParticipantDashboardProps {
   onLogout: () => void;
@@ -19,6 +20,7 @@ interface ParticipantDashboardProps {
 
 const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const [showCalendar, setShowCalendar] = useState(false);
   const [showQuestionnaires, setShowQuestionnaires] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
@@ -33,38 +35,38 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
   const upcomingActivities = [
     { 
       date: t('common.next'), 
-      activity: "Weekly Survey", 
+      activity: t('activity.weekly.survey'), 
       time: "10:00 AM", 
       type: "questionnaire",
-      details: "Quick 5-minute survey about your daily symptoms and medication adherence",
-      location: "Online - Complete from home"
+      details: t('activity.weekly.survey.details'),
+      location: t('activity.online.location')
     },
     { 
-      date: "Dec 15", 
-      activity: "Site Visit - Blood Draw", 
+      date: "15 Dic", 
+      activity: t('activity.site.visit.blood'), 
       time: "2:00 PM", 
       type: "visit",
-      details: "Routine blood work for safety monitoring and efficacy assessment",
-      location: "Metro General Hospital - Lab Building, 2nd Floor",
-      notes: "Please fast for 12 hours before the visit. Bring your medication diary and any questions you may have."
+      details: t('activity.site.visit.blood.details'),
+      location: t('activity.hospital.location'),
+      notes: t('activity.site.visit.notes')
     },
     { 
-      date: "Dec 20", 
-      activity: "Daily Diary Entry", 
-      time: "Any time", 
+      date: "20 Dic", 
+      activity: t('activity.daily.diary'), 
+      time: t('activity.anytime'), 
       type: "diary",
-      details: "Record your daily symptoms, medication taken, and any side effects",
-      location: "Online - Mobile app or web portal"
+      details: t('activity.daily.diary.details'),
+      location: t('activity.mobile.location')
     }
   ];
 
   const handleCompleteSurvey = () => {
     setSurveyCompleted(true);
-    alert("Survey completed successfully! Thank you for your participation.");
+    alert(t('activity.survey.completed'));
   };
 
   const handleExportPDF = () => {
-    alert("PDF export initiated - questionnaire responses would be downloaded as a secure, de-identified document.");
+    alert(t('activity.pdf.export'));
   };
 
   const getActivityIcon = (type: string) => {
@@ -80,7 +82,6 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
     <div className="min-h-screen bg-studio-bg">
       <Header
         role="participant"
-        onLogout={onLogout}
       />
 
 
@@ -153,7 +154,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                 className="w-full text-xs"
               >
                 <Calendar className="h-3 w-3 mr-1" />
-                View Full Calendar
+                {t('calendar.view.full')}
               </Button>
             </div>
             
@@ -187,7 +188,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                         </div>
                       </div>
                       <Button variant="studio" size="sm" className="w-full sm:w-auto">
-                        View Details
+                        {t('activity.view.details')}
                       </Button>
                     </div>
                   </CardContent>
@@ -197,16 +198,16 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
           </TabsContent>
 
           <TabsContent value="questionnaires" className="space-y-4">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
-              <h3 className="text-lg font-medium text-studio-text">Your Surveys</h3>
+            <div className="flex flex-col space-y-2">
+              <h3 className="text-base font-medium text-studio-text">{t('questionnaire.your.surveys')}</h3>
               <Button 
                 variant="studio" 
                 size="sm"
                 onClick={() => setShowQuestionnaires(true)}
-                className="w-full sm:w-auto"
+                className="w-full text-xs"
               >
-                <FileText className="h-4 w-4 mr-2" />
-                View All Surveys
+                <FileText className="h-3 w-3 mr-1" />
+                {t('questionnaire.view.all')}
               </Button>
             </div>
 
@@ -214,19 +215,19 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
               <Card className="bg-red-50 border-red-200">
                 <CardContent className="p-4 text-center">
                   <div className="text-xl sm:text-2xl font-bold text-red-600">3</div>
-                  <div className="text-xs sm:text-sm text-red-700">Pending</div>
+                  <div className="text-xs sm:text-sm text-red-700">{t('questionnaire.pending')}</div>
                 </CardContent>
               </Card>
               <Card className="bg-green-50 border-green-200">
                 <CardContent className="p-4 text-center">
                   <div className="text-xl sm:text-2xl font-bold text-green-600">12</div>
-                  <div className="text-xs sm:text-sm text-green-700">Completed</div>
+                  <div className="text-xs sm:text-sm text-green-700">{t('questionnaire.completed')}</div>
                 </CardContent>
               </Card>
               <Card className="bg-blue-50 border-blue-200 col-span-2 sm:col-span-1">
                 <CardContent className="p-4 text-center">
                   <div className="text-xl sm:text-2xl font-bold text-blue-600">80%</div>
-                  <div className="text-xs sm:text-sm text-blue-700">Completion Rate</div>
+                  <div className="text-xs sm:text-sm text-blue-700">{t('questionnaire.completion.rate')}</div>
                 </CardContent>
               </Card>
             </div>
@@ -244,11 +245,11 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                     </span>
                 </div>
                 <p className={`text-sm mb-3 ${surveyCompleted ? 'text-green-700' : 'text-yellow-700'}`}>
-                  {surveyCompleted ? 'Thank you for completing today\'s survey!' : 'Quick 5-minute survey about your daily symptoms'}
+                  {surveyCompleted ? t('questionnaire.thanks.completing') : t('questionnaire.quick.survey')}
                 </p>
                 {!surveyCompleted && (
                   <Button size="sm" className="w-full sm:w-auto" onClick={handleCompleteSurvey}>
-                    Complete Now
+                    {t('questionnaire.complete.now')}
                   </Button>
                 )}
               </div>
@@ -298,7 +299,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
           </TabsContent>
 
           <TabsContent value="visits" className="space-y-4">
-            <h3 className="text-lg font-medium text-studio-text">Site Visits</h3>
+            <h3 className="text-base font-medium text-studio-text">{t('visits.site.visits')}</h3>
             
             <div className="space-y-3">
               <Card className="bg-gray-50 border-gray-200">
@@ -306,11 +307,11 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                   <div className="flex items-start space-x-3">
                     <CheckCircle className="h-5 w-5 text-gray-600 mt-0.5" />
                     <div className="flex-1">
-                      <p className="font-medium text-gray-800">Baseline Visit - Completed</p>
-                      <p className="text-sm text-gray-600">Nov 15, 2024 at 2:00 PM</p>
-                      <p className="text-xs text-gray-600 mt-1">Blood draw, vitals, questionnaires completed</p>
+                      <p className="font-medium text-gray-800">{t('visits.baseline.completed')}</p>
+                      <p className="text-sm text-gray-600">15 Nov 2024 a las 2:00 PM</p>
+                      <p className="text-xs text-gray-600 mt-1">{t('visits.baseline.procedures')}</p>
                       <div className="bg-gray-100 border border-gray-300 rounded p-2 text-xs text-gray-700 mt-2">
-                        <strong>Visit Notes:</strong> All procedures completed successfully. Blood pressure slightly elevated, will monitor at next visit. Patient reported no adverse events.
+                        <strong>{t('visits.notes')}:</strong> {t('visits.baseline.notes')}
                       </div>
                     </div>
                   </div>
@@ -322,11 +323,11 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                   <div className="flex items-start space-x-3">
                     <Clock className="h-5 w-5 text-gray-600 mt-0.5" />
                     <div className="flex-1">
-                      <p className="font-medium text-gray-800">Week 4 Visit - Scheduled</p>
-                      <p className="text-sm text-gray-600">Dec 15, 2024 at 2:00 PM</p>
-                      <p className="text-xs text-gray-600 mt-1">Blood draw, safety assessment, questionnaires</p>
+                      <p className="font-medium text-gray-800">{t('visits.week4.scheduled')}</p>
+                      <p className="text-sm text-gray-600">15 Dic 2024 a las 2:00 PM</p>
+                      <p className="text-xs text-gray-600 mt-1">{t('visits.week4.procedures')}</p>
                       <div className="bg-gray-50 border border-gray-200 rounded p-2 text-xs text-gray-700 mt-2">
-                        <strong>Preparation Notes:</strong> Please fast for 12 hours before the visit. Bring your medication diary and any questions you may have.
+                        <strong>{t('visits.preparation.notes')}:</strong> {t('visits.week4.notes')}
                       </div>
                     </div>
                   </div>
@@ -501,7 +502,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                 onClick={() => setShowProfile(true)}
               >
                 <User className="h-4 w-4 mr-2" />
-                View Profile & Settings
+                {t('profile.view.settings')}
               </Button>
               
               <Button 
@@ -510,7 +511,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                 onClick={handleExportPDF}
               >
                 <Download className="h-4 w-4 mr-2" />
-                Export My Responses (PDF)
+                {t('profile.export.pdf')}
               </Button>
 
               <Card className="bg-blue-50 border-blue-200">
@@ -518,10 +519,9 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                   <div className="flex items-start space-x-3">
                     <Shield className="h-5 w-5 text-blue-600 mt-0.5" />
                     <div>
-                      <p className="font-medium text-blue-800">Privacy & Security</p>
+                      <p className="font-medium text-blue-800">{t('profile.privacy.security')}</p>
                       <p className="text-xs text-blue-700 mt-1">
-                        Your data is encrypted and protected according to HIPAA standards. 
-                        All responses are de-identified for analysis.
+                        {t('profile.privacy.description')}
                       </p>
                     </div>
                   </div>
@@ -532,7 +532,18 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
         </Tabs>
       </main>
 
-      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6">
+      {/* Bottom actions section */}
+      <div className="fixed bottom-4 left-4 right-4 sm:left-6 sm:right-6 flex justify-between items-end">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => navigate('/settings')}
+          className="bg-white shadow-lg border-gray-200"
+        >
+          <Settings className="h-4 w-4 mr-2" />
+          {t('header.settings')}
+        </Button>
+        
         <Button
           onClick={() => setShowChatbot(true)}
           className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg"

@@ -54,15 +54,6 @@ const Header = ({ role, onLogout }: HeaderProps) => {
             <Settings className="h-4 w-4 mr-2" />
             {t('header.settings')}
           </Button>
-          {onLogout && (
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={onLogout}
-            >
-              {t('header.logout')}
-            </Button>
-          )}
         </div>
       </div>
     </header>

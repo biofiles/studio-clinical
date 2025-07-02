@@ -88,6 +88,52 @@ const translations = {
     'contact.issued': 'Issued',
     'contact.tap.for.details': 'Tap for details',
     'contact.token.description': 'Click to view your participant profile and barcode details',
+    
+    // Activities
+    'activity.weekly.survey': 'Encuesta Semanal',
+    'activity.weekly.survey.details': 'Encuesta rápida de 5 minutos sobre sus síntomas diarios y adherencia a la medicación',
+    'activity.online.location': 'En línea - Complete desde casa',
+    'activity.site.visit.blood': 'Visita al Sitio - Extracción de Sangre',
+    'activity.site.visit.blood.details': 'Análisis de sangre de rutina para monitoreo de seguridad y evaluación de eficacia',
+    'activity.hospital.location': 'Hospital General Metro - Edificio de Laboratorio, 2do Piso',
+    'activity.site.visit.notes': 'Por favor ayune durante 12 horas antes de la visita. Traiga su diario de medicamentos y cualquier pregunta que pueda tener.',
+    'activity.daily.diary': 'Entrada de Diario Diario',
+    'activity.anytime': 'Cualquier momento',
+    'activity.daily.diary.details': 'Registre sus síntomas diarios, medicamentos tomados y cualquier efecto secundario',
+    'activity.mobile.location': 'En línea - Aplicación móvil o portal web',
+    'activity.survey.completed': 'Encuesta completada exitosamente! Gracias por su participación.',
+    'activity.pdf.export': 'Exportación PDF iniciada - las respuestas del cuestionario se descargarían como un documento seguro y sin identificación.',
+    'activity.view.details': 'Ver Detalles',
+    
+    // Calendar
+    'calendar.view.full': 'Ver Calendario Completo',
+    
+    // Questionnaires
+    'questionnaire.your.surveys': 'Sus Encuestas',
+    'questionnaire.view.all': 'Ver Todas las Encuestas',
+    'questionnaire.pending': 'Pendientes',
+    'questionnaire.completed': 'Completadas',
+    'questionnaire.completion.rate': 'Tasa de Finalización',
+    'questionnaire.thanks.completing': '¡Gracias por completar la encuesta de hoy!',
+    'questionnaire.quick.survey': 'Encuesta rápida de 5 minutos sobre sus síntomas diarios',
+    'questionnaire.complete.now': 'Completar Ahora',
+    
+    // Visits
+    'visits.site.visits': 'Visitas al Sitio',
+    'visits.baseline.completed': 'Visita Basal - Completada',
+    'visits.baseline.procedures': 'Extracción de sangre, signos vitales, cuestionarios completados',
+    'visits.notes': 'Notas de la Visita',
+    'visits.baseline.notes': 'Todos los procedimientos completados exitosamente. Presión arterial ligeramente elevada, se monitoreará en la próxima visita. El paciente no reportó eventos adversos.',
+    'visits.week4.scheduled': 'Visita Semana 4 - Programada',
+    'visits.week4.procedures': 'Extracción de sangre, evaluación de seguridad, cuestionarios',
+    'visits.preparation.notes': 'Notas de Preparación',
+    'visits.week4.notes': 'Por favor ayune durante 12 horas antes de la visita. Traiga su diario de medicamentos y cualquier pregunta que pueda tener.',
+    
+    // Profile
+    'profile.view.settings': 'Ver Perfil y Configuración',
+    'profile.export.pdf': 'Exportar Mis Respuestas (PDF)',
+    'profile.privacy.security': 'Privacidad y Seguridad',
+    'profile.privacy.description': 'Sus datos están encriptados y protegidos según los estándares HIPAA. Todas las respuestas son desidentificadas para el análisis.',
     'details.study.progress': 'Study Progress',
     'details.recent.activity': 'Recent Activity',
     'details.upcoming.events': 'Upcoming Events',
@@ -240,6 +286,52 @@ const translations = {
     'contact.issued': 'Emitido',
     'contact.tap.for.details': 'Toca para ver detalles',
     'contact.token.description': 'Haz clic para ver tu perfil de participante y detalles del código de barras',
+    
+    // Activities  
+    'activity.weekly.survey': 'Encuesta Semanal',
+    'activity.weekly.survey.details': 'Encuesta rápida de 5 minutos sobre sus síntomas diarios y adherencia a la medicación',
+    'activity.online.location': 'En línea - Complete desde casa',
+    'activity.site.visit.blood': 'Visita al Sitio - Extracción de Sangre',
+    'activity.site.visit.blood.details': 'Análisis de sangre de rutina para monitoreo de seguridad y evaluación de eficacia',
+    'activity.hospital.location': 'Hospital General Metro - Edificio de Laboratorio, 2do Piso',
+    'activity.site.visit.notes': 'Por favor ayune durante 12 horas antes de la visita. Traiga su diario de medicamentos y cualquier pregunta que pueda tener.',
+    'activity.daily.diary': 'Entrada de Diario Diario',
+    'activity.anytime': 'Cualquier momento',
+    'activity.daily.diary.details': 'Registre sus síntomas diarios, medicamentos tomados y cualquier efecto secundario',
+    'activity.mobile.location': 'En línea - Aplicación móvil o portal web',
+    'activity.survey.completed': 'Encuesta completada exitosamente! Gracias por su participación.',
+    'activity.pdf.export': 'Exportación PDF iniciada - las respuestas del cuestionario se descargarían como un documento seguro y sin identificación.',
+    'activity.view.details': 'Ver Detalles',
+    
+    // Calendar
+    'calendar.view.full': 'Ver Calendario Completo',
+    
+    // Questionnaires
+    'questionnaire.your.surveys': 'Sus Encuestas',
+    'questionnaire.view.all': 'Ver Todas las Encuestas',
+    'questionnaire.pending': 'Pendientes',
+    'questionnaire.completed': 'Completadas',
+    'questionnaire.completion.rate': 'Tasa de Finalización',
+    'questionnaire.thanks.completing': '¡Gracias por completar la encuesta de hoy!',
+    'questionnaire.quick.survey': 'Encuesta rápida de 5 minutos sobre sus síntomas diarios',
+    'questionnaire.complete.now': 'Completar Ahora',
+    
+    // Visits
+    'visits.site.visits': 'Visitas al Sitio',
+    'visits.baseline.completed': 'Visita Basal - Completada',
+    'visits.baseline.procedures': 'Extracción de sangre, signos vitales, cuestionarios completados',
+    'visits.notes': 'Notas de la Visita',
+    'visits.baseline.notes': 'Todos los procedimientos completados exitosamente. Presión arterial ligeramente elevada, se monitoreará en la próxima visita. El paciente no reportó eventos adversos.',
+    'visits.week4.scheduled': 'Visita Semana 4 - Programada',
+    'visits.week4.procedures': 'Extracción de sangre, evaluación de seguridad, cuestionarios',
+    'visits.preparation.notes': 'Notas de Preparación',
+    'visits.week4.notes': 'Por favor ayune durante 12 horas antes de la visita. Traiga su diario de medicamentos y cualquier pregunta que pueda tener.',
+    
+    // Profile
+    'profile.view.settings': 'Ver Perfil y Configuración',
+    'profile.export.pdf': 'Exportar Mis Respuestas (PDF)',
+    'profile.privacy.security': 'Privacidad y Seguridad',
+    'profile.privacy.description': 'Sus datos están encriptados y protegidos según los estándares HIPAA. Todas las respuestas son desidentificadas para el análisis.',
     
     // Participant Details
     'details.title': 'Detalles del Participante',
