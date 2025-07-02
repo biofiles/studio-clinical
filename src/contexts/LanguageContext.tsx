@@ -61,7 +61,7 @@ const translations = {
     
     // Participant specific
     'participant.profile': 'Profile',
-    'participant.your.schedule': 'Your Schedule',
+    'participant.your.schedule': 'Your Agenda',
     'participant.days.remaining': 'days remaining',
     'participant.token': 'Participant Token',
     
@@ -259,7 +259,7 @@ const translations = {
     'participant.schedule.visit': 'Programar Visita',
     'participant.barcode.click': 'Haga clic para ver el código de barras',
     'participant.profile': 'Perfil',
-    'participant.your.schedule': 'Tu Horario',
+    'participant.your.schedule': 'Tu Agenda',
     'participant.days.remaining': 'días restantes',
     'participant.token': 'Token de Participante',
     

@@ -226,18 +226,19 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
                           {new Date(participant.nextVisit).toLocaleDateString()}
                         </TableCell>
                         <TableCell>
-                          <div className="flex items-center space-x-1">
-                            {participant.hasAlerts && (
-                              <div title="Participant has alerts">
-                                <AlertTriangle className="h-4 w-4 text-red-500" />
-                              </div>
-                            )}
+                          <div className="flex space-x-1 relative">
                             <Button 
                               size="sm" 
                               variant="outline"
                               onClick={() => handleViewParticipant(participant.patientId)}
                               title={t('participant.view.details')}
+                              className="relative"
                             >
+                              {participant.hasAlerts && (
+                                <div className="absolute -left-5 top-1/2 transform -translate-y-1/2">
+                                  <AlertTriangle className="h-4 w-4 text-red-500" />
+                                </div>
+                              )}
                               <Eye className="h-3 w-3" />
                             </Button>
                             <Button 
