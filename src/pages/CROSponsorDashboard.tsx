@@ -27,8 +27,6 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
     <div className="min-h-screen bg-studio-bg">
       <Header
         role="cro-sponsor"
-        onDemoToggle={() => setIsDemoMode(!isDemoMode)}
-        isDemoMode={isDemoMode}
         onLogout={onLogout}
       />
 

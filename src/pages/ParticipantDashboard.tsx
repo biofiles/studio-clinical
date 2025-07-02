@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -16,7 +15,6 @@ interface ParticipantDashboardProps {
 }
 
 const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
-  const [isDemoMode, setIsDemoMode] = useState(true);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showQuestionnaires, setShowQuestionnaires] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
@@ -40,22 +38,11 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
     <div className="min-h-screen bg-studio-bg">
       <Header
         role="participant"
-        onDemoToggle={() => setIsDemoMode(!isDemoMode)}
-        isDemoMode={isDemoMode}
         onLogout={onLogout}
       />
 
       {/* Security & Compliance Banner */}
-      {isDemoMode && (
-        <div className="bg-blue-50 border-b border-blue-200 px-6 py-3">
-          <div className="flex items-center space-x-2 text-sm text-blue-800">
-            <Shield className="h-4 w-4" />
-            <span className="font-medium">Demo Mode:</span>
-            <span>All data is de-identified and simulated. Compliant with HIPAA, 21 CFR Part 11, and ICH-GCP standards.</span>
-          </div>
-        </div>
-      )}
-
+      {/* Main Content */}
       <main className="p-6 max-w-4xl mx-auto space-y-6">
         <div className="space-y-2">
           <h2 className="text-xl font-medium text-studio-text">
