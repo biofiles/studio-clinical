@@ -31,6 +31,9 @@ const CalendarView = ({ open, onOpenChange, activities }: CalendarViewProps) => 
     { date: new Date(2024, 11, 28), title: "Monthly Assessment", time: "9:00 AM", type: "assessment" }
   ];
 
+  // Get activity dates for highlighting
+  const activityDates = upcomingVisits.map(visit => visit.date);
+
   const getActivityTypeColor = (type: string) => {
     switch (type) {
       case 'visit': return 'bg-red-100 text-red-800';
@@ -40,6 +43,12 @@ const CalendarView = ({ open, onOpenChange, activities }: CalendarViewProps) => 
       case 'assessment': return 'bg-orange-100 text-orange-800';
       default: return 'bg-gray-100 text-gray-800';
     }
+  };
+
+  const isDayWithActivity = (date: Date) => {
+    return activityDates.some(activityDate => 
+      activityDate.toDateString() === date.toDateString()
+    );
   };
 
   return (
@@ -64,6 +73,16 @@ const CalendarView = ({ open, onOpenChange, activities }: CalendarViewProps) => 
                   selected={selectedDate}
                   onSelect={setSelectedDate}
                   className="rounded-md border"
+                  modifiers={{
+                    hasActivity: isDayWithActivity
+                  }}
+                  modifiersStyles={{
+                    hasActivity: {
+                      backgroundColor: '#3b82f6',
+                      color: 'white',
+                      fontWeight: 'bold'
+                    }
+                  }}
                 />
               </CardContent>
             </Card>
@@ -108,7 +127,7 @@ const CalendarView = ({ open, onOpenChange, activities }: CalendarViewProps) => 
 
         <div className="text-xs text-studio-text-muted bg-blue-50 p-3 rounded">
           <strong>Note:</strong> This calendar is read-only. Contact your study coordinator to reschedule appointments.
-          All dates and times are displayed in your local timezone.
+          All dates and times are displayed in your local timezone. Days with activities are highlighted in blue.
         </div>
       </DialogContent>
     </Dialog>
