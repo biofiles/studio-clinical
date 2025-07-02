@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useState } from "react";
-import { Search, Eye, FileText, Calendar } from "lucide-react";
+import { Search, Eye, FileText, Calendar, Barcode } from "lucide-react";
 
 interface ParticipantListProps {
   open: boolean;
@@ -14,6 +14,7 @@ interface ParticipantListProps {
 }
 
 interface Participant {
+  patientId: string;
   token: string;
   enrollmentDate: string;
   lastVisit: string;
@@ -29,6 +30,7 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
 
   const participants: Participant[] = [
     {
+      patientId: "P001",
       token: "PTK-9283-WZ1",
       enrollmentDate: "2024-10-15",
       lastVisit: "2024-12-01",
@@ -39,6 +41,7 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
       complianceRate: 96
     },
     {
+      patientId: "P002",
       token: "PTK-4751-QR3",
       enrollmentDate: "2024-10-20",
       lastVisit: "2024-12-05",
@@ -49,6 +52,7 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
       complianceRate: 98
     },
     {
+      patientId: "P003",
       token: "PTK-8239-MN7",
       enrollmentDate: "2024-10-18",
       lastVisit: "2024-11-28",
@@ -59,6 +63,7 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
       complianceRate: 89
     },
     {
+      patientId: "P004",
       token: "PTK-5642-LP9",
       enrollmentDate: "2024-11-01",
       lastVisit: "2024-12-08",
@@ -69,6 +74,7 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
       complianceRate: 94
     },
     {
+      patientId: "P005",
       token: "PTK-7194-KX2",
       enrollmentDate: "2024-11-05",
       lastVisit: "2024-12-02",
@@ -81,6 +87,7 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
   ];
 
   const filteredParticipants = participants.filter(p =>
+    p.patientId.toLowerCase().includes(searchTerm.toLowerCase()) ||
     p.token.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -93,16 +100,16 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
     }
   };
 
-  const handleViewParticipant = (token: string) => {
-    alert(`Opening detailed view for participant ${token}`);
+  const handleViewParticipant = (patientId: string) => {
+    alert(`Opening detailed view for patient ${patientId}`);
   };
 
-  const handleViewQuestionnaires = (token: string) => {
-    alert(`Opening questionnaires for participant ${token}`);
+  const handleViewQuestionnaires = (patientId: string) => {
+    alert(`Opening questionnaires for patient ${patientId}`);
   };
 
-  const handleScheduleVisit = (token: string) => {
-    alert(`Scheduling visit for participant ${token}`);
+  const handleScheduleVisit = (patientId: string) => {
+    alert(`Scheduling visit for patient ${patientId}`);
   };
 
   return (
@@ -116,17 +123,10 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
         </DialogHeader>
         
         <div className="space-y-4">
-          <div className="bg-blue-50 border border-blue-200 rounded p-3">
-            <p className="text-sm text-blue-800">
-              <strong>Privacy Notice:</strong> All participants are identified by secure tokens only. 
-              No personally identifiable information (PII) is displayed in compliance with HIPAA regulations.
-            </p>
-          </div>
-
           <div className="flex items-center space-x-4">
             <div className="flex-1">
               <Input
-                placeholder="Search by participant token..."
+                placeholder="Search by patient ID or token..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full"
@@ -142,7 +142,8 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Participant Token</TableHead>
+                    <TableHead>Patient ID</TableHead>
+                    <TableHead>Token</TableHead>
                     <TableHead>Enrollment</TableHead>
                     <TableHead>Visit Status</TableHead>
                     <TableHead>Questionnaires</TableHead>
@@ -153,9 +154,17 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
                 </TableHeader>
                 <TableBody>
                   {filteredParticipants.map((participant) => (
-                    <TableRow key={participant.token}>
-                      <TableCell className="font-mono font-medium">
-                        {participant.token}
+                    <TableRow key={participant.patientId}>
+                      <TableCell className="font-semibold">
+                        {participant.patientId}
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center space-x-2">
+                          <Barcode className="h-4 w-4 text-studio-text-muted" />
+                          <code className="font-mono text-sm">
+                            {participant.token}
+                          </code>
+                        </div>
                       </TableCell>
                       <TableCell>
                         {new Date(participant.enrollmentDate).toLocaleDateString()}
@@ -190,21 +199,21 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
                           <Button 
                             size="sm" 
                             variant="outline"
-                            onClick={() => handleViewParticipant(participant.token)}
+                            onClick={() => handleViewParticipant(participant.patientId)}
                           >
                             <Eye className="h-3 w-3" />
                           </Button>
                           <Button 
                             size="sm" 
                             variant="outline"
-                            onClick={() => handleViewQuestionnaires(participant.token)}
+                            onClick={() => handleViewQuestionnaires(participant.patientId)}
                           >
                             <FileText className="h-3 w-3" />
                           </Button>
                           <Button 
                             size="sm" 
                             variant="outline"
-                            onClick={() => handleScheduleVisit(participant.token)}
+                            onClick={() => handleScheduleVisit(participant.patientId)}
                           >
                             <Calendar className="h-3 w-3" />
                           </Button>
@@ -216,11 +225,6 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
               </Table>
             </CardContent>
           </Card>
-
-          <div className="text-xs text-studio-text-muted bg-yellow-50 p-3 rounded">
-            <strong>Compliance Note:</strong> All data exports and reports reference participants by token only. 
-            This system maintains full audit trails in accordance with 21 CFR Part 11 requirements for electronic records.
-          </div>
         </div>
       </DialogContent>
     </Dialog>

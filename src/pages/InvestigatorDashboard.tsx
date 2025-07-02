@@ -12,18 +12,17 @@ interface InvestigatorDashboardProps {
 }
 
 const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
-  const [isDemoMode, setIsDemoMode] = useState(false);
   const [showParticipantList, setShowParticipantList] = useState(false);
   const [showChatbot, setShowChatbot] = useState(false);
 
   const nextEvents = [
-    { date: "Dec 15, 2024", time: "2:00 PM", event: "PTK-9283-WZ1 - Site Visit", type: "visit" },
-    { date: "Dec 16, 2024", time: "10:00 AM", event: "PTK-4751-QR3 - Blood Draw", type: "lab" },
+    { date: "Dec 15, 2024", time: "2:00 PM", event: "P001 - Site Visit", type: "visit" },
+    { date: "Dec 16, 2024", time: "10:00 AM", event: "P002 - Blood Draw", type: "lab" },
     { date: "Dec 18, 2024", time: "3:00 PM", event: "Monthly Team Meeting", type: "meeting" }
   ];
 
   const handleExportQuestionnaires = () => {
-    alert("Exporting questionnaire data (tokenized) as PDF...");
+    alert("Exporting questionnaire data as PDF...");
   };
 
   const handleManageCalendar = () => {
@@ -38,22 +37,8 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
     <div className="min-h-screen bg-studio-bg">
       <Header
         role="investigator"
-        onDemoToggle={() => setIsDemoMode(!isDemoMode)}
-        isDemoMode={isDemoMode}
         onLogout={onLogout}
       />
-
-      {isDemoMode && (
-        <div className="bg-yellow-50 border-b border-yellow-200 px-6 py-3">
-          <div className="max-w-6xl mx-auto">
-            <p className="text-sm text-yellow-800">
-              <strong>Demo Mode:</strong> All data displayed is de-identified and simulated. 
-              Participants are referenced by secure tokens only. 
-              System complies with HIPAA, 21 CFR Part 11, and ICH-GCP guidelines.
-            </p>
-          </div>
-        </div>
-      )}
 
       <main className="p-6 max-w-6xl mx-auto space-y-6">
         <div className="space-y-2">
