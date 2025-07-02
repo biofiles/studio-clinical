@@ -25,7 +25,7 @@ const translations = {
     'dashboard.next.events': 'Next 3 Study Events',
     'dashboard.study.management': 'Study Management',
     'dashboard.participant.list': 'Participant List',
-    'dashboard.manage.calendar': 'Manage Calendar',
+    'dashboard.manage.calendar': 'Calendar',
     'dashboard.questionnaires': 'Questionnaires',
     'dashboard.export.questionnaires': 'Export Questionnaires',
     'dashboard.study.progress': 'Study Progress',
@@ -63,6 +63,10 @@ const translations = {
     'participant.profile': 'Profile',
     'participant.your.schedule': 'Your Schedule',
     'participant.days.remaining': 'days remaining',
+    'participant.token': 'Participant Token',
+    
+    // Questionnaires
+    'questionnaire.daily.symptom': 'Daily Symptom Diary',
     'details.study.progress': 'Study Progress',
     'details.recent.activity': 'Recent Activity',
     'details.upcoming.events': 'Upcoming Events',
@@ -112,6 +116,8 @@ const translations = {
     'common.next': 'Next',
     'common.previous': 'Previous',
     'common.complete': 'Complete',
+    'common.completed': 'Completed',
+    'common.due.today': 'Due Today',
     'common.pending': 'Pending',
     'common.active': 'Active',
     'common.inactive': 'Inactive',
@@ -160,7 +166,7 @@ const translations = {
     'dashboard.next.events': 'Próximos 3 Eventos del Estudio',
     'dashboard.study.management': 'Gestión del Estudio',
     'dashboard.participant.list': 'Lista de Participantes',
-    'dashboard.manage.calendar': 'Gestionar Calendario',
+    'dashboard.manage.calendar': 'Calendario',
     'dashboard.questionnaires': 'Cuestionarios',
     'dashboard.export.questionnaires': 'Exportar Cuestionarios',
     'dashboard.study.progress': 'Progreso del Estudio',
@@ -188,6 +194,10 @@ const translations = {
     'participant.profile': 'Perfil',
     'participant.your.schedule': 'Tu Horario',
     'participant.days.remaining': 'días restantes',
+    'participant.token': 'Token de Participante',
+    
+    // Questionnaires
+    'questionnaire.daily.symptom': 'Diario de Síntomas Diarios',
     
     // Participant Details
     'details.title': 'Detalles del Participante',
@@ -244,6 +254,8 @@ const translations = {
     'common.back': 'Atrás',
     'common.next': 'Siguiente',
     'common.previous': 'Anterior',
+    'common.completed': 'Completado',
+    'common.due.today': 'Vence Hoy',
     'common.complete': 'Completar',
     'common.pending': 'Pendiente',
     'common.active': 'Activo',

@@ -91,7 +91,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
             {t('common.welcome')}!
           </h2>
           <p className="text-studio-text-muted text-xs sm:text-sm">
-            Phase II Clinical Trial | {daysLeft} {t('participant.days.remaining')}
+            Protocolo PROTO-2024-001 | Patrocinador: Novartis AG | {daysLeft} {t('participant.days.remaining')}
           </p>
         </div>
 
@@ -235,9 +235,9 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                   ) : (
                     <Bell className="h-4 w-4 text-yellow-600" />
                   )}
-                  <span className={`font-medium ${surveyCompleted ? 'text-green-800' : 'text-yellow-800'}`}>
-                    Daily Symptom Diary - {surveyCompleted ? 'Completed' : 'Due Today'}
-                  </span>
+                    <span className={`font-medium ${surveyCompleted ? 'text-green-800' : 'text-yellow-800'}`}>
+                      {t('questionnaire.daily.symptom')} - {surveyCompleted ? t('common.completed') : t('common.due.today')}
+                    </span>
                 </div>
                 <p className={`text-sm mb-3 ${surveyCompleted ? 'text-green-700' : 'text-yellow-700'}`}>
                   {surveyCompleted ? 'Thank you for completing today\'s survey!' : 'Quick 5-minute survey about your daily symptoms'}
@@ -340,7 +340,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                   <div className="flex items-center space-x-3">
                     <Barcode className="h-8 w-8 text-studio-text-muted" />
                     <div>
-                      <p className="font-medium text-studio-text">Participant Token</p>
+                      <p className="font-medium text-studio-text">{t('participant.token')}</p>
                       <button 
                         onClick={() => setShowProfile(true)}
                         className="text-lg font-mono bg-gray-100 px-3 py-1 rounded hover:bg-gray-200 transition-colors cursor-pointer"
