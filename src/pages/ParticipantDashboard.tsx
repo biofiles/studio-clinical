@@ -92,7 +92,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
             {t('common.welcome')}!
           </h2>
           <p className="text-studio-text-muted text-xs sm:text-sm">
-            Protocolo PROTO-2024-001 | Patrocinador: Novartis AG | {daysLeft} {t('participant.days.remaining')}
+            Protocolo PROTO-2024-001 | Patrocinador: Novartis AG
           </p>
         </div>
 
@@ -362,19 +362,19 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-sm text-studio-text-muted">{t('contact.principal.investigator')}:</span>
-                      <span className="text-sm font-medium">Dr. María González, MD</span>
+                      <span className="text-sm font-medium">Dr. Carlos Mendoza, MD</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-studio-text-muted">{t('contact.study.coordinator')}:</span>
-                      <span className="text-sm font-medium">Ana López, RN</span>
+                      <span className="text-sm font-medium">Lic. Sofía Herrera, RN</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-studio-text-muted">{t('contact.phone')}:</span>
-                      <a href="tel:+34911234567" className="text-sm text-blue-600 hover:underline">+34 91 123 4567</a>
+                      <a href="tel:+541148765432" className="text-sm text-blue-600 hover:underline">+54 11 4876-5432</a>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-studio-text-muted">{t('contact.email')}:</span>
-                      <a href="mailto:study@hospital.es" className="text-sm text-blue-600 hover:underline">study@hospital.es</a>
+                      <a href="mailto:estudio@hospital.com.ar" className="text-sm text-blue-600 hover:underline">estudio@hospital.com.ar</a>
                     </div>
                     <div className="bg-blue-50 border border-blue-200 rounded p-2 text-xs text-blue-800">
                       <strong>{t('contact.emergency')}:</strong> {t('contact.emergency.info')}
@@ -394,8 +394,8 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                 <CardContent className="space-y-3">
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-sm text-studio-text-muted">AEMPS (España):</span>
-                      <a href="tel:+34918225000" className="text-sm text-blue-600 hover:underline">+34 91 822 5000</a>
+                      <span className="text-sm text-studio-text-muted">ANMAT (Argentina):</span>
+                      <a href="tel:+541143401400" className="text-sm text-blue-600 hover:underline">+54 11 4340-1400</a>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-studio-text-muted">EMA (Europa):</span>
@@ -403,7 +403,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-studio-text-muted">{t('contact.safety.reporting')}:</span>
-                      <a href="tel:+34900123456" className="text-sm text-blue-600 hover:underline">+34 900 123 456</a>
+                      <a href="tel:+5411800333678" className="text-sm text-blue-600 hover:underline">+54 11 800-333-678</a>
                     </div>
                   </div>
                   <div className="bg-orange-50 border border-orange-200 rounded p-2 text-xs text-orange-800">
@@ -474,7 +474,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                     <div className="flex justify-between items-center">
                       <div>
                         <p className="text-xs opacity-75">{t('contact.unblinding.emergency')}</p>
-                        <p className="text-sm font-semibold">24/7: +34 911 234 999</p>
+                        <p className="text-sm font-semibold">24/7: +54 11 987-654-321</p>
                       </div>
                       <div className="text-right">
                         <p className="text-xs opacity-75">{t('contact.issued')}</p>

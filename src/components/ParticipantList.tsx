@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useState } from "react";
-import { Search, Eye, FileText, Calendar, Barcode } from "lucide-react";
+import { Search, Eye, FileText, Calendar, Barcode, AlertTriangle } from "lucide-react";
 import ParticipantDetailView from "./ParticipantDetailView";
 import ParticipantScheduler from "./ParticipantScheduler";
 import ParticipantQuestionnaires from "./ParticipantQuestionnaires";
@@ -27,6 +27,7 @@ interface Participant {
   questionnairesTotal: number;
   visitStatus: 'completed' | 'scheduled' | 'overdue';
   complianceRate: number;
+  hasAlerts: boolean;
 }
 
 const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
@@ -47,7 +48,8 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
       questionnairesCompleted: 8,
       questionnairesTotal: 10,
       visitStatus: 'scheduled',
-      complianceRate: 96
+      complianceRate: 96,
+      hasAlerts: false
     },
     {
       patientId: "P002",
@@ -58,7 +60,8 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
       questionnairesCompleted: 9,
       questionnairesTotal: 10,
       visitStatus: 'scheduled',
-      complianceRate: 98
+      complianceRate: 98,
+      hasAlerts: true
     },
     {
       patientId: "P003",
@@ -69,7 +72,8 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
       questionnairesCompleted: 7,
       questionnairesTotal: 10,
       visitStatus: 'overdue',
-      complianceRate: 89
+      complianceRate: 89,
+      hasAlerts: true
     },
     {
       patientId: "P004",
@@ -80,7 +84,8 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
       questionnairesCompleted: 6,
       questionnairesTotal: 8,
       visitStatus: 'completed',
-      complianceRate: 94
+      complianceRate: 94,
+      hasAlerts: false
     },
     {
       patientId: "P005",
@@ -91,7 +96,8 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
       questionnairesCompleted: 5,
       questionnairesTotal: 8,
       visitStatus: 'scheduled',
-      complianceRate: 92
+      complianceRate: 92,
+      hasAlerts: false
     }
   ];
 
@@ -220,7 +226,12 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
                           {new Date(participant.nextVisit).toLocaleDateString()}
                         </TableCell>
                         <TableCell>
-                          <div className="flex space-x-1">
+                          <div className="flex items-center space-x-1">
+                            {participant.hasAlerts && (
+                              <div title="Participant has alerts">
+                                <AlertTriangle className="h-4 w-4 text-red-500" />
+                              </div>
+                            )}
                             <Button 
                               size="sm" 
                               variant="outline"
