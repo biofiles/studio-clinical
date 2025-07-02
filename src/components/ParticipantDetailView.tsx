@@ -288,27 +288,27 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
             <CardHeader>
               <CardTitle className="text-sm flex items-center space-x-2">
                 <Signature className="h-4 w-4" />
-                <span>Informed Consent (ICF)</span>
+                <span>{t('details.icf.title')}</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="flex justify-between">
-                <span className="text-sm text-studio-text-muted">ICF Version:</span>
+                <span className="text-sm text-studio-text-muted">{t('details.icf.version')}:</span>
                 <code className="font-mono text-sm bg-gray-100 px-2 py-1 rounded">{participantDetails.icfDetails.version}</code>
               </div>
               <div className="flex justify-between">
-                <span className="text-sm text-studio-text-muted">Signed Date:</span>
+                <span className="text-sm text-studio-text-muted">{t('details.icf.signed.date')}:</span>
                 <span>{new Date(participantDetails.icfDetails.signedDate).toLocaleDateString()}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-sm text-studio-text-muted">Status:</span>
+                <span className="text-sm text-studio-text-muted">{t('details.icf.status')}:</span>
                 <Badge className={getICFStatusColor(participantDetails.icfDetails.status)}>
                   {participantDetails.icfDetails.status}
                 </Badge>
               </div>
               {participantDetails.icfDetails.status === "Re-consent Required" && (
                 <div className="bg-orange-50 border border-orange-200 rounded p-2 text-xs text-orange-800">
-                  <strong>Action Required:</strong> ICF has been updated to v2.1. Please schedule re-consent visit.
+                  <strong>{t('details.icf.action.required')}:</strong> {t('details.icf.updated.schedule')}
                 </div>
               )}
             </CardContent>

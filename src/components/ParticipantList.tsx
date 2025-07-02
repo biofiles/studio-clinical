@@ -61,7 +61,7 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
       questionnairesTotal: 10,
       visitStatus: 'scheduled',
       complianceRate: 98,
-      hasAlerts: true
+      hasAlerts: false
     },
     {
       patientId: "P003",
@@ -85,7 +85,7 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
       questionnairesTotal: 8,
       visitStatus: 'completed',
       complianceRate: 94,
-      hasAlerts: false
+      hasAlerts: true
     },
     {
       patientId: "P005",
@@ -97,7 +97,7 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
       questionnairesTotal: 8,
       visitStatus: 'scheduled',
       complianceRate: 92,
-      hasAlerts: false
+      hasAlerts: true
     }
   ];
 
