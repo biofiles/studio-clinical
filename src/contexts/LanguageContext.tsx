@@ -67,6 +67,27 @@ const translations = {
     
     // Questionnaires
     'questionnaire.daily.symptom': 'Daily Symptom Diary',
+    
+    // Contact Information
+    'contact.info': 'Contact Info',
+    'contact.site.staff': 'Site Staff',
+    'contact.principal.investigator': 'Principal Investigator',
+    'contact.study.coordinator': 'Study Coordinator',
+    'contact.phone': 'Phone',
+    'contact.email': 'Email',
+    'contact.emergency': 'Emergency Contact',
+    'contact.emergency.info': 'Available 24/7 for urgent study-related matters',
+    'contact.regulatory.authorities': 'Regulatory Authorities',
+    'contact.safety.reporting': 'Safety Reporting',
+    'contact.safety.note': 'Important',
+    'contact.safety.description': 'Report any adverse events immediately to your study team',
+    'contact.sponsor': 'Study Sponsor',
+    'contact.company': 'Company',
+    'contact.medical.monitor': 'Medical Monitor',
+    'contact.unblinding.emergency': 'Emergency Unblinding',
+    'contact.issued': 'Issued',
+    'contact.tap.for.details': 'Tap for details',
+    'contact.token.description': 'Click to view your participant profile and barcode details',
     'details.study.progress': 'Study Progress',
     'details.recent.activity': 'Recent Activity',
     'details.upcoming.events': 'Upcoming Events',
@@ -198,6 +219,27 @@ const translations = {
     
     // Questionnaires
     'questionnaire.daily.symptom': 'Diario de Síntomas Diarios',
+    
+    // Contact Information
+    'contact.info': 'Información de Contacto',
+    'contact.site.staff': 'Personal del Sitio',
+    'contact.principal.investigator': 'Investigador Principal',
+    'contact.study.coordinator': 'Coordinador del Estudio',
+    'contact.phone': 'Teléfono',
+    'contact.email': 'Correo Electrónico',
+    'contact.emergency': 'Contacto de Emergencia',
+    'contact.emergency.info': 'Disponible 24/7 para asuntos urgentes relacionados con el estudio',
+    'contact.regulatory.authorities': 'Autoridades Regulatorias',
+    'contact.safety.reporting': 'Reporte de Seguridad',
+    'contact.safety.note': 'Importante',
+    'contact.safety.description': 'Reporte cualquier evento adverso inmediatamente a su equipo de estudio',
+    'contact.sponsor': 'Patrocinador del Estudio',
+    'contact.company': 'Empresa',
+    'contact.medical.monitor': 'Monitor Médico',
+    'contact.unblinding.emergency': 'Desenmascaramiento de Emergencia',
+    'contact.issued': 'Emitido',
+    'contact.tap.for.details': 'Toca para ver detalles',
+    'contact.token.description': 'Haz clic para ver tu perfil de participante y detalles del código de barras',
     
     // Participant Details
     'details.title': 'Detalles del Participante',

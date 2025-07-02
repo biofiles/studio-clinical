@@ -11,7 +11,7 @@ import QuestionnairesView from "@/components/QuestionnairesView";
 import AIChatbot from "@/components/AIChatbot";
 import EConsentDialog from "@/components/EConsentDialog";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode, Signature } from "lucide-react";
+import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode, Signature, Building } from "lucide-react";
 
 interface ParticipantDashboardProps {
   onLogout: () => void;
@@ -116,7 +116,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
 
         {/* Main Sections - Mobile-first tabs */}
         <Tabs defaultValue="schedule" className="space-y-3">{/* Reduced spacing */}
-          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-5 h-auto gap-1">{/* Added gap for mobile */}
+          <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 h-auto gap-1">{/* Updated for 6 tabs */}
             <TabsTrigger value="schedule" className="flex flex-col items-center space-y-0.5 h-12 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-xs">
               <Calendar className="h-4 w-4 sm:h-4 sm:w-4" />
               <span className="text-xs sm:text-sm">{t('dashboard.manage.calendar')}</span>
@@ -132,6 +132,10 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
             <TabsTrigger value="visits" className="flex flex-col items-center space-y-0.5 h-12 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-xs">
               <Activity className="h-4 w-4 sm:h-4 sm:w-4" />
               <span className="text-xs sm:text-sm">{t('dashboard.site.visits')}</span>
+            </TabsTrigger>
+            <TabsTrigger value="contact" className="flex flex-col items-center space-y-0.5 h-12 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-xs">
+              <MapPin className="h-4 w-4 sm:h-4 sm:w-4" />
+              <span className="text-xs sm:text-sm">{t('contact.info')}</span>
             </TabsTrigger>
             <TabsTrigger value="profile" className="flex flex-col items-center space-y-0.5 h-12 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-xs">
               <User className="h-4 w-4 sm:h-4 sm:w-4" />
@@ -331,24 +335,160 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
             </div>
           </TabsContent>
 
-          <TabsContent value="profile" className="space-y-4">
-            <h3 className="text-lg font-medium text-studio-text">Your Profile</h3>
+          <TabsContent value="contact" className="space-y-3">
+            <h3 className="text-base font-medium text-studio-text">{t('contact.info')}</h3>
             
             <div className="space-y-4">
+              {/* Site Staff Contact */}
+              <Card className="bg-studio-surface border-studio-border">
+                <CardHeader>
+                  <CardTitle className="text-sm flex items-center space-x-2">
+                    <Stethoscope className="h-4 w-4" />
+                    <span>{t('contact.site.staff')}</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="space-y-2">
+                    <div className="flex justify-between">
+                      <span className="text-sm text-studio-text-muted">{t('contact.principal.investigator')}:</span>
+                      <span className="text-sm font-medium">Dr. María González, MD</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-studio-text-muted">{t('contact.study.coordinator')}:</span>
+                      <span className="text-sm font-medium">Ana López, RN</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-studio-text-muted">{t('contact.phone')}:</span>
+                      <a href="tel:+34911234567" className="text-sm text-blue-600 hover:underline">+34 91 123 4567</a>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-studio-text-muted">{t('contact.email')}:</span>
+                      <a href="mailto:study@hospital.es" className="text-sm text-blue-600 hover:underline">study@hospital.es</a>
+                    </div>
+                    <div className="bg-blue-50 border border-blue-200 rounded p-2 text-xs text-blue-800">
+                      <strong>{t('contact.emergency')}:</strong> {t('contact.emergency.info')}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Regulatory Authorities */}
+              <Card className="bg-studio-surface border-studio-border">
+                <CardHeader>
+                  <CardTitle className="text-sm flex items-center space-x-2">
+                    <Shield className="h-4 w-4" />
+                    <span>{t('contact.regulatory.authorities')}</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="space-y-2">
+                    <div className="flex justify-between">
+                      <span className="text-sm text-studio-text-muted">AEMPS (España):</span>
+                      <a href="tel:+34918225000" className="text-sm text-blue-600 hover:underline">+34 91 822 5000</a>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-studio-text-muted">EMA (Europa):</span>
+                      <a href="mailto:info@ema.europa.eu" className="text-sm text-blue-600 hover:underline">info@ema.europa.eu</a>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-studio-text-muted">{t('contact.safety.reporting')}:</span>
+                      <a href="tel:+34900123456" className="text-sm text-blue-600 hover:underline">+34 900 123 456</a>
+                    </div>
+                  </div>
+                  <div className="bg-orange-50 border border-orange-200 rounded p-2 text-xs text-orange-800">
+                    <strong>{t('contact.safety.note')}:</strong> {t('contact.safety.description')}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Sponsor Contact */}
+              <Card className="bg-studio-surface border-studio-border">
+                <CardHeader>
+                  <CardTitle className="text-sm flex items-center space-x-2">
+                    <Building className="h-4 w-4" />
+                    <span>{t('contact.sponsor')}</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="space-y-2">
+                    <div className="flex justify-between">
+                      <span className="text-sm text-studio-text-muted">{t('contact.company')}:</span>
+                      <span className="text-sm font-medium">Novartis AG</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-studio-text-muted">{t('contact.medical.monitor')}:</span>
+                      <span className="text-sm font-medium">Dr. James Wilson, PhD</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-studio-text-muted">{t('contact.phone')}:</span>
+                      <a href="tel:+41616966111" className="text-sm text-blue-600 hover:underline">+41 61 696 6111</a>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="profile" className="space-y-3">
+            <h3 className="text-base font-medium text-studio-text">{t('participant.profile')}</h3>
+            
+            <div className="space-y-4">
+              {/* Patient ID Card */}
+              <Card className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-2">
+                      <h4 className="text-lg font-bold">STUDIO Clinical Trial</h4>
+                      <p className="text-sm opacity-90">Patient ID Card</p>
+                      <div className="space-y-1">
+                        <p className="text-xs opacity-75">Protocol: PROTO-2024-001</p>
+                        <p className="text-xs opacity-75">Site: Metro General Hospital</p>
+                      </div>
+                    </div>
+                    <div className="text-right space-y-1">
+                      <div 
+                        onClick={() => setShowProfile(true)}
+                        className="bg-white text-gray-800 px-3 py-2 rounded cursor-pointer hover:bg-gray-100 transition-colors"
+                      >
+                        <div className="text-xs font-mono leading-tight">
+                          ||||||||||||||||<br/>
+                          {participantToken}<br/>
+                          ||||||||||||||||
+                        </div>
+                      </div>
+                      <p className="text-xs opacity-75">{t('contact.tap.for.details')}</p>
+                    </div>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-white/20">
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className="text-xs opacity-75">{t('contact.unblinding.emergency')}</p>
+                        <p className="text-sm font-semibold">24/7: +34 911 234 999</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-xs opacity-75">{t('contact.issued')}</p>
+                        <p className="text-xs">15 Oct 2024</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Participant Token Section */}
               <Card className="bg-studio-surface border-studio-border">
                 <CardContent className="p-4">
                   <div className="flex items-center space-x-3">
                     <Barcode className="h-8 w-8 text-studio-text-muted" />
-                    <div>
+                    <div className="flex-1">
                       <p className="font-medium text-studio-text">{t('participant.token')}</p>
                       <button 
                         onClick={() => setShowProfile(true)}
-                        className="text-lg font-mono bg-gray-100 px-3 py-1 rounded hover:bg-gray-200 transition-colors cursor-pointer"
+                        className="text-lg font-mono bg-gray-100 px-3 py-1 rounded hover:bg-gray-200 transition-colors cursor-pointer border-2 border-dashed border-gray-300 hover:border-gray-400"
                       >
                         {participantToken}
                       </button>
                       <p className="text-xs text-studio-text-muted mt-1">
-                        This unique token identifies you in the study while protecting your privacy
+                        {t('contact.token.description')}
                       </p>
                     </div>
                   </div>
