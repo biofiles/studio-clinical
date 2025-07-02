@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,6 +7,7 @@ import { Users, FileCheck, AlertTriangle, BarChart3, Calendar, UserCheck, Messag
 import ParticipantList from "@/components/ParticipantList";
 import AIChatbot from "@/components/AIChatbot";
 import CalendarManagement from "@/components/CalendarManagement";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface InvestigatorDashboardProps {
   onLogout: () => void;
@@ -15,6 +17,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
   const [showParticipantList, setShowParticipantList] = useState(false);
   const [showChatbot, setShowChatbot] = useState(false);
   const [showCalendarManagement, setShowCalendarManagement] = useState(false);
+  const { t } = useLanguage();
 
   const nextEvents = [
     { date: "Dec 15, 2024", time: "2:00 PM", event: "P001 - Site Visit", type: "visit" },
@@ -40,10 +43,10 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
       <main className="p-6 max-w-6xl mx-auto space-y-6">
         <div className="space-y-2">
           <h2 className="text-xl font-medium text-studio-text">
-            Study Management Dashboard
+            {t('dashboard.title')}
           </h2>
           <p className="text-studio-text-muted">
-            Protocol: PROTO-2024-001 | Site: Metro General Hospital
+            {t('dashboard.protocol')}
           </p>
         </div>
 
@@ -55,7 +58,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                 <span className="text-2xl font-semibold text-studio-text">15/30</span>
               </div>
               <p className="text-studio-text-muted text-sm mt-1">
-                Participants enrolled
+                {t('dashboard.participants.enrolled')}
               </p>
             </CardContent>
           </Card>
@@ -67,7 +70,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                 <span className="text-2xl font-semibold text-studio-text">8</span>
               </div>
               <p className="text-studio-text-muted text-sm mt-1">
-                Pending reviews
+                {t('dashboard.pending.reviews')}
               </p>
             </CardContent>
           </Card>
@@ -79,7 +82,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                 <span className="text-2xl font-semibold text-studio-text">2</span>
               </div>
               <p className="text-studio-text-muted text-sm mt-1">
-                Adverse events
+                {t('dashboard.adverse.events')}
               </p>
             </CardContent>
           </Card>
@@ -91,7 +94,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                 <span className="text-2xl font-semibold text-studio-text">12</span>
               </div>
               <p className="text-studio-text-muted text-sm mt-1">
-                Upcoming visits
+                {t('dashboard.upcoming.visits')}
               </p>
             </CardContent>
           </Card>
@@ -100,7 +103,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <Card className="bg-studio-surface border-studio-border lg:col-span-2">
             <CardHeader>
-              <CardTitle className="text-studio-text">Next 3 Study Events</CardTitle>
+              <CardTitle className="text-studio-text">{t('dashboard.next.events')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {nextEvents.map((item, index) => (
@@ -125,7 +128,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
 
           <Card className="bg-studio-surface border-studio-border">
             <CardHeader>
-              <CardTitle className="text-studio-text">Study Management</CardTitle>
+              <CardTitle className="text-studio-text">{t('dashboard.study.management')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <Button 
@@ -134,7 +137,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                 onClick={() => setShowParticipantList(true)}
               >
                 <Users className="h-4 w-4 mr-2" />
-                Participant List
+                {t('dashboard.participant.list')}
               </Button>
               <Button 
                 variant="studio" 
@@ -142,7 +145,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                 onClick={() => setShowCalendarManagement(true)}
               >
                 <Calendar className="h-4 w-4 mr-2" />
-                Manage Calendar
+                {t('dashboard.manage.calendar')}
               </Button>
               <Button 
                 variant="studio" 
@@ -150,7 +153,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                 onClick={handleQuestionnaires}
               >
                 <FileCheck className="h-4 w-4 mr-2" />
-                Questionnaires
+                {t('dashboard.questionnaires')}
               </Button>
               <Button 
                 variant="studio" 
@@ -158,7 +161,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                 onClick={handleExportQuestionnaires}
               >
                 <Download className="h-4 w-4 mr-2" />
-                Export Questionnaires
+                {t('dashboard.export.questionnaires')}
               </Button>
             </CardContent>
           </Card>
@@ -167,12 +170,12 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card className="bg-studio-surface border-studio-border">
             <CardHeader>
-              <CardTitle className="text-studio-text">Study Progress</CardTitle>
+              <CardTitle className="text-studio-text">{t('dashboard.study.progress')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-studio-text-muted">Enrollment</span>
+                  <span className="text-studio-text-muted">{t('dashboard.enrollment')}</span>
                   <span className="text-studio-text">15/30 (50%)</span>
                 </div>
                 <div className="w-full bg-studio-bg rounded-full h-2">
@@ -184,12 +187,12 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
 
           <Card className="bg-studio-surface border-studio-border">
             <CardHeader>
-              <CardTitle className="text-studio-text">Diary Compliance</CardTitle>
+              <CardTitle className="text-studio-text">{t('dashboard.diary.compliance')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-studio-text-muted">Daily Diaries</span>
+                  <span className="text-studio-text-muted">{t('dashboard.daily.diaries')}</span>
                   <span className="text-studio-text">89%</span>
                 </div>
                 <div className="w-full bg-studio-bg rounded-full h-2">
@@ -201,12 +204,12 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
 
           <Card className="bg-studio-surface border-studio-border">
             <CardHeader>
-              <CardTitle className="text-studio-text">Visit Compliance</CardTitle>
+              <CardTitle className="text-studio-text">{t('dashboard.visit.compliance')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-studio-text-muted">Site Visits</span>
+                  <span className="text-studio-text-muted">{t('dashboard.site.visits')}</span>
                   <span className="text-studio-text">96%</span>
                 </div>
                 <div className="w-full bg-studio-bg rounded-full h-2">

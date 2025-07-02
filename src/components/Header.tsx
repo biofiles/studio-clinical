@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface HeaderProps {
   role?: string;
@@ -10,9 +11,21 @@ interface HeaderProps {
 
 const Header = ({ role, onLogout }: HeaderProps) => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const handleSettings = () => {
     navigate('/settings');
+  };
+
+  const getRoleDisplay = (role: string) => {
+    switch (role) {
+      case 'investigator':
+        return 'Site';
+      case 'cro-sponsor':
+        return 'CRO/Sponsor';
+      default:
+        return role?.replace('-', '/');
+    }
   };
 
   return (
@@ -25,8 +38,8 @@ const Header = ({ role, onLogout }: HeaderProps) => {
           {role && (
             <div className="flex items-center space-x-2">
               <span className="text-studio-text-muted">•</span>
-              <span className="text-sm text-studio-text-muted capitalize ml-1 mt-0.5">
-                {role === 'cro-sponsor' ? 'CRO/Sponsor' : role.replace('-', '/')}
+              <span className="text-sm text-studio-text-muted capitalize ml-1 mt-1 mr-1">
+                {getRoleDisplay(role)}
               </span>
             </div>
           )}
@@ -39,7 +52,7 @@ const Header = ({ role, onLogout }: HeaderProps) => {
             onClick={handleSettings}
           >
             <Settings className="h-4 w-4 mr-2" />
-            Settings
+            {t('header.settings')}
           </Button>
           {onLogout && (
             <Button
@@ -47,7 +60,7 @@ const Header = ({ role, onLogout }: HeaderProps) => {
               size="sm"
               onClick={onLogout}
             >
-              Logout
+              {t('header.logout')}
             </Button>
           )}
         </div>

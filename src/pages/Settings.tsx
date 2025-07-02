@@ -1,16 +1,15 @@
 
-import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
 import Header from "@/components/Header";
 import { Globe, LogOut, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Settings = () => {
-  const [language, setLanguage] = useState("english");
   const navigate = useNavigate();
+  const { language, setLanguage, t } = useLanguage();
 
   const handleLogout = () => {
     window.location.href = '/';
@@ -33,11 +32,11 @@ const Settings = () => {
             className="flex items-center space-x-2"
           >
             <ArrowLeft className="h-4 w-4" />
-            <span>Back</span>
+            <span>{t('settings.back')}</span>
           </Button>
           <div>
-            <h2 className="text-xl font-medium text-studio-text">Settings</h2>
-            <p className="text-studio-text-muted">Manage your preferences and account</p>
+            <h2 className="text-xl font-medium text-studio-text">{t('settings.title')}</h2>
+            <p className="text-studio-text-muted">{t('settings.subtitle')}</p>
           </div>
         </div>
 
@@ -46,13 +45,13 @@ const Settings = () => {
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-studio-text">
                 <Globe className="h-5 w-5" />
-                <span>Language Preferences</span>
+                <span>{t('settings.language.preferences')}</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-studio-text">
-                  Display Language
+                  {t('settings.display.language')}
                 </label>
                 <Select value={language} onValueChange={setLanguage}>
                   <SelectTrigger className="w-full">
@@ -64,7 +63,7 @@ const Settings = () => {
                   </SelectContent>
                 </Select>
                 <p className="text-xs text-studio-text-muted">
-                  Changes will be applied after refreshing the page
+                  {t('settings.language.note')}
                 </p>
               </div>
             </CardContent>
@@ -74,17 +73,17 @@ const Settings = () => {
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-studio-text">
                 <LogOut className="h-5 w-5" />
-                <span>Account Actions</span>
+                <span>{t('settings.account.actions')}</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-4">
                 <div>
                   <h4 className="text-sm font-medium text-studio-text mb-2">
-                    Sign Out
+                    {t('settings.sign.out')}
                   </h4>
                   <p className="text-xs text-studio-text-muted mb-3">
-                    You will be redirected to the login page
+                    {t('settings.sign.out.note')}
                   </p>
                   <Button
                     variant="outline"
@@ -92,7 +91,7 @@ const Settings = () => {
                     className="flex items-center space-x-2 text-red-600 border-red-200 hover:bg-red-50"
                   >
                     <LogOut className="h-4 w-4" />
-                    <span>Sign Out</span>
+                    <span>{t('settings.sign.out')}</span>
                   </Button>
                 </div>
               </div>

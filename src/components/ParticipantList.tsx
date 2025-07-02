@@ -1,3 +1,4 @@
+
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +10,7 @@ import { Search, Eye, FileText, Calendar, Barcode } from "lucide-react";
 import ParticipantDetailView from "./ParticipantDetailView";
 import ParticipantScheduler from "./ParticipantScheduler";
 import ParticipantQuestionnaires from "./ParticipantQuestionnaires";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ParticipantListProps {
   open: boolean;
@@ -33,6 +35,7 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
   const [showDetailView, setShowDetailView] = useState(false);
   const [showScheduler, setShowScheduler] = useState(false);
   const [showQuestionnaires, setShowQuestionnaires] = useState(false);
+  const { t } = useLanguage();
 
   const participants: Participant[] = [
     {
@@ -134,7 +137,7 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
           <DialogHeader>
             <DialogTitle className="flex items-center space-x-2">
               <Search className="h-5 w-5" />
-              <span>Participant Management</span>
+              <span>{t('participant.management')}</span>
             </DialogTitle>
           </DialogHeader>
           
@@ -142,14 +145,14 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
             <div className="flex items-center space-x-4">
               <div className="flex-1">
                 <Input
-                  placeholder="Search by patient ID or token..."
+                  placeholder={t('participant.search')}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full"
                 />
               </div>
               <div className="text-sm text-studio-text-muted">
-                {filteredParticipants.length} of {participants.length} participants
+                {filteredParticipants.length} {t('participant.of')} {participants.length} {t('participant.participants')}
               </div>
             </div>
 
@@ -158,14 +161,14 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Patient ID</TableHead>
+                      <TableHead>{t('participant.patient.id')}</TableHead>
                       <TableHead>Token</TableHead>
-                      <TableHead>Enrollment</TableHead>
-                      <TableHead>Visit Status</TableHead>
-                      <TableHead>Questionnaires</TableHead>
-                      <TableHead>Compliance</TableHead>
-                      <TableHead>Next Visit</TableHead>
-                      <TableHead>Actions</TableHead>
+                      <TableHead>{t('participant.enrollment')}</TableHead>
+                      <TableHead>{t('participant.visit.status')}</TableHead>
+                      <TableHead>{t('dashboard.questionnaires')}</TableHead>
+                      <TableHead>{t('participant.compliance')}</TableHead>
+                      <TableHead>{t('participant.next.visit')}</TableHead>
+                      <TableHead>{t('participant.actions')}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -179,7 +182,7 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
                             <button
                               onClick={() => handleBarcodeClick(participant.token)}
                               className="flex items-center space-x-2 hover:bg-gray-100 p-1 rounded transition-colors cursor-pointer"
-                              title="Click to view barcode"
+                              title={t('participant.barcode.click')}
                             >
                               <Barcode className="h-4 w-4 text-studio-text-muted hover:text-blue-600" />
                               <code className="font-mono text-sm hover:text-blue-600">
@@ -193,7 +196,7 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
                         </TableCell>
                         <TableCell>
                           <Badge className={getStatusColor(participant.visitStatus)}>
-                            {participant.visitStatus}
+                            {t(`status.${participant.visitStatus}`)}
                           </Badge>
                         </TableCell>
                         <TableCell>
@@ -222,7 +225,7 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
                               size="sm" 
                               variant="outline"
                               onClick={() => handleViewParticipant(participant.patientId)}
-                              title="View Details"
+                              title={t('participant.view.details')}
                             >
                               <Eye className="h-3 w-3" />
                             </Button>
@@ -230,7 +233,7 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
                               size="sm" 
                               variant="outline"
                               onClick={() => handleViewQuestionnaires(participant.patientId)}
-                              title="View Questionnaires"
+                              title={t('participant.view.questionnaires')}
                             >
                               <FileText className="h-3 w-3" />
                             </Button>
@@ -238,7 +241,7 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
                               size="sm" 
                               variant="outline"
                               onClick={() => handleScheduleVisit(participant.patientId)}
-                              title="Schedule Visit"
+                              title={t('participant.schedule.visit')}
                             >
                               <Calendar className="h-3 w-3" />
                             </Button>

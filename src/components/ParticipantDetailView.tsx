@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { User, Calendar, FileText, Activity, AlertTriangle } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ParticipantDetailViewProps {
   open: boolean;
@@ -12,9 +13,11 @@ interface ParticipantDetailViewProps {
 }
 
 const ParticipantDetailView = ({ open, onOpenChange, participantId }: ParticipantDetailViewProps) => {
+  const { t } = useLanguage();
+
   if (!participantId) return null;
 
-  // Mock participant data that matches the table data
+  // Mock participant data with different demographics for each participant
   const participantData = {
     P001: {
       patientId: "P001",
@@ -25,7 +28,12 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
       questionnairesCompleted: 8,
       questionnairesTotal: 10,
       visitStatus: 'scheduled' as const,
-      complianceRate: 96
+      complianceRate: 96,
+      demographics: {
+        age: 45,
+        gender: "Female",
+        ethnicity: "Hispanic/Latino"
+      }
     },
     P002: {
       patientId: "P002",
@@ -36,7 +44,12 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
       questionnairesCompleted: 9,
       questionnairesTotal: 10,
       visitStatus: 'scheduled' as const,
-      complianceRate: 98
+      complianceRate: 98,
+      demographics: {
+        age: 32,
+        gender: "Male",
+        ethnicity: "Caucasian"
+      }
     },
     P003: {
       patientId: "P003",
@@ -47,7 +60,12 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
       questionnairesCompleted: 7,
       questionnairesTotal: 10,
       visitStatus: 'overdue' as const,
-      complianceRate: 89
+      complianceRate: 89,
+      demographics: {
+        age: 58,
+        gender: "Female",
+        ethnicity: "African American"
+      }
     },
     P004: {
       patientId: "P004",
@@ -58,7 +76,12 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
       questionnairesCompleted: 6,
       questionnairesTotal: 8,
       visitStatus: 'completed' as const,
-      complianceRate: 94
+      complianceRate: 94,
+      demographics: {
+        age: 67,
+        gender: "Male",
+        ethnicity: "Asian"
+      }
     },
     P005: {
       patientId: "P005",
@@ -69,7 +92,12 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
       questionnairesCompleted: 5,
       questionnairesTotal: 8,
       visitStatus: 'scheduled' as const,
-      complianceRate: 92
+      complianceRate: 92,
+      demographics: {
+        age: 29,
+        gender: "Female",
+        ethnicity: "Native American"
+      }
     }
   };
 
@@ -79,11 +107,6 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
   const participantDetails = {
     ...participant,
     status: "Active",
-    demographics: {
-      age: 45,
-      gender: "Female",
-      ethnicity: "Hispanic/Latino"
-    },
     contact: {
       phone: "(555) 123-4567",
       email: "participant@example.com",
@@ -108,12 +131,12 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
     ],
     alerts: participant.visitStatus === 'overdue' 
       ? [
-          { type: "warning", message: "Visit overdue" },
-          { type: "info", message: "Due for monthly assessment" }
+          { type: "warning", message: t('details.visit.overdue') },
+          { type: "info", message: t('details.monthly.assessment') }
         ]
       : participant.complianceRate < 95
       ? [
-          { type: "info", message: "Due for monthly assessment" }
+          { type: "info", message: t('details.monthly.assessment') }
         ]
       : []
   };
@@ -142,7 +165,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-2">
             <User className="h-5 w-5" />
-            <span>Participant Details - {participantId}</span>
+            <span>{t('details.title')} - {participantId}</span>
           </DialogTitle>
         </DialogHeader>
 
@@ -153,7 +176,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
               <CardHeader>
                 <CardTitle className="text-sm flex items-center space-x-2">
                   <AlertTriangle className="h-4 w-4 text-orange-600" />
-                  <span>Alerts</span>
+                  <span>{t('details.alerts')}</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
@@ -170,11 +193,11 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card>
               <CardHeader>
-                <CardTitle className="text-sm">Basic Information</CardTitle>
+                <CardTitle className="text-sm">{t('details.basic.info')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-sm text-studio-text-muted">Patient ID:</span>
+                  <span className="text-sm text-studio-text-muted">{t('participant.patient.id')}:</span>
                   <span className="font-semibold">{participantDetails.patientId}</span>
                 </div>
                 <div className="flex justify-between">
@@ -182,13 +205,13 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                   <code className="font-mono text-sm">{participantDetails.token}</code>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-studio-text-muted">Enrollment Date:</span>
+                  <span className="text-sm text-studio-text-muted">{t('participant.enrollment')} Date:</span>
                   <span>{new Date(participantDetails.enrollmentDate).toLocaleDateString()}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-studio-text-muted">Visit Status:</span>
+                  <span className="text-sm text-studio-text-muted">{t('participant.visit.status')}:</span>
                   <Badge className={getStatusColor(participantDetails.visitStatus)}>
-                    {participantDetails.visitStatus}
+                    {t(`status.${participantDetails.visitStatus}`)}
                   </Badge>
                 </div>
                 <div className="flex justify-between">
@@ -196,7 +219,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                   <span>{new Date(participantDetails.lastVisit).toLocaleDateString()}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-studio-text-muted">Next Visit:</span>
+                  <span className="text-sm text-studio-text-muted">{t('participant.next.visit')}:</span>
                   <span>{new Date(participantDetails.nextVisit).toLocaleDateString()}</span>
                 </div>
               </CardContent>
@@ -204,19 +227,19 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
 
             <Card>
               <CardHeader>
-                <CardTitle className="text-sm">Demographics</CardTitle>
+                <CardTitle className="text-sm">{t('details.demographics')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-sm text-studio-text-muted">Age:</span>
+                  <span className="text-sm text-studio-text-muted">{t('details.age')}:</span>
                   <span>{participantDetails.demographics.age}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-studio-text-muted">Gender:</span>
+                  <span className="text-sm text-studio-text-muted">{t('details.gender')}:</span>
                   <span>{participantDetails.demographics.gender}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-studio-text-muted">Ethnicity:</span>
+                  <span className="text-sm text-studio-text-muted">{t('details.ethnicity')}:</span>
                   <span>{participantDetails.demographics.ethnicity}</span>
                 </div>
               </CardContent>
@@ -228,7 +251,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
             <CardHeader>
               <CardTitle className="text-sm flex items-center space-x-2">
                 <Activity className="h-4 w-4" />
-                <span>Study Progress</span>
+                <span>{t('details.study.progress')}</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -237,7 +260,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                   <div className="text-2xl font-bold text-blue-600">
                     {participantDetails.studyProgress.visitsCompleted}/{participantDetails.studyProgress.visitsTotal}
                   </div>
-                  <div className="text-sm text-studio-text-muted">Site Visits</div>
+                  <div className="text-sm text-studio-text-muted">{t('dashboard.site.visits')}</div>
                   <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                     <div 
                       className="bg-blue-600 h-2 rounded-full" 
@@ -251,7 +274,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                   <div className="text-2xl font-bold text-green-600">
                     {participantDetails.studyProgress.questionnairesCompleted}/{participantDetails.studyProgress.questionnairesTotal}
                   </div>
-                  <div className="text-sm text-studio-text-muted">Questionnaires</div>
+                  <div className="text-sm text-studio-text-muted">{t('dashboard.questionnaires')}</div>
                   <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                     <div 
                       className="bg-green-600 h-2 rounded-full" 
@@ -265,7 +288,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                   <div className="text-2xl font-bold text-purple-600">
                     {participantDetails.studyProgress.complianceRate}%
                   </div>
-                  <div className="text-sm text-studio-text-muted">Compliance Rate</div>
+                  <div className="text-sm text-studio-text-muted">{t('participant.compliance')} Rate</div>
                   <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                     <div 
                       className="bg-purple-600 h-2 rounded-full" 
@@ -285,7 +308,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
               <CardHeader>
                 <CardTitle className="text-sm flex items-center space-x-2">
                   <FileText className="h-4 w-4" />
-                  <span>Recent Activity</span>
+                  <span>{t('details.recent.activity')}</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
@@ -298,7 +321,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                       </div>
                     </div>
                     <Badge className={getActivityTypeColor(activity.type)}>
-                      {activity.type}
+                      {t(`activity.${activity.type}`)}
                     </Badge>
                   </div>
                 ))}
@@ -309,7 +332,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
               <CardHeader>
                 <CardTitle className="text-sm flex items-center space-x-2">
                   <Calendar className="h-4 w-4" />
-                  <span>Upcoming Events</span>
+                  <span>{t('details.upcoming.events')}</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
