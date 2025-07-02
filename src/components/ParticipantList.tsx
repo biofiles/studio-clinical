@@ -1,4 +1,3 @@
-
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -7,6 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useState } from "react";
 import { Search, Eye, FileText, Calendar, Barcode } from "lucide-react";
+import ParticipantDetailView from "./ParticipantDetailView";
+import ParticipantScheduler from "./ParticipantScheduler";
+import ParticipantQuestionnaires from "./ParticipantQuestionnaires";
 
 interface ParticipantListProps {
   open: boolean;
@@ -27,6 +29,10 @@ interface Participant {
 
 const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedParticipant, setSelectedParticipant] = useState<string | null>(null);
+  const [showDetailView, setShowDetailView] = useState(false);
+  const [showScheduler, setShowScheduler] = useState(false);
+  const [showQuestionnaires, setShowQuestionnaires] = useState(false);
 
   const participants: Participant[] = [
     {
@@ -101,133 +107,162 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
   };
 
   const handleViewParticipant = (patientId: string) => {
-    alert(`Opening detailed view for patient ${patientId}`);
+    setSelectedParticipant(patientId);
+    setShowDetailView(true);
   };
 
   const handleViewQuestionnaires = (patientId: string) => {
-    alert(`Opening questionnaires for patient ${patientId}`);
+    setSelectedParticipant(patientId);
+    setShowQuestionnaires(true);
   };
 
   const handleScheduleVisit = (patientId: string) => {
-    alert(`Scheduling visit for patient ${patientId}`);
+    setSelectedParticipant(patientId);
+    setShowScheduler(true);
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="flex items-center space-x-2">
-            <Search className="h-5 w-5" />
-            <span>Participant Management</span>
-          </DialogTitle>
-        </DialogHeader>
-        
-        <div className="space-y-4">
-          <div className="flex items-center space-x-4">
-            <div className="flex-1">
-              <Input
-                placeholder="Search by patient ID or token..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full"
-              />
+    <>
+      <Dialog open={open} onOpenChange={onOpenChange}>
+        <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center space-x-2">
+              <Search className="h-5 w-5" />
+              <span>Participant Management</span>
+            </DialogTitle>
+          </DialogHeader>
+          
+          <div className="space-y-4">
+            <div className="flex items-center space-x-4">
+              <div className="flex-1">
+                <Input
+                  placeholder="Search by patient ID or token..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full"
+                />
+              </div>
+              <div className="text-sm text-studio-text-muted">
+                {filteredParticipants.length} of {participants.length} participants
+              </div>
             </div>
-            <div className="text-sm text-studio-text-muted">
-              {filteredParticipants.length} of {participants.length} participants
-            </div>
-          </div>
 
-          <Card className="bg-studio-surface border-studio-border">
-            <CardContent className="p-0">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Patient ID</TableHead>
-                    <TableHead>Token</TableHead>
-                    <TableHead>Enrollment</TableHead>
-                    <TableHead>Visit Status</TableHead>
-                    <TableHead>Questionnaires</TableHead>
-                    <TableHead>Compliance</TableHead>
-                    <TableHead>Next Visit</TableHead>
-                    <TableHead>Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {filteredParticipants.map((participant) => (
-                    <TableRow key={participant.patientId}>
-                      <TableCell className="font-semibold">
-                        {participant.patientId}
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center space-x-2">
-                          <Barcode className="h-4 w-4 text-studio-text-muted" />
-                          <code className="font-mono text-sm">
-                            {participant.token}
-                          </code>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        {new Date(participant.enrollmentDate).toLocaleDateString()}
-                      </TableCell>
-                      <TableCell>
-                        <Badge className={getStatusColor(participant.visitStatus)}>
-                          {participant.visitStatus}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>
-                        {participant.questionnairesCompleted}/{participant.questionnairesTotal}
-                        <div className="w-16 bg-gray-200 rounded-full h-1 mt-1">
-                          <div 
-                            className="bg-blue-600 h-1 rounded-full" 
-                            style={{ 
-                              width: `${(participant.questionnairesCompleted / participant.questionnairesTotal) * 100}%` 
-                            }}
-                          ></div>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <span className={participant.complianceRate >= 95 ? 'text-green-600' : 
-                                       participant.complianceRate >= 85 ? 'text-yellow-600' : 'text-red-600'}>
-                          {participant.complianceRate}%
-                        </span>
-                      </TableCell>
-                      <TableCell>
-                        {new Date(participant.nextVisit).toLocaleDateString()}
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex space-x-1">
-                          <Button 
-                            size="sm" 
-                            variant="outline"
-                            onClick={() => handleViewParticipant(participant.patientId)}
-                          >
-                            <Eye className="h-3 w-3" />
-                          </Button>
-                          <Button 
-                            size="sm" 
-                            variant="outline"
-                            onClick={() => handleViewQuestionnaires(participant.patientId)}
-                          >
-                            <FileText className="h-3 w-3" />
-                          </Button>
-                          <Button 
-                            size="sm" 
-                            variant="outline"
-                            onClick={() => handleScheduleVisit(participant.patientId)}
-                          >
-                            <Calendar className="h-3 w-3" />
-                          </Button>
-                        </div>
-                      </TableCell>
+            <Card className="bg-studio-surface border-studio-border">
+              <CardContent className="p-0">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Patient ID</TableHead>
+                      <TableHead>Token</TableHead>
+                      <TableHead>Enrollment</TableHead>
+                      <TableHead>Visit Status</TableHead>
+                      <TableHead>Questionnaires</TableHead>
+                      <TableHead>Compliance</TableHead>
+                      <TableHead>Next Visit</TableHead>
+                      <TableHead>Actions</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
-        </div>
-      </DialogContent>
-    </Dialog>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredParticipants.map((participant) => (
+                      <TableRow key={participant.patientId}>
+                        <TableCell className="font-semibold">
+                          {participant.patientId}
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center space-x-2">
+                            <Barcode className="h-4 w-4 text-studio-text-muted" />
+                            <code className="font-mono text-sm">
+                              {participant.token}
+                            </code>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          {new Date(participant.enrollmentDate).toLocaleDateString()}
+                        </TableCell>
+                        <TableCell>
+                          <Badge className={getStatusColor(participant.visitStatus)}>
+                            {participant.visitStatus}
+                          </Badge>
+                        </TableCell>
+                        <TableCell>
+                          {participant.questionnairesCompleted}/{participant.questionnairesTotal}
+                          <div className="w-16 bg-gray-200 rounded-full h-1 mt-1">
+                            <div 
+                              className="bg-blue-600 h-1 rounded-full" 
+                              style={{ 
+                                width: `${(participant.questionnairesCompleted / participant.questionnairesTotal) * 100}%` 
+                              }}
+                            ></div>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <span className={participant.complianceRate >= 95 ? 'text-green-600' : 
+                                         participant.complianceRate >= 85 ? 'text-yellow-600' : 'text-red-600'}>
+                            {participant.complianceRate}%
+                          </span>
+                        </TableCell>
+                        <TableCell>
+                          {new Date(participant.nextVisit).toLocaleDateString()}
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex space-x-1">
+                            <Button 
+                              size="sm" 
+                              variant="outline"
+                              onClick={() => handleViewParticipant(participant.patientId)}
+                              title="View Details"
+                            >
+                              <Eye className="h-3 w-3" />
+                            </Button>
+                            <Button 
+                              size="sm" 
+                              variant="outline"
+                              onClick={() => handleViewQuestionnaires(participant.patientId)}
+                              title="View Questionnaires"
+                            >
+                              <FileText className="h-3 w-3" />
+                            </Button>
+                            <Button 
+                              size="sm" 
+                              variant="outline"
+                              onClick={() => handleScheduleVisit(participant.patientId)}
+                              title="Schedule Visit"
+                            >
+                              <Calendar className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Detail View Dialog */}
+      <ParticipantDetailView
+        open={showDetailView}
+        onOpenChange={setShowDetailView}
+        participantId={selectedParticipant}
+      />
+
+      {/* Schedule Dialog */}
+      <ParticipantScheduler
+        open={showScheduler}
+        onOpenChange={setShowScheduler}
+        participantId={selectedParticipant}
+      />
+
+      {/* Questionnaires Dialog */}
+      <ParticipantQuestionnaires
+        open={showQuestionnaires}
+        onOpenChange={setShowQuestionnaires}
+        participantId={selectedParticipant}
+      />
+    </>
   );
 };
 
