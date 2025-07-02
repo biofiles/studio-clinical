@@ -1,9 +1,8 @@
-
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { User, Calendar, FileText, Activity, AlertTriangle } from "lucide-react";
+import { User, Calendar, FileText, Activity, AlertTriangle, Signature, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ParticipantDetailViewProps {
@@ -33,6 +32,11 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
         age: 45,
         gender: "Female",
         ethnicity: "Hispanic/Latino"
+      },
+      icfDetails: {
+        version: "v2.1",
+        signedDate: "2024-10-15",
+        status: "Signed"
       }
     },
     P002: {
@@ -49,6 +53,11 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
         age: 32,
         gender: "Male",
         ethnicity: "Caucasian"
+      },
+      icfDetails: {
+        version: "v2.1",
+        signedDate: "2024-10-20",
+        status: "Signed"
       }
     },
     P003: {
@@ -65,6 +74,11 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
         age: 58,
         gender: "Female",
         ethnicity: "African American"
+      },
+      icfDetails: {
+        version: "v2.0",
+        signedDate: "2024-10-18",
+        status: "Re-consent Required"
       }
     },
     P004: {
@@ -81,6 +95,11 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
         age: 67,
         gender: "Male",
         ethnicity: "Asian"
+      },
+      icfDetails: {
+        version: "v2.1",
+        signedDate: "2024-11-01",
+        status: "Signed"
       }
     },
     P005: {
@@ -97,6 +116,11 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
         age: 29,
         gender: "Female",
         ethnicity: "Native American"
+      },
+      icfDetails: {
+        version: "v2.1",
+        signedDate: "2024-11-05",
+        status: "Signed"
       }
     }
   };
@@ -138,6 +162,10 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
       ? [
           { type: "info", message: t('details.monthly.assessment') }
         ]
+      : participant.icfDetails.status === "Re-consent Required"
+      ? [
+          { type: "warning", message: "ICF re-consent required - version update available" }
+        ]
       : []
   };
 
@@ -155,6 +183,15 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
       case 'completed': return 'bg-green-100 text-green-800';
       case 'scheduled': return 'bg-blue-100 text-blue-800';
       case 'overdue': return 'bg-red-100 text-red-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const getICFStatusColor = (status: string) => {
+    switch (status) {
+      case 'Signed': return 'bg-green-100 text-green-800';
+      case 'Re-consent Required': return 'bg-orange-100 text-orange-800';
+      case 'Pending': return 'bg-yellow-100 text-yellow-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
@@ -245,6 +282,37 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
               </CardContent>
             </Card>
           </div>
+
+          {/* ICF Information */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-sm flex items-center space-x-2">
+                <Signature className="h-4 w-4" />
+                <span>Informed Consent (ICF)</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="flex justify-between">
+                <span className="text-sm text-studio-text-muted">ICF Version:</span>
+                <code className="font-mono text-sm bg-gray-100 px-2 py-1 rounded">{participantDetails.icfDetails.version}</code>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-sm text-studio-text-muted">Signed Date:</span>
+                <span>{new Date(participantDetails.icfDetails.signedDate).toLocaleDateString()}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-sm text-studio-text-muted">Status:</span>
+                <Badge className={getICFStatusColor(participantDetails.icfDetails.status)}>
+                  {participantDetails.icfDetails.status}
+                </Badge>
+              </div>
+              {participantDetails.icfDetails.status === "Re-consent Required" && (
+                <div className="bg-orange-50 border border-orange-200 rounded p-2 text-xs text-orange-800">
+                  <strong>Action Required:</strong> ICF has been updated to v2.1. Please schedule re-consent visit.
+                </div>
+              )}
+            </CardContent>
+          </Card>
 
           {/* Study Progress */}
           <Card>
