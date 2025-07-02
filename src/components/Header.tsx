@@ -38,7 +38,7 @@ const Header = ({ role, onLogout }: HeaderProps) => {
           {role && (
             <div className="flex items-center space-x-2">
               <span className="text-studio-text-muted">•</span>
-              <span className="text-sm text-studio-text-muted capitalize ml-1 mt-1 mr-1">
+              <span className="text-sm text-studio-text-muted capitalize ml-2 mt-1 mr-1">
                 {getRoleDisplay(role)}
               </span>
             </div>

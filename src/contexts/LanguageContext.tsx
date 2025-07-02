@@ -58,6 +58,11 @@ const translations = {
     'details.monthly.assessment': 'Due for monthly assessment',
     'details.basic.info': 'Basic Information',
     'details.demographics': 'Demographics',
+    
+    // Participant specific
+    'participant.profile': 'Profile',
+    'participant.your.schedule': 'Your Schedule',
+    'participant.days.remaining': 'days remaining',
     'details.study.progress': 'Study Progress',
     'details.recent.activity': 'Recent Activity',
     'details.upcoming.events': 'Upcoming Events',
@@ -180,6 +185,9 @@ const translations = {
     'participant.view.questionnaires': 'Ver Cuestionarios',
     'participant.schedule.visit': 'Programar Visita',
     'participant.barcode.click': 'Haga clic para ver el código de barras',
+    'participant.profile': 'Perfil',
+    'participant.your.schedule': 'Tu Horario',
+    'participant.days.remaining': 'días restantes',
     
     // Participant Details
     'details.title': 'Detalles del Participante',

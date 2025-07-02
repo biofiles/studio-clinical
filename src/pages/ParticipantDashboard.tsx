@@ -95,9 +95,12 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
               <Barcode className="h-4 w-4 text-studio-text-muted" />
-              <code className="text-xs font-mono bg-gray-100 px-2 py-1 rounded">
+              <button 
+                onClick={() => setShowProfile(true)}
+                className="text-xs font-mono bg-gray-100 px-2 py-1 rounded hover:bg-gray-200 transition-colors cursor-pointer"
+              >
                 {participantToken}
-              </code>
+              </button>
             </div>
             <div className="flex items-center space-x-2 text-xs text-studio-text-muted">
               <Clock className="h-3 w-3" />
@@ -114,7 +117,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
             {t('common.welcome')}!
           </h2>
           <p className="text-studio-text-muted text-sm sm:text-base">
-            Phase II Clinical Trial | {daysLeft} {t('common.active')}
+            Phase II Clinical Trial | {daysLeft} {t('participant.days.remaining')}
           </p>
         </div>
 
@@ -128,13 +131,10 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                   <span className="text-studio-text font-medium">{studyProgress}%</span>
                 </div>
                 <Progress value={studyProgress} className="h-3 mb-2" />
-                <p className="text-xs text-studio-text-muted">
-                  {t('common.loading')}
-                </p>
               </div>
               <div className="text-center sm:text-right sm:ml-6">
                 <p className="text-2xl sm:text-3xl font-bold text-studio-text">{daysLeft}</p>
-                <p className="text-xs text-studio-text-muted">{t('common.active')}</p>
+                <p className="text-xs text-studio-text-muted">{t('participant.days.remaining')}</p>
               </div>
             </div>
           </CardContent>
@@ -161,13 +161,13 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
             </TabsTrigger>
             <TabsTrigger value="profile" className="flex flex-col items-center space-y-1 h-16 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2">
               <User className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-sm">{t('details.demographics')}</span>
+              <span className="text-xs sm:text-sm">{t('participant.profile')}</span>
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="schedule" className="space-y-4">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
-              <h3 className="text-lg font-medium text-studio-text">Your Schedule</h3>
+              <h3 className="text-lg font-medium text-studio-text">{t('participant.your.schedule')}</h3>
               <Button 
                 variant="studio" 
                 size="sm"
@@ -323,15 +323,15 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
             <h3 className="text-lg font-medium text-studio-text">Site Visits</h3>
             
             <div className="space-y-3">
-              <Card className="bg-studio-surface border-studio-border">
+              <Card className="bg-gray-50 border-gray-200">
                 <CardContent className="p-4">
                   <div className="flex items-start space-x-3">
-                    <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
+                    <CheckCircle className="h-5 w-5 text-gray-600 mt-0.5" />
                     <div className="flex-1">
-                      <p className="font-medium text-studio-text">Baseline Visit - Completed</p>
-                      <p className="text-sm text-studio-text-muted">Nov 15, 2024 at 2:00 PM</p>
-                      <p className="text-xs text-studio-text-muted mt-1">Blood draw, vitals, questionnaires completed</p>
-                      <div className="bg-gray-50 border border-gray-200 rounded p-2 text-xs text-gray-700 mt-2">
+                      <p className="font-medium text-gray-800">Baseline Visit - Completed</p>
+                      <p className="text-sm text-gray-600">Nov 15, 2024 at 2:00 PM</p>
+                      <p className="text-xs text-gray-600 mt-1">Blood draw, vitals, questionnaires completed</p>
+                      <div className="bg-gray-100 border border-gray-300 rounded p-2 text-xs text-gray-700 mt-2">
                         <strong>Visit Notes:</strong> All procedures completed successfully. Blood pressure slightly elevated, will monitor at next visit. Patient reported no adverse events.
                       </div>
                     </div>
@@ -339,15 +339,15 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-blue-50 border-blue-200">
+              <Card className="bg-white border-gray-200">
                 <CardContent className="p-4">
                   <div className="flex items-start space-x-3">
-                    <Clock className="h-5 w-5 text-blue-600 mt-0.5" />
+                    <Clock className="h-5 w-5 text-gray-600 mt-0.5" />
                     <div className="flex-1">
-                      <p className="font-medium text-blue-800">Week 4 Visit - Scheduled</p>
-                      <p className="text-sm text-blue-700">Dec 15, 2024 at 2:00 PM</p>
-                      <p className="text-xs text-blue-700 mt-1">Blood draw, safety assessment, questionnaires</p>
-                      <div className="bg-blue-100 border border-blue-300 rounded p-2 text-xs text-blue-800 mt-2">
+                      <p className="font-medium text-gray-800">Week 4 Visit - Scheduled</p>
+                      <p className="text-sm text-gray-600">Dec 15, 2024 at 2:00 PM</p>
+                      <p className="text-xs text-gray-600 mt-1">Blood draw, safety assessment, questionnaires</p>
+                      <div className="bg-gray-50 border border-gray-200 rounded p-2 text-xs text-gray-700 mt-2">
                         <strong>Preparation Notes:</strong> Please fast for 12 hours before the visit. Bring your medication diary and any questions you may have.
                       </div>
                     </div>
@@ -367,9 +367,12 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                     <Barcode className="h-8 w-8 text-studio-text-muted" />
                     <div>
                       <p className="font-medium text-studio-text">Participant Token</p>
-                      <code className="text-lg font-mono bg-gray-100 px-3 py-1 rounded">
+                      <button 
+                        onClick={() => setShowProfile(true)}
+                        className="text-lg font-mono bg-gray-100 px-3 py-1 rounded hover:bg-gray-200 transition-colors cursor-pointer"
+                      >
                         {participantToken}
-                      </code>
+                      </button>
                       <p className="text-xs text-studio-text-muted mt-1">
                         This unique token identifies you in the study while protecting your privacy
                       </p>
