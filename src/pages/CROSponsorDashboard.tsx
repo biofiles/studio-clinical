@@ -1,9 +1,8 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
-import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Camera, Download, Clock } from "lucide-react";
+import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, FileText } from "lucide-react";
 import { toast } from "sonner";
 
 interface CROSponsorDashboardProps {
@@ -11,7 +10,7 @@ interface CROSponsorDashboardProps {
 }
 
 const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
-  const [isGeneratingScreenshot, setIsGeneratingScreenshot] = useState<string | null>(null);
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [currentView, setCurrentView] = useState("dashboard");
   const [selectedStudy, setSelectedStudy] = useState<string | null>(null);
 
@@ -27,17 +26,17 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
     { type: "success", message: "Study PROTO-2024-001 milestone reached", time: "2 days ago" }
   ];
 
-  const handleScreenshotCapture = async (section: string) => {
-    setIsGeneratingScreenshot(section);
+  const handlePDFGeneration = async () => {
+    setIsGeneratingPDF(true);
     
-    // Simulate screenshot generation process
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    // Simulate PDF generation process
+    await new Promise(resolve => setTimeout(resolve, 3000));
     
-    toast.success(`${section} screenshot generated for audit trail`, {
-      description: `Compliance document ready for regulatory submission`
+    toast.success("Questionnaire PDF Report Generated", {
+      description: "Complete questionnaire data exported for regulatory submission"
     });
     
-    setIsGeneratingScreenshot(null);
+    setIsGeneratingPDF(false);
   };
 
   const getContextTitle = () => {
@@ -83,21 +82,21 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
           </div>
           
           <Button
-            onClick={() => handleScreenshotCapture("Portfolio Overview")}
-            disabled={isGeneratingScreenshot === "Portfolio Overview"}
+            onClick={handlePDFGeneration}
+            disabled={isGeneratingPDF}
             variant="outline"
             size="sm"
             className="flex items-center space-x-2"
           >
-            {isGeneratingScreenshot === "Portfolio Overview" ? (
+            {isGeneratingPDF ? (
               <>
                 <div className="animate-spin h-3 w-3 border border-primary border-t-transparent rounded-full" />
-                <span>Generating...</span>
+                <span>Generating PDF...</span>
               </>
             ) : (
               <>
-                <Camera className="h-3 w-3" />
-                <span>Generate Screenshot for Audit</span>
+                <FileText className="h-3 w-3" />
+                <span>Generate Questionnaire PDF Report</span>
               </>
             )}
           </Button>
@@ -155,27 +154,8 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <Card className="bg-studio-surface border-studio-border lg:col-span-2">
-            <CardHeader className="flex flex-row items-center justify-between">
+            <CardHeader>
               <CardTitle className="text-studio-text">Active Studies</CardTitle>
-              <Button
-                onClick={() => handleScreenshotCapture("Study Overview")}
-                disabled={isGeneratingScreenshot === "Study Overview"}
-                variant="outline"
-                size="sm"
-                className="flex items-center space-x-1"
-              >
-                {isGeneratingScreenshot === "Study Overview" ? (
-                  <>
-                    <div className="animate-spin h-3 w-3 border border-primary border-t-transparent rounded-full" />
-                    <span className="text-xs">Generating...</span>
-                  </>
-                ) : (
-                  <>
-                    <Camera className="h-3 w-3" />
-                    <span className="text-xs">Screenshot</span>
-                  </>
-                )}
-              </Button>
             </CardHeader>
             <CardContent className="space-y-4">
               {studies.map((study, index) => (
@@ -186,31 +166,13 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                       <h4 className="font-medium text-studio-text">{study.title}</h4>
                       <p className="text-sm text-studio-text-muted">{study.id}</p>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <span className={`px-2 py-1 rounded text-xs ${
-                        study.status === 'Active' ? 'bg-accent text-accent-foreground' :
-                        study.status === 'Recruiting' ? 'bg-primary text-primary-foreground' :
-                        'bg-muted text-muted-foreground'
-                      }`}>
-                        {study.status}
-                      </span>
-                      <Button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleScreenshotCapture(`Visit Logs - ${study.id}`);
-                        }}
-                        disabled={isGeneratingScreenshot === `Visit Logs - ${study.id}`}
-                        variant="ghost"
-                        size="sm"
-                        className="h-6 w-6 p-0"
-                      >
-                        {isGeneratingScreenshot === `Visit Logs - ${study.id}` ? (
-                          <div className="animate-spin h-3 w-3 border border-primary border-t-transparent rounded-full" />
-                        ) : (
-                          <Camera className="h-3 w-3" />
-                        )}
-                      </Button>
-                    </div>
+                    <span className={`px-2 py-1 rounded text-xs ${
+                      study.status === 'Active' ? 'bg-accent text-accent-foreground' :
+                      study.status === 'Recruiting' ? 'bg-primary text-primary-foreground' :
+                      'bg-muted text-muted-foreground'
+                    }`}>
+                      {study.status}
+                    </span>
                   </div>
                   <div className="flex justify-between text-sm text-studio-text-muted">
                     <span>{study.sites} sites</span>
@@ -222,21 +184,8 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
           </Card>
 
           <Card className="bg-studio-surface border-studio-border">
-            <CardHeader className="flex flex-row items-center justify-between">
+            <CardHeader>
               <CardTitle className="text-studio-text">Recent Alerts</CardTitle>
-              <Button
-                onClick={() => handleScreenshotCapture("Alerts Log")}
-                disabled={isGeneratingScreenshot === "Alerts Log"}
-                variant="outline"
-                size="sm"
-                className="flex items-center space-x-1"
-              >
-                {isGeneratingScreenshot === "Alerts Log" ? (
-                  <div className="animate-spin h-3 w-3 border border-primary border-t-transparent rounded-full" />
-                ) : (
-                  <Camera className="h-3 w-3" />
-                )}
-              </Button>
             </CardHeader>
             <CardContent className="space-y-4">
               {alerts.map((alert, index) => (
@@ -256,21 +205,8 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card className="bg-studio-surface border-studio-border">
-            <CardHeader className="flex flex-row items-center justify-between">
+            <CardHeader>
               <CardTitle className="text-studio-text">Enrollment Progress</CardTitle>
-              <Button
-                onClick={() => handleScreenshotCapture("Enrollment Report")}
-                disabled={isGeneratingScreenshot === "Enrollment Report"}
-                variant="ghost"
-                size="sm"
-                className="h-6 w-6 p-0"
-              >
-                {isGeneratingScreenshot === "Enrollment Report" ? (
-                  <div className="animate-spin h-3 w-3 border border-primary border-t-transparent rounded-full" />
-                ) : (
-                  <Camera className="h-3 w-3" />
-                )}
-              </Button>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
@@ -286,21 +222,8 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
           </Card>
 
           <Card className="bg-studio-surface border-studio-border">
-            <CardHeader className="flex flex-row items-center justify-between">
+            <CardHeader>
               <CardTitle className="text-studio-text">Budget Utilization</CardTitle>
-              <Button
-                onClick={() => handleScreenshotCapture("Budget Report")}
-                disabled={isGeneratingScreenshot === "Budget Report"}
-                variant="ghost"
-                size="sm"
-                className="h-6 w-6 p-0"
-              >
-                {isGeneratingScreenshot === "Budget Report" ? (
-                  <div className="animate-spin h-3 w-3 border border-primary border-t-transparent rounded-full" />
-                ) : (
-                  <Camera className="h-3 w-3" />
-                )}
-              </Button>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
@@ -316,21 +239,8 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
           </Card>
 
           <Card className="bg-studio-surface border-studio-border">
-            <CardHeader className="flex flex-row items-center justify-between">
+            <CardHeader>
               <CardTitle className="text-studio-text">Timeline Progress</CardTitle>
-              <Button
-                onClick={() => handleScreenshotCapture("Timeline Report")}
-                disabled={isGeneratingScreenshot === "Timeline Report"}
-                variant="ghost"
-                size="sm"
-                className="h-6 w-6 p-0"
-              >
-                {isGeneratingScreenshot === "Timeline Report" ? (
-                  <div className="animate-spin h-3 w-3 border border-primary border-t-transparent rounded-full" />
-                ) : (
-                  <Camera className="h-3 w-3" />
-                )}
-              </Button>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
