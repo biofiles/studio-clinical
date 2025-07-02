@@ -1,28 +1,48 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LoginForm from "./LoginForm";
 
 interface LoginProps {
   onRoleSelect: (role: 'participant' | 'investigator' | 'cro-sponsor') => void;
 }
 
 const Login = ({ onRoleSelect }: LoginProps) => {
+  const { t } = useLanguage();
+  const [showLoginForm, setShowLoginForm] = useState(false);
+
   const roles = [
     {
       id: 'participant' as const,
-      title: 'Participant',
-      description: 'Access your study participation portal'
+      title: t('login.roles.participant'),
+      description: t('login.roles.participant.description')
     },
     {
       id: 'investigator' as const,
-      title: 'Investigator',
-      description: 'Manage and monitor clinical studies'
+      title: t('login.roles.investigator'),
+      description: t('login.roles.investigator.description')
     },
     {
       id: 'cro-sponsor' as const,
-      title: 'CRO/Sponsor',
-      description: 'Oversee and administer research programs'
+      title: t('login.roles.cro-sponsor'),
+      description: t('login.roles.cro-sponsor.description')
     }
   ];
+
+  const handleLogin = (credentials: { email: string; password: string; role: string }) => {
+    // In a real app, you would validate credentials here
+    onRoleSelect(credentials.role as 'participant' | 'investigator' | 'cro-sponsor');
+  };
+
+  if (showLoginForm) {
+    return (
+      <LoginForm 
+        onLogin={handleLogin}
+        onBackToRoleSelection={() => setShowLoginForm(false)}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-studio-bg flex items-center justify-center p-4">
@@ -32,7 +52,7 @@ const Login = ({ onRoleSelect }: LoginProps) => {
             STUDIO
           </h1>
           <p className="text-studio-text-muted text-sm">
-            Select your role to continue
+            {t('login.role.selection.subtitle')}
           </p>
         </div>
 
@@ -41,7 +61,7 @@ const Login = ({ onRoleSelect }: LoginProps) => {
             <Card 
               key={role.id} 
               className="bg-studio-surface border-studio-border hover:shadow-md transition-all duration-200 cursor-pointer"
-              onClick={() => onRoleSelect(role.id)}
+              onClick={() => setShowLoginForm(true)}
             >
               <CardHeader className="pb-3">
                 <h3 className="text-lg font-medium text-studio-text">
@@ -59,7 +79,7 @@ const Login = ({ onRoleSelect }: LoginProps) => {
 
         <div className="text-center">
           <p className="text-xs text-studio-text-muted">
-            Don't have access? Contact your administrator
+            {t('login.help')}
           </p>
         </div>
       </div>

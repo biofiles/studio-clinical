@@ -317,17 +317,58 @@ const EConsentDialog = ({ open, onOpenChange }: EConsentDialogProps) => {
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-2">
             <FileText className="h-5 w-5" />
-            <span>{t('econsent.title')}</span>
+            <span>{t('econsent.title')} - Version {icfVersion}</span>
           </DialogTitle>
           <p className="text-sm text-studio-text-muted">{t('econsent.subtitle')}</p>
           <div className="flex items-center space-x-2 text-xs text-studio-text-muted">
-            <span>Version: {icfVersion}</span>
-            <Separator orientation="vertical" className="h-4" />
             <span>Last Updated: December 1, 2024</span>
           </div>
         </DialogHeader>
 
         <div className="space-y-6">
+          {/* ICF History and Optional ICFs */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-sm">Previous Signed ICFs</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <div className="text-xs space-y-1">
+                  <div className="flex justify-between">
+                    <span>ICF v2.0</span>
+                    <span className="text-studio-text-muted">Nov 15, 2024</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>ICF v1.0</span>
+                    <span className="text-studio-text-muted">Oct 10, 2024</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-sm">Optional ICFs Available</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs">
+                    <span>Pharmacokinetics (PK)</span>
+                    <Button variant="outline" size="sm">Sign</Button>
+                  </div>
+                  <div className="flex items-center justify-between text-xs">
+                    <span>Biomarkers</span>
+                    <Button variant="outline" size="sm">Sign</Button>
+                  </div>
+                  <div className="flex items-center justify-between text-xs">
+                    <span>Pregnant Partner</span>
+                    <Button variant="outline" size="sm">Sign</Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
           {/* Enhanced Audio Controls */}
           <Card>
             <CardHeader>

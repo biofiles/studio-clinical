@@ -111,6 +111,25 @@ const translations = {
     'common.active': 'Active',
     'common.inactive': 'Inactive',
     
+    // Login and Authentication
+    'login.title': 'Sign In',
+    'login.subtitle': 'Sign in to access your account',
+    'login.email': 'Email',
+    'login.email.placeholder': 'Enter your email',
+    'login.password': 'Password',
+    'login.password.placeholder': 'Enter your password',
+    'login.role.select': 'Select your role',
+    'login.role.selection.subtitle': 'Select your role to continue',
+    'login.button': 'Sign In',
+    'login.back': 'Back to Role Selection',
+    'login.help': "Don't have access? Contact your administrator",
+    'login.roles.participant': 'Participant',
+    'login.roles.investigator': 'Site',
+    'login.roles.cro-sponsor': 'CRO/Sponsor',
+    'login.roles.participant.description': 'Access your study participation portal',
+    'login.roles.investigator.description': 'Manage and monitor clinical studies',
+    'login.roles.cro-sponsor.description': 'Oversee and administer research programs',
+    
     // Status values
     'status.completed': 'completed',
     'status.scheduled': 'scheduled',
@@ -221,6 +240,25 @@ const translations = {
     'common.pending': 'Pendiente',
     'common.active': 'Activo',
     'common.inactive': 'Inactivo',
+    
+    // Login and Authentication (Spanish)
+    'login.title': 'Iniciar Sesión',
+    'login.subtitle': 'Inicia sesión para acceder a tu cuenta',
+    'login.email': 'Correo Electrónico',
+    'login.email.placeholder': 'Ingresa tu correo electrónico',
+    'login.password': 'Contraseña',
+    'login.password.placeholder': 'Ingresa tu contraseña',
+    'login.role.select': 'Selecciona tu rol',
+    'login.role.selection.subtitle': 'Selecciona tu rol para continuar',
+    'login.button': 'Iniciar Sesión',
+    'login.back': 'Volver a Selección de Rol',
+    'login.help': '¿No tienes acceso? Contacta a tu administrador',
+    'login.roles.participant': 'Participante',
+    'login.roles.investigator': 'Sitio',
+    'login.roles.cro-sponsor': 'CRO/Patrocinador',
+    'login.roles.participant.description': 'Accede a tu portal de participación en estudios',
+    'login.roles.investigator.description': 'Gestiona y monitorea estudios clínicos',
+    'login.roles.cro-sponsor.description': 'Supervisa y administra programas de investigación',
     
     // Status values
     'status.completed': 'completado',
