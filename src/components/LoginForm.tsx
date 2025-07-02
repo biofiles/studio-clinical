@@ -5,30 +5,37 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Eye, EyeOff, Lock, User } from "lucide-react";
+import { Eye, EyeOff, Lock, User, ArrowLeft } from "lucide-react";
 
 interface LoginFormProps {
-  onLogin: (credentials: { email: string; password: string; role: string }) => void;
+  onLogin: (credentials: { email: string; password: string }) => void;
   onBackToRoleSelection: () => void;
+  selectedRole: string;
 }
 
-const LoginForm = ({ onLogin, onBackToRoleSelection }: LoginFormProps) => {
+const LoginForm = ({ onLogin, onBackToRoleSelection, selectedRole }: LoginFormProps) => {
   const { t } = useLanguage();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [selectedRole, setSelectedRole] = useState("");
 
-  const roles = [
-    { id: 'participant', title: t('login.roles.participant'), description: t('login.roles.participant.description') },
-    { id: 'investigator', title: t('login.roles.investigator'), description: t('login.roles.investigator.description') },
-    { id: 'cro-sponsor', title: t('login.roles.cro-sponsor'), description: t('login.roles.cro-sponsor.description') }
-  ];
+  const getRoleDisplayName = (role: string) => {
+    switch (role) {
+      case 'participant':
+        return t('login.participant');
+      case 'investigator':
+        return t('login.investigator');
+      case 'cro-sponsor':
+        return t('login.cro.sponsor');
+      default:
+        return role;
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email && password && selectedRole) {
-      onLogin({ email, password, role: selectedRole });
+    if (email && password) {
+      onLogin({ email, password });
     }
   };
 
@@ -46,9 +53,14 @@ const LoginForm = ({ onLogin, onBackToRoleSelection }: LoginFormProps) => {
 
         <Card className="bg-studio-surface border-studio-border">
           <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
-              <User className="h-5 w-5" />
-              <span>{t('login.title')}</span>
+            <CardTitle className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <User className="h-5 w-5" />
+                <span>{t('login.title')}</span>
+              </div>
+              <div className="text-sm text-studio-text-muted">
+                {getRoleDisplayName(selectedRole)}
+              </div>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -92,30 +104,10 @@ const LoginForm = ({ onLogin, onBackToRoleSelection }: LoginFormProps) => {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <Label>{t('login.role.select')}</Label>
-                <div className="space-y-2">
-                  {roles.map((role) => (
-                    <div
-                      key={role.id}
-                      className={`p-3 border rounded cursor-pointer transition-all ${
-                        selectedRole === role.id
-                          ? 'border-studio-accent bg-studio-accent/10'
-                          : 'border-studio-border hover:border-studio-accent/50'
-                      }`}
-                      onClick={() => setSelectedRole(role.id)}
-                    >
-                      <div className="text-sm font-medium">{role.title}</div>
-                      <div className="text-xs text-studio-text-muted">{role.description}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
               <Button 
                 type="submit" 
                 className="w-full"
-                disabled={!email || !password || !selectedRole}
+                disabled={!email || !password}
               >
                 <Lock className="h-4 w-4 mr-2" />
                 {t('login.button')}
@@ -129,7 +121,8 @@ const LoginForm = ({ onLogin, onBackToRoleSelection }: LoginFormProps) => {
               onClick={onBackToRoleSelection}
               className="w-full"
             >
-              {t('login.back')}
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              {t('login.change.role')}
             </Button>
           </CardContent>
         </Card>
