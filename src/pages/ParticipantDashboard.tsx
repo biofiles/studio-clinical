@@ -366,7 +366,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-studio-text-muted">{t('contact.study.coordinator')}:</span>
-                      <span className="text-sm font-medium">Lic. Sofía Herrera, RN</span>
+                      <span className="text-sm font-medium">Lic. Ana María González, RN</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-studio-text-muted">{t('contact.phone')}:</span>
