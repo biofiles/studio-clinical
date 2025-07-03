@@ -75,7 +75,7 @@ const translations = {
     'questionnaire.daily.symptom': 'Daily Symptom Diary',
     
     // Contact Information
-    'contact.info': 'Contact Info',
+    'contact.info': 'Contact',
     'contact.site.staff': 'Site Staff',
     'contact.principal.investigator': 'Principal Investigator',
     'contact.study.coordinator': 'Study Coordinator',
@@ -125,7 +125,7 @@ const translations = {
     'questionnaire.complete.now': 'Completar Ahora',
     
     // Visits
-    'visits.site.visits': 'Visitas al Sitio',
+    'visits.site.visits': 'Site Visits',
     'visits.baseline.completed': 'Visita Basal - Completada',
     'visits.baseline.procedures': 'Extracción de sangre, signos vitales, cuestionarios completados',
     'visits.notes': 'Notas de la Visita',
@@ -159,7 +159,7 @@ const translations = {
     'settings.sign.out.note': 'You will be redirected to the login page',
     
     // eConsent
-    'econsent.title': 'Electronic Consent',
+    'econsent.title': 'Informed Consent',
     'econsent.subtitle': 'Review and sign your informed consent document',
     'econsent.document.title': 'Informed Consent Form',
     'econsent.audio.play': 'Play Audio',
@@ -273,7 +273,7 @@ const translations = {
     'questionnaire.daily.symptom': 'Diario de Síntomas Diarios',
     
     // Contact Information
-    'contact.info': 'Información de Contacto',
+    'contact.info': 'Contacto',
     'contact.site.staff': 'Personal del Sitio',
     'contact.principal.investigator': 'Investigador Principal',
     'contact.study.coordinator': 'Coordinador del Estudio',
@@ -323,7 +323,7 @@ const translations = {
     'questionnaire.complete.now': 'Completar Ahora',
     
     // Visits
-    'visits.site.visits': 'Visitas al Sitio',
+    'visits.site.visits': 'Visitas',
     'visits.baseline.completed': 'Visita Basal - Completada',
     'visits.baseline.procedures': 'Extracción de sangre, signos vitales, cuestionarios completados',
     'visits.notes': 'Notas de la Visita',
@@ -371,7 +371,7 @@ const translations = {
     'settings.sign.out.note': 'Serás redirigido a la página de inicio de sesión',
     
     // eConsent
-    'econsent.title': 'Consentimiento Electrónico',
+    'econsent.title': 'Consentimiento Informado',
     'econsent.subtitle': 'Revisa y firma tu documento de consentimiento informado',
     'econsent.document.title': 'Formulario de Consentimiento Informado',
     'econsent.audio.play': 'Reproducir Audio',
@@ -440,7 +440,7 @@ const translations = {
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguage] = useState(() => {
-    return localStorage.getItem('language') || 'english';
+    return localStorage.getItem('language') || 'spanish';
   });
 
   useEffect(() => {
