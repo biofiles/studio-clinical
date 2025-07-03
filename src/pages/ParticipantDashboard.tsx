@@ -13,13 +13,15 @@ import AIChatbot from "@/components/AIChatbot";
 import EConsentDialog from "@/components/EConsentDialog";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode, Signature, Building, Settings } from "lucide-react";
-
 interface ParticipantDashboardProps {
   onLogout: () => void;
 }
-
-const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
-  const { t } = useLanguage();
+const ParticipantDashboard = ({
+  onLogout
+}: ParticipantDashboardProps) => {
+  const {
+    t
+  } = useLanguage();
   const navigate = useNavigate();
   const [showCalendar, setShowCalendar] = useState(false);
   const [showQuestionnaires, setShowQuestionnaires] = useState(false);
@@ -27,62 +29,53 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
   const [showChatbot, setShowChatbot] = useState(false);
   const [showEConsent, setShowEConsent] = useState(false);
   const [surveyCompleted, setSurveyCompleted] = useState(false);
-
   const studyProgress = 65;
   const daysLeft = 30;
   const participantToken = "PTK-9283-WZ1";
-
-  const upcomingActivities = [
-    { 
-      date: t('common.next'), 
-      activity: t('activity.weekly.survey'), 
-      time: "10:00 AM", 
-      type: "questionnaire",
-      details: t('activity.weekly.survey.details'),
-      location: t('activity.online.location')
-    },
-    { 
-      date: "15 Dic", 
-      activity: t('activity.site.visit.blood'), 
-      time: "2:00 PM", 
-      type: "visit",
-      details: t('activity.site.visit.blood.details'),
-      location: t('activity.hospital.location'),
-      notes: t('activity.site.visit.notes')
-    },
-    { 
-      date: "20 Dic", 
-      activity: t('activity.daily.diary'), 
-      time: t('activity.anytime'), 
-      type: "diary",
-      details: t('activity.daily.diary.details'),
-      location: t('activity.mobile.location')
-    }
-  ];
-
+  const upcomingActivities = [{
+    date: t('common.next'),
+    activity: t('activity.weekly.survey'),
+    time: "10:00 AM",
+    type: "questionnaire",
+    details: t('activity.weekly.survey.details'),
+    location: t('activity.online.location')
+  }, {
+    date: "15 Dic",
+    activity: t('activity.site.visit.blood'),
+    time: "2:00 PM",
+    type: "visit",
+    details: t('activity.site.visit.blood.details'),
+    location: t('activity.hospital.location'),
+    notes: t('activity.site.visit.notes')
+  }, {
+    date: "20 Dic",
+    activity: t('activity.daily.diary'),
+    time: t('activity.anytime'),
+    type: "diary",
+    details: t('activity.daily.diary.details'),
+    location: t('activity.mobile.location')
+  }];
   const handleCompleteSurvey = () => {
     setSurveyCompleted(true);
     alert(t('activity.survey.completed'));
   };
-
   const handleExportPDF = () => {
     alert(t('activity.pdf.export'));
   };
-
   const getActivityIcon = (type: string) => {
     switch (type) {
-      case 'visit': return <Stethoscope className="h-5 w-5" />;
-      case 'questionnaire': return <FileText className="h-5 w-5" />;
-      case 'diary': return <FileText className="h-5 w-5" />;
-      default: return <Activity className="h-5 w-5" />;
+      case 'visit':
+        return <Stethoscope className="h-5 w-5" />;
+      case 'questionnaire':
+        return <FileText className="h-5 w-5" />;
+      case 'diary':
+        return <FileText className="h-5 w-5" />;
+      default:
+        return <Activity className="h-5 w-5" />;
     }
   };
-
-  return (
-    <div className="min-h-screen bg-studio-bg">
-      <Header
-        role="participant"
-      />
+  return <div className="min-h-screen bg-studio-bg">
+      <Header role="participant" />
 
 
       <main className="p-3 sm:p-4 max-w-6xl mx-auto">{/* Reduced padding for mobile */}
@@ -147,20 +140,14 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
           <TabsContent value="schedule" className="space-y-3">{/* Reduced spacing */}
             <div className="flex flex-col space-y-2">{/* Mobile first layout */}
               <h3 className="text-base font-medium text-studio-text">{t('participant.your.schedule')}</h3>{/* Smaller title */}
-              <Button 
-                variant="studio" 
-                size="sm"
-                onClick={() => setShowCalendar(true)}
-                className="w-full text-xs"
-              >
+              <Button variant="studio" size="sm" onClick={() => setShowCalendar(true)} className="w-full text-xs">
                 <Calendar className="h-3 w-3 mr-1" />
                 {t('calendar.view.full')}
               </Button>
             </div>
             
             <div className="space-y-4">
-              {upcomingActivities.map((item, index) => (
-                <Card key={index} className="bg-studio-surface border-studio-border">
+              {upcomingActivities.map((item, index) => <Card key={index} className="bg-studio-surface border-studio-border">
                   <CardContent className="p-4">
                     <div className="space-y-3">
                       <div className="flex items-start space-x-3">
@@ -170,18 +157,8 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                         <div className="flex-1">
                           <div className="flex items-center space-x-2 mb-1">
                             <p className="font-medium text-studio-text">{item.activity}</p>
-                            <Badge 
-                              variant="secondary" 
-                              className={`text-xs ${
-                                item.type === 'visit' ? 'bg-red-100 text-red-800 border-red-200' :
-                                item.type === 'questionnaire' ? 'bg-blue-100 text-blue-800 border-blue-200' :
-                                item.type === 'diary' ? 'bg-green-100 text-green-800 border-green-200' :
-                                'bg-gray-100 text-gray-800 border-gray-200'
-                              }`}
-                            >
-                              {item.type === 'visit' ? 'Visita' :
-                               item.type === 'questionnaire' ? 'Cuestionario' :
-                               item.type === 'diary' ? 'Diario' : item.type}
+                            <Badge variant="secondary" className={`text-xs ${item.type === 'visit' ? 'bg-red-100 text-red-800 border-red-200' : item.type === 'questionnaire' ? 'bg-blue-100 text-blue-800 border-blue-200' : item.type === 'diary' ? 'bg-green-100 text-green-800 border-green-200' : 'bg-gray-100 text-gray-800 border-gray-200'}`}>
+                              {item.type === 'visit' ? 'Visita' : item.type === 'questionnaire' ? 'Cuestionario' : item.type === 'diary' ? 'Diario' : item.type}
                             </Badge>
                           </div>
                           <p className="text-sm text-studio-text-muted mb-2">{item.date} at {item.time}</p>
@@ -190,11 +167,9 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                             <MapPin className="h-3 w-3" />
                             <span>{item.location}</span>
                           </div>
-                          {item.notes && (
-                            <div className="bg-blue-50 border border-blue-200 rounded p-2 text-xs text-blue-800">
+                          {item.notes && <div className="bg-blue-50 border border-blue-200 rounded p-2 text-xs text-blue-800">
                               <strong>Important Notes:</strong> {item.notes}
-                            </div>
-                          )}
+                            </div>}
                         </div>
                       </div>
                       <Button variant="studio" size="sm" className="w-full sm:w-auto">
@@ -202,20 +177,14 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                       </Button>
                     </div>
                   </CardContent>
-                </Card>
-              ))}
+                </Card>)}
             </div>
           </TabsContent>
 
           <TabsContent value="questionnaires" className="space-y-4">
             <div className="flex flex-col space-y-2">
               <h3 className="text-base font-medium text-studio-text">{t('questionnaire.your.surveys')}</h3>
-              <Button 
-                variant="studio" 
-                size="sm"
-                onClick={() => setShowQuestionnaires(true)}
-                className="w-full text-xs"
-              >
+              <Button variant="studio" size="sm" onClick={() => setShowQuestionnaires(true)} className="w-full text-xs">
                 <FileText className="h-3 w-3 mr-1" />
                 {t('questionnaire.view.all')}
               </Button>
@@ -245,11 +214,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
             <div className="space-y-3">
               <div className={`p-4 border rounded ${surveyCompleted ? 'bg-green-50 border-green-200' : 'bg-yellow-50 border-yellow-200'}`}>
                 <div className="flex items-center space-x-2 mb-2">
-                  {surveyCompleted ? (
-                    <CheckCircle className="h-4 w-4 text-green-600" />
-                  ) : (
-                    <Bell className="h-4 w-4 text-yellow-600" />
-                  )}
+                  {surveyCompleted ? <CheckCircle className="h-4 w-4 text-green-600" /> : <Bell className="h-4 w-4 text-yellow-600" />}
                     <span className={`font-medium ${surveyCompleted ? 'text-green-800' : 'text-yellow-800'}`}>
                       {t('questionnaire.daily.symptom')} - {surveyCompleted ? t('common.completed') : t('common.due.today')}
                     </span>
@@ -257,11 +222,9 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                 <p className={`text-sm mb-3 ${surveyCompleted ? 'text-green-700' : 'text-yellow-700'}`}>
                   {surveyCompleted ? t('questionnaire.thanks.completing') : t('questionnaire.quick.survey')}
                 </p>
-                {!surveyCompleted && (
-                  <Button size="sm" className="w-full sm:w-auto" onClick={handleCompleteSurvey}>
+                {!surveyCompleted && <Button size="sm" className="w-full sm:w-auto" onClick={handleCompleteSurvey}>
                     {t('questionnaire.complete.now')}
-                  </Button>
-                )}
+                  </Button>}
               </div>
             </div>
           </TabsContent>
@@ -269,12 +232,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
           <TabsContent value="econsent" className="space-y-4">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
               <h3 className="text-lg font-medium text-studio-text">{t('econsent.title')}</h3>
-              <Button 
-                variant="studio" 
-                size="sm"
-                onClick={() => setShowEConsent(true)}
-                className="w-full sm:w-auto"
-              >
+              <Button variant="studio" size="sm" onClick={() => setShowEConsent(true)} className="w-full sm:w-auto">
                 <Signature className="h-4 w-4 mr-2" />
                 {t('econsent.view.signed')}
               </Button>
@@ -294,11 +252,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                       <li>• {t('econsent.search.placeholder')}</li>
                       <li>• {t('econsent.signature.required')}</li>
                     </ul>
-                    <Button
-                      size="sm"
-                      className="mt-3"
-                      onClick={() => setShowEConsent(true)}
-                    >
+                    <Button size="sm" className="mt-3" onClick={() => setShowEConsent(true)}>
                       <FileText className="h-4 w-4 mr-2" />
                       {t('econsent.view.signed')}
                     </Button>
@@ -362,7 +316,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-sm text-studio-text-muted">{t('contact.principal.investigator')}:</span>
-                      <span className="text-sm font-medium">Dr. Carlos Mendoza, MD</span>
+                      <span className="text-sm font-medium">Dr. Carlos Mendoza</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-studio-text-muted">{t('contact.study.coordinator')}:</span>
@@ -397,14 +351,8 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                       <span className="text-sm text-studio-text-muted">ANMAT (Argentina):</span>
                       <a href="tel:+541143401400" className="text-sm text-blue-600 hover:underline">+54 11 4340-1400</a>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-sm text-studio-text-muted">EMA (Europa):</span>
-                      <a href="mailto:info@ema.europa.eu" className="text-sm text-blue-600 hover:underline">info@ema.europa.eu</a>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-sm text-studio-text-muted">{t('contact.safety.reporting')}:</span>
-                      <a href="tel:+5411800333678" className="text-sm text-blue-600 hover:underline">+54 11 800-333-678</a>
-                    </div>
+                    
+                    
                   </div>
                   <div className="bg-orange-50 border border-orange-200 rounded p-2 text-xs text-orange-800">
                     <strong>{t('contact.safety.note')}:</strong> {t('contact.safety.description')}
@@ -457,13 +405,10 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                       </div>
                     </div>
                     <div className="text-right space-y-1">
-                      <div 
-                        onClick={() => setShowProfile(true)}
-                        className="bg-white text-gray-800 px-3 py-2 rounded cursor-pointer hover:bg-gray-100 transition-colors"
-                      >
+                      <div onClick={() => setShowProfile(true)} className="bg-white text-gray-800 px-3 py-2 rounded cursor-pointer hover:bg-gray-100 transition-colors">
                         <div className="text-xs font-mono leading-tight">
-                          ||||||||||||||||<br/>
-                          {participantToken}<br/>
+                          ||||||||||||||||<br />
+                          {participantToken}<br />
                           ||||||||||||||||
                         </div>
                       </div>
@@ -492,10 +437,7 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                     <Barcode className="h-8 w-8 text-studio-text-muted" />
                     <div className="flex-1">
                       <p className="font-medium text-studio-text">{t('participant.token')}</p>
-                      <button 
-                        onClick={() => setShowProfile(true)}
-                        className="text-lg font-mono bg-gray-100 px-3 py-1 rounded hover:bg-gray-200 transition-colors cursor-pointer border-2 border-dashed border-gray-300 hover:border-gray-400"
-                      >
+                      <button onClick={() => setShowProfile(true)} className="text-lg font-mono bg-gray-100 px-3 py-1 rounded hover:bg-gray-200 transition-colors cursor-pointer border-2 border-dashed border-gray-300 hover:border-gray-400">
                         {participantToken}
                       </button>
                       <p className="text-xs text-studio-text-muted mt-1">
@@ -506,20 +448,12 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
                 </CardContent>
               </Card>
 
-              <Button 
-                variant="studio" 
-                className="w-full justify-start"
-                onClick={() => setShowProfile(true)}
-              >
+              <Button variant="studio" className="w-full justify-start" onClick={() => setShowProfile(true)}>
                 <User className="h-4 w-4 mr-2" />
                 {t('profile.view.settings')}
               </Button>
               
-              <Button 
-                variant="studio" 
-                className="w-full justify-start"
-                onClick={handleExportPDF}
-              >
+              <Button variant="studio" className="w-full justify-start" onClick={handleExportPDF}>
                 <Download className="h-4 w-4 mr-2" />
                 {t('profile.export.pdf')}
               </Button>
@@ -543,43 +477,21 @@ const ParticipantDashboard = ({ onLogout }: ParticipantDashboardProps) => {
       </main>
 
       <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6">
-        <Button
-          onClick={() => setShowChatbot(true)}
-          className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg"
-          size="icon"
-        >
+        <Button onClick={() => setShowChatbot(true)} className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg" size="icon">
           <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
         </Button>
       </div>
 
       {/* Dialogs */}
-      <CalendarView 
-        open={showCalendar} 
-        onOpenChange={setShowCalendar}
-        activities={upcomingActivities}
-      />
+      <CalendarView open={showCalendar} onOpenChange={setShowCalendar} activities={upcomingActivities} />
       
-      <QuestionnairesView 
-        open={showQuestionnaires} 
-        onOpenChange={setShowQuestionnaires}
-      />
+      <QuestionnairesView open={showQuestionnaires} onOpenChange={setShowQuestionnaires} />
 
-      <UserProfileDialog 
-        open={showProfile} 
-        onOpenChange={setShowProfile}
-      />
+      <UserProfileDialog open={showProfile} onOpenChange={setShowProfile} />
 
-      <AIChatbot 
-        open={showChatbot} 
-        onOpenChange={setShowChatbot}
-      />
+      <AIChatbot open={showChatbot} onOpenChange={setShowChatbot} />
 
-      <EConsentDialog 
-        open={showEConsent} 
-        onOpenChange={setShowEConsent}
-      />
-    </div>
-  );
+      <EConsentDialog open={showEConsent} onOpenChange={setShowEConsent} />
+    </div>;
 };
-
 export default ParticipantDashboard;
