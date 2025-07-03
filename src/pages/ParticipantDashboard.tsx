@@ -172,9 +172,7 @@ const ParticipantDashboard = ({
                             </div>}
                         </div>
                       </div>
-                      <Button variant="studio" size="sm" className="w-full sm:w-auto">
-                        {t('activity.view.details')}
-                      </Button>
+                      
                     </div>
                   </CardContent>
                 </Card>)}
