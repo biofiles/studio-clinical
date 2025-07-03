@@ -33,7 +33,7 @@ const translations = {
     'dashboard.visit.compliance': 'Visit Compliance',
     'dashboard.enrollment': 'Enrollment',
     'dashboard.daily.diaries': 'Daily Diaries',
-    'dashboard.site.visits': 'Visits',
+    'dashboard.site.visits': 'Site Visits',
     
     // Participant Management
     'participant.management': 'Participant Management',
@@ -75,7 +75,7 @@ const translations = {
     'questionnaire.daily.symptom': 'Daily Symptom Diary',
     
     // Contact Information
-    'contact.info': 'Contact',
+    'contact.info': 'Contact Info',
     'contact.site.staff': 'Site Staff',
     'contact.principal.investigator': 'Principal Investigator',
     'contact.study.coordinator': 'Study Coordinator',
@@ -159,7 +159,7 @@ const translations = {
     'settings.sign.out.note': 'You will be redirected to the login page',
     
     // eConsent
-    'econsent.title': 'Informed Consent',
+    'econsent.title': 'Electronic Consent',
     'econsent.subtitle': 'Review and sign your informed consent document',
     'econsent.document.title': 'Informed Consent Form',
     'econsent.audio.play': 'Play Audio',
@@ -247,7 +247,7 @@ const translations = {
     'dashboard.visit.compliance': 'Cumplimiento de Visitas',
     'dashboard.enrollment': 'Inscripción',
     'dashboard.daily.diaries': 'Diarios Diarios',
-    'dashboard.site.visits': 'Visitas',
+    'dashboard.site.visits': 'Visitas al Sitio',
     
     // Participant Management
     'participant.management': 'Gestión de Participantes',
@@ -273,7 +273,7 @@ const translations = {
     'questionnaire.daily.symptom': 'Diario de Síntomas Diarios',
     
     // Contact Information
-    'contact.info': 'Información',
+    'contact.info': 'Información de Contacto',
     'contact.site.staff': 'Personal del Sitio',
     'contact.principal.investigator': 'Investigador Principal',
     'contact.study.coordinator': 'Coordinador del Estudio',
@@ -371,7 +371,7 @@ const translations = {
     'settings.sign.out.note': 'Serás redirigido a la página de inicio de sesión',
     
     // eConsent
-    'econsent.title': 'Consentimiento Informado',
+    'econsent.title': 'Consentimiento Electrónico',
     'econsent.subtitle': 'Revisa y firma tu documento de consentimiento informado',
     'econsent.document.title': 'Formulario de Consentimiento Informado',
     'econsent.audio.play': 'Reproducir Audio',
@@ -440,7 +440,7 @@ const translations = {
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguage] = useState(() => {
-    return localStorage.getItem('language') || 'spanish';
+    return localStorage.getItem('language') || 'english';
   });
 
   useEffect(() => {
