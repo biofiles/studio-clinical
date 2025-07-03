@@ -328,9 +328,7 @@ const ParticipantDashboard = ({
                       <span className="text-sm text-studio-text-muted">{t('contact.email')}:</span>
                       <a href="mailto:estudio@hospital.com.ar" className="text-sm text-blue-600 hover:underline">estudio@hospital.com.ar</a>
                     </div>
-                    <div className="bg-blue-50 border border-blue-200 rounded p-2 text-xs text-blue-800">
-                      <strong>{t('contact.emergency')}:</strong> {t('contact.emergency.info')}
-                    </div>
+                    
                   </div>
                 </CardContent>
               </Card>
