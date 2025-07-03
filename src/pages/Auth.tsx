@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { ArrowLeft, User, UserPlus, AlertCircle } from "lucide-react";
+import { ArrowLeft, User, UserPlus, AlertCircle, UserCheck, Building } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const Auth = () => {
@@ -142,6 +143,37 @@ const Auth = () => {
               >
                 {isSignUp ? "¿Ya tienes una cuenta? Inicia sesión" : "¿No tienes una cuenta? Regístrate"}
               </Button>
+            </div>
+
+            <div className="mt-6 space-y-3">
+              <div className="text-center">
+                <p className="text-xs text-studio-text-muted mb-3">
+                  Acceso directo por rol:
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 gap-2">
+                <Link to="/participant">
+                  <Button variant="outline" className="w-full flex items-center space-x-2 text-sm">
+                    <User className="h-4 w-4" />
+                    <span>Participante</span>
+                  </Button>
+                </Link>
+                
+                <Link to="/investigator">
+                  <Button variant="outline" className="w-full flex items-center space-x-2 text-sm">
+                    <UserCheck className="h-4 w-4" />
+                    <span>Investigador</span>
+                  </Button>
+                </Link>
+                
+                <Link to="/cro-sponsor">
+                  <Button variant="outline" className="w-full flex items-center space-x-2 text-sm">
+                    <Building className="h-4 w-4" />
+                    <span>CRO/Patrocinador</span>
+                  </Button>
+                </Link>
+              </div>
             </div>
 
             <div className="mt-4 text-center">
