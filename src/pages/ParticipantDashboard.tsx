@@ -301,6 +301,11 @@ const ParticipantDashboard = ({
           <TabsContent value="contact" className="space-y-3">
             <h3 className="text-base font-medium text-studio-text">{t('contact.info')}</h3>
             
+            {/* Important Safety Note - Moved to top */}
+            <div className="bg-orange-50 border border-orange-200 rounded p-2 text-xs text-orange-800">
+              <strong>{t('contact.safety.note')}:</strong> {t('contact.safety.description')}
+            </div>
+            
             <div className="space-y-4">
               {/* Site Staff Contact */}
               <Card className="bg-studio-surface border-studio-border">
@@ -350,33 +355,34 @@ const ParticipantDashboard = ({
                     
                     
                   </div>
-                  <div className="bg-orange-50 border border-orange-200 rounded p-2 text-xs text-orange-800">
-                    <strong>{t('contact.safety.note')}:</strong> {t('contact.safety.description')}
-                  </div>
                 </CardContent>
               </Card>
 
-              {/* Sponsor Contact */}
+              {/* Ethics Committee */}
               <Card className="bg-studio-surface border-studio-border">
                 <CardHeader>
                   <CardTitle className="text-sm flex items-center space-x-2">
-                    <Building className="h-4 w-4" />
-                    <span>{t('contact.sponsor')}</span>
+                    <Shield className="h-4 w-4" />
+                    <span>Comité de Ética</span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-sm text-studio-text-muted">{t('contact.company')}:</span>
-                      <span className="text-sm font-medium">Novartis AG</span>
+                      <span className="text-sm text-studio-text-muted">Comité:</span>
+                      <span className="text-sm font-medium">CEI Hospital Metro General</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm text-studio-text-muted">{t('contact.medical.monitor')}:</span>
-                      <span className="text-sm font-medium">Dr. James Wilson, PhD</span>
+                      <span className="text-sm text-studio-text-muted">Presidente:</span>
+                      <span className="text-sm font-medium">Dr. María Elena Rodriguez</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm text-studio-text-muted">{t('contact.phone')}:</span>
-                      <a href="tel:+41616966111" className="text-sm text-blue-600 hover:underline">+41 61 696 6111</a>
+                      <a href="tel:+541148765450" className="text-sm text-blue-600 hover:underline">+54 11 4876-5450</a>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-studio-text-muted">{t('contact.email')}:</span>
+                      <a href="mailto:cei@hospital.com.ar" className="text-sm text-blue-600 hover:underline">cei@hospital.com.ar</a>
                     </div>
                   </div>
                 </CardContent>
