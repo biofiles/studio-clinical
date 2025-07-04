@@ -63,7 +63,8 @@ export default {
 					primary: 'hsl(var(--progress-primary))',
 					success: 'hsl(var(--progress-success))',
 					info: 'hsl(var(--progress-info))',
-					accent: 'hsl(var(--progress-accent))'
+					accent: 'hsl(var(--progress-accent))',
+					gray: 'hsl(var(--progress-gray))'
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
