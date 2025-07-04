@@ -14,9 +14,10 @@ import { Play, Pause, Square, Search, Download, FileText, Signature, CheckCircle
 interface EConsentDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  mode?: 'sign' | 'view';
 }
 
-const EConsentDialog = ({ open, onOpenChange }: EConsentDialogProps) => {
+const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogProps) => {
   const { t } = useLanguage();
   const [isPlaying, setIsPlaying] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -311,6 +312,19 @@ const EConsentDialog = ({ open, onOpenChange }: EConsentDialogProps) => {
     }
   }, []);
 
+  // Set initial signed state based on mode
+  useEffect(() => {
+    if (mode === 'view') {
+      setIsSigned(true);
+      setFullName("Juan Carlos García");
+      setAgreed(true);
+    } else {
+      setIsSigned(false);
+      setFullName("");
+      setAgreed(false);
+    }
+  }, [mode]);
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
@@ -483,7 +497,7 @@ const EConsentDialog = ({ open, onOpenChange }: EConsentDialogProps) => {
           </Card>
 
           {/* Electronic Signature */}
-          {!isSigned ? (
+          {mode === 'sign' && !isSigned ? (
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
@@ -555,18 +569,20 @@ const EConsentDialog = ({ open, onOpenChange }: EConsentDialogProps) => {
                 </Button>
               </CardContent>
             </Card>
-          ) : (
+          ) : mode === 'view' || isSigned ? (
             <Card className="bg-green-50 border-green-200">
               <CardContent className="p-4">
                 <div className="flex items-center space-x-2 text-green-800">
                   <CheckCircle className="h-5 w-5" />
-                  <span className="font-medium">{t('econsent.signature.complete')}</span>
+                  <span className="font-medium">
+                    {mode === 'view' ? 'Documento Firmado Electrónicamente' : t('econsent.signature.complete')}
+                  </span>
                 </div>
                 <p className="text-sm text-green-700 mt-1">
-                  Signed by: {fullName} on {new Date().toLocaleDateString()}
+                  Firmado por: {fullName} el {mode === 'view' ? '24 Nov 2024' : new Date().toLocaleDateString()}
                 </p>
                 <p className="text-xs text-green-600 mt-1">
-                  ICF Version: {icfVersion} | Document ID: ICF-{Date.now()}
+                  ICF Version: {icfVersion} | Document ID: ICF-{mode === 'view' ? '20241124' : Date.now()}
                 </p>
                 <div className="flex space-x-2 mt-3">
                   <Button
@@ -577,17 +593,19 @@ const EConsentDialog = ({ open, onOpenChange }: EConsentDialogProps) => {
                     <Download className="h-4 w-4 mr-2" />
                     {t('econsent.download.pdf')}
                   </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setIsSigned(false)}
-                  >
-                    {t('econsent.view.signed')}
-                  </Button>
+                  {mode === 'sign' && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setIsSigned(false)}
+                    >
+                      {t('econsent.view.signed')}
+                    </Button>
+                  )}
                 </div>
               </CardContent>
             </Card>
-          )}
+          ) : null}
         </div>
       </DialogContent>
     </Dialog>

@@ -28,6 +28,7 @@ const ParticipantDashboard = ({
   const [showProfile, setShowProfile] = useState(false);
   const [showChatbot, setShowChatbot] = useState(false);
   const [showEConsent, setShowEConsent] = useState(false);
+  const [eConsentMode, setEConsentMode] = useState<'sign' | 'view'>('sign');
   const [surveyCompleted, setSurveyCompleted] = useState(false);
   const studyProgress = 65;
   const daysLeft = 30;
@@ -269,7 +270,10 @@ const ParticipantDashboard = ({
                     </div>
                     <Badge 
                       className="bg-green-100 text-green-800 cursor-pointer hover:bg-green-200 transition-colors" 
-                      onClick={() => setShowEConsent(true)}
+                      onClick={() => {
+                        setEConsentMode('view');
+                        setShowEConsent(true);
+                      }}
                     >
                       {t('econsent.status.signed')}
                     </Badge>
@@ -285,7 +289,10 @@ const ParticipantDashboard = ({
                     </div>
                     <Badge 
                       className="bg-gray-100 text-gray-800 cursor-pointer hover:bg-gray-200 transition-colors" 
-                      onClick={() => setShowEConsent(true)}
+                      onClick={() => {
+                        setEConsentMode('view');
+                        setShowEConsent(true);
+                      }}
                     >
                       {t('econsent.status.superseded')}
                     </Badge>
@@ -301,7 +308,10 @@ const ParticipantDashboard = ({
                     </div>
                     <Badge 
                       className="bg-yellow-100 text-yellow-800 cursor-pointer hover:bg-yellow-200 transition-colors" 
-                      onClick={() => setShowEConsent(true)}
+                      onClick={() => {
+                        setEConsentMode('sign');
+                        setShowEConsent(true);
+                      }}
                     >
                       {t('econsent.status.pending')}
                     </Badge>
@@ -313,20 +323,27 @@ const ParticipantDashboard = ({
             <Card className="bg-blue-50 border-blue-200">
               <CardContent className="p-4">
                 <div className="flex items-start space-x-3">
-                  <Signature className="h-6 w-6 text-blue-600 mt-1" />
+                  <Clock className="h-6 w-6 text-blue-600 mt-1" />
                   <div className="flex-1">
-                    <p className="font-medium text-blue-800">{t('econsent.document.title')}</p>
+                    <p className="font-medium text-blue-800">Próximo Consentimiento Pendiente</p>
                     <p className="text-sm text-blue-700 mt-1">
-                      {t('econsent.subtitle')}
+                      <strong>Adenda de Seguridad v1.0</strong> - Disponible para firma
                     </p>
-                    <ul className="text-xs text-blue-600 mt-2 space-y-1">
-                      <li>• {t('econsent.audio.play')} / {t('econsent.audio.pause')}</li>
-                      <li>• {t('econsent.search.placeholder')}</li>
-                      <li>• {t('econsent.signature.required')}</li>
-                    </ul>
-                    <Button size="sm" className="mt-3" onClick={() => setShowEConsent(true)}>
-                      <FileText className="h-4 w-4 mr-2" />
-                      {t('econsent.view.signed')}
+                    <div className="text-xs text-blue-600 mt-2 space-y-1">
+                      <p>• Documento disponible desde: 1 Dic 2024</p>
+                      <p>• Plazo para firmar: Hasta 15 Dic 2024</p>
+                      <p>• Modalidad: Firma electrónica con audio disponible</p>
+                    </div>
+                    <Button 
+                      size="sm" 
+                      className="mt-3"
+                      onClick={() => {
+                        setEConsentMode('sign');
+                        setShowEConsent(true);
+                      }}
+                    >
+                      <Signature className="h-4 w-4 mr-2" />
+                      Firmar Ahora
                     </Button>
                   </div>
                 </div>
@@ -567,7 +584,7 @@ const ParticipantDashboard = ({
 
       <AIChatbot open={showChatbot} onOpenChange={setShowChatbot} />
 
-      <EConsentDialog open={showEConsent} onOpenChange={setShowEConsent} />
+      <EConsentDialog open={showEConsent} onOpenChange={setShowEConsent} mode={eConsentMode} />
     </div>;
 };
 export default ParticipantDashboard;
