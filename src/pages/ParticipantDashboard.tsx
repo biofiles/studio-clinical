@@ -82,10 +82,10 @@ const ParticipantDashboard = ({
       <main className="p-3 sm:p-4 max-w-6xl mx-auto">{/* Reduced padding for mobile */}
         {/* Welcome Section - Mobile first */}
         <div className="space-y-1 mb-4">
-          <h2 className="text-lg sm:text-xl font-medium text-studio-text">
+          <h2 className="text-xl sm:text-2xl font-medium text-studio-text">
             {t('common.welcome')}
           </h2>
-          <p className="text-studio-text-muted text-xs sm:text-sm">
+          <p className="text-studio-text-muted text-sm sm:text-base">
             Protocolo PROTO-2024-001 | Patrocinador: Novartis AG
           </p>
         </div>
@@ -96,15 +96,15 @@ const ParticipantDashboard = ({
             <div className="space-y-4 sm:space-y-0 sm:flex sm:items-center sm:justify-between">
               <div className="flex-1 sm:mr-6">
                 <div className="flex justify-between items-center mb-3">
-                  <span className="text-sm font-medium text-studio-text-muted">{t('dashboard.study.progress')}</span>
-                  <span className="text-lg font-bold text-studio-text">{studyProgress}%</span>
+                  <span className="text-base sm:text-lg font-medium text-studio-text-muted">{t('dashboard.study.progress')}</span>
+                  <span className="text-xl sm:text-2xl font-bold text-studio-text">{studyProgress}%</span>
                 </div>
                 <Progress value={studyProgress} className="h-4 mb-1" />
               </div>
               <div className="flex items-center justify-between sm:block sm:text-right bg-studio-surface/50 rounded-lg p-3 sm:bg-transparent sm:p-0">
                 <div className="sm:text-center">
-                  <p className="text-3xl sm:text-4xl font-bold text-studio-text">{daysLeft}</p>
-                  <p className="text-sm text-studio-text-muted font-medium">{t('participant.days.remaining')}</p>
+                  <p className="text-4xl sm:text-5xl font-bold text-studio-text">{daysLeft}</p>
+                  <p className="text-base sm:text-lg text-studio-text-muted font-medium">{t('participant.days.remaining')}</p>
                 </div>
               </div>
             </div>
@@ -114,37 +114,37 @@ const ParticipantDashboard = ({
         {/* Main Sections - Mobile-first tabs */}
         <Tabs defaultValue="schedule" className="space-y-3">{/* Reduced spacing */}
           <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 h-auto gap-1">{/* Updated for 6 tabs */}
-            <TabsTrigger value="schedule" className="flex flex-col items-center space-y-0.5 h-12 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-xs">
-              <Calendar className="h-4 w-4 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-sm">{t('dashboard.manage.calendar')}</span>
+            <TabsTrigger value="schedule" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
+              <Calendar className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-sm sm:text-sm">{t('dashboard.manage.calendar')}</span>
             </TabsTrigger>
-            <TabsTrigger value="questionnaires" className="flex flex-col items-center space-y-0.5 h-12 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-xs">
-              <FileText className="h-4 w-4 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-sm">{t('dashboard.questionnaires')}</span>
+            <TabsTrigger value="questionnaires" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
+              <FileText className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-sm sm:text-sm">{t('dashboard.questionnaires')}</span>
             </TabsTrigger>
-            <TabsTrigger value="econsent" className="flex flex-col items-center space-y-0.5 h-12 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-xs">
-              <Signature className="h-4 w-4 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-sm">{t('econsent.title')}</span>
+            <TabsTrigger value="econsent" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
+              <Signature className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-sm sm:text-sm">{t('econsent.title')}</span>
             </TabsTrigger>
-            <TabsTrigger value="visits" className="flex flex-col items-center space-y-0.5 h-12 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-xs">
-              <Activity className="h-4 w-4 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-sm">{t('dashboard.site.visits')}</span>
+            <TabsTrigger value="visits" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
+              <Activity className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-sm sm:text-sm">{t('dashboard.site.visits')}</span>
             </TabsTrigger>
-            <TabsTrigger value="contact" className="flex flex-col items-center space-y-0.5 h-12 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-xs">
-              <MapPin className="h-4 w-4 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-sm">{t('contact.info')}</span>
+            <TabsTrigger value="contact" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
+              <MapPin className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-sm sm:text-sm">{t('contact.info')}</span>
             </TabsTrigger>
-            <TabsTrigger value="profile" className="flex flex-col items-center space-y-0.5 h-12 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-xs">
-              <User className="h-4 w-4 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-sm">{t('participant.profile')}</span>
+            <TabsTrigger value="profile" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
+              <User className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-sm sm:text-sm">{t('participant.profile')}</span>
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="schedule" className="space-y-3">{/* Reduced spacing */}
             <div className="flex flex-col space-y-2">{/* Mobile first layout */}
-              <h3 className="text-base font-medium text-studio-text">{t('participant.your.schedule')}</h3>{/* Smaller title */}
-              <Button variant="studio" size="sm" onClick={() => setShowCalendar(true)} className="w-full text-xs">
-                <Calendar className="h-3 w-3 mr-1" />
+              <h3 className="text-lg sm:text-xl font-medium text-studio-text">{t('participant.your.schedule')}</h3>
+              <Button variant="studio" size="sm" onClick={() => setShowCalendar(true)} className="w-full text-sm">
+                <Calendar className="h-4 w-4 mr-2" />
                 {t('calendar.view.full')}
               </Button>
             </div>
@@ -159,20 +159,29 @@ const ParticipantDashboard = ({
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center space-x-2 mb-1">
-                            <p className="font-medium text-studio-text">{item.activity}</p>
-                            <Badge variant="secondary" className={`text-xs ${item.type === 'visit' ? 'bg-red-100 text-red-800 border-red-200' : item.type === 'questionnaire' ? 'bg-blue-100 text-blue-800 border-blue-200' : item.type === 'diary' ? 'bg-green-100 text-green-800 border-green-200' : 'bg-gray-100 text-gray-800 border-gray-200'}`}>
-                              {item.type === 'visit' ? 'Visita' : item.type === 'questionnaire' ? 'Cuestionario' : item.type === 'diary' ? 'Diario' : item.type}
+                            <p className="font-medium text-studio-text text-base sm:text-lg">{item.activity}</p>
+                            <Badge variant="secondary" className={`text-sm ${
+                              item.type === 'visit' ? 'bg-red-100 text-red-800 border-red-200' : 
+                              item.type === 'questionnaire' ? 'bg-blue-100 text-blue-800 border-blue-200' : 
+                              item.type === 'diary' ? 'bg-green-100 text-green-800 border-green-200' : 
+                              'bg-gray-100 text-gray-800 border-gray-200'
+                            }`}>
+                              {item.type === 'visit' ? 'Visit' : 
+                               item.type === 'questionnaire' ? 'Questionnaire' : 
+                               item.type === 'diary' ? 'Diary' : item.type}
                             </Badge>
                           </div>
-                          <p className="text-sm text-studio-text-muted mb-2">{item.date} at {item.time}</p>
-                          <p className="text-sm text-studio-text mb-2">{item.details}</p>
-                          <div className="flex items-center space-x-1 text-xs text-studio-text-muted mb-2">
-                            <MapPin className="h-3 w-3" />
+                          <p className="text-sm sm:text-base text-studio-text-muted mb-2">{item.date} at {item.time}</p>
+                          <p className="text-sm sm:text-base text-studio-text mb-2">{item.details}</p>
+                          <div className="flex items-center space-x-1 text-sm text-studio-text-muted mb-2">
+                            <MapPin className="h-4 w-4" />
                             <span>{item.location}</span>
                           </div>
-                          {item.notes && <div className="bg-blue-50 border border-blue-200 rounded p-2 text-xs text-blue-800">
+                          {item.notes && (
+                            <div className="bg-blue-50 border border-blue-200 rounded p-3 text-sm text-blue-800">
                               <strong>Important Notes:</strong> {item.notes}
-                            </div>}
+                            </div>
+                          )}
                         </div>
                       </div>
                       
@@ -184,9 +193,9 @@ const ParticipantDashboard = ({
 
           <TabsContent value="questionnaires" className="space-y-4">
             <div className="flex flex-col space-y-2">
-              <h3 className="text-base font-medium text-studio-text">{t('questionnaire.your.surveys')}</h3>
-              <Button variant="studio" size="sm" onClick={() => setShowQuestionnaires(true)} className="w-full text-xs">
-                <FileText className="h-3 w-3 mr-1" />
+              <h3 className="text-lg sm:text-xl font-medium text-studio-text">{t('questionnaire.your.surveys')}</h3>
+              <Button variant="studio" size="sm" onClick={() => setShowQuestionnaires(true)} className="w-full text-sm">
+                <FileText className="h-4 w-4 mr-2" />
                 {t('questionnaire.view.all')}
               </Button>
             </div>
@@ -194,20 +203,20 @@ const ParticipantDashboard = ({
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               <Card className="bg-red-50 border-red-200">
                 <CardContent className="p-4 text-center">
-                  <div className="text-xl sm:text-2xl font-bold text-red-600">3</div>
-                  <div className="text-xs sm:text-sm text-red-700">{t('questionnaire.pending')}</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-red-600">3</div>
+                  <div className="text-sm sm:text-base text-red-700">{t('questionnaire.pending')}</div>
                 </CardContent>
               </Card>
               <Card className="bg-green-50 border-green-200">
                 <CardContent className="p-4 text-center">
-                  <div className="text-xl sm:text-2xl font-bold text-green-600">12</div>
-                  <div className="text-xs sm:text-sm text-green-700">{t('questionnaire.completed')}</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-green-600">12</div>
+                  <div className="text-sm sm:text-base text-green-700">{t('questionnaire.completed')}</div>
                 </CardContent>
               </Card>
               <Card className="bg-blue-50 border-blue-200 col-span-2 sm:col-span-1">
                 <CardContent className="p-4 text-center">
-                  <div className="text-xl sm:text-2xl font-bold text-blue-600">80%</div>
-                  <div className="text-xs sm:text-sm text-blue-700">{t('questionnaire.completion.rate')}</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-blue-600">80%</div>
+                  <div className="text-sm sm:text-base text-blue-700">{t('questionnaire.completion.rate')}</div>
                 </CardContent>
               </Card>
             </div>
