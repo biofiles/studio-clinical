@@ -213,7 +213,7 @@ const translations = {
     'login.help': "Don't have access? Contact your administrator",
     'login.roles.participant': 'Participant',
     'login.roles.investigator': 'Site',
-    'login.roles.cro-sponsor': 'CRO/Sponsor',
+    'login.roles.cro-sponsor': 'Sponsor/CRO',
     'login.roles.participant.description': 'Access your study participation portal',
     'login.roles.investigator.description': 'Manage and monitor clinical studies',
     'login.roles.cro-sponsor.description': 'Oversee and administer research programs',

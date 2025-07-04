@@ -178,7 +178,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                   <span className="text-studio-text-muted">{t('dashboard.enrollment')}</span>
                   <span className="text-studio-text">15/30 (50%)</span>
                 </div>
-                <div className="w-full bg-studio-bg rounded-full h-2">
+                <div className="w-full bg-muted rounded-full h-2">
                   <div className="bg-primary h-2 rounded-full" style={{ width: '50%' }}></div>
                 </div>
               </div>
@@ -195,7 +195,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                   <span className="text-studio-text-muted">{t('dashboard.daily.diaries')}</span>
                   <span className="text-studio-text">89%</span>
                 </div>
-                <div className="w-full bg-studio-bg rounded-full h-2">
+                <div className="w-full bg-muted rounded-full h-2">
                   <div className="bg-green-500 h-2 rounded-full" style={{ width: '89%' }}></div>
                 </div>
               </div>
@@ -212,7 +212,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                   <span className="text-studio-text-muted">{t('dashboard.site.visits')}</span>
                   <span className="text-studio-text">96%</span>
                 </div>
-                <div className="w-full bg-studio-bg rounded-full h-2">
+                <div className="w-full bg-muted rounded-full h-2">
                   <div className="bg-blue-500 h-2 rounded-full" style={{ width: '96%' }}></div>
                 </div>
               </div>

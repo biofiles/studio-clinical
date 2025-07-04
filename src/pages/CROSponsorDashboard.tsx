@@ -294,7 +294,7 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                       <span className="text-studio-text-muted">Target</span>
                       <span className="text-studio-text">1,247/1,500</span>
                     </div>
-                    <div className="w-full bg-studio-bg rounded-full h-2">
+                    <div className="w-full bg-muted rounded-full h-2">
                       <div className="bg-primary h-2 rounded-full" style={{ width: '83%' }}></div>
                     </div>
                   </div>
@@ -311,7 +311,7 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                       <span className="text-studio-text-muted">Active</span>
                       <span className="text-studio-text">94.2%</span>
                     </div>
-                    <div className="w-full bg-studio-bg rounded-full h-2">
+                    <div className="w-full bg-muted rounded-full h-2">
                       <div className="bg-primary h-2 rounded-full" style={{ width: '94%' }}></div>
                     </div>
                   </div>
@@ -328,7 +328,7 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                       <span className="text-studio-text-muted">Overall</span>
                       <span className="text-studio-text">98.5%</span>
                     </div>
-                    <div className="w-full bg-studio-bg rounded-full h-2">
+                    <div className="w-full bg-muted rounded-full h-2">
                       <div className="bg-primary h-2 rounded-full" style={{ width: '98%' }}></div>
                     </div>
                   </div>
@@ -349,7 +349,7 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                       <span className="text-studio-text-muted">Spent</span>
                       <span className="text-studio-text">$2.4M/$3.2M</span>
                     </div>
-                    <div className="w-full bg-studio-bg rounded-full h-2">
+                    <div className="w-full bg-muted rounded-full h-2">
                       <div className="bg-primary h-2 rounded-full" style={{ width: '75%' }}></div>
                     </div>
                   </div>
@@ -366,7 +366,7 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                       <span className="text-studio-text-muted">Completion</span>
                       <span className="text-studio-text">67%</span>
                     </div>
-                    <div className="w-full bg-studio-bg rounded-full h-2">
+                    <div className="w-full bg-muted rounded-full h-2">
                       <div className="bg-primary h-2 rounded-full" style={{ width: '67%' }}></div>
                     </div>
                   </div>

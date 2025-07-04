@@ -22,7 +22,7 @@ const Header = ({ role, onLogout }: HeaderProps) => {
       case 'investigator':
         return 'Site';
       case 'cro-sponsor':
-        return 'CRO/Sponsor';
+        return 'Sponsor/CRO';
       default:
         return role?.replace('-', '/');
     }

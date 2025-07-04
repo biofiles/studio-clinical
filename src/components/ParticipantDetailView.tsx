@@ -329,7 +329,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                     {participantDetails.studyProgress.visitsCompleted}/{participantDetails.studyProgress.visitsTotal}
                   </div>
                   <div className="text-sm text-studio-text-muted">{t('dashboard.site.visits')}</div>
-                  <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
+                  <div className="w-full bg-muted rounded-full h-2 mt-2">
                     <div 
                       className="bg-blue-600 h-2 rounded-full" 
                       style={{ 
@@ -343,7 +343,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                     {participantDetails.studyProgress.questionnairesCompleted}/{participantDetails.studyProgress.questionnairesTotal}
                   </div>
                   <div className="text-sm text-studio-text-muted">{t('dashboard.questionnaires')}</div>
-                  <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
+                  <div className="w-full bg-muted rounded-full h-2 mt-2">
                     <div 
                       className="bg-green-600 h-2 rounded-full" 
                       style={{ 
@@ -357,7 +357,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                     {participantDetails.studyProgress.complianceRate}%
                   </div>
                   <div className="text-sm text-studio-text-muted">{t('participant.compliance')} Rate</div>
-                  <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
+                  <div className="w-full bg-muted rounded-full h-2 mt-2">
                     <div 
                       className="bg-purple-600 h-2 rounded-full" 
                       style={{ 
