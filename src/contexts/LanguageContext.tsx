@@ -375,7 +375,7 @@ const translations = {
     'settings.sign.out.note': 'Serás redirigido a la página de inicio de sesión',
     
     // eConsent
-    'econsent.title': 'Consentimiento',
+    'econsent.title': 'Consentimiento Informado',
     'econsent.subtitle': 'Revisa y firma tu documento de consentimiento informado',
     'econsent.document.title': 'Formulario de Consentimiento Informado',
     'econsent.audio.play': 'Reproducir Audio',
