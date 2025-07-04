@@ -399,7 +399,7 @@ const translations = {
     'econsent.status.pending': 'Pendiente',
     
     // Common
-    'common.welcome': '¡Bienvenido',
+    'common.welcome': 'Bienvenido',
     'common.loading': 'Cargando...',
     'common.save': 'Guardar',
     'common.cancel': 'Cancelar',
