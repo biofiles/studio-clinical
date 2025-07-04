@@ -119,15 +119,15 @@ const ParticipantDashboard = ({
               <span className="text-sm sm:text-sm">{t('dashboard.manage.calendar')}</span>
             </TabsTrigger>
             <TabsTrigger value="questionnaires" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
-              <FileText className="h-5 w-5" />
+              <FileText className="h-5 w-5 sm:h-6 sm:w-6" />
               <span className="text-sm sm:text-sm">{t('dashboard.questionnaires')}</span>
             </TabsTrigger>
             <TabsTrigger value="econsent" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
-              <Signature className="h-5 w-5" />
+              <Signature className="h-5 w-5 sm:h-6 sm:w-6" />
               <span className="text-sm sm:text-sm">{t('econsent.title')}</span>
             </TabsTrigger>
             <TabsTrigger value="visits" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
-              <Activity className="h-5 w-5" />
+              <Activity className="h-5 w-5 sm:h-6 sm:w-6" />
               <span className="text-sm sm:text-sm">{t('dashboard.site.visits')}</span>
             </TabsTrigger>
             <TabsTrigger value="contact" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
