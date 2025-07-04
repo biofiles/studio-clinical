@@ -179,7 +179,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                   <span className="text-studio-text">15/30 (50%)</span>
                 </div>
                 <div className="w-full bg-muted rounded-full h-2">
-                  <div className="bg-primary h-2 rounded-full" style={{ width: '50%' }}></div>
+                  <div className="bg-progress-primary h-2 rounded-full" style={{ width: '50%' }}></div>
                 </div>
               </div>
             </CardContent>
@@ -196,7 +196,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                   <span className="text-studio-text">89%</span>
                 </div>
                 <div className="w-full bg-muted rounded-full h-2">
-                  <div className="bg-green-500 h-2 rounded-full" style={{ width: '89%' }}></div>
+                  <div className="bg-progress-success h-2 rounded-full" style={{ width: '89%' }}></div>
                 </div>
               </div>
             </CardContent>
@@ -213,7 +213,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                   <span className="text-studio-text">96%</span>
                 </div>
                 <div className="w-full bg-muted rounded-full h-2">
-                  <div className="bg-blue-500 h-2 rounded-full" style={{ width: '96%' }}></div>
+                  <div className="bg-progress-info h-2 rounded-full" style={{ width: '96%' }}></div>
                 </div>
               </div>
             </CardContent>

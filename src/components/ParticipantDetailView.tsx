@@ -324,48 +324,48 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600">
-                    {participantDetails.studyProgress.visitsCompleted}/{participantDetails.studyProgress.visitsTotal}
-                  </div>
-                  <div className="text-sm text-studio-text-muted">{t('dashboard.site.visits')}</div>
-                  <div className="w-full bg-muted rounded-full h-2 mt-2">
-                    <div 
-                      className="bg-blue-600 h-2 rounded-full" 
-                      style={{ 
-                        width: `${(participantDetails.studyProgress.visitsCompleted / participantDetails.studyProgress.visitsTotal) * 100}%` 
-                      }}
-                    ></div>
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600">
-                    {participantDetails.studyProgress.questionnairesCompleted}/{participantDetails.studyProgress.questionnairesTotal}
-                  </div>
-                  <div className="text-sm text-studio-text-muted">{t('dashboard.questionnaires')}</div>
-                  <div className="w-full bg-muted rounded-full h-2 mt-2">
-                    <div 
-                      className="bg-green-600 h-2 rounded-full" 
-                      style={{ 
-                        width: `${(participantDetails.studyProgress.questionnairesCompleted / participantDetails.studyProgress.questionnairesTotal) * 100}%` 
-                      }}
-                    ></div>
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-purple-600">
-                    {participantDetails.studyProgress.complianceRate}%
-                  </div>
-                  <div className="text-sm text-studio-text-muted">{t('participant.compliance')} Rate</div>
-                  <div className="w-full bg-muted rounded-full h-2 mt-2">
-                    <div 
-                      className="bg-purple-600 h-2 rounded-full" 
-                      style={{ 
-                        width: `${participantDetails.studyProgress.complianceRate}%` 
-                      }}
-                    ></div>
-                  </div>
-                </div>
+                 <div className="text-center">
+                   <div className="text-2xl font-bold text-blue-600">
+                     {participantDetails.studyProgress.visitsCompleted}/{participantDetails.studyProgress.visitsTotal}
+                   </div>
+                   <div className="text-sm text-studio-text-muted">{t('dashboard.site.visits')}</div>
+                   <div className="w-full bg-muted rounded-full h-2 mt-2">
+                     <div 
+                       className="bg-progress-info h-2 rounded-full" 
+                       style={{ 
+                         width: `${(participantDetails.studyProgress.visitsCompleted / participantDetails.studyProgress.visitsTotal) * 100}%` 
+                       }}
+                     ></div>
+                   </div>
+                 </div>
+                 <div className="text-center">
+                   <div className="text-2xl font-bold text-green-600">
+                     {participantDetails.studyProgress.questionnairesCompleted}/{participantDetails.studyProgress.questionnairesTotal}
+                   </div>
+                   <div className="text-sm text-studio-text-muted">{t('dashboard.questionnaires')}</div>
+                   <div className="w-full bg-muted rounded-full h-2 mt-2">
+                     <div 
+                       className="bg-progress-success h-2 rounded-full" 
+                       style={{ 
+                         width: `${(participantDetails.studyProgress.questionnairesCompleted / participantDetails.studyProgress.questionnairesTotal) * 100}%` 
+                       }}
+                     ></div>
+                   </div>
+                 </div>
+                 <div className="text-center">
+                   <div className="text-2xl font-bold text-purple-600">
+                     {participantDetails.studyProgress.complianceRate}%
+                   </div>
+                   <div className="text-sm text-studio-text-muted">{t('participant.compliance')} Rate</div>
+                   <div className="w-full bg-muted rounded-full h-2 mt-2">
+                     <div 
+                       className="bg-progress-accent h-2 rounded-full" 
+                       style={{ 
+                         width: `${participantDetails.studyProgress.complianceRate}%` 
+                       }}
+                     ></div>
+                   </div>
+                 </div>
               </div>
             </CardContent>
           </Card>

@@ -59,6 +59,12 @@ export default {
 					text: 'hsl(var(--studio-text))',
 					'text-muted': 'hsl(var(--studio-text-muted))'
 				},
+				progress: {
+					primary: 'hsl(var(--progress-primary))',
+					success: 'hsl(var(--progress-success))',
+					info: 'hsl(var(--progress-info))',
+					accent: 'hsl(var(--progress-accent))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',

@@ -42,6 +42,12 @@ All colors MUST be HSL.
     --studio-border: 0 0% 88%;
     --studio-text: 0 0% 15%;
     --studio-text-muted: 0 0% 45%;
+    
+    /* Progress bar tokens - darker for better visibility */
+    --progress-primary: 220 91% 35%;
+    --progress-success: 142 71% 35%;
+    --progress-info: 217 91% 45%;
+    --progress-accent: 271 91% 45%;
 
     --radius: 0.5rem;
 
