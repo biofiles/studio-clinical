@@ -83,7 +83,7 @@ const ParticipantDashboard = ({
         {/* Welcome Section - Mobile first */}
         <div className="space-y-1 mb-4">
           <h2 className="text-lg sm:text-xl font-medium text-studio-text">
-            {t('common.welcome')}!
+            ¡{t('common.welcome')}!
           </h2>
           <p className="text-studio-text-muted text-xs sm:text-sm">
             Protocolo PROTO-2024-001 | Patrocinador: Novartis AG
