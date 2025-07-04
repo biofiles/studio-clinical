@@ -92,20 +92,18 @@ const ParticipantDashboard = ({
 
         {/* Progress Overview - Mobile optimized */}
         <Card className="bg-studio-surface border-studio-border mb-4">{/* Reduced margin */}
-          <CardContent className="p-4 sm:p-6">
-            <div className="space-y-4 sm:space-y-0 sm:flex sm:items-center sm:justify-between">
-              <div className="flex-1 sm:mr-6">
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-sm font-medium text-studio-text-muted">{t('dashboard.study.progress')}</span>
-                  <span className="text-lg font-bold text-studio-text">{studyProgress}%</span>
+          <CardContent className="p-3 sm:p-4">{/* Reduced padding */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0">
+              <div className="flex-1">
+                <div className="flex justify-between text-sm mb-2">
+                  <span className="text-studio-text-muted">{t('dashboard.study.progress')}</span>
+                  <span className="text-studio-text font-medium">{studyProgress}%</span>
                 </div>
-                <Progress value={studyProgress} className="h-4 mb-1" />
+                <Progress value={studyProgress} className="h-3 mb-2" />
               </div>
-              <div className="flex items-center justify-between sm:block sm:text-right bg-studio-surface/50 rounded-lg p-3 sm:bg-transparent sm:p-0">
-                <div className="sm:text-center">
-                  <p className="text-3xl sm:text-4xl font-bold text-studio-text">{daysLeft}</p>
-                  <p className="text-sm text-studio-text-muted font-medium">{t('participant.days.remaining')}</p>
-                </div>
+              <div className="text-center sm:text-right sm:ml-6">
+                <p className="text-2xl sm:text-3xl font-bold text-studio-text">{daysLeft}</p>
+                <p className="text-xs text-studio-text-muted">{t('participant.days.remaining')}</p>
               </div>
             </div>
           </CardContent>
