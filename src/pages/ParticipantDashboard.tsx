@@ -85,7 +85,7 @@ const ParticipantDashboard = ({
           <h2 className="text-xl sm:text-2xl font-medium text-studio-text">
             {t('common.welcome')}
           </h2>
-          <p className="text-studio-text-muted text-sm sm:text-base">
+          <p className="text-studio-text-muted text-xs sm:text-sm">
             Protocolo PROTO-2024-001 | Patrocinador: Novartis AG
           </p>
         </div>
@@ -116,27 +116,27 @@ const ParticipantDashboard = ({
           <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 h-auto gap-1">{/* Updated for 6 tabs */}
             <TabsTrigger value="schedule" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
               <Calendar className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-sm sm:text-sm">{t('dashboard.manage.calendar')}</span>
+              <span className="text-xs sm:text-xs">{t('dashboard.manage.calendar')}</span>
             </TabsTrigger>
             <TabsTrigger value="questionnaires" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
               <FileText className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-sm sm:text-sm">{t('dashboard.questionnaires')}</span>
+              <span className="text-xs sm:text-xs">{t('dashboard.questionnaires')}</span>
             </TabsTrigger>
             <TabsTrigger value="econsent" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
               <Signature className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-sm sm:text-sm">{t('econsent.title')}</span>
+              <span className="text-xs sm:text-xs">{t('econsent.title')}</span>
             </TabsTrigger>
             <TabsTrigger value="visits" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
               <Activity className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-sm sm:text-sm">{t('dashboard.site.visits')}</span>
+              <span className="text-xs sm:text-xs">{t('dashboard.site.visits')}</span>
             </TabsTrigger>
             <TabsTrigger value="contact" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
               <MapPin className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-sm sm:text-sm">{t('contact.info')}</span>
+              <span className="text-xs sm:text-xs">{t('contact.info')}</span>
             </TabsTrigger>
             <TabsTrigger value="profile" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
               <User className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-sm sm:text-sm">{t('participant.profile')}</span>
+              <span className="text-xs sm:text-xs">{t('participant.profile')}</span>
             </TabsTrigger>
           </TabsList>
 
