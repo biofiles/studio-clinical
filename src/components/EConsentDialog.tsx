@@ -327,7 +327,7 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="w-full max-w-4xl max-h-[95vh] mx-4 sm:mx-auto overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-2">
             <FileText className="h-5 w-5" />
@@ -506,7 +506,7 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4">
                   <div>
                     <label className="text-sm font-medium">{t('econsent.signature.full.name')}</label>
                     <Input
@@ -526,16 +526,38 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
 
                 <div>
                   <label className="text-sm font-medium mb-2 block">Electronic Signature</label>
-                  <div className="border-2 border-dashed border-gray-300 rounded p-2">
+                  <div className="border-2 border-dashed border-gray-300 rounded p-2 overflow-hidden">
                     <canvas
                       ref={canvasRef}
-                      width={400}
-                      height={150}
-                      className="w-full cursor-crosshair"
+                      width={300}
+                      height={120}
+                      className="w-full max-w-full h-auto cursor-crosshair touch-none"
                       onMouseDown={startDrawing}
                       onMouseMove={draw}
                       onMouseUp={stopDrawing}
                       onMouseLeave={stopDrawing}
+                      onTouchStart={(e) => {
+                        e.preventDefault();
+                        const touch = e.touches[0];
+                        const mouseEvent = new MouseEvent("mousedown", {
+                          clientX: touch.clientX,
+                          clientY: touch.clientY
+                        });
+                        startDrawing(mouseEvent as any);
+                      }}
+                      onTouchMove={(e) => {
+                        e.preventDefault();
+                        const touch = e.touches[0];
+                        const mouseEvent = new MouseEvent("mousemove", {
+                          clientX: touch.clientX,
+                          clientY: touch.clientY
+                        });
+                        draw(mouseEvent as any);
+                      }}
+                      onTouchEnd={(e) => {
+                        e.preventDefault();
+                        stopDrawing();
+                      }}
                     />
                   </div>
                   <Button
