@@ -226,7 +226,11 @@ const translations = {
     // Activity types
     'activity.visit': 'visit',
     'activity.questionnaire': 'questionnaire',
-    'activity.call': 'call'
+    'activity.call': 'call',
+    'activity.diary': 'diary',
+    'activity.assessment': 'assessment',
+    'activity.lab': 'lab work',
+    'activity.meeting': 'meeting'
   },
   spanish: {
     // Header
@@ -442,7 +446,11 @@ const translations = {
     // Activity types
     'activity.visit': 'visita',
     'activity.questionnaire': 'cuestionario',
-    'activity.call': 'llamada'
+    'activity.call': 'llamada',
+    'activity.diary': 'diario',
+    'activity.assessment': 'evaluación',
+    'activity.lab': 'laboratorio',
+    'activity.meeting': 'reunión'
   }
 };
 

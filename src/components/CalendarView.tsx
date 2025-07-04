@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { Calendar as CalendarIcon, Clock } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Activity {
   date: string;
@@ -20,6 +21,7 @@ interface CalendarViewProps {
 }
 
 const CalendarView = ({ open, onOpenChange, activities }: CalendarViewProps) => {
+  const { t } = useLanguage();
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
 
   // Mock upcoming visits for calendar display
@@ -110,7 +112,7 @@ const CalendarView = ({ open, onOpenChange, activities }: CalendarViewProps) => 
                       <div className="flex items-center space-x-2 mb-1">
                         <h4 className="font-medium text-studio-text">{visit.title}</h4>
                         <Badge className={getActivityTypeColor(visit.type)}>
-                          {visit.type}
+                          {t(`activity.${visit.type}`)}
                         </Badge>
                       </div>
                       <div className="flex items-center space-x-1 text-sm text-studio-text-muted">

@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { Calendar as CalendarIcon, Clock, Users, FileText, Activity } from "lucide-react";
 import { format } from "date-fns";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface CalendarManagementProps {
   open: boolean;
@@ -14,6 +15,7 @@ interface CalendarManagementProps {
 }
 
 const CalendarManagement = ({ open, onOpenChange }: CalendarManagementProps) => {
+  const { t } = useLanguage();
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
 
   const studyEvents = [
@@ -103,7 +105,7 @@ const CalendarManagement = ({ open, onOpenChange }: CalendarManagementProps) => 
                     <div className="flex items-center space-x-2 mb-1">
                       <h4 className="font-medium text-sm">{event.title}</h4>
                       <Badge className={getEventTypeColor(event.type)}>
-                        {event.type}
+                        {t(`activity.${event.type}`)}
                       </Badge>
                     </div>
                     <div className="text-xs text-studio-text-muted">

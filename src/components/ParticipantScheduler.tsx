@@ -11,6 +11,7 @@ import { useState } from "react";
 import { Calendar as CalendarIcon, Clock, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ParticipantSchedulerProps {
   open: boolean;
@@ -19,6 +20,7 @@ interface ParticipantSchedulerProps {
 }
 
 const ParticipantScheduler = ({ open, onOpenChange, participantId }: ParticipantSchedulerProps) => {
+  const { t } = useLanguage();
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [eventType, setEventType] = useState("");
   const [eventTime, setEventTime] = useState("");
@@ -177,7 +179,7 @@ const ParticipantScheduler = ({ open, onOpenChange, participantId }: Participant
                     <div className="flex items-center space-x-2 mb-1">
                       <h4 className="font-medium text-sm">{event.title}</h4>
                       <span className={`px-2 py-1 text-xs rounded ${getEventTypeColor(event.type)}`}>
-                        {event.type}
+                        {t(`activity.${event.type}`)}
                       </span>
                     </div>
                     <div className="text-xs text-studio-text-muted">
