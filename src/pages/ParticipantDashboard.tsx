@@ -240,7 +240,7 @@ const ParticipantDashboard = ({
             <div className="grid grid-cols-2 gap-4">
               <Card className="bg-green-50 border-green-200">
                 <CardContent className="p-4 text-center">
-                  <div className="text-lg font-bold text-green-600">15 Oct 2024</div>
+                  <div className="text-lg font-bold text-green-600">24 Nov 2024</div>
                   <div className="text-xs text-green-700">Primer Consentimiento</div>
                 </CardContent>
               </Card>
@@ -263,8 +263,8 @@ const ParticipantDashboard = ({
                     <div className="flex items-center space-x-2">
                       <CheckCircle className="h-4 w-4 text-green-600" />
                       <div>
-                        <p className="text-sm font-medium">Consentimiento Informado v2.1</p>
-                        <p className="text-xs text-studio-text-muted">Firmado el 15 Oct 2024</p>
+                        <p className="text-sm font-medium">Consentimiento Informado v2.0</p>
+                        <p className="text-xs text-studio-text-muted">Firmado el 24 Nov 2024</p>
                       </div>
                     </div>
                     <Badge className="bg-green-100 text-green-800">Firmado</Badge>
@@ -274,7 +274,7 @@ const ParticipantDashboard = ({
                     <div className="flex items-center space-x-2">
                       <CheckCircle className="h-4 w-4 text-gray-600" />
                       <div>
-                        <p className="text-sm font-medium">Consentimiento Informado v2.0</p>
+                        <p className="text-sm font-medium">Consentimiento Informado v1.0</p>
                         <p className="text-xs text-studio-text-muted">Firmado el 15 Oct 2024</p>
                       </div>
                     </div>
