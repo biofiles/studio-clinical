@@ -67,7 +67,7 @@ const translations = {
     
     // Participant specific
     'participant.profile': 'Profile',
-    'participant.your.schedule': 'Your Agenda',
+    'participant.your.schedule': 'Your Schedule',
     'participant.days.remaining': 'days remaining',
     'participant.token': 'Participant Token',
     
@@ -96,8 +96,8 @@ const translations = {
     'contact.token.description': 'Click to view your participant profile and barcode details',
     
     // Activities
-    'activity.weekly.survey': 'Encuesta Semanal',
-    'activity.weekly.survey.details': 'Encuesta rápida de 5 minutos sobre sus síntomas diarios y adherencia a la medicación',
+    'activity.weekly.survey': 'Cuestionario Semanal',
+    'activity.weekly.survey.details': 'Cuestionario rápido de 5 minutos sobre sus síntomas diarios y adherencia a la medicación',
     'activity.online.location': 'En línea - Complete desde casa',
     'activity.site.visit.blood': 'Visita al Sitio - Extracción de Sangre',
     'activity.site.visit.blood.details': 'Análisis de sangre de rutina para monitoreo de seguridad y evaluación de eficacia',
@@ -107,7 +107,7 @@ const translations = {
     'activity.anytime': 'Cualquier momento',
     'activity.daily.diary.details': 'Registre sus síntomas diarios, medicamentos tomados y cualquier efecto secundario',
     'activity.mobile.location': 'En línea - Aplicación móvil o portal web',
-    'activity.survey.completed': 'Encuesta completada exitosamente! Gracias por su participación.',
+    'activity.survey.completed': 'Cuestionario completado exitosamente! Gracias por su participación.',
     'activity.pdf.export': 'Exportación PDF iniciada - las respuestas del cuestionario se descargarían como un documento seguro y sin identificación.',
     'activity.view.details': 'Ver Detalles',
     
@@ -115,13 +115,13 @@ const translations = {
     'calendar.view.full': 'Ver Calendario Completo',
     
     // Questionnaires
-    'questionnaire.your.surveys': 'Sus Encuestas',
-    'questionnaire.view.all': 'Ver Todas las Encuestas',
+    'questionnaire.your.surveys': 'Sus Cuestionarios',
+    'questionnaire.view.all': 'Ver Todos los Cuestionarios',
     'questionnaire.pending': 'Pendientes',
     'questionnaire.completed': 'Completadas',
     'questionnaire.completion.rate': 'Tasa de Finalización',
-    'questionnaire.thanks.completing': '¡Gracias por completar la encuesta de hoy!',
-    'questionnaire.quick.survey': 'Encuesta rápida de 5 minutos sobre sus síntomas diarios',
+    'questionnaire.thanks.completing': '¡Gracias por completar el cuestionario de hoy!',
+    'questionnaire.quick.survey': 'Cuestionario rápido de 5 minutos sobre sus síntomas diarios',
     'questionnaire.complete.now': 'Completar Ahora',
     
     // Visits
@@ -298,8 +298,8 @@ const translations = {
     'contact.token.description': 'Haz clic para ver tu perfil de participante y detalles del código de barras',
     
     // Activities  
-    'activity.weekly.survey': 'Encuesta Semanal',
-    'activity.weekly.survey.details': 'Encuesta rápida de 5 minutos sobre sus síntomas diarios y adherencia a la medicación',
+    'activity.weekly.survey': 'Cuestionario Semanal',
+    'activity.weekly.survey.details': 'Cuestionario rápido de 5 minutos sobre sus síntomas diarios y adherencia a la medicación',
     'activity.online.location': 'En línea - Complete desde casa',
     'activity.site.visit.blood': 'Visita al Sitio - Extracción de Sangre',
     'activity.site.visit.blood.details': 'Análisis de sangre de rutina para monitoreo de seguridad y evaluación de eficacia',
@@ -309,7 +309,7 @@ const translations = {
     'activity.anytime': 'Cualquier momento',
     'activity.daily.diary.details': 'Registre sus síntomas diarios, medicamentos tomados y cualquier efecto secundario',
     'activity.mobile.location': 'En línea - Aplicación móvil o portal web',
-    'activity.survey.completed': 'Encuesta completada exitosamente! Gracias por su participación.',
+    'activity.survey.completed': 'Cuestionario completado exitosamente! Gracias por su participación.',
     'activity.pdf.export': 'Exportación PDF iniciada - las respuestas del cuestionario se descargarían como un documento seguro y sin identificación.',
     'activity.view.details': 'Ver Detalles',
     
@@ -317,13 +317,13 @@ const translations = {
     'calendar.view.full': 'Ver Calendario Completo',
     
     // Questionnaires
-    'questionnaire.your.surveys': 'Sus Encuestas',
-    'questionnaire.view.all': 'Ver Todas las Encuestas',
+    'questionnaire.your.surveys': 'Sus Cuestionarios',
+    'questionnaire.view.all': 'Ver Todos los Cuestionarios',
     'questionnaire.pending': 'Pendientes',
     'questionnaire.completed': 'Completadas',
     'questionnaire.completion.rate': 'Tasa de Finalización',
-    'questionnaire.thanks.completing': '¡Gracias por completar la encuesta de hoy!',
-    'questionnaire.quick.survey': 'Encuesta rápida de 5 minutos sobre sus síntomas diarios',
+    'questionnaire.thanks.completing': '¡Gracias por completar el cuestionario de hoy!',
+    'questionnaire.quick.survey': 'Cuestionario rápido de 5 minutos sobre sus síntomas diarios',
     'questionnaire.complete.now': 'Completar Ahora',
     
     // Visits
@@ -399,7 +399,7 @@ const translations = {
     'econsent.status.pending': 'Pendiente',
     
     // Common
-    'common.welcome': 'Bienvenido',
+    'common.welcome': '¡Bienvenido',
     'common.loading': 'Cargando...',
     'common.save': 'Guardar',
     'common.cancel': 'Cancelar',
