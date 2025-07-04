@@ -159,7 +159,7 @@ const translations = {
     'settings.sign.out.note': 'You will be redirected to the login page',
     
     // eConsent
-    'econsent.title': 'Informed Consent',
+    'econsent.title': 'Consent',
     'econsent.subtitle': 'Review and sign your informed consent document',
     'econsent.document.title': 'Informed Consent Form',
     'econsent.audio.play': 'Play Audio',
@@ -375,7 +375,7 @@ const translations = {
     'settings.sign.out.note': 'Serás redirigido a la página de inicio de sesión',
     
     // eConsent
-    'econsent.title': 'Consentimiento Informado',
+    'econsent.title': 'Consentimiento',
     'econsent.subtitle': 'Revisa y firma tu documento de consentimiento informado',
     'econsent.document.title': 'Formulario de Consentimiento Informado',
     'econsent.audio.play': 'Reproducir Audio',
