@@ -235,6 +235,65 @@ const ParticipantDashboard = ({
                 {t('econsent.view.signed')}
               </Button>
             </div>
+
+            {/* Consent Signature Dates Widget */}
+            <div className="grid grid-cols-2 gap-4">
+              <Card className="bg-green-50 border-green-200">
+                <CardContent className="p-4 text-center">
+                  <div className="text-lg font-bold text-green-600">15 Oct 2024</div>
+                  <div className="text-xs text-green-700">Primer Consentimiento</div>
+                </CardContent>
+              </Card>
+              <Card className="bg-blue-50 border-blue-200">
+                <CardContent className="p-4 text-center">
+                  <div className="text-lg font-bold text-blue-600">15 Oct 2024</div>
+                  <div className="text-xs text-blue-700">Último Consentimiento</div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Consent History */}
+            <Card className="bg-studio-surface border-studio-border">
+              <CardHeader>
+                <CardTitle className="text-sm">{t('econsent.history')}</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between p-2 bg-green-50 border border-green-200 rounded">
+                    <div className="flex items-center space-x-2">
+                      <CheckCircle className="h-4 w-4 text-green-600" />
+                      <div>
+                        <p className="text-sm font-medium">Consentimiento Informado v2.1</p>
+                        <p className="text-xs text-studio-text-muted">Firmado el 15 Oct 2024</p>
+                      </div>
+                    </div>
+                    <Badge className="bg-green-100 text-green-800">Firmado</Badge>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-2 bg-gray-50 border border-gray-200 rounded">
+                    <div className="flex items-center space-x-2">
+                      <CheckCircle className="h-4 w-4 text-gray-600" />
+                      <div>
+                        <p className="text-sm font-medium">Consentimiento Informado v2.0</p>
+                        <p className="text-xs text-studio-text-muted">Firmado el 15 Oct 2024</p>
+                      </div>
+                    </div>
+                    <Badge className="bg-gray-100 text-gray-800">Superseded</Badge>
+                  </div>
+
+                  <div className="flex items-center justify-between p-2 bg-yellow-50 border border-yellow-200 rounded">
+                    <div className="flex items-center space-x-2">
+                      <Clock className="h-4 w-4 text-yellow-600" />
+                      <div>
+                        <p className="text-sm font-medium">Adenda de Seguridad v1.0</p>
+                        <p className="text-xs text-studio-text-muted">Disponible para firma</p>
+                      </div>
+                    </div>
+                    <Badge className="bg-yellow-100 text-yellow-800">Pendiente</Badge>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
             
             <Card className="bg-blue-50 border-blue-200">
               <CardContent className="p-4">
