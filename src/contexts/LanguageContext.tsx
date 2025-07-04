@@ -178,6 +178,9 @@ const translations = {
     'econsent.download.pdf': 'Download PDF',
     'econsent.view.signed': 'View Signed Document',
     'econsent.history': 'History',
+    'econsent.status.signed': 'Signed',
+    'econsent.status.superseded': 'Superseded',
+    'econsent.status.pending': 'Pending',
     
     // Common
     'common.welcome': 'Welcome',
@@ -372,7 +375,7 @@ const translations = {
     'settings.sign.out.note': 'Serás redirigido a la página de inicio de sesión',
     
     // eConsent
-    'econsent.title': 'Consentimiento Informado',
+    'econsent.title': 'Consentimiento',
     'econsent.subtitle': 'Revisa y firma tu documento de consentimiento informado',
     'econsent.document.title': 'Formulario de Consentimiento Informado',
     'econsent.audio.play': 'Reproducir Audio',
@@ -391,6 +394,9 @@ const translations = {
     'econsent.download.pdf': 'Descargar PDF',
     'econsent.view.signed': 'Ver Documento Firmado',
     'econsent.history': 'Historial',
+    'econsent.status.signed': 'Firmado',
+    'econsent.status.superseded': 'Reemplazado',
+    'econsent.status.pending': 'Pendiente',
     
     // Common
     'common.welcome': 'Bienvenido',

@@ -267,7 +267,12 @@ const ParticipantDashboard = ({
                         <p className="text-xs text-studio-text-muted">Firmado el 24 Nov 2024</p>
                       </div>
                     </div>
-                    <Badge className="bg-green-100 text-green-800">Firmado</Badge>
+                    <Badge 
+                      className="bg-green-100 text-green-800 cursor-pointer hover:bg-green-200 transition-colors" 
+                      onClick={() => setShowEConsent(true)}
+                    >
+                      {t('econsent.status.signed')}
+                    </Badge>
                   </div>
                   
                   <div className="flex items-center justify-between p-2 bg-gray-50 border border-gray-200 rounded">
@@ -278,7 +283,12 @@ const ParticipantDashboard = ({
                         <p className="text-xs text-studio-text-muted">Firmado el 15 Oct 2024</p>
                       </div>
                     </div>
-                    <Badge className="bg-gray-100 text-gray-800">Superseded</Badge>
+                    <Badge 
+                      className="bg-gray-100 text-gray-800 cursor-pointer hover:bg-gray-200 transition-colors" 
+                      onClick={() => setShowEConsent(true)}
+                    >
+                      {t('econsent.status.superseded')}
+                    </Badge>
                   </div>
 
                   <div className="flex items-center justify-between p-2 bg-yellow-50 border border-yellow-200 rounded">
@@ -289,7 +299,12 @@ const ParticipantDashboard = ({
                         <p className="text-xs text-studio-text-muted">Disponible para firma</p>
                       </div>
                     </div>
-                    <Badge className="bg-yellow-100 text-yellow-800">Pendiente</Badge>
+                    <Badge 
+                      className="bg-yellow-100 text-yellow-800 cursor-pointer hover:bg-yellow-200 transition-colors" 
+                      onClick={() => setShowEConsent(true)}
+                    >
+                      {t('econsent.status.pending')}
+                    </Badge>
                   </div>
                 </div>
               </CardContent>
