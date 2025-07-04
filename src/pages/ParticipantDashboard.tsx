@@ -115,27 +115,27 @@ const ParticipantDashboard = ({
         <Tabs defaultValue="schedule" className="space-y-3">{/* Reduced spacing */}
           <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 h-auto gap-1">{/* Updated for 6 tabs */}
             <TabsTrigger value="schedule" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
-              <Calendar className="h-4 w-4" />
+              <Calendar className="h-5 w-5" />
               <span className="text-sm sm:text-sm">{t('dashboard.manage.calendar')}</span>
             </TabsTrigger>
             <TabsTrigger value="questionnaires" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
-              <FileText className="h-4 w-4" />
+              <FileText className="h-5 w-5" />
               <span className="text-sm sm:text-sm">{t('dashboard.questionnaires')}</span>
             </TabsTrigger>
             <TabsTrigger value="econsent" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
-              <Signature className="h-4 w-4" />
+              <Signature className="h-5 w-5" />
               <span className="text-sm sm:text-sm">{t('econsent.title')}</span>
             </TabsTrigger>
             <TabsTrigger value="visits" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
-              <Activity className="h-4 w-4" />
+              <Activity className="h-5 w-5" />
               <span className="text-sm sm:text-sm">{t('dashboard.site.visits')}</span>
             </TabsTrigger>
             <TabsTrigger value="contact" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
-              <MapPin className="h-4 w-4" />
+              <MapPin className="h-5 w-5" />
               <span className="text-sm sm:text-sm">{t('contact.info')}</span>
             </TabsTrigger>
             <TabsTrigger value="profile" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
-              <User className="h-4 w-4" />
+              <User className="h-5 w-5" />
               <span className="text-sm sm:text-sm">{t('participant.profile')}</span>
             </TabsTrigger>
           </TabsList>
@@ -241,7 +241,7 @@ const ParticipantDashboard = ({
 
           <TabsContent value="econsent" className="space-y-4">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
-              <h3 className="text-lg font-medium text-studio-text">{t('econsent.title')}</h3>
+              <h3 className="text-lg font-medium text-studio-text">Consentimiento Informado</h3>
               <Button variant="studio" size="sm" onClick={() => setShowEConsent(true)} className="w-full sm:w-auto">
                 <Signature className="h-4 w-4 mr-2" />
                 {t('econsent.view.signed')}
@@ -275,7 +275,7 @@ const ParticipantDashboard = ({
                     <div className="flex items-center space-x-2">
                       <CheckCircle className="h-4 w-4 text-green-600" />
                       <div>
-                        <p className="text-sm font-medium">Consentimiento Informado v2.0</p>
+                        <p className="text-sm font-medium">Formulario de Consentimiento Informado v2.0</p>
                         <p className="text-xs text-studio-text-muted">Firmado el 24 Nov 2024</p>
                       </div>
                     </div>
@@ -291,7 +291,7 @@ const ParticipantDashboard = ({
                     <div className="flex items-center space-x-2">
                       <CheckCircle className="h-4 w-4 text-gray-600" />
                       <div>
-                        <p className="text-sm font-medium">Consentimiento Informado v1.0</p>
+                        <p className="text-sm font-medium">Formulario de Consentimiento Informado v1.0</p>
                         <p className="text-xs text-studio-text-muted">Firmado el 15 Oct 2024</p>
                       </div>
                     </div>
