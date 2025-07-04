@@ -241,13 +241,13 @@ const ParticipantDashboard = ({
             <div className="grid grid-cols-2 gap-4">
               <Card className="bg-green-50 border-green-200">
                 <CardContent className="p-4 text-center">
-                  <div className="text-lg font-bold text-green-600">24 Nov 2024</div>
+                  <div className="text-lg font-bold text-green-600">15 Oct 2024</div>
                   <div className="text-xs text-green-700">Primer Consentimiento</div>
                 </CardContent>
               </Card>
               <Card className="bg-blue-50 border-blue-200">
                 <CardContent className="p-4 text-center">
-                  <div className="text-lg font-bold text-blue-600">15 Oct 2024</div>
+                  <div className="text-lg font-bold text-blue-600">24 Nov 2024</div>
                   <div className="text-xs text-blue-700">Último Consentimiento</div>
                 </CardContent>
               </Card>
@@ -268,13 +268,10 @@ const ParticipantDashboard = ({
                         <p className="text-xs text-studio-text-muted">Firmado el 24 Nov 2024</p>
                       </div>
                     </div>
-                    <Badge 
-                      className="bg-green-100 text-green-800 cursor-pointer hover:bg-green-200 transition-colors" 
-                      onClick={() => {
-                        setEConsentMode('view');
-                        setShowEConsent(true);
-                      }}
-                    >
+                    <Badge className="bg-green-100 text-green-800 cursor-pointer hover:bg-green-200 transition-colors" onClick={() => {
+                    setEConsentMode('view');
+                    setShowEConsent(true);
+                  }}>
                       {t('econsent.status.signed')}
                     </Badge>
                   </div>
@@ -287,13 +284,10 @@ const ParticipantDashboard = ({
                         <p className="text-xs text-studio-text-muted">Firmado el 15 Oct 2024</p>
                       </div>
                     </div>
-                    <Badge 
-                      className="bg-gray-100 text-gray-800 cursor-pointer hover:bg-gray-200 transition-colors" 
-                      onClick={() => {
-                        setEConsentMode('view');
-                        setShowEConsent(true);
-                      }}
-                    >
+                    <Badge className="bg-gray-100 text-gray-800 cursor-pointer hover:bg-gray-200 transition-colors" onClick={() => {
+                    setEConsentMode('view');
+                    setShowEConsent(true);
+                  }}>
                       {t('econsent.status.superseded')}
                     </Badge>
                   </div>
@@ -306,13 +300,10 @@ const ParticipantDashboard = ({
                         <p className="text-xs text-studio-text-muted">Disponible para firma</p>
                       </div>
                     </div>
-                    <Badge 
-                      className="bg-yellow-100 text-yellow-800 cursor-pointer hover:bg-yellow-200 transition-colors" 
-                      onClick={() => {
-                        setEConsentMode('sign');
-                        setShowEConsent(true);
-                      }}
-                    >
+                    <Badge className="bg-yellow-100 text-yellow-800 cursor-pointer hover:bg-yellow-200 transition-colors" onClick={() => {
+                    setEConsentMode('sign');
+                    setShowEConsent(true);
+                  }}>
                       {t('econsent.status.pending')}
                     </Badge>
                   </div>
@@ -334,14 +325,10 @@ const ParticipantDashboard = ({
                       <p>• Plazo para firmar: Hasta 15 Dic 2024</p>
                       <p>• Modalidad: Firma electrónica con audio disponible</p>
                     </div>
-                    <Button 
-                      size="sm" 
-                      className="mt-3"
-                      onClick={() => {
-                        setEConsentMode('sign');
-                        setShowEConsent(true);
-                      }}
-                    >
+                    <Button size="sm" className="mt-3" onClick={() => {
+                    setEConsentMode('sign');
+                    setShowEConsent(true);
+                  }}>
                       <Signature className="h-4 w-4 mr-2" />
                       Firmar Ahora
                     </Button>
