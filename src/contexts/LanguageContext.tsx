@@ -177,6 +177,7 @@ const translations = {
     'econsent.signature.complete': 'Consent Signed Successfully',
     'econsent.download.pdf': 'Download PDF',
     'econsent.view.signed': 'View Signed Document',
+    'econsent.history': 'History',
     
     // Common
     'common.welcome': 'Welcome',
@@ -389,6 +390,7 @@ const translations = {
     'econsent.signature.complete': 'Consentimiento Firmado Exitosamente',
     'econsent.download.pdf': 'Descargar PDF',
     'econsent.view.signed': 'Ver Documento Firmado',
+    'econsent.history': 'Historial',
     
     // Common
     'common.welcome': 'Bienvenido',
