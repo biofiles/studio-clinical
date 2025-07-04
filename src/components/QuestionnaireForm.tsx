@@ -149,26 +149,35 @@ const QuestionnaireForm = ({ open, onOpenChange, questionnaire, onComplete }: Qu
 
       case 'scale':
         return (
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="flex justify-between text-xs text-studio-text-muted">
               <span>Not at all</span>
               <span>Extremely</span>
             </div>
-            <div className="flex space-x-2">
+            {/* Mobile-first responsive grid */}
+            <div className="grid grid-cols-5 sm:grid-cols-10 gap-2">
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
                 <button
                   key={value}
                   onClick={() => handleResponseChange(currentQuestion.id, value)}
-                  className={`w-8 h-8 rounded-full text-xs font-medium ${
+                  className={`aspect-square rounded-lg text-sm font-medium transition-all ${
                     responses[currentQuestion.id] === value
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                      ? 'bg-blue-600 text-white shadow-md scale-105'
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300 hover:scale-105'
                   }`}
                 >
                   {value}
                 </button>
               ))}
             </div>
+            {/* Selected value indicator for better UX */}
+            {responses[currentQuestion.id] && (
+              <div className="text-center">
+                <span className="text-sm text-studio-text-muted">
+                  Selected: <span className="font-medium text-blue-600">{responses[currentQuestion.id]}</span>
+                </span>
+              </div>
+            )}
           </div>
         );
 
