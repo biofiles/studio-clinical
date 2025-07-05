@@ -47,9 +47,26 @@ const CalendarView = ({ open, onOpenChange, activities }: CalendarViewProps) => 
     }
   };
 
+  const getActivityDotColor = (type: string) => {
+    switch (type) {
+      case 'visit': return '#dc2626'; // red-600
+      case 'questionnaire': return '#2563eb'; // blue-600
+      case 'diary': return '#16a34a'; // green-600
+      case 'call': return '#9333ea'; // purple-600
+      case 'assessment': return '#ea580c'; // orange-600
+      default: return '#6b7280'; // gray-500
+    }
+  };
+
   const isDayWithActivity = (date: Date) => {
     return activityDates.some(activityDate => 
       activityDate.toDateString() === date.toDateString()
+    );
+  };
+
+  const getActivityForDate = (date: Date) => {
+    return upcomingVisits.find(visit => 
+      visit.date.toDateString() === date.toDateString()
     );
   };
 
@@ -74,16 +91,22 @@ const CalendarView = ({ open, onOpenChange, activities }: CalendarViewProps) => 
                   mode="single"
                   selected={selectedDate}
                   onSelect={setSelectedDate}
-                  className="rounded-md border"
+                  className="rounded-md border [&_.has-activity]:relative [&_.has-activity]:after:absolute [&_.has-activity]:after:top-1 [&_.has-activity]:after:right-1 [&_.has-activity]:after:w-2 [&_.has-activity]:after:h-2 [&_.has-activity]:after:rounded-full [&_.has-visit]:after:bg-red-600 [&_.has-questionnaire]:after:bg-blue-600 [&_.has-diary]:after:bg-green-600 [&_.has-call]:after:bg-purple-600 [&_.has-assessment]:after:bg-orange-600 [&_.has-activity]:after:content-['']"
                   modifiers={{
-                    hasActivity: isDayWithActivity
+                    hasActivity: isDayWithActivity,
+                    hasVisit: (date) => getActivityForDate(date)?.type === 'visit',
+                    hasQuestionnaire: (date) => getActivityForDate(date)?.type === 'questionnaire',
+                    hasDiary: (date) => getActivityForDate(date)?.type === 'diary',
+                    hasCall: (date) => getActivityForDate(date)?.type === 'call',
+                    hasAssessment: (date) => getActivityForDate(date)?.type === 'assessment'
                   }}
-                  modifiersStyles={{
-                    hasActivity: {
-                      backgroundColor: '#3b82f6',
-                      color: 'white',
-                      fontWeight: 'bold'
-                    }
+                  modifiersClassNames={{
+                    hasActivity: "has-activity",
+                    hasVisit: "has-visit",
+                    hasQuestionnaire: "has-questionnaire", 
+                    hasDiary: "has-diary",
+                    hasCall: "has-call",
+                    hasAssessment: "has-assessment"
                   }}
                 />
               </CardContent>
