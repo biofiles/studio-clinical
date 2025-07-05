@@ -1,8 +1,10 @@
 
 import { Button } from "@/components/ui/button";
-import { Settings } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Settings, Building } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useStudy } from "@/contexts/StudyContext";
 
 interface HeaderProps {
   role?: string;
@@ -12,6 +14,7 @@ interface HeaderProps {
 const Header = ({ role, onLogout }: HeaderProps) => {
   const navigate = useNavigate();
   const { t } = useLanguage();
+  const { selectedStudy } = useStudy();
 
   const handleSettings = () => {
     navigate('/settings');
@@ -41,6 +44,20 @@ const Header = ({ role, onLogout }: HeaderProps) => {
               <span className="text-sm text-studio-text-muted capitalize ml-2 mt-1 mr-1">
                 {getRoleDisplay(role)}
               </span>
+              {selectedStudy && (
+                <>
+                  <span className="text-studio-text-muted">•</span>
+                  <div className="flex items-center space-x-2 ml-2">
+                    <Building className="h-4 w-4 text-studio-text-muted" />
+                    <Badge variant="outline" className="text-xs">
+                      {selectedStudy.protocol}
+                    </Badge>
+                    <span className="text-sm text-studio-text-muted">
+                      {selectedStudy.name}
+                    </span>
+                  </div>
+                </>
+              )}
             </div>
           )}
         </div>

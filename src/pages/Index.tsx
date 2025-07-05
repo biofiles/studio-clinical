@@ -5,7 +5,11 @@ const Index = () => {
   const navigate = useNavigate();
 
   const handleRoleSelect = (role: 'participant' | 'investigator' | 'cro-sponsor') => {
-    navigate(`/${role}`);
+    if (role === 'participant') {
+      navigate(`/${role}`);
+    } else {
+      navigate(`/select-study?role=${role}`);
+    }
   };
 
   return <Login onRoleSelect={handleRoleSelect} />;

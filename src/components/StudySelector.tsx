@@ -1,0 +1,144 @@
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useStudy } from "@/contexts/StudyContext";
+import { useNavigate } from "react-router-dom";
+import { Building, Users, FileText, CheckCircle } from "lucide-react";
+
+interface StudySelectorProps {
+  userRole: 'investigator' | 'cro-sponsor';
+}
+
+const StudySelector = ({ userRole }: StudySelectorProps) => {
+  const { t } = useLanguage();
+  const { studies, setSelectedStudy } = useStudy();
+  const navigate = useNavigate();
+  const [selectedStudyId, setSelectedStudyId] = useState<string>('');
+
+  const handleStudySelect = (studyId: string) => {
+    setSelectedStudyId(studyId);
+  };
+
+  const handleContinue = () => {
+    const study = studies.find(s => s.id === selectedStudyId);
+    if (study) {
+      setSelectedStudy(study);
+      navigate(`/${userRole}`);
+    }
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'active':
+        return 'bg-progress-success/10 text-progress-success border-progress-success/20';
+      case 'recruiting':
+        return 'bg-progress-info/10 text-progress-info border-progress-info/20';
+      case 'completed':
+        return 'bg-progress-gray/10 text-progress-gray border-progress-gray/20';
+      default:
+        return 'bg-studio-border text-studio-text-muted';
+    }
+  };
+
+  const getRoleTitle = () => {
+    return userRole === 'investigator' 
+      ? t('study.selector.investigator.title')
+      : t('study.selector.cro.title');
+  };
+
+  return (
+    <div className="min-h-screen bg-studio-bg flex items-center justify-center p-4">
+      <div className="w-full max-w-4xl space-y-8">
+        <div className="text-center">
+          <h1 className="text-4xl font-light tracking-widest text-studio-text mb-2">
+            STUDIO
+          </h1>
+          <h2 className="text-xl font-medium text-studio-text mb-2">
+            {getRoleTitle()}
+          </h2>
+          <p className="text-studio-text-muted text-sm">
+            {t('study.selector.subtitle')}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {studies.map((study) => (
+            <Card 
+              key={study.id}
+              className={`bg-studio-surface border-studio-border hover:shadow-md transition-all duration-200 cursor-pointer ${
+                selectedStudyId === study.id 
+                  ? 'border-studio-accent shadow-md' 
+                  : 'hover:border-studio-accent'
+              }`}
+              onClick={() => handleStudySelect(study.id)}
+            >
+              <CardHeader className="pb-3">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <CardTitle className="flex items-center space-x-3 mb-2">
+                      <Building className="h-5 w-5 text-studio-accent" />
+                      <span className="text-lg font-medium text-studio-text">
+                        {study.name}
+                      </span>
+                      {selectedStudyId === study.id && (
+                        <CheckCircle className="h-5 w-5 text-progress-success" />
+                      )}
+                    </CardTitle>
+                    <div className="flex items-center space-x-2 mb-2">
+                      <Badge variant="outline" className="text-xs">
+                        {study.protocol}
+                      </Badge>
+                      <Badge variant="outline" className="text-xs">
+                        {study.phase}
+                      </Badge>
+                      <Badge className={`text-xs ${getStatusColor(study.status)}`}>
+                        {t(`study.status.${study.status}`)}
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div className="flex items-center space-x-2">
+                    <Building className="h-4 w-4 text-studio-text-muted" />
+                    <span className="text-studio-text-muted">
+                      {study.sites} {t('study.sites')}
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Users className="h-4 w-4 text-studio-text-muted" />
+                    <span className="text-studio-text-muted">
+                      {study.participants} {t('study.participants')}
+                    </span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        <div className="flex justify-center space-x-4">
+          <Button
+            variant="outline"
+            onClick={() => navigate('/')}
+            className="min-w-32"
+          >
+            {t('common.back')}
+          </Button>
+          <Button
+            onClick={handleContinue}
+            disabled={!selectedStudyId}
+            className="min-w-32"
+          >
+            {t('common.continue')}
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default StudySelector;

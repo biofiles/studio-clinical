@@ -230,7 +230,17 @@ const translations = {
     'activity.diary': 'diary',
     'activity.assessment': 'assessment',
     'activity.lab': 'lab work',
-    'activity.meeting': 'meeting'
+    'activity.meeting': 'meeting',
+    
+    // Study Selector
+    'study.selector.investigator.title': 'Select Study - Site Investigator',
+    'study.selector.cro.title': 'Select Study - CRO/Sponsor',
+    'study.selector.subtitle': 'Choose the study you want to access',
+    'study.sites': 'sites',
+    'study.participants': 'participants',
+    'study.status.active': 'Active',
+    'study.status.recruiting': 'Recruiting',
+    'study.status.completed': 'Completed'
   },
   spanish: {
     // Header
@@ -450,7 +460,17 @@ const translations = {
     'activity.diary': 'diario',
     'activity.assessment': 'evaluación',
     'activity.lab': 'laboratorio',
-    'activity.meeting': 'reunión'
+    'activity.meeting': 'reunión',
+    
+    // Study Selector
+    'study.selector.investigator.title': 'Seleccionar Estudio - Investigador del Sitio',
+    'study.selector.cro.title': 'Seleccionar Estudio - CRO/Patrocinador',
+    'study.selector.subtitle': 'Elige el estudio al que quieres acceder',
+    'study.sites': 'sitios',
+    'study.participants': 'participantes',
+    'study.status.active': 'Activo',
+    'study.status.recruiting': 'Reclutando',
+    'study.status.completed': 'Completado'
   }
 };
 

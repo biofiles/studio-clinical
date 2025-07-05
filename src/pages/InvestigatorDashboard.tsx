@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
@@ -8,6 +8,8 @@ import ParticipantList from "@/components/ParticipantList";
 import AIChatbot from "@/components/AIChatbot";
 import CalendarManagement from "@/components/CalendarManagement";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useStudy } from "@/contexts/StudyContext";
+import { useNavigate } from "react-router-dom";
 
 interface InvestigatorDashboardProps {
   onLogout: () => void;
@@ -18,6 +20,15 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
   const [showChatbot, setShowChatbot] = useState(false);
   const [showCalendarManagement, setShowCalendarManagement] = useState(false);
   const { t } = useLanguage();
+  const { selectedStudy } = useStudy();
+  const navigate = useNavigate();
+
+  // Redirect to study selection if no study is selected
+  useEffect(() => {
+    if (!selectedStudy) {
+      navigate('/select-study?role=investigator');
+    }
+  }, [selectedStudy, navigate]);
 
   const nextEvents = [
     { date: "Dec 15, 2024", time: "2:00 PM", event: "P001 - Site Visit", type: "visit" },
@@ -46,7 +57,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
             {t('dashboard.title')}
           </h2>
           <p className="text-studio-text-muted">
-            {t('dashboard.protocol')}
+            {selectedStudy ? `${selectedStudy.protocol} | ${selectedStudy.name}` : t('dashboard.protocol')}
           </p>
         </div>
 

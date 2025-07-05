@@ -1,11 +1,13 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Header from "@/components/Header";
 import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, FileText, Calendar, Users, Settings } from "lucide-react";
 import { toast } from "sonner";
+import { useStudy } from "@/contexts/StudyContext";
+import { useNavigate } from "react-router-dom";
 
 interface CROSponsorDashboardProps {
   onLogout: () => void;
@@ -13,7 +15,16 @@ interface CROSponsorDashboardProps {
 
 const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
-  const [selectedStudy, setSelectedStudy] = useState<string | null>(null);
+  const [selectedStudyLocal, setSelectedStudyLocal] = useState<string | null>(null);
+  const { selectedStudy } = useStudy();
+  const navigate = useNavigate();
+
+  // Redirect to study selection if no study is selected
+  useEffect(() => {
+    if (!selectedStudy) {
+      navigate('/select-study?role=cro-sponsor');
+    }
+  }, [selectedStudy, navigate]);
 
   const studies = [
     { id: "PROTO-2024-001", title: "Phase II Oncology Trial", sites: 12, participants: 156, status: "Active" },
@@ -42,8 +53,7 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
 
   const getContextTitle = () => {
     if (selectedStudy) {
-      const study = studies.find(s => s.id === selectedStudy);
-      return `Viewing Study: ${study?.title} (${study?.id})`;
+      return `${selectedStudy.protocol} | ${selectedStudy.name}`;
     }
     return "Portfolio Overview - All Active Studies";
   };
@@ -165,7 +175,7 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
               <CardContent className="space-y-4">
                 {studies.map((study, index) => (
                   <div key={index} className="p-4 bg-studio-bg rounded border border-studio-border hover:border-primary/30 transition-colors cursor-pointer"
-                       onClick={() => setSelectedStudy(study.id)}>
+                       onClick={() => setSelectedStudyLocal(study.id)}>
                     <div className="flex justify-between items-start mb-2">
                       <div>
                         <h4 className="font-medium text-studio-text">{study.title}</h4>
