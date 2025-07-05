@@ -124,7 +124,7 @@ const ParticipantDashboard = ({
             </TabsTrigger>
             <TabsTrigger value="econsent" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
               <Signature className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-xs">{t('econsent.title')}</span>
+              <span className="text-xs sm:text-xs">Informed Consent</span>
             </TabsTrigger>
             <TabsTrigger value="visits" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
               <Activity className="h-5 w-5 sm:h-4 sm:w-4" />
