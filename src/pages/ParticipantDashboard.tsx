@@ -12,7 +12,7 @@ import QuestionnairesView from "@/components/QuestionnairesView";
 import AIChatbot from "@/components/AIChatbot";
 import EConsentDialog from "@/components/EConsentDialog";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode, Signature, Building, Settings } from "lucide-react";
+import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode, Signature, Building, Settings, Scale } from "lucide-react";
 interface ParticipantDashboardProps {
   onLogout: () => void;
 }
@@ -100,7 +100,7 @@ const ParticipantDashboard = ({
                   <span className="text-base sm:text-lg font-medium text-studio-text-muted">{t('dashboard.study.progress')}</span>
                   <span className="text-xl sm:text-2xl font-bold text-studio-text">{studyProgress}%</span>
                 </div>
-                <Progress value={studyProgress} className="h-4 mb-1" />
+                <Progress value={studyProgress} color="gray" className="h-4 mb-1" />
               </div>
               <div className="flex items-center justify-between sm:block sm:text-right bg-studio-surface/50 rounded-lg p-3 sm:bg-transparent sm:p-0">
                 <div className="sm:text-center">
@@ -125,7 +125,7 @@ const ParticipantDashboard = ({
             </TabsTrigger>
             <TabsTrigger value="econsent" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
               <Signature className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-xs">eConsent</span>
+              <span className="text-xs sm:text-xs">Informed Consent</span>
             </TabsTrigger>
             <TabsTrigger value="visits" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
               <Activity className="h-5 w-5 sm:h-4 sm:w-4" />
@@ -161,8 +161,15 @@ const ParticipantDashboard = ({
                         <div className="flex-1">
                           <div className="flex items-center space-x-2 mb-1">
                             <p className="font-medium text-studio-text text-base sm:text-lg">{item.activity}</p>
-                            <Badge variant="secondary" className={`text-sm ${item.type === 'visit' ? 'bg-red-100 text-red-800 border-red-200' : item.type === 'questionnaire' ? 'bg-blue-100 text-blue-800 border-blue-200' : item.type === 'diary' ? 'bg-green-100 text-green-800 border-green-200' : 'bg-gray-100 text-gray-800 border-gray-200'}`}>
-                              {item.type === 'visit' ? 'Visit' : item.type === 'questionnaire' ? 'Questionnaire' : item.type === 'diary' ? 'Diary' : item.type}
+                            <Badge variant="secondary" className={`text-sm border ${
+                              item.type === 'visit' ? 'bg-destructive/10 text-destructive border-destructive/20' : 
+                              item.type === 'questionnaire' ? 'bg-[hsl(var(--progress-info))]/10 text-[hsl(var(--progress-info))] border-[hsl(var(--progress-info))]/20' : 
+                              item.type === 'diary' ? 'bg-[hsl(var(--progress-success))]/10 text-[hsl(var(--progress-success))] border-[hsl(var(--progress-success))]/20' : 
+                              'bg-muted text-muted-foreground border-border'
+                            }`}>
+                              {item.type === 'visit' ? 'Visit' : 
+                               item.type === 'questionnaire' ? 'Questionnaire' : 
+                               item.type === 'diary' ? 'Diary' : item.type}
                             </Badge>
                           </div>
                           <p className="text-sm sm:text-base text-studio-text-muted mb-2">{item.date} at {item.time}</p>
@@ -171,9 +178,11 @@ const ParticipantDashboard = ({
                             <MapPin className="h-4 w-4" />
                             <span>{item.location}</span>
                           </div>
-                          {item.notes && <div className="bg-blue-50 border border-blue-200 rounded p-3 text-sm text-blue-800">
+                          {item.notes && (
+                            <div className="bg-blue-50 border border-blue-200 rounded p-3 text-sm text-blue-800">
                               <strong>Important Notes:</strong> {item.notes}
-                            </div>}
+                            </div>
+                          )}
                         </div>
                       </div>
                       
@@ -193,35 +202,35 @@ const ParticipantDashboard = ({
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              <Card className="bg-red-50 border-red-200">
+              <Card className="bg-[hsl(var(--progress-info))]/5 border-[hsl(var(--progress-info))]/20">
                 <CardContent className="p-4 text-center">
-                  <div className="text-2xl sm:text-3xl font-bold text-red-600">3</div>
-                  <div className="text-sm sm:text-base text-red-700">{t('questionnaire.pending')}</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-[hsl(var(--progress-info))]">3</div>
+                  <div className="text-sm sm:text-base text-[hsl(var(--progress-info))]/80">{t('questionnaire.pending')}</div>
                 </CardContent>
               </Card>
-              <Card className="bg-green-50 border-green-200">
+              <Card className="bg-[hsl(var(--progress-success))]/5 border-[hsl(var(--progress-success))]/20">
                 <CardContent className="p-4 text-center">
-                  <div className="text-2xl sm:text-3xl font-bold text-green-600">12</div>
-                  <div className="text-sm sm:text-base text-green-700">{t('questionnaire.completed')}</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-[hsl(var(--progress-success))]">12</div>
+                  <div className="text-sm sm:text-base text-[hsl(var(--progress-success))]/80">{t('questionnaire.completed')}</div>
                 </CardContent>
               </Card>
-              <Card className="bg-blue-50 border-blue-200 col-span-2 sm:col-span-1">
+              <Card className="bg-[hsl(var(--progress-primary))]/5 border-[hsl(var(--progress-primary))]/20 col-span-2 sm:col-span-1">
                 <CardContent className="p-4 text-center">
-                  <div className="text-2xl sm:text-3xl font-bold text-blue-600">80%</div>
-                  <div className="text-sm sm:text-base text-blue-700">{t('questionnaire.completion.rate')}</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-[hsl(var(--progress-primary))]">80%</div>
+                  <div className="text-sm sm:text-base text-[hsl(var(--progress-primary))]/80">{t('questionnaire.completion.rate')}</div>
                 </CardContent>
               </Card>
             </div>
 
             <div className="space-y-3">
-              <div className={`p-4 border rounded ${surveyCompleted ? 'bg-green-50 border-green-200' : 'bg-yellow-50 border-yellow-200'}`}>
+              <div className={`p-4 border rounded ${surveyCompleted ? 'bg-[hsl(var(--progress-success))]/5 border-[hsl(var(--progress-success))]/20' : 'bg-[hsl(var(--progress-accent))]/5 border-[hsl(var(--progress-accent))]/20'}`}>
                 <div className="flex items-center space-x-2 mb-2">
-                  {surveyCompleted ? <CheckCircle className="h-4 w-4 text-green-600" /> : <Bell className="h-4 w-4 text-yellow-600" />}
-                    <span className={`font-medium ${surveyCompleted ? 'text-green-800' : 'text-yellow-800'}`}>
+                  {surveyCompleted ? <CheckCircle className="h-4 w-4 text-[hsl(var(--progress-success))]" /> : <Bell className="h-4 w-4 text-[hsl(var(--progress-accent))]" />}
+                    <span className={`font-medium ${surveyCompleted ? 'text-[hsl(var(--progress-success))]' : 'text-[hsl(var(--progress-accent))]'}`}>
                       {t('questionnaire.daily.symptom')} - {surveyCompleted ? t('common.completed') : t('common.due.today')}
                     </span>
                 </div>
-                <p className={`text-sm mb-3 ${surveyCompleted ? 'text-green-700' : 'text-yellow-700'}`}>
+                <p className={`text-sm mb-3 ${surveyCompleted ? 'text-[hsl(var(--progress-success))]/80' : 'text-[hsl(var(--progress-accent))]/80'}`}>
                   {surveyCompleted ? t('questionnaire.thanks.completing') : t('questionnaire.quick.survey')}
                 </p>
                 {!surveyCompleted && <Button size="sm" className="w-full sm:w-auto" onClick={handleCompleteSurvey}>
@@ -242,16 +251,16 @@ const ParticipantDashboard = ({
 
             {/* Consent Signature Dates Widget */}
             <div className="grid grid-cols-2 gap-4">
-              <Card className="bg-green-50 border-green-200">
+              <Card className="bg-[hsl(var(--progress-success))]/5 border-[hsl(var(--progress-success))]/20">
                 <CardContent className="p-4 text-center">
-                  <div className="text-lg font-bold text-green-600">15 Oct 2024</div>
-                  <div className="text-xs text-green-700">Primer Consentimiento</div>
+                  <div className="text-lg font-bold text-[hsl(var(--progress-success))]">15 Oct 2024</div>
+                  <div className="text-xs text-[hsl(var(--progress-success))]/80">Primer Consentimiento</div>
                 </CardContent>
               </Card>
-              <Card className="bg-blue-50 border-blue-200">
+              <Card className="bg-[hsl(var(--progress-primary))]/5 border-[hsl(var(--progress-primary))]/20">
                 <CardContent className="p-4 text-center">
-                  <div className="text-lg font-bold text-blue-600">24 Nov 2024</div>
-                  <div className="text-xs text-blue-700">Último Consentimiento</div>
+                  <div className="text-lg font-bold text-[hsl(var(--progress-primary))]">24 Nov 2024</div>
+                  <div className="text-xs text-[hsl(var(--progress-primary))]/80">Último Consentimiento</div>
                 </CardContent>
               </Card>
             </div>
@@ -263,15 +272,15 @@ const ParticipantDashboard = ({
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between p-2 bg-green-50 border border-green-200 rounded">
+                  <div className="flex items-center justify-between p-2 bg-[hsl(var(--progress-success))]/5 border border-[hsl(var(--progress-success))]/20 rounded">
                     <div className="flex items-center space-x-2">
-                      <CheckCircle className="h-4 w-4 text-green-600" />
+                      <CheckCircle className="h-4 w-4 text-[hsl(var(--progress-success))]" />
                       <div>
                         <p className="text-sm font-medium">{language === 'spanish' ? 'Formulario de consentimiento informado Principal v2.0' : 'Main Informed Consent Form v2.0'}</p>
                         <p className="text-xs text-studio-text-muted">Firmado el 24 Nov 2024</p>
                       </div>
                     </div>
-                    <Badge className="bg-green-100 text-green-800 cursor-pointer hover:bg-green-200 transition-colors" onClick={() => {
+                    <Badge className="bg-[hsl(var(--progress-success))]/10 text-[hsl(var(--progress-success))] border border-[hsl(var(--progress-success))]/20 cursor-pointer hover:bg-[hsl(var(--progress-success))]/20 transition-colors" onClick={() => {
                     setEConsentMode('view');
                     setShowEConsent(true);
                   }}>
@@ -443,7 +452,7 @@ const ParticipantDashboard = ({
               <Card className="bg-studio-surface border-studio-border">
                 <CardHeader>
                   <CardTitle className="text-sm flex items-center space-x-2">
-                    <Shield className="h-4 w-4" />
+                    <Scale className="h-4 w-4" />
                     <span>Comité de Ética</span>
                   </CardTitle>
                 </CardHeader>
@@ -531,7 +540,10 @@ const ParticipantDashboard = ({
                 </CardContent>
               </Card>
 
-              
+              <Button variant="studio" className="w-full justify-start" onClick={() => setShowProfile(true)}>
+                <User className="h-4 w-4 mr-2" />
+                {t('profile.view.settings')}
+              </Button>
               
               <Button variant="studio" className="w-full justify-start" onClick={handleExportPDF}>
                 <Download className="h-4 w-4 mr-2" />
