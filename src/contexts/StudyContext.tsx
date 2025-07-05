@@ -22,42 +22,42 @@ const StudyContext = createContext<StudyContextType | undefined>(undefined);
 const mockStudies: Study[] = [
   {
     id: '1',
-    name: 'Cardiovascular Safety Study',
-    protocol: 'PROTO-2024-001',
+    name: 'PARADIGM-CV: Heart Failure Outcomes Study',
+    protocol: 'NVS-4578-301',
     phase: 'Phase III',
     status: 'active',
-    sites: 12,
-    participants: 450,
+    sites: 18,
+    participants: 385,
     sponsor: 'Novartis AG'
   },
   {
     id: '2',
-    name: 'Diabetes Management Trial',
-    protocol: 'PROTO-2024-002',
+    name: 'ATLAS-DM2: Type 2 Diabetes Prevention Trial', 
+    protocol: 'PF-07081532-003',
     phase: 'Phase II',
     status: 'recruiting',
-    sites: 8,
-    participants: 120,
+    sites: 14,
+    participants: 162,
     sponsor: 'Pfizer Inc.'
   },
   {
     id: '3',
-    name: 'Oncology Biomarker Study',
-    protocol: 'PROTO-2024-003',
-    phase: 'Phase I',
+    name: 'HORIZON-Onc: Biomarker Driven Therapy',
+    protocol: 'RO-7198457-104',
+    phase: 'Phase I/II',
     status: 'active',
-    sites: 5,
-    participants: 75,
+    sites: 9,
+    participants: 94,
     sponsor: 'Roche Ltd.'
   },
   {
     id: '4',
-    name: 'Pediatric Safety Evaluation',
-    protocol: 'PROTO-2024-004',
-    phase: 'Phase III',
+    name: 'GUARDIAN-Ped: Pediatric Safety Assessment',
+    protocol: 'JNJ-83475219-201',
+    phase: 'Phase II/III',
     status: 'recruiting',
-    sites: 15,
-    participants: 200,
+    sites: 22,
+    participants: 278,
     sponsor: 'Johnson & Johnson'
   }
 ];

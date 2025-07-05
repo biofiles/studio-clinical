@@ -31,9 +31,10 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
   }, [selectedStudy, navigate]);
 
   const nextEvents = [
-    { date: "Dec 15, 2024", time: "2:00 PM", event: "P001 - Site Visit", type: "visit" },
-    { date: "Dec 16, 2024", time: "10:00 AM", event: "P002 - Blood Draw", type: "lab" },
-    { date: "Dec 18, 2024", time: "3:00 PM", event: "Monthly Team Meeting", type: "meeting" }
+    { date: "Jul 18, 2025", time: "9:30 AM", event: "S004 - Baseline Assessment", type: "visit" },
+    { date: "Jul 22, 2025", time: "1:15 PM", event: "S007 - ECG Monitoring", type: "lab" },
+    { date: "Jul 25, 2025", time: "11:00 AM", event: "Weekly Safety Review", type: "meeting" },
+    { date: "Aug 02, 2025", time: "3:45 PM", event: "S002 - Follow-up Visit", type: "visit" }
   ];
 
   const handleExportQuestionnaires = () => {
@@ -66,7 +67,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
             <CardContent className="p-6">
               <div className="flex items-center space-x-2">
                 <Users className="h-5 w-5 text-studio-text-muted" />
-                <span className="text-2xl font-semibold text-studio-text">15/30</span>
+                <span className="text-2xl font-semibold text-studio-text">24/40</span>
               </div>
               <p className="text-studio-text-muted text-sm mt-1">
                 {t('dashboard.participants.enrolled')}
@@ -78,7 +79,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
             <CardContent className="p-6">
               <div className="flex items-center space-x-2">
                 <FileCheck className="h-5 w-5 text-studio-text-muted" />
-                <span className="text-2xl font-semibold text-studio-text">8</span>
+                <span className="text-2xl font-semibold text-studio-text">12</span>
               </div>
               <p className="text-studio-text-muted text-sm mt-1">
                 {t('dashboard.pending.reviews')}
@@ -90,7 +91,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
             <CardContent className="p-6">
               <div className="flex items-center space-x-2">
                 <AlertTriangle className="h-5 w-5 text-studio-text-muted" />
-                <span className="text-2xl font-semibold text-studio-text">2</span>
+                <span className="text-2xl font-semibold text-studio-text">1</span>
               </div>
               <p className="text-studio-text-muted text-sm mt-1">
                 {t('dashboard.adverse.events')}
@@ -102,7 +103,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
             <CardContent className="p-6">
               <div className="flex items-center space-x-2">
                 <Calendar className="h-5 w-5 text-studio-text-muted" />
-                <span className="text-2xl font-semibold text-studio-text">12</span>
+                <span className="text-2xl font-semibold text-studio-text">8</span>
               </div>
               <p className="text-studio-text-muted text-sm mt-1">
                 {t('dashboard.upcoming.visits')}
@@ -187,10 +188,10 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-studio-text-muted">{t('dashboard.enrollment')}</span>
-                  <span className="text-studio-text">15/30 (50%)</span>
+                  <span className="text-studio-text">24/40 (60%)</span>
                 </div>
                 <div className="w-full bg-muted rounded-full h-2">
-                  <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" style={{ width: '50%' }}></div>
+                  <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" style={{ width: '60%' }}></div>
                 </div>
               </div>
             </CardContent>
@@ -204,10 +205,10 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-studio-text-muted">{t('dashboard.daily.diaries')}</span>
-                  <span className="text-studio-text">89%</span>
+                  <span className="text-studio-text">91%</span>
                 </div>
                 <div className="w-full bg-muted rounded-full h-2">
-                  <div className="bg-[hsl(var(--progress-success))] h-2 rounded-full" style={{ width: '89%' }}></div>
+                  <div className="bg-[hsl(var(--progress-success))] h-2 rounded-full" style={{ width: '91%' }}></div>
                 </div>
               </div>
             </CardContent>
@@ -221,10 +222,10 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-studio-text-muted">{t('dashboard.site.visits')}</span>
-                  <span className="text-studio-text">96%</span>
+                  <span className="text-studio-text">94%</span>
                 </div>
                 <div className="w-full bg-muted rounded-full h-2">
-                  <div className="bg-[hsl(var(--progress-info))] h-2 rounded-full" style={{ width: '96%' }}></div>
+                  <div className="bg-[hsl(var(--progress-info))] h-2 rounded-full" style={{ width: '94%' }}></div>
                 </div>
               </div>
             </CardContent>
