@@ -46,41 +46,22 @@ const StudyDropdown = () => {
           </div>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-80">
+      <DropdownMenuContent className="w-80 bg-studio-surface border-studio-border">
         {studies.map((study) => (
           <DropdownMenuItem
             key={study.id}
             onClick={() => setSelectedStudy(study)}
-            className="cursor-pointer p-3"
+            className="cursor-pointer p-3 hover:bg-studio-bg"
           >
-            <div className="flex flex-col w-full space-y-2">
-              <div className="flex items-center space-x-2">
-                <span className="font-medium text-studio-text">{study.name}</span>
+            <div className="flex flex-col w-full space-y-1">
+              <div className="flex items-center justify-between">
+                <span className="font-medium text-studio-text">{study.protocol}</span>
                 {selectedStudy?.id === study.id && (
                   <Badge variant="outline" className="text-xs">Selected</Badge>
                 )}
               </div>
-              <div className="flex items-center space-x-2">
-                <Badge variant="outline" className="text-xs">
-                  {study.protocol}
-                </Badge>
-                <Badge variant="outline" className="text-xs">
-                  {study.phase}
-                </Badge>
-                <Badge className={`text-xs ${getStatusColor(study.status)}`}>
-                  {t(`study.status.${study.status}`)}
-                </Badge>
-              </div>
-              <div className="flex items-center space-x-4 text-xs text-studio-text-muted">
-                <div className="flex items-center space-x-1">
-                  <Building className="h-3 w-3" />
-                  <span>{study.sites} {t('study.sites')}</span>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <Users className="h-3 w-3" />
-                  <span>{study.participants} {t('study.participants')}</span>
-                </div>
-              </div>
+              <span className="text-sm text-studio-text-muted">{study.name}</span>
+              <span className="text-xs text-studio-text-muted">{study.sponsor}</span>
             </div>
           </DropdownMenuItem>
         ))}

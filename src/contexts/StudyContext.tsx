@@ -8,6 +8,7 @@ interface Study {
   status: 'active' | 'recruiting' | 'completed';
   sites: number;
   participants: number;
+  sponsor: string;
 }
 
 interface StudyContextType {
@@ -26,7 +27,8 @@ const mockStudies: Study[] = [
     phase: 'Phase III',
     status: 'active',
     sites: 12,
-    participants: 450
+    participants: 450,
+    sponsor: 'Novartis AG'
   },
   {
     id: '2',
@@ -35,7 +37,8 @@ const mockStudies: Study[] = [
     phase: 'Phase II',
     status: 'recruiting',
     sites: 8,
-    participants: 120
+    participants: 120,
+    sponsor: 'Pfizer Inc.'
   },
   {
     id: '3',
@@ -44,7 +47,8 @@ const mockStudies: Study[] = [
     phase: 'Phase I',
     status: 'active',
     sites: 5,
-    participants: 75
+    participants: 75,
+    sponsor: 'Roche Ltd.'
   },
   {
     id: '4',
@@ -53,7 +57,8 @@ const mockStudies: Study[] = [
     phase: 'Phase III',
     status: 'recruiting',
     sites: 15,
-    participants: 200
+    participants: 200,
+    sponsor: 'Johnson & Johnson'
   }
 ];
 
