@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,56 +8,74 @@ import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, 
 import { toast } from "sonner";
 import { useStudy } from "@/contexts/StudyContext";
 import { useNavigate } from "react-router-dom";
-
 interface CROSponsorDashboardProps {
   onLogout: () => void;
 }
-
-const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
+const CROSponsorDashboard = ({
+  onLogout
+}: CROSponsorDashboardProps) => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [selectedStudyLocal, setSelectedStudyLocal] = useState<string | null>(null);
-  const { selectedStudy, studies, setSelectedStudy } = useStudy();
+  const {
+    selectedStudy,
+    studies,
+    setSelectedStudy
+  } = useStudy();
   const navigate = useNavigate();
-
-  const localStudies = [
-    { id: "PROTO-2024-001", title: "Phase II Oncology Trial", sites: 12, participants: 156, status: "Active" },
-    { id: "PROTO-2024-002", title: "Phase III Cardiology Study", sites: 8, participants: 89, status: "Recruiting" },
-    { id: "PROTO-2023-015", title: "Phase I Safety Study", sites: 3, participants: 24, status: "Completed" }
-  ];
-
+  const localStudies = [{
+    id: "PROTO-2024-001",
+    title: "Phase II Oncology Trial",
+    sites: 12,
+    participants: 156,
+    status: "Active"
+  }, {
+    id: "PROTO-2024-002",
+    title: "Phase III Cardiology Study",
+    sites: 8,
+    participants: 89,
+    status: "Recruiting"
+  }, {
+    id: "PROTO-2023-015",
+    title: "Phase I Safety Study",
+    sites: 3,
+    participants: 24,
+    status: "Completed"
+  }];
   const handleStudySelect = (studyId: string) => {
     const study = studies.find(s => s.id === studyId);
     if (study) {
       setSelectedStudy(study);
     }
   };
-
-  const alerts = [
-    { type: "warning", message: "Site 003 enrollment behind target", time: "2 hours ago" },
-    { type: "info", message: "Monthly safety report submitted", time: "1 day ago" },
-    { type: "success", message: "Study PROTO-2024-001 milestone reached", time: "2 days ago" }
-  ];
-
+  const alerts = [{
+    type: "warning",
+    message: "Site 003 enrollment behind target",
+    time: "2 hours ago"
+  }, {
+    type: "info",
+    message: "Monthly safety report submitted",
+    time: "1 day ago"
+  }, {
+    type: "success",
+    message: "Study PROTO-2024-001 milestone reached",
+    time: "2 days ago"
+  }];
   const handlePDFGeneration = async () => {
     setIsGeneratingPDF(true);
-    
+
     // Simulate PDF generation process
     await new Promise(resolve => setTimeout(resolve, 3000));
-    
     toast.success("Questionnaire PDF Report Generated", {
       description: "Complete questionnaire data exported for regulatory submission"
     });
-    
     setIsGeneratingPDF(false);
   };
-
   const getContextTitle = () => {
     if (selectedStudy) {
       return `${selectedStudy.protocol} | ${selectedStudy.name}`;
     }
     return "Portfolio Overview - All Active Studies";
   };
-
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'Active':
@@ -71,13 +88,8 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
         return 'bg-studio-border text-studio-text-muted';
     }
   };
-
-  return (
-    <div className="min-h-screen bg-studio-bg">
-      <Header
-        role="cro-sponsor"
-        onLogout={onLogout}
-      />
+  return <div className="min-h-screen bg-studio-bg">
+      <Header role="cro-sponsor" onLogout={onLogout} />
 
       {/* User Context Bar */}
       <div className="bg-studio-surface border-b border-studio-border px-6 py-3">
@@ -88,10 +100,7 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
               {getContextTitle()}
             </span>
           </div>
-          <div className="flex items-center space-x-2 text-xs text-studio-text-muted">
-            <Clock className="h-3 w-3" />
-            <span>Last updated: {new Date().toLocaleString()}</span>
-          </div>
+          
         </div>
       </div>
 
@@ -188,21 +197,10 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                   <CardTitle className="text-studio-text">Study Selection</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  {studies.map((study) => (
-                    <div 
-                      key={study.id}
-                      className={`p-3 rounded border cursor-pointer transition-all duration-200 ${
-                        selectedStudy?.id === study.id 
-                          ? 'border-studio-accent bg-studio-accent/5 shadow-sm' 
-                          : 'border-studio-border hover:border-studio-accent hover:bg-studio-bg'
-                      }`}
-                      onClick={() => handleStudySelect(study.id)}
-                    >
+                  {studies.map(study => <div key={study.id} className={`p-3 rounded border cursor-pointer transition-all duration-200 ${selectedStudy?.id === study.id ? 'border-studio-accent bg-studio-accent/5 shadow-sm' : 'border-studio-border hover:border-studio-accent hover:bg-studio-bg'}`} onClick={() => handleStudySelect(study.id)}>
                       <div className="flex items-center justify-between mb-2">
                         <span className="font-medium text-studio-text text-sm">{study.name}</span>
-                        {selectedStudy?.id === study.id && (
-                          <CheckCircle className="h-4 w-4 text-progress-success" />
-                        )}
+                        {selectedStudy?.id === study.id && <CheckCircle className="h-4 w-4 text-progress-success" />}
                       </div>
                       <div className="flex items-center space-x-2 mb-2">
                         <Badge variant="outline" className="text-xs">
@@ -217,8 +215,7 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                           {study.status}
                         </Badge>
                       </div>
-                    </div>
-                  ))}
+                    </div>)}
                 </CardContent>
               </Card>
 
@@ -229,8 +226,7 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {selectedStudy ? (
-                    <div className="space-y-4">
+                  {selectedStudy ? <div className="space-y-4">
                       <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <span className="text-sm text-studio-text-muted">Protocol</span>
@@ -255,13 +251,10 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                         <span className="text-sm text-studio-text-muted">Participants</span>
                         <p className="font-medium text-studio-text text-2xl">{selectedStudy.participants}</p>
                       </div>
-                    </div>
-                  ) : (
-                    <div className="text-center py-8 text-studio-text-muted">
+                    </div> : <div className="text-center py-8 text-studio-text-muted">
                       <Building2 className="h-12 w-12 mx-auto mb-4 opacity-50" />
                       <p>Select a study from the list to view details</p>
-                    </div>
-                  )}
+                    </div>}
                 </CardContent>
               </Card>
             </div>
@@ -270,24 +263,14 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
           <TabsContent value="questionnaires" className="space-y-6">
             <div className="flex justify-between items-center">
               <h3 className="text-lg font-medium text-studio-text">Questionnaire Management</h3>
-              <Button
-                onClick={handlePDFGeneration}
-                disabled={isGeneratingPDF}
-                variant="outline"
-                size="sm"
-                className="flex items-center space-x-2"
-              >
-                {isGeneratingPDF ? (
-                  <>
+              <Button onClick={handlePDFGeneration} disabled={isGeneratingPDF} variant="outline" size="sm" className="flex items-center space-x-2">
+                {isGeneratingPDF ? <>
                     <div className="animate-spin h-3 w-3 border border-primary border-t-transparent rounded-full" />
                     <span>Generating PDF...</span>
-                  </>
-                ) : (
-                  <>
+                  </> : <>
                     <FileText className="h-3 w-3" />
                     <span>Generate Questionnaire PDF Report</span>
-                  </>
-                )}
+                  </>}
               </Button>
             </div>
             
@@ -373,7 +356,9 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                       <span className="text-studio-text">1,247/1,500</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" style={{ width: '83%' }}></div>
+                      <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" style={{
+                      width: '83%'
+                    }}></div>
                     </div>
                   </div>
                 </CardContent>
@@ -390,7 +375,9 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                       <span className="text-studio-text">94.2%</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-[hsl(var(--progress-success))] h-2 rounded-full" style={{ width: '94%' }}></div>
+                      <div className="bg-[hsl(var(--progress-success))] h-2 rounded-full" style={{
+                      width: '94%'
+                    }}></div>
                     </div>
                   </div>
                 </CardContent>
@@ -407,7 +394,9 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                       <span className="text-studio-text">98.5%</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-[hsl(var(--progress-info))] h-2 rounded-full" style={{ width: '98%' }}></div>
+                      <div className="bg-[hsl(var(--progress-info))] h-2 rounded-full" style={{
+                      width: '98%'
+                    }}></div>
                     </div>
                   </div>
                 </CardContent>
@@ -428,7 +417,9 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                       <span className="text-studio-text">$2.4M/$3.2M</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" style={{ width: '75%' }}></div>
+                      <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" style={{
+                      width: '75%'
+                    }}></div>
                     </div>
                   </div>
                 </CardContent>
@@ -445,7 +436,9 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                       <span className="text-studio-text">67%</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-[hsl(var(--progress-accent))] h-2 rounded-full" style={{ width: '67%' }}></div>
+                      <div className="bg-[hsl(var(--progress-accent))] h-2 rounded-full" style={{
+                      width: '67%'
+                    }}></div>
                     </div>
                   </div>
                 </CardContent>
@@ -456,8 +449,7 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                   <CardTitle className="text-studio-text">Recent Alerts</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {alerts.map((alert, index) => (
-                    <div key={index} className="flex items-start space-x-3">
+                  {alerts.map((alert, index) => <div key={index} className="flex items-start space-x-3">
                       {alert.type === 'warning' && <AlertCircle className="h-4 w-4 text-destructive mt-0.5" />}
                       {alert.type === 'info' && <AlertCircle className="h-4 w-4 text-studio-text-muted mt-0.5" />}
                       {alert.type === 'success' && <CheckCircle className="h-4 w-4 text-primary mt-0.5" />}
@@ -465,16 +457,13 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                         <p className="text-sm text-studio-text">{alert.message}</p>
                         <p className="text-xs text-studio-text-muted">{alert.time}</p>
                       </div>
-                    </div>
-                  ))}
+                    </div>)}
                 </CardContent>
               </Card>
             </div>
           </TabsContent>
         </Tabs>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default CROSponsorDashboard;
