@@ -20,7 +20,8 @@ const ParticipantDashboard = ({
   onLogout
 }: ParticipantDashboardProps) => {
   const {
-    t
+    t,
+    language
   } = useLanguage();
   const navigate = useNavigate();
   const [showCalendar, setShowCalendar] = useState(false);
@@ -275,7 +276,7 @@ const ParticipantDashboard = ({
                     <div className="flex items-center space-x-2">
                       <CheckCircle className="h-4 w-4 text-green-600" />
                       <div>
-                        <p className="text-sm font-medium">Consentimiento Informado v2.0</p>
+                        <p className="text-sm font-medium">{language === 'spanish' ? 'Formulario de consentimiento informado Principal v2.0' : 'Main Informed Consent Form v2.0'}</p>
                         <p className="text-xs text-studio-text-muted">Firmado el 24 Nov 2024</p>
                       </div>
                     </div>
@@ -291,7 +292,7 @@ const ParticipantDashboard = ({
                     <div className="flex items-center space-x-2">
                       <CheckCircle className="h-4 w-4 text-gray-600" />
                       <div>
-                        <p className="text-sm font-medium">Consentimiento Informado v1.0</p>
+                        <p className="text-sm font-medium">{language === 'spanish' ? 'Formulario de consentimiento informado Principal v1.0' : 'Main Informed Consent Form v1.0'}</p>
                         <p className="text-xs text-studio-text-muted">Firmado el 15 Oct 2024</p>
                       </div>
                     </div>
