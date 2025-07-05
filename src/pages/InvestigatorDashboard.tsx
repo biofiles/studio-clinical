@@ -281,7 +281,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                   <span className="text-studio-text">{studyData ? studyData.diaryCompliance : 0}%</span>
                 </div>
                 <div className="w-full bg-muted rounded-full h-2">
-                  <div className="bg-[hsl(var(--progress-success))] h-2 rounded-full" 
+                  <div className={`h-2 rounded-full ${studyData && studyData.diaryCompliance < 90 ? 'bg-[hsl(var(--progress-warning))]' : 'bg-[hsl(var(--progress-success))]'}`} 
                        style={{ width: `${studyData ? studyData.diaryCompliance : 0}%` }}></div>
                 </div>
               </div>
@@ -299,7 +299,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                   <span className="text-studio-text">{studyData ? studyData.visitCompliance : 0}%</span>
                 </div>
                 <div className="w-full bg-muted rounded-full h-2">
-                  <div className="bg-[hsl(var(--progress-info))] h-2 rounded-full" 
+                  <div className={`h-2 rounded-full ${studyData && studyData.visitCompliance < 90 ? 'bg-[hsl(var(--progress-warning))]' : 'bg-[hsl(var(--progress-info))]'}`} 
                        style={{ width: `${studyData ? studyData.visitCompliance : 0}%` }}></div>
                 </div>
               </div>

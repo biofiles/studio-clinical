@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Header from "@/components/Header";
+import StudyDropdown from "@/components/StudyDropdown";
 import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, FileText, Calendar, Users, Settings } from "lucide-react";
 import { toast } from "sonner";
 import { useStudy } from "@/contexts/StudyContext";
@@ -70,6 +71,127 @@ const CROSponsorDashboard = ({
     });
     setIsGeneratingPDF(false);
   };
+  // Get dynamic data based on selected study
+  const getStudySpecificData = () => {
+    if (!selectedStudy) return null;
+    
+    switch (selectedStudy.id) {
+      case '1': // Novartis PARADIGM-CV
+        return {
+          questionnaires: {
+            dailySymptom: 91,
+            weeklyQoL: 88,
+            monthlyHealth: 94,
+            qualityReviews: 15,
+            dataValidation: 3
+          },
+          schedule: [
+            { event: "First Patient Last Visit", protocol: selectedStudy.protocol, date: "Mar 2025" },
+            { event: "Database Lock", protocol: selectedStudy.protocol, date: "Jun 2025" },
+            { event: "Statistical Analysis Plan", protocol: selectedStudy.protocol, date: "Jul 2025" }
+          ],
+          participants: {
+            enrollment: { current: 385, target: 450, percentage: 86 },
+            retention: 96.2,
+            compliance: 94.1
+          },
+          reports: {
+            budget: { spent: 2.8, total: 3.5, percentage: 80 },
+            timeline: 72,
+            alerts: [
+              { type: "info", message: "Cardiology milestone achieved ahead of schedule", time: "1 hour ago" },
+              { type: "success", message: "PARADIGM-CV interim analysis completed", time: "3 days ago" }
+            ]
+          }
+        };
+      case '2': // Pfizer ATLAS-DM2
+        return {
+          questionnaires: {
+            dailySymptom: 87,
+            weeklyQoL: 92,
+            monthlyHealth: 89,
+            qualityReviews: 8,
+            dataValidation: 2
+          },
+          schedule: [
+            { event: "Mid-study Analysis", protocol: selectedStudy.protocol, date: "Aug 2025" },
+            { event: "Safety Review", protocol: selectedStudy.protocol, date: "Sep 2025" }
+          ],
+          participants: {
+            enrollment: { current: 162, target: 200, percentage: 81 },
+            retention: 93.8,
+            compliance: 96.7
+          },
+          reports: {
+            budget: { spent: 1.6, total: 2.2, percentage: 73 },
+            timeline: 68,
+            alerts: [
+              { type: "warning", message: "Diabetes endpoint review scheduled", time: "4 hours ago" },
+              { type: "info", message: "ATLAS-DM2 site training completed", time: "2 days ago" }
+            ]
+          }
+        };
+      case '3': // Roche HORIZON-Onc
+        return {
+          questionnaires: {
+            dailySymptom: 83,
+            weeklyQoL: 79,
+            monthlyHealth: 86,
+            qualityReviews: 22,
+            dataValidation: 9
+          },
+          schedule: [
+            { event: "Interim Safety Analysis", protocol: selectedStudy.protocol, date: "Oct 2025" },
+            { event: "Biomarker Analysis Complete", protocol: selectedStudy.protocol, date: "Nov 2025" }
+          ],
+          participants: {
+            enrollment: { current: 94, target: 120, percentage: 78 },
+            retention: 91.5,
+            compliance: 89.3
+          },
+          reports: {
+            budget: { spent: 1.9, total: 2.8, percentage: 68 },
+            timeline: 61,
+            alerts: [
+              { type: "warning", message: "Oncology biomarker delays reported", time: "6 hours ago" },
+              { type: "success", message: "HORIZON-Onc Phase I completed", time: "1 week ago" }
+            ]
+          }
+        };
+      case '4': // J&J GUARDIAN-Ped
+        return {
+          questionnaires: {
+            dailySymptom: 95,
+            weeklyQoL: 91,
+            monthlyHealth: 97,
+            qualityReviews: 6,
+            dataValidation: 1
+          },
+          schedule: [
+            { event: "Pediatric Safety Review", protocol: selectedStudy.protocol, date: "Sep 2025" },
+            { event: "Growth Assessment Analysis", protocol: selectedStudy.protocol, date: "Dec 2025" }
+          ],
+          participants: {
+            enrollment: { current: 278, target: 320, percentage: 87 },
+            retention: 98.1,
+            compliance: 97.4
+          },
+          reports: {
+            budget: { spent: 2.1, total: 2.9, percentage: 72 },
+            timeline: 79,
+            alerts: [
+              { type: "success", message: "Pediatric enrollment exceeding targets", time: "2 hours ago" },
+              { type: "info", message: "GUARDIAN-Ped safety data reviewed", time: "1 day ago" }
+            ]
+          }
+        };
+      default:
+        return null;
+    }
+  };
+
+  const studyData = getStudySpecificData();
+  
   const getContextTitle = () => {
     if (selectedStudy) {
       return `${selectedStudy.protocol} | ${selectedStudy.name}`;
@@ -94,13 +216,13 @@ const CROSponsorDashboard = ({
       {/* User Context Bar */}
       <div className="bg-studio-surface border-b border-studio-border px-6 py-3">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-4">
             <Building2 className="h-4 w-4 text-studio-text-muted" />
             <span className="text-sm font-medium text-studio-text">
               {getContextTitle()}
             </span>
           </div>
-          
+          <StudyDropdown />
         </div>
       </div>
 
@@ -166,11 +288,11 @@ const CROSponsorDashboard = ({
         </div>
 
         {/* Sectioned Content */}
-        <Tabs defaultValue="studies" className="space-y-6">
+        <Tabs defaultValue="details" className="space-y-6">
           <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="studies" className="flex items-center space-x-2">
+            <TabsTrigger value="details" className="flex items-center space-x-2">
               <Building2 className="h-4 w-4" />
-              <span>Studies</span>
+              <span>Study Details</span>
             </TabsTrigger>
             <TabsTrigger value="questionnaires" className="flex items-center space-x-2">
               <FileText className="h-4 w-4" />
@@ -190,74 +312,53 @@ const CROSponsorDashboard = ({
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="studies" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <Card className="bg-studio-surface border-studio-border">
-                <CardHeader>
-                  <CardTitle className="text-studio-text">Study Selection</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  {studies.map(study => <div key={study.id} className={`p-3 rounded border cursor-pointer transition-all duration-200 ${selectedStudy?.id === study.id ? 'border-studio-accent bg-studio-accent/5 shadow-sm' : 'border-studio-border hover:border-studio-accent hover:bg-studio-bg'}`} onClick={() => handleStudySelect(study.id)}>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="font-medium text-studio-text text-sm">{study.name}</span>
-                        {selectedStudy?.id === study.id && <CheckCircle className="h-4 w-4 text-progress-success" />}
+          <TabsContent value="details" className="space-y-6">
+            <Card className="bg-studio-surface border-studio-border">
+              <CardHeader>
+                <CardTitle className="text-studio-text">
+                  {selectedStudy ? `${selectedStudy.name} Details` : 'Select a Study'}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {selectedStudy ? (
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <span className="text-sm text-studio-text-muted">Protocol</span>
+                        <p className="font-medium text-studio-text">{selectedStudy.protocol}</p>
                       </div>
-                      <div className="flex items-center space-x-2 mb-2">
-                        <Badge variant="outline" className="text-xs">
-                          {study.protocol}
+                      <div className="space-y-2">
+                        <span className="text-sm text-studio-text-muted">Phase</span>
+                        <p className="font-medium text-studio-text">{selectedStudy.phase}</p>
+                      </div>
+                      <div className="space-y-2">
+                        <span className="text-sm text-studio-text-muted">Status</span>
+                        <Badge className={getStatusColor(selectedStudy.status)}>
+                          {selectedStudy.status}
                         </Badge>
-                        <Badge variant="outline" className="text-xs">
-                          {study.phase}
-                        </Badge>
                       </div>
-                      <div className="flex items-center space-x-1 text-xs text-studio-text-muted">
-                        <Badge className={`text-xs ${getStatusColor(study.status)}`}>
-                          {study.status}
-                        </Badge>
+                      <div className="space-y-2">
+                        <span className="text-sm text-studio-text-muted">Sites</span>
+                        <p className="font-medium text-studio-text">{selectedStudy.sites}</p>
                       </div>
-                    </div>)}
-                </CardContent>
-              </Card>
-
-              <Card className="bg-studio-surface border-studio-border lg:col-span-2">
-                <CardHeader>
-                  <CardTitle className="text-studio-text">
-                    {selectedStudy ? `${selectedStudy.name} Details` : 'Select a Study'}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {selectedStudy ? <div className="space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <span className="text-sm text-studio-text-muted">Protocol</span>
-                          <p className="font-medium text-studio-text">{selectedStudy.protocol}</p>
-                        </div>
-                        <div className="space-y-2">
-                          <span className="text-sm text-studio-text-muted">Phase</span>
-                          <p className="font-medium text-studio-text">{selectedStudy.phase}</p>
-                        </div>
-                        <div className="space-y-2">
-                          <span className="text-sm text-studio-text-muted">Status</span>
-                          <Badge className={getStatusColor(selectedStudy.status)}>
-                            {selectedStudy.status}
-                          </Badge>
-                        </div>
-                        <div className="space-y-2">
-                          <span className="text-sm text-studio-text-muted">Sites</span>
-                          <p className="font-medium text-studio-text">{selectedStudy.sites}</p>
-                        </div>
+                      <div className="space-y-2">
+                        <span className="text-sm text-studio-text-muted">Sponsor</span>
+                        <p className="font-medium text-studio-text">{selectedStudy.sponsor}</p>
                       </div>
-                      <div className="pt-4 border-t border-studio-border">
+                      <div className="space-y-2">
                         <span className="text-sm text-studio-text-muted">Participants</span>
                         <p className="font-medium text-studio-text text-2xl">{selectedStudy.participants}</p>
                       </div>
-                    </div> : <div className="text-center py-8 text-studio-text-muted">
-                      <Building2 className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                      <p>Select a study from the list to view details</p>
-                    </div>}
-                </CardContent>
-              </Card>
-            </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center py-8 text-studio-text-muted">
+                    <Building2 className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                    <p>Select a study from the dropdown to view details</p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="questionnaires" className="space-y-6">
@@ -283,15 +384,15 @@ const CROSponsorDashboard = ({
                   <div className="space-y-4">
                     <div className="flex justify-between">
                       <span className="text-studio-text-muted">Daily Symptom Diary</span>
-                      <span className="text-studio-text">89%</span>
+                      <span className="text-studio-text">{studyData ? studyData.questionnaires.dailySymptom : 89}%</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-studio-text-muted">Weekly QoL Assessment</span>
-                      <span className="text-studio-text">76%</span>
+                      <span className="text-studio-text">{studyData ? studyData.questionnaires.weeklyQoL : 76}%</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-studio-text-muted">Monthly Health Survey</span>
-                      <span className="text-studio-text">92%</span>
+                      <span className="text-studio-text">{studyData ? studyData.questionnaires.monthlyHealth : 92}%</span>
                     </div>
                   </div>
                 </CardContent>
@@ -305,11 +406,11 @@ const CROSponsorDashboard = ({
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
                       <span className="text-studio-text">Quality Review Required</span>
-                      <span className="bg-[hsl(var(--progress-accent))]/10 text-[hsl(var(--progress-accent))] border border-[hsl(var(--progress-accent))]/20 px-2 py-1 rounded text-xs">23</span>
+                      <span className="bg-[hsl(var(--progress-accent))]/10 text-[hsl(var(--progress-accent))] border border-[hsl(var(--progress-accent))]/20 px-2 py-1 rounded text-xs">{studyData ? studyData.questionnaires.qualityReviews : 23}</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-studio-text">Data Validation</span>
-                      <span className="bg-destructive/10 text-destructive border border-destructive/20 px-2 py-1 rounded text-xs">7</span>
+                      <span className="bg-destructive/10 text-destructive border border-destructive/20 px-2 py-1 rounded text-xs">{studyData ? studyData.questionnaires.dataValidation : 7}</span>
                     </div>
                   </div>
                 </CardContent>
@@ -324,20 +425,21 @@ const CROSponsorDashboard = ({
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center p-3 bg-studio-bg rounded">
-                    <div>
-                      <p className="font-medium text-studio-text">First Patient Last Visit</p>
-                      <p className="text-sm text-studio-text-muted">PROTO-2024-001</p>
+                  {studyData && studyData.schedule.map((milestone, index) => (
+                    <div key={index} className="flex justify-between items-center p-3 bg-studio-bg rounded">
+                      <div>
+                        <p className="font-medium text-studio-text">{milestone.event}</p>
+                        <p className="text-sm text-studio-text-muted">{milestone.protocol}</p>
+                      </div>
+                      <span className="text-studio-text">{milestone.date}</span>
                     </div>
-                    <span className="text-studio-text">Mar 2025</span>
-                  </div>
-                  <div className="flex justify-between items-center p-3 bg-studio-bg rounded">
-                    <div>
-                      <p className="font-medium text-studio-text">Database Lock</p>
-                      <p className="text-sm text-studio-text-muted">PROTO-2024-002</p>
+                  ))}
+                  {!studyData && (
+                    <div className="text-center py-8 text-studio-text-muted">
+                      <Calendar className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                      <p>Select a study to view milestones</p>
                     </div>
-                    <span className="text-studio-text">Jun 2025</span>
-                  </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -353,12 +455,13 @@ const CROSponsorDashboard = ({
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-studio-text-muted">Target</span>
-                      <span className="text-studio-text">1,247/1,500</span>
+                      <span className="text-studio-text">
+                        {studyData ? `${studyData.participants.enrollment.current}/${studyData.participants.enrollment.target}` : '1,247/1,500'}
+                      </span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" style={{
-                      width: '83%'
-                    }}></div>
+                      <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" 
+                           style={{ width: `${studyData ? studyData.participants.enrollment.percentage : 83}%` }}></div>
                     </div>
                   </div>
                 </CardContent>
@@ -372,12 +475,11 @@ const CROSponsorDashboard = ({
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-studio-text-muted">Active</span>
-                      <span className="text-studio-text">94.2%</span>
+                      <span className="text-studio-text">{studyData ? studyData.participants.retention : 94.2}%</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-[hsl(var(--progress-success))] h-2 rounded-full" style={{
-                      width: '94%'
-                    }}></div>
+                      <div className="bg-[hsl(var(--progress-success))] h-2 rounded-full" 
+                           style={{ width: `${studyData ? studyData.participants.retention : 94}%` }}></div>
                     </div>
                   </div>
                 </CardContent>
@@ -391,12 +493,11 @@ const CROSponsorDashboard = ({
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-studio-text-muted">Overall</span>
-                      <span className="text-studio-text">98.5%</span>
+                      <span className="text-studio-text">{studyData ? studyData.participants.compliance : 98.5}%</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-[hsl(var(--progress-info))] h-2 rounded-full" style={{
-                      width: '98%'
-                    }}></div>
+                      <div className="bg-[hsl(var(--progress-info))] h-2 rounded-full" 
+                           style={{ width: `${studyData ? studyData.participants.compliance : 98}%` }}></div>
                     </div>
                   </div>
                 </CardContent>
@@ -414,12 +515,13 @@ const CROSponsorDashboard = ({
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-studio-text-muted">Spent</span>
-                      <span className="text-studio-text">$2.4M/$3.2M</span>
+                      <span className="text-studio-text">
+                        {studyData ? `$${studyData.reports.budget.spent}M/$${studyData.reports.budget.total}M` : '$2.4M/$3.2M'}
+                      </span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" style={{
-                      width: '75%'
-                    }}></div>
+                      <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" 
+                           style={{ width: `${studyData ? studyData.reports.budget.percentage : 75}%` }}></div>
                     </div>
                   </div>
                 </CardContent>
@@ -433,12 +535,11 @@ const CROSponsorDashboard = ({
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-studio-text-muted">Completion</span>
-                      <span className="text-studio-text">67%</span>
+                      <span className="text-studio-text">{studyData ? studyData.reports.timeline : 67}%</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-[hsl(var(--progress-accent))] h-2 rounded-full" style={{
-                      width: '67%'
-                    }}></div>
+                      <div className="bg-[hsl(var(--progress-accent))] h-2 rounded-full" 
+                           style={{ width: `${studyData ? studyData.reports.timeline : 67}%` }}></div>
                     </div>
                   </div>
                 </CardContent>
@@ -449,7 +550,8 @@ const CROSponsorDashboard = ({
                   <CardTitle className="text-studio-text">Recent Alerts</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {alerts.map((alert, index) => <div key={index} className="flex items-start space-x-3">
+                  {(studyData ? studyData.reports.alerts : alerts).map((alert, index) => (
+                    <div key={index} className="flex items-start space-x-3">
                       {alert.type === 'warning' && <AlertCircle className="h-4 w-4 text-destructive mt-0.5" />}
                       {alert.type === 'info' && <AlertCircle className="h-4 w-4 text-studio-text-muted mt-0.5" />}
                       {alert.type === 'success' && <CheckCircle className="h-4 w-4 text-primary mt-0.5" />}
@@ -457,7 +559,8 @@ const CROSponsorDashboard = ({
                         <p className="text-sm text-studio-text">{alert.message}</p>
                         <p className="text-xs text-studio-text-muted">{alert.time}</p>
                       </div>
-                    </div>)}
+                    </div>
+                  ))}
                 </CardContent>
               </Card>
             </div>
