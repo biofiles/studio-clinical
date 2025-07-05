@@ -26,11 +26,11 @@ const CalendarView = ({ open, onOpenChange, activities }: CalendarViewProps) => 
 
   // Mock upcoming visits for calendar display
   const upcomingVisits = [
-    { date: new Date(2024, 11, 14), title: "Weekly Survey", time: "10:00 AM", type: "questionnaire" },
-    { date: new Date(2024, 11, 15), title: "Site Visit - Blood Draw", time: "2:00 PM", type: "visit" },
-    { date: new Date(2024, 11, 20), title: "Daily Diary Entry", time: "Any time", type: "diary" },
-    { date: new Date(2024, 11, 22), title: "Follow-up Call", time: "3:00 PM", type: "call" },
-    { date: new Date(2024, 11, 28), title: "Monthly Assessment", time: "9:00 AM", type: "assessment" }
+    { date: new Date(2025, 6, 14), title: "Weekly Survey", time: "10:00 AM", type: "questionnaire" },
+    { date: new Date(2025, 6, 22), title: "Site Visit - Blood Draw", time: "2:00 PM", type: "visit" },
+    { date: new Date(2025, 7, 5), title: "Daily Diary Entry", time: "Any time", type: "diary" },
+    { date: new Date(2025, 8, 12), title: "Follow-up Call", time: "3:00 PM", type: "call" },
+    { date: new Date(2025, 9, 8), title: "Monthly Assessment", time: "9:00 AM", type: "assessment" }
   ];
 
   // Get activity dates for highlighting
