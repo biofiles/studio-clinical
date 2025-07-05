@@ -11,6 +11,7 @@ import ParticipantDetailView from "./ParticipantDetailView";
 import ParticipantScheduler from "./ParticipantScheduler";
 import ParticipantQuestionnaires from "./ParticipantQuestionnaires";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useStudy } from "@/contexts/StudyContext";
 
 interface ParticipantListProps {
   open: boolean;
@@ -37,93 +38,175 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
   const [showScheduler, setShowScheduler] = useState(false);
   const [showQuestionnaires, setShowQuestionnaires] = useState(false);
   const { t } = useLanguage();
+  const { selectedStudy } = useStudy();
 
-  const participants: Participant[] = [
-    {
-      patientId: "S001",
-      token: "NVS-7293-XK4",
-      enrollmentDate: "2025-04-12",
-      lastVisit: "2025-07-08",
-      nextVisit: "2025-07-22",
-      questionnairesCompleted: 11,
-      questionnairesTotal: 14,
-      visitStatus: 'scheduled',
-      complianceRate: 97,
-      hasAlerts: false
-    },
-    {
-      patientId: "S002",
-      token: "NVS-8451-QR7",
-      enrollmentDate: "2025-04-18",
-      lastVisit: "2025-07-10",
-      nextVisit: "2025-08-02",
-      questionnairesCompleted: 12,
-      questionnairesTotal: 14,
-      visitStatus: 'completed',
-      complianceRate: 99,
-      hasAlerts: false
-    },
-    {
-      patientId: "S003",
-      token: "NVS-2839-MN2",
-      enrollmentDate: "2025-04-25",
-      lastVisit: "2025-06-28",
-      nextVisit: "2025-07-15",
-      questionnairesCompleted: 9,
-      questionnairesTotal: 13,
-      visitStatus: 'overdue',
-      complianceRate: 86,
-      hasAlerts: true
-    },
-    {
-      patientId: "S004",
-      token: "NVS-5642-LP3",
-      enrollmentDate: "2025-05-03",
-      lastVisit: "2025-07-12",
-      nextVisit: "2025-07-18",
-      questionnairesCompleted: 8,
-      questionnairesTotal: 12,
-      visitStatus: 'scheduled',
-      complianceRate: 93,
-      hasAlerts: false
-    },
-    {
-      patientId: "S005",
-      token: "NVS-7194-KX8",
-      enrollmentDate: "2025-05-10",
-      lastVisit: "2025-07-09",
-      nextVisit: "2025-07-25",
-      questionnairesCompleted: 7,
-      questionnairesTotal: 11,
-      visitStatus: 'scheduled',
-      complianceRate: 89,
-      hasAlerts: true
-    },
-    {
-      patientId: "S006",
-      token: "NVS-4287-RT5",
-      enrollmentDate: "2025-05-15",
-      lastVisit: "2025-07-11",
-      nextVisit: "2025-08-08",
-      questionnairesCompleted: 6,
-      questionnairesTotal: 10,
-      visitStatus: 'completed',
-      complianceRate: 95,
-      hasAlerts: false
-    },
-    {
-      patientId: "S007",
-      token: "NVS-9163-WZ9",
-      enrollmentDate: "2025-05-22",
-      lastVisit: "2025-07-05",
-      nextVisit: "2025-07-22",
-      questionnairesCompleted: 8,
-      questionnairesTotal: 10,
-      visitStatus: 'scheduled',
-      complianceRate: 91,
-      hasAlerts: true
+  // Dynamic participant data based on selected study
+  const getParticipantsForStudy = (studyId: string | undefined) => {
+    if (!studyId) return [];
+    
+    switch (studyId) {
+      case '1': // PARADIGM-CV
+        return [
+          {
+            patientId: "S001",
+            token: "NVS-7293-XK4",
+            enrollmentDate: "2025-04-12",
+            lastVisit: "2025-07-08",
+            nextVisit: "2025-07-22",
+            questionnairesCompleted: 11,
+            questionnairesTotal: 14,
+            visitStatus: 'scheduled' as const,
+            complianceRate: 97,
+            hasAlerts: false
+          },
+          {
+            patientId: "S002",
+            token: "NVS-8451-QR7",
+            enrollmentDate: "2025-04-18",
+            lastVisit: "2025-07-10",
+            nextVisit: "2025-08-02",
+            questionnairesCompleted: 12,
+            questionnairesTotal: 14,
+            visitStatus: 'completed' as const,
+            complianceRate: 99,
+            hasAlerts: false
+          },
+          {
+            patientId: "S003",
+            token: "NVS-2839-MN2",
+            enrollmentDate: "2025-04-25",
+            lastVisit: "2025-06-28",
+            nextVisit: "2025-07-15",
+            questionnairesCompleted: 9,
+            questionnairesTotal: 13,
+            visitStatus: 'overdue' as const,
+            complianceRate: 86,
+            hasAlerts: true
+          },
+          {
+            patientId: "S004",
+            token: "NVS-5642-LP3",
+            enrollmentDate: "2025-05-03",
+            lastVisit: "2025-07-12",
+            nextVisit: "2025-07-18",
+            questionnairesCompleted: 8,
+            questionnairesTotal: 12,
+            visitStatus: 'scheduled' as const,
+            complianceRate: 93,
+            hasAlerts: false
+          }
+        ];
+      case '2': // ATLAS-DM2
+        return [
+          {
+            patientId: "P001",
+            token: "PF-4821-DM7",
+            enrollmentDate: "2025-05-08",
+            lastVisit: "2025-07-11",
+            nextVisit: "2025-07-19",
+            questionnairesCompleted: 6,
+            questionnairesTotal: 9,
+            visitStatus: 'scheduled' as const,
+            complianceRate: 91,
+            hasAlerts: false
+          },
+          {
+            patientId: "P002",
+            token: "PF-7394-DM2",
+            enrollmentDate: "2025-05-15",
+            lastVisit: "2025-07-09",
+            nextVisit: "2025-07-24",
+            questionnairesCompleted: 7,
+            questionnairesTotal: 9,
+            visitStatus: 'completed' as const,
+            complianceRate: 95,
+            hasAlerts: false
+          },
+          {
+            patientId: "P003",
+            token: "PF-9157-DM8",
+            enrollmentDate: "2025-05-22",
+            lastVisit: "2025-07-05",
+            nextVisit: "2025-07-28",
+            questionnairesCompleted: 5,
+            questionnairesTotal: 8,
+            visitStatus: 'scheduled' as const,
+            complianceRate: 88,
+            hasAlerts: true
+          }
+        ];
+      case '3': // HORIZON-Onc
+        return [
+          {
+            patientId: "H001",
+            token: "RO-2847-ONC1",
+            enrollmentDate: "2025-06-01",
+            lastVisit: "2025-07-10",
+            nextVisit: "2025-07-20",
+            questionnairesCompleted: 4,
+            questionnairesTotal: 7,
+            visitStatus: 'scheduled' as const,
+            complianceRate: 89,
+            hasAlerts: false
+          },
+          {
+            patientId: "H002",
+            token: "RO-5639-ONC3",
+            enrollmentDate: "2025-06-08",
+            lastVisit: "2025-07-08",
+            nextVisit: "2025-07-23",
+            questionnairesCompleted: 3,
+            questionnairesTotal: 6,
+            visitStatus: 'completed' as const,
+            complianceRate: 92,
+            hasAlerts: true
+          }
+        ];
+      case '4': // GUARDIAN-Ped
+        return [
+          {
+            patientId: "G001",
+            token: "JNJ-7429-PED5",
+            enrollmentDate: "2025-05-10",
+            lastVisit: "2025-07-12",
+            nextVisit: "2025-07-21",
+            questionnairesCompleted: 8,
+            questionnairesTotal: 10,
+            visitStatus: 'scheduled' as const,
+            complianceRate: 96,
+            hasAlerts: false
+          },
+          {
+            patientId: "G002",
+            token: "JNJ-8351-PED2",
+            enrollmentDate: "2025-05-17",
+            lastVisit: "2025-07-14",
+            nextVisit: "2025-07-24",
+            questionnairesCompleted: 9,
+            questionnairesTotal: 10,
+            visitStatus: 'completed' as const,
+            complianceRate: 98,
+            hasAlerts: false
+          },
+          {
+            patientId: "G003",
+            token: "JNJ-6273-PED8",
+            enrollmentDate: "2025-05-24",
+            lastVisit: "2025-07-06",
+            nextVisit: "2025-07-27",
+            questionnairesCompleted: 6,
+            questionnairesTotal: 9,
+            visitStatus: 'scheduled' as const,
+            complianceRate: 93,
+            hasAlerts: true
+          }
+        ];
+      default:
+        return [];
     }
-  ];
+  };
+
+  const participants: Participant[] = getParticipantsForStudy(selectedStudy?.id);
 
   const filteredParticipants = participants.filter(p =>
     p.patientId.toLowerCase().includes(searchTerm.toLowerCase()) ||

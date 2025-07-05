@@ -22,7 +22,7 @@ const StudyContext = createContext<StudyContextType | undefined>(undefined);
 const mockStudies: Study[] = [
   {
     id: '1',
-    name: 'PARADIGM-CV: Heart Failure Outcomes Study',
+    name: 'PARADIGM-CV',
     protocol: 'NVS-4578-301',
     phase: 'Phase III',
     status: 'active',
@@ -32,7 +32,7 @@ const mockStudies: Study[] = [
   },
   {
     id: '2',
-    name: 'ATLAS-DM2: Type 2 Diabetes Prevention Trial', 
+    name: 'ATLAS-DM2', 
     protocol: 'PF-07081532-003',
     phase: 'Phase II',
     status: 'recruiting',
@@ -42,7 +42,7 @@ const mockStudies: Study[] = [
   },
   {
     id: '3',
-    name: 'HORIZON-Onc: Biomarker Driven Therapy',
+    name: 'HORIZON-Onc',
     protocol: 'RO-7198457-104',
     phase: 'Phase I/II',
     status: 'active',
@@ -52,7 +52,7 @@ const mockStudies: Study[] = [
   },
   {
     id: '4',
-    name: 'GUARDIAN-Ped: Pediatric Safety Assessment',
+    name: 'GUARDIAN-Ped',
     protocol: 'JNJ-83475219-201',
     phase: 'Phase II/III',
     status: 'recruiting',

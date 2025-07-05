@@ -30,12 +30,74 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
     }
   }, [selectedStudy, navigate]);
 
-  const nextEvents = [
-    { date: "Jul 18, 2025", time: "9:30 AM", event: "S004 - Baseline Assessment", type: "visit" },
-    { date: "Jul 22, 2025", time: "1:15 PM", event: "S007 - ECG Monitoring", type: "lab" },
-    { date: "Jul 25, 2025", time: "11:00 AM", event: "Weekly Safety Review", type: "meeting" },
-    { date: "Aug 02, 2025", time: "3:45 PM", event: "S002 - Follow-up Visit", type: "visit" }
-  ];
+  // Dynamic data based on selected study
+  const getStudyData = () => {
+    if (!selectedStudy) return null;
+    
+    switch (selectedStudy.id) {
+      case '1': // PARADIGM-CV
+        return {
+          enrolled: { current: 24, total: 40, percentage: 60 },
+          pendingReviews: 12,
+          adverseEvents: 1,
+          upcomingVisits: 8,
+          diaryCompliance: 91,
+          visitCompliance: 94,
+          nextEvents: [
+            { date: "Jul 18, 2025", time: "9:30 AM", event: "S004 - Baseline Assessment", type: "visit" },
+            { date: "Jul 22, 2025", time: "1:15 PM", event: "S007 - ECG Monitoring", type: "lab" },
+            { date: "Jul 25, 2025", time: "11:00 AM", event: "Weekly Safety Review", type: "meeting" },
+            { date: "Aug 02, 2025", time: "3:45 PM", event: "S002 - Follow-up Visit", type: "visit" }
+          ]
+        };
+      case '2': // ATLAS-DM2
+        return {
+          enrolled: { current: 18, total: 35, percentage: 51 },
+          pendingReviews: 7,
+          adverseEvents: 0,
+          upcomingVisits: 5,
+          diaryCompliance: 88,
+          visitCompliance: 97,
+          nextEvents: [
+            { date: "Jul 19, 2025", time: "10:00 AM", event: "P003 - HbA1c Test", type: "lab" },
+            { date: "Jul 24, 2025", time: "2:30 PM", event: "P008 - Dosing Visit", type: "visit" },
+            { date: "Jul 28, 2025", time: "4:00 PM", event: "DMC Safety Meeting", type: "meeting" }
+          ]
+        };
+      case '3': // HORIZON-Onc
+        return {
+          enrolled: { current: 12, total: 25, percentage: 48 },
+          pendingReviews: 15,
+          adverseEvents: 3,
+          upcomingVisits: 11,
+          diaryCompliance: 85,
+          visitCompliance: 92,
+          nextEvents: [
+            { date: "Jul 20, 2025", time: "8:45 AM", event: "H001 - Tumor Assessment", type: "visit" },
+            { date: "Jul 23, 2025", time: "11:30 AM", event: "H005 - Biomarker Analysis", type: "lab" },
+            { date: "Jul 26, 2025", time: "1:00 PM", event: "Oncology Team Review", type: "meeting" }
+          ]
+        };
+      case '4': // GUARDIAN-Ped
+        return {
+          enrolled: { current: 31, total: 50, percentage: 62 },
+          pendingReviews: 9,
+          adverseEvents: 0,
+          upcomingVisits: 14,
+          diaryCompliance: 93,
+          visitCompliance: 98,
+          nextEvents: [
+            { date: "Jul 21, 2025", time: "3:15 PM", event: "G006 - Growth Assessment", type: "visit" },
+            { date: "Jul 24, 2025", time: "9:00 AM", event: "G012 - Safety Labs", type: "lab" },
+            { date: "Jul 27, 2025", time: "10:30 AM", event: "Pediatric Safety Review", type: "meeting" }
+          ]
+        };
+      default:
+        return null;
+    }
+  };
+
+  const studyData = getStudyData();
 
   const handleExportQuestionnaires = () => {
     alert("Exporting questionnaire data as PDF...");
@@ -67,7 +129,9 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
             <CardContent className="p-6">
               <div className="flex items-center space-x-2">
                 <Users className="h-5 w-5 text-studio-text-muted" />
-                <span className="text-2xl font-semibold text-studio-text">24/40</span>
+                <span className="text-2xl font-semibold text-studio-text">
+                  {studyData ? `${studyData.enrolled.current}/${studyData.enrolled.total}` : '0/0'}
+                </span>
               </div>
               <p className="text-studio-text-muted text-sm mt-1">
                 {t('dashboard.participants.enrolled')}
@@ -79,7 +143,9 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
             <CardContent className="p-6">
               <div className="flex items-center space-x-2">
                 <FileCheck className="h-5 w-5 text-studio-text-muted" />
-                <span className="text-2xl font-semibold text-studio-text">12</span>
+                <span className="text-2xl font-semibold text-studio-text">
+                  {studyData ? studyData.pendingReviews : '0'}
+                </span>
               </div>
               <p className="text-studio-text-muted text-sm mt-1">
                 {t('dashboard.pending.reviews')}
@@ -91,7 +157,9 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
             <CardContent className="p-6">
               <div className="flex items-center space-x-2">
                 <AlertTriangle className="h-5 w-5 text-studio-text-muted" />
-                <span className="text-2xl font-semibold text-studio-text">1</span>
+                <span className="text-2xl font-semibold text-studio-text">
+                  {studyData ? studyData.adverseEvents : '0'}
+                </span>
               </div>
               <p className="text-studio-text-muted text-sm mt-1">
                 {t('dashboard.adverse.events')}
@@ -103,7 +171,9 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
             <CardContent className="p-6">
               <div className="flex items-center space-x-2">
                 <Calendar className="h-5 w-5 text-studio-text-muted" />
-                <span className="text-2xl font-semibold text-studio-text">8</span>
+                <span className="text-2xl font-semibold text-studio-text">
+                  {studyData ? studyData.upcomingVisits : '0'}
+                </span>
               </div>
               <p className="text-studio-text-muted text-sm mt-1">
                 {t('dashboard.upcoming.visits')}
@@ -118,7 +188,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
               <CardTitle className="text-studio-text">{t('dashboard.next.events')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {nextEvents.map((item, index) => (
+              {studyData && studyData.nextEvents.map((item, index) => (
                 <div key={index} className="flex justify-between items-center p-3 bg-studio-bg rounded">
                   <div>
                     <p className="font-medium text-studio-text">{item.event}</p>
@@ -188,10 +258,13 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-studio-text-muted">{t('dashboard.enrollment')}</span>
-                  <span className="text-studio-text">24/40 (60%)</span>
+                  <span className="text-studio-text">
+                    {studyData ? `${studyData.enrolled.current}/${studyData.enrolled.total} (${studyData.enrolled.percentage}%)` : '0/0 (0%)'}
+                  </span>
                 </div>
                 <div className="w-full bg-muted rounded-full h-2">
-                  <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" style={{ width: '60%' }}></div>
+                  <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" 
+                       style={{ width: `${studyData ? studyData.enrolled.percentage : 0}%` }}></div>
                 </div>
               </div>
             </CardContent>
@@ -205,10 +278,11 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-studio-text-muted">{t('dashboard.daily.diaries')}</span>
-                  <span className="text-studio-text">91%</span>
+                  <span className="text-studio-text">{studyData ? studyData.diaryCompliance : 0}%</span>
                 </div>
                 <div className="w-full bg-muted rounded-full h-2">
-                  <div className="bg-[hsl(var(--progress-success))] h-2 rounded-full" style={{ width: '91%' }}></div>
+                  <div className="bg-[hsl(var(--progress-success))] h-2 rounded-full" 
+                       style={{ width: `${studyData ? studyData.diaryCompliance : 0}%` }}></div>
                 </div>
               </div>
             </CardContent>
@@ -222,10 +296,11 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-studio-text-muted">{t('dashboard.site.visits')}</span>
-                  <span className="text-studio-text">94%</span>
+                  <span className="text-studio-text">{studyData ? studyData.visitCompliance : 0}%</span>
                 </div>
                 <div className="w-full bg-muted rounded-full h-2">
-                  <div className="bg-[hsl(var(--progress-info))] h-2 rounded-full" style={{ width: '94%' }}></div>
+                  <div className="bg-[hsl(var(--progress-info))] h-2 rounded-full" 
+                       style={{ width: `${studyData ? studyData.visitCompliance : 0}%` }}></div>
                 </div>
               </div>
             </CardContent>
