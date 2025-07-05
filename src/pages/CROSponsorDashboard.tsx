@@ -244,11 +244,11 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
                       <span className="text-studio-text">Quality Review Required</span>
-                      <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">23</span>
+                      <span className="bg-[hsl(var(--progress-accent))]/10 text-[hsl(var(--progress-accent))] border border-[hsl(var(--progress-accent))]/20 px-2 py-1 rounded text-xs">23</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-studio-text">Data Validation</span>
-                      <span className="bg-red-100 text-red-800 px-2 py-1 rounded text-xs">7</span>
+                      <span className="bg-destructive/10 text-destructive border border-destructive/20 px-2 py-1 rounded text-xs">7</span>
                     </div>
                   </div>
                 </CardContent>
@@ -295,7 +295,7 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                       <span className="text-studio-text">1,247/1,500</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-progress-gray h-2 rounded-full" style={{ width: '83%' }}></div>
+                      <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" style={{ width: '83%' }}></div>
                     </div>
                   </div>
                 </CardContent>
@@ -312,7 +312,7 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                       <span className="text-studio-text">94.2%</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-progress-gray h-2 rounded-full" style={{ width: '94%' }}></div>
+                      <div className="bg-[hsl(var(--progress-success))] h-2 rounded-full" style={{ width: '94%' }}></div>
                     </div>
                   </div>
                 </CardContent>
@@ -329,7 +329,7 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                       <span className="text-studio-text">98.5%</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-progress-gray h-2 rounded-full" style={{ width: '98%' }}></div>
+                      <div className="bg-[hsl(var(--progress-info))] h-2 rounded-full" style={{ width: '98%' }}></div>
                     </div>
                   </div>
                 </CardContent>
@@ -350,7 +350,7 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                       <span className="text-studio-text">$2.4M/$3.2M</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-progress-gray h-2 rounded-full" style={{ width: '75%' }}></div>
+                      <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" style={{ width: '75%' }}></div>
                     </div>
                   </div>
                 </CardContent>
@@ -367,7 +367,7 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
                       <span className="text-studio-text">67%</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-progress-gray h-2 rounded-full" style={{ width: '67%' }}></div>
+                      <div className="bg-[hsl(var(--progress-accent))] h-2 rounded-full" style={{ width: '67%' }}></div>
                     </div>
                   </div>
                 </CardContent>

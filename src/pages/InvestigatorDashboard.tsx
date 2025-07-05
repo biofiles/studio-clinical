@@ -113,10 +113,10 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                     <p className="text-sm text-studio-text-muted">{item.date} at {item.time}</p>
                   </div>
                   <div className="text-right">
-                    <span className={`px-2 py-1 text-xs rounded ${
-                      item.type === 'visit' ? 'bg-blue-100 text-blue-800' :
-                      item.type === 'lab' ? 'bg-green-100 text-green-800' :
-                      'bg-purple-100 text-purple-800'
+                    <span className={`px-2 py-1 text-xs rounded border ${
+                      item.type === 'visit' ? 'bg-[hsl(var(--progress-info))]/10 text-[hsl(var(--progress-info))] border-[hsl(var(--progress-info))]/20' :
+                      item.type === 'lab' ? 'bg-[hsl(var(--progress-success))]/10 text-[hsl(var(--progress-success))] border-[hsl(var(--progress-success))]/20' :
+                      'bg-[hsl(var(--progress-accent))]/10 text-[hsl(var(--progress-accent))] border-[hsl(var(--progress-accent))]/20'
                     }`}>
                       {item.type}
                     </span>
@@ -179,7 +179,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                   <span className="text-studio-text">15/30 (50%)</span>
                 </div>
                 <div className="w-full bg-muted rounded-full h-2">
-                  <div className="bg-progress-gray h-2 rounded-full" style={{ width: '50%' }}></div>
+                  <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" style={{ width: '50%' }}></div>
                 </div>
               </div>
             </CardContent>
@@ -196,7 +196,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                   <span className="text-studio-text">89%</span>
                 </div>
                 <div className="w-full bg-muted rounded-full h-2">
-                  <div className="bg-progress-gray h-2 rounded-full" style={{ width: '89%' }}></div>
+                  <div className="bg-[hsl(var(--progress-success))] h-2 rounded-full" style={{ width: '89%' }}></div>
                 </div>
               </div>
             </CardContent>
@@ -213,7 +213,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                   <span className="text-studio-text">96%</span>
                 </div>
                 <div className="w-full bg-muted rounded-full h-2">
-                  <div className="bg-progress-gray h-2 rounded-full" style={{ width: '96%' }}></div>
+                  <div className="bg-[hsl(var(--progress-info))] h-2 rounded-full" style={{ width: '96%' }}></div>
                 </div>
               </div>
             </CardContent>

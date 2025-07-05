@@ -73,11 +73,11 @@ const ParticipantQuestionnaires = ({ open, onOpenChange, participantId }: Partic
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'completed': return 'bg-green-100 text-green-800';
-      case 'in-progress': return 'bg-yellow-100 text-yellow-800';
-      case 'pending': return 'bg-blue-100 text-blue-800';
-      case 'overdue': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'completed': return 'bg-[hsl(var(--progress-success))]/10 text-[hsl(var(--progress-success))] border-[hsl(var(--progress-success))]/20';
+      case 'in-progress': return 'bg-[hsl(var(--progress-accent))]/10 text-[hsl(var(--progress-accent))] border-[hsl(var(--progress-accent))]/20';
+      case 'pending': return 'bg-[hsl(var(--progress-info))]/10 text-[hsl(var(--progress-info))] border-[hsl(var(--progress-info))]/20';
+      case 'overdue': return 'bg-destructive/10 text-destructive border-destructive/20';
+      default: return 'bg-muted text-muted-foreground border-border';
     }
   };
 
@@ -121,28 +121,28 @@ const ParticipantQuestionnaires = ({ open, onOpenChange, participantId }: Partic
         <div className="space-y-6">
           {/* Summary Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Card className="bg-green-50 border-green-200">
+            <Card className="bg-[hsl(var(--progress-success))]/5 border-[hsl(var(--progress-success))]/20">
               <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-green-600">{completedCount}</div>
-                <div className="text-sm text-green-700">Completed</div>
+                <div className="text-2xl font-bold text-[hsl(var(--progress-success))]">{completedCount}</div>
+                <div className="text-sm text-[hsl(var(--progress-success))]/80">Completed</div>
               </CardContent>
             </Card>
-            <Card className="bg-yellow-50 border-yellow-200">
+            <Card className="bg-[hsl(var(--progress-accent))]/5 border-[hsl(var(--progress-accent))]/20">
               <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-yellow-600">{inProgressCount}</div>
-                <div className="text-sm text-yellow-700">In Progress</div>
+                <div className="text-2xl font-bold text-[hsl(var(--progress-accent))]">{inProgressCount}</div>
+                <div className="text-sm text-[hsl(var(--progress-accent))]/80">In Progress</div>
               </CardContent>
             </Card>
-            <Card className="bg-blue-50 border-blue-200">
+            <Card className="bg-[hsl(var(--progress-info))]/5 border-[hsl(var(--progress-info))]/20">
               <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-blue-600">{pendingCount}</div>
-                <div className="text-sm text-blue-700">Pending</div>
+                <div className="text-2xl font-bold text-[hsl(var(--progress-info))]">{pendingCount}</div>
+                <div className="text-sm text-[hsl(var(--progress-info))]/80">Pending</div>
               </CardContent>
             </Card>
-            <Card className="bg-red-50 border-red-200">
+            <Card className="bg-destructive/5 border-destructive/20">
               <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-red-600">{overdueCount}</div>
-                <div className="text-sm text-red-700">Overdue</div>
+                <div className="text-2xl font-bold text-destructive">{overdueCount}</div>
+                <div className="text-sm text-destructive/80">Overdue</div>
               </CardContent>
             </Card>
           </div>
@@ -156,12 +156,12 @@ const ParticipantQuestionnaires = ({ open, onOpenChange, participantId }: Partic
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-2">
                         <h3 className="font-medium text-studio-text">{questionnaire.title}</h3>
-                        <Badge className={getStatusColor(questionnaire.status)}>
+                        <span className={`px-2 py-1 text-xs rounded border ${getStatusColor(questionnaire.status)}`}>
                           <div className="flex items-center space-x-1">
                             {getStatusIcon(questionnaire.status)}
                             <span className="capitalize">{questionnaire.status.replace('-', ' ')}</span>
                           </div>
-                        </Badge>
+                        </span>
                       </div>
                       
                       <div className="grid grid-cols-2 gap-4 text-sm text-studio-text-muted mb-3">

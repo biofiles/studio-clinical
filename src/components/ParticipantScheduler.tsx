@@ -62,11 +62,11 @@ const ParticipantScheduler = ({ open, onOpenChange, participantId }: Participant
 
   const getEventTypeColor = (type: string) => {
     switch (type) {
-      case 'visit': return 'bg-red-100 text-red-800';
-      case 'questionnaire': return 'bg-blue-100 text-blue-800';
-      case 'call': return 'bg-purple-100 text-purple-800';
-      case 'lab': return 'bg-green-100 text-green-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'visit': return 'bg-destructive/10 text-destructive border-destructive/20';
+      case 'questionnaire': return 'bg-[hsl(var(--progress-info))]/10 text-[hsl(var(--progress-info))] border-[hsl(var(--progress-info))]/20';
+      case 'call': return 'bg-[hsl(var(--progress-accent))]/10 text-[hsl(var(--progress-accent))] border-[hsl(var(--progress-accent))]/20';
+      case 'lab': return 'bg-[hsl(var(--progress-success))]/10 text-[hsl(var(--progress-success))] border-[hsl(var(--progress-success))]/20';
+      default: return 'bg-muted text-muted-foreground border-border';
     }
   };
 
@@ -178,7 +178,7 @@ const ParticipantScheduler = ({ open, onOpenChange, participantId }: Participant
                   <div className="flex-1">
                     <div className="flex items-center space-x-2 mb-1">
                       <h4 className="font-medium text-sm">{event.title}</h4>
-                      <span className={`px-2 py-1 text-xs rounded ${getEventTypeColor(event.type)}`}>
+                      <span className={`px-2 py-1 text-xs rounded border ${getEventTypeColor(event.type)}`}>
                         {t(`activity.${event.type}`)}
                       </span>
                     </div>
