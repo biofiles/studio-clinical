@@ -1,11 +1,10 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
 import { useNavigate } from "react-router-dom";
-import { Building, Users, FileText, CheckCircle } from "lucide-react";
+import { Building, Users, FileText } from "lucide-react";
 
 interface StudySelectorProps {
   userRole: 'investigator' | 'cro-sponsor';
@@ -15,14 +14,9 @@ const StudySelector = ({ userRole }: StudySelectorProps) => {
   const { t } = useLanguage();
   const { studies, setSelectedStudy } = useStudy();
   const navigate = useNavigate();
-  const [selectedStudyId, setSelectedStudyId] = useState<string>('');
 
   const handleStudySelect = (studyId: string) => {
-    setSelectedStudyId(studyId);
-  };
-
-  const handleContinue = () => {
-    const study = studies.find(s => s.id === selectedStudyId);
+    const study = studies.find(s => s.id === studyId);
     if (study) {
       setSelectedStudy(study);
       navigate(`/${userRole}`);
@@ -67,11 +61,7 @@ const StudySelector = ({ userRole }: StudySelectorProps) => {
           {studies.map((study) => (
             <div 
               key={study.id}
-              className={`bg-studio-surface border border-studio-border rounded-lg p-4 hover:shadow-md transition-all duration-200 cursor-pointer ${
-                selectedStudyId === study.id 
-                  ? 'border-studio-accent shadow-md bg-studio-accent/5' 
-                  : 'hover:border-studio-accent'
-              }`}
+              className="bg-studio-surface border border-studio-border rounded-lg p-4 hover:shadow-md hover:border-studio-accent transition-all duration-200 cursor-pointer"
               onClick={() => handleStudySelect(study.id)}
             >
               <div className="flex items-center justify-between">
@@ -81,9 +71,6 @@ const StudySelector = ({ userRole }: StudySelectorProps) => {
                     <span className="text-lg font-medium text-studio-text">
                       {study.name}
                     </span>
-                    {selectedStudyId === study.id && (
-                      <CheckCircle className="h-5 w-5 text-progress-success" />
-                    )}
                   </div>
                   <div className="flex items-center space-x-2 mb-2">
                     <Badge variant="outline" className="text-xs">
@@ -112,20 +99,13 @@ const StudySelector = ({ userRole }: StudySelectorProps) => {
           ))}
         </div>
 
-        <div className="flex justify-center space-x-4">
+        <div className="flex justify-center">
           <Button
             variant="outline"
             onClick={() => navigate('/')}
             className="min-w-32"
           >
             {t('common.back')}
-          </Button>
-          <Button
-            onClick={handleContinue}
-            disabled={!selectedStudyId}
-            className="min-w-32"
-          >
-            {t('common.continue')}
           </Button>
         </div>
       </div>
