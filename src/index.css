@@ -29,12 +29,12 @@ All colors MUST be HSL.
     --accent: 0 0% 94%;
     --accent-foreground: 0 0% 15%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 65% 55%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    --ring: 0 0% 70%;
+    --ring: 215 25% 65%;
 
     /* Studio-specific tokens */
     --studio-bg: 0 0% 98%;
@@ -43,11 +43,11 @@ All colors MUST be HSL.
     --studio-text: 0 0% 15%;
     --studio-text-muted: 0 0% 45%;
     
-    /* Progress bar tokens - darker for better visibility */
-    --progress-primary: 220 91% 35%;
-    --progress-success: 142 71% 35%;
-    --progress-info: 217 91% 45%;
-    --progress-accent: 271 91% 45%;
+    /* Progress bar tokens - softer, more harmonious colors */
+    --progress-primary: 210 85% 45%;
+    --progress-success: 155 65% 42%;
+    --progress-info: 200 85% 50%;
+    --progress-accent: 280 65% 55%;
     --progress-gray: 0 0% 55%;
 
     --radius: 0.5rem;
@@ -91,20 +91,20 @@ All colors MUST be HSL.
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 55% 45%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --ring: 215 20% 75%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary: 210 70% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 215 25% 65%;
   }
 }
 
