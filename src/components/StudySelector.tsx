@@ -63,60 +63,52 @@ const StudySelector = ({ userRole }: StudySelectorProps) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="space-y-3">
           {studies.map((study) => (
-            <Card 
+            <div 
               key={study.id}
-              className={`bg-studio-surface border-studio-border hover:shadow-md transition-all duration-200 cursor-pointer ${
+              className={`bg-studio-surface border border-studio-border rounded-lg p-4 hover:shadow-md transition-all duration-200 cursor-pointer ${
                 selectedStudyId === study.id 
-                  ? 'border-studio-accent shadow-md' 
+                  ? 'border-studio-accent shadow-md bg-studio-accent/5' 
                   : 'hover:border-studio-accent'
               }`}
               onClick={() => handleStudySelect(study.id)}
             >
-              <CardHeader className="pb-3">
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <CardTitle className="flex items-center space-x-3 mb-2">
-                      <Building className="h-5 w-5 text-studio-accent" />
-                      <span className="text-lg font-medium text-studio-text">
-                        {study.name}
-                      </span>
-                      {selectedStudyId === study.id && (
-                        <CheckCircle className="h-5 w-5 text-progress-success" />
-                      )}
-                    </CardTitle>
-                    <div className="flex items-center space-x-2 mb-2">
-                      <Badge variant="outline" className="text-xs">
-                        {study.protocol}
-                      </Badge>
-                      <Badge variant="outline" className="text-xs">
-                        {study.phase}
-                      </Badge>
-                      <Badge className={`text-xs ${getStatusColor(study.status)}`}>
-                        {t(`study.status.${study.status}`)}
-                      </Badge>
+              <div className="flex items-center justify-between">
+                <div className="flex-1">
+                  <div className="flex items-center space-x-3 mb-2">
+                    <Building className="h-5 w-5 text-studio-accent" />
+                    <span className="text-lg font-medium text-studio-text">
+                      {study.name}
+                    </span>
+                    {selectedStudyId === study.id && (
+                      <CheckCircle className="h-5 w-5 text-progress-success" />
+                    )}
+                  </div>
+                  <div className="flex items-center space-x-2 mb-2">
+                    <Badge variant="outline" className="text-xs">
+                      {study.protocol}
+                    </Badge>
+                    <Badge variant="outline" className="text-xs">
+                      {study.phase}
+                    </Badge>
+                    <Badge className={`text-xs ${getStatusColor(study.status)}`}>
+                      {t(`study.status.${study.status}`)}
+                    </Badge>
+                  </div>
+                  <div className="flex items-center space-x-6 text-sm text-studio-text-muted">
+                    <div className="flex items-center space-x-2">
+                      <Building className="h-4 w-4" />
+                      <span>{study.sites} {t('study.sites')}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Users className="h-4 w-4" />
+                      <span>{study.participants} {t('study.participants')}</span>
                     </div>
                   </div>
                 </div>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div className="flex items-center space-x-2">
-                    <Building className="h-4 w-4 text-studio-text-muted" />
-                    <span className="text-studio-text-muted">
-                      {study.sites} {t('study.sites')}
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Users className="h-4 w-4 text-studio-text-muted" />
-                    <span className="text-studio-text-muted">
-                      {study.participants} {t('study.participants')}
-                    </span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
 

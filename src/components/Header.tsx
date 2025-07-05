@@ -5,6 +5,7 @@ import { Settings, Building } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
+import StudyDropdown from "@/components/StudyDropdown";
 
 interface HeaderProps {
   role?: string;
@@ -39,15 +40,21 @@ const Header = ({ role, onLogout }: HeaderProps) => {
             STUDIO
           </h1>
           {role && role !== 'participant' && (
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-4">
               <span className="text-studio-text-muted">•</span>
-              <span className="text-sm text-studio-text-muted capitalize ml-2 mt-1 mr-1">
+              <span className="text-sm text-studio-text-muted capitalize">
                 {getRoleDisplay(role)}
               </span>
-              {selectedStudy && (
+              {role === 'investigator' && (
                 <>
                   <span className="text-studio-text-muted">•</span>
-                  <div className="flex items-center space-x-2 ml-2">
+                  <StudyDropdown />
+                </>
+              )}
+              {role === 'cro-sponsor' && selectedStudy && (
+                <>
+                  <span className="text-studio-text-muted">•</span>
+                  <div className="flex items-center space-x-2">
                     <Building className="h-4 w-4 text-studio-text-muted" />
                     <Badge variant="outline" className="text-xs">
                       {selectedStudy.protocol}

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Header from "@/components/Header";
 import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, FileText, Calendar, Users, Settings } from "lucide-react";
@@ -16,21 +17,21 @@ interface CROSponsorDashboardProps {
 const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [selectedStudyLocal, setSelectedStudyLocal] = useState<string | null>(null);
-  const { selectedStudy } = useStudy();
+  const { selectedStudy, studies, setSelectedStudy } = useStudy();
   const navigate = useNavigate();
 
-  // Redirect to study selection if no study is selected
-  useEffect(() => {
-    if (!selectedStudy) {
-      navigate('/select-study?role=cro-sponsor');
-    }
-  }, [selectedStudy, navigate]);
-
-  const studies = [
+  const localStudies = [
     { id: "PROTO-2024-001", title: "Phase II Oncology Trial", sites: 12, participants: 156, status: "Active" },
     { id: "PROTO-2024-002", title: "Phase III Cardiology Study", sites: 8, participants: 89, status: "Recruiting" },
     { id: "PROTO-2023-015", title: "Phase I Safety Study", sites: 3, participants: 24, status: "Completed" }
   ];
+
+  const handleStudySelect = (studyId: string) => {
+    const study = studies.find(s => s.id === studyId);
+    if (study) {
+      setSelectedStudy(study);
+    }
+  };
 
   const alerts = [
     { type: "warning", message: "Site 003 enrollment behind target", time: "2 hours ago" },
@@ -56,6 +57,19 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
       return `${selectedStudy.protocol} | ${selectedStudy.name}`;
     }
     return "Portfolio Overview - All Active Studies";
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'Active':
+        return 'bg-progress-success/10 text-progress-success border-progress-success/20';
+      case 'Recruiting':
+        return 'bg-progress-info/10 text-progress-info border-progress-info/20';
+      case 'Completed':
+        return 'bg-progress-gray/10 text-progress-gray border-progress-gray/20';
+      default:
+        return 'bg-studio-border text-studio-text-muted';
+    }
   };
 
   return (
@@ -168,35 +182,89 @@ const CROSponsorDashboard = ({ onLogout }: CROSponsorDashboardProps) => {
           </TabsList>
 
           <TabsContent value="studies" className="space-y-6">
-            <Card className="bg-studio-surface border-studio-border">
-              <CardHeader>
-                <CardTitle className="text-studio-text">Active Studies</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {studies.map((study, index) => (
-                  <div key={index} className="p-4 bg-studio-bg rounded border border-studio-border hover:border-primary/30 transition-colors cursor-pointer"
-                       onClick={() => setSelectedStudyLocal(study.id)}>
-                    <div className="flex justify-between items-start mb-2">
-                      <div>
-                        <h4 className="font-medium text-studio-text">{study.title}</h4>
-                        <p className="text-sm text-studio-text-muted">{study.id}</p>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <Card className="bg-studio-surface border-studio-border">
+                <CardHeader>
+                  <CardTitle className="text-studio-text">Study Selection</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {studies.map((study) => (
+                    <div 
+                      key={study.id}
+                      className={`p-3 rounded border cursor-pointer transition-all duration-200 ${
+                        selectedStudy?.id === study.id 
+                          ? 'border-studio-accent bg-studio-accent/5 shadow-sm' 
+                          : 'border-studio-border hover:border-studio-accent hover:bg-studio-bg'
+                      }`}
+                      onClick={() => handleStudySelect(study.id)}
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="font-medium text-studio-text text-sm">{study.name}</span>
+                        {selectedStudy?.id === study.id && (
+                          <CheckCircle className="h-4 w-4 text-progress-success" />
+                        )}
                       </div>
-                      <span className={`px-2 py-1 rounded text-xs ${
-                        study.status === 'Active' ? 'bg-accent text-accent-foreground' :
-                        study.status === 'Recruiting' ? 'bg-primary text-primary-foreground' :
-                        'bg-muted text-muted-foreground'
-                      }`}>
-                        {study.status}
-                      </span>
+                      <div className="flex items-center space-x-2 mb-2">
+                        <Badge variant="outline" className="text-xs">
+                          {study.protocol}
+                        </Badge>
+                        <Badge variant="outline" className="text-xs">
+                          {study.phase}
+                        </Badge>
+                      </div>
+                      <div className="flex items-center space-x-1 text-xs text-studio-text-muted">
+                        <Badge className={`text-xs ${getStatusColor(study.status)}`}>
+                          {study.status}
+                        </Badge>
+                      </div>
                     </div>
-                    <div className="flex justify-between text-sm text-studio-text-muted">
-                      <span>{study.sites} sites</span>
-                      <span>{study.participants} participants</span>
+                  ))}
+                </CardContent>
+              </Card>
+
+              <Card className="bg-studio-surface border-studio-border lg:col-span-2">
+                <CardHeader>
+                  <CardTitle className="text-studio-text">
+                    {selectedStudy ? `${selectedStudy.name} Details` : 'Select a Study'}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {selectedStudy ? (
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <span className="text-sm text-studio-text-muted">Protocol</span>
+                          <p className="font-medium text-studio-text">{selectedStudy.protocol}</p>
+                        </div>
+                        <div className="space-y-2">
+                          <span className="text-sm text-studio-text-muted">Phase</span>
+                          <p className="font-medium text-studio-text">{selectedStudy.phase}</p>
+                        </div>
+                        <div className="space-y-2">
+                          <span className="text-sm text-studio-text-muted">Status</span>
+                          <Badge className={getStatusColor(selectedStudy.status)}>
+                            {selectedStudy.status}
+                          </Badge>
+                        </div>
+                        <div className="space-y-2">
+                          <span className="text-sm text-studio-text-muted">Sites</span>
+                          <p className="font-medium text-studio-text">{selectedStudy.sites}</p>
+                        </div>
+                      </div>
+                      <div className="pt-4 border-t border-studio-border">
+                        <span className="text-sm text-studio-text-muted">Participants</span>
+                        <p className="font-medium text-studio-text text-2xl">{selectedStudy.participants}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
+                  ) : (
+                    <div className="text-center py-8 text-studio-text-muted">
+                      <Building2 className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                      <p>Select a study from the list to view details</p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
 
           <TabsContent value="questionnaires" className="space-y-6">
