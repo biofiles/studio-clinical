@@ -167,9 +167,7 @@ const ParticipantDashboard = ({
                               item.type === 'diary' ? 'bg-[hsl(var(--progress-success))]/10 text-[hsl(var(--progress-success))] border-[hsl(var(--progress-success))]/20' : 
                               'bg-muted text-muted-foreground border-border'
                             }`}>
-                              {item.type === 'visit' ? 'Visit' : 
-                               item.type === 'questionnaire' ? 'Questionnaire' : 
-                               item.type === 'diary' ? 'Diary' : item.type}
+                              {t(`activity.${item.type}`)}
                             </Badge>
                           </div>
                           <p className="text-sm sm:text-base text-studio-text-muted mb-2">{item.date} at {item.time}</p>
