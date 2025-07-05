@@ -12,7 +12,7 @@ import QuestionnairesView from "@/components/QuestionnairesView";
 import AIChatbot from "@/components/AIChatbot";
 import EConsentDialog from "@/components/EConsentDialog";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode, Signature, Building, Settings } from "lucide-react";
+import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode, Signature, Building, Settings, Scale } from "lucide-react";
 interface ParticipantDashboardProps {
   onLogout: () => void;
 }
@@ -452,7 +452,7 @@ const ParticipantDashboard = ({
               <Card className="bg-studio-surface border-studio-border">
                 <CardHeader>
                   <CardTitle className="text-sm flex items-center space-x-2">
-                    <Shield className="h-4 w-4" />
+                    <Scale className="h-4 w-4" />
                     <span>Comité de Ética</span>
                   </CardTitle>
                 </CardHeader>
