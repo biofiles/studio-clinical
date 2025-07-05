@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LoginForm from "./LoginForm";
-import MFASetup from "./MFASetup";
 import { User, UserCheck, Building } from "lucide-react";
 
 interface LoginProps {
@@ -14,7 +13,6 @@ const Login = ({ onRoleSelect }: LoginProps) => {
   const { t } = useLanguage();
   const [selectedRole, setSelectedRole] = useState<string>('');
   const [showLoginForm, setShowLoginForm] = useState(false);
-  const [showMFASetup, setShowMFASetup] = useState(false);
 
   const roles = [
     {
@@ -43,32 +41,14 @@ const Login = ({ onRoleSelect }: LoginProps) => {
   };
 
   const handleLogin = (credentials: { email: string; password: string }) => {
-    // Show MFA setup option after successful login
-    setShowMFASetup(true);
-  };
-
-  const handleMFASetupComplete = () => {
-    onRoleSelect(selectedRole as 'participant' | 'investigator' | 'cro-sponsor');
-  };
-
-  const handleMFASetupSkip = () => {
+    // In a real app, you would validate credentials here
     onRoleSelect(selectedRole as 'participant' | 'investigator' | 'cro-sponsor');
   };
 
   const handleBackToRoleSelection = () => {
     setShowLoginForm(false);
-    setShowMFASetup(false);
     setSelectedRole('');
   };
-
-  if (showMFASetup && selectedRole) {
-    return (
-      <MFASetup 
-        onSetupComplete={handleMFASetupComplete}
-        onSkip={handleMFASetupSkip}
-      />
-    );
-  }
 
   if (showLoginForm && selectedRole) {
     return (
