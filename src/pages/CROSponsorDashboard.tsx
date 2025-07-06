@@ -333,30 +333,30 @@ const CROSponsorDashboard = () => {
 
         {/* Sectioned Content */}
         <Tabs defaultValue="details" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-6">
-            <TabsTrigger value="details" className="flex items-center space-x-2">
-              <Building2 className="h-4 w-4" />
-              <span>{t('cro.study.details')}</span>
+          <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 h-auto gap-1">
+            <TabsTrigger value="details" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
+              <Building2 className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-xs sm:text-xs">{t('cro.study.details')}</span>
             </TabsTrigger>
-            <TabsTrigger value="questionnaires" className="flex items-center space-x-2">
-              <FileText className="h-4 w-4" />
-              <span>{t('cro.questionnaires')}</span>
+            <TabsTrigger value="questionnaires" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
+              <FileText className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-xs sm:text-xs">{t('cro.questionnaires')}</span>
             </TabsTrigger>
-            <TabsTrigger value="schedule" className="flex items-center space-x-2">
-              <Calendar className="h-4 w-4" />
-              <span>{t('cro.schedule')}</span>
+            <TabsTrigger value="schedule" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
+              <Calendar className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-xs sm:text-xs">{t('cro.schedule')}</span>
             </TabsTrigger>
-            <TabsTrigger value="participants" className="flex items-center space-x-2">
-              <Users className="h-4 w-4" />
-              <span>{t('cro.participants')}</span>
+            <TabsTrigger value="participants" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
+              <Users className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-xs sm:text-xs">{t('cro.participants')}</span>
             </TabsTrigger>
-            <TabsTrigger value="user-management" className="flex items-center space-x-2">
-              <Shield className="h-4 w-4" />
-              <span>User Management</span>
+            <TabsTrigger value="user-management" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
+              <Shield className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-xs sm:text-xs">User Management</span>
             </TabsTrigger>
-            <TabsTrigger value="reports" className="flex items-center space-x-2">
-              <TrendingUp className="h-4 w-4" />
-              <span>{t('cro.reports')}</span>
+            <TabsTrigger value="reports" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
+              <TrendingUp className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-xs sm:text-xs">{t('cro.reports')}</span>
             </TabsTrigger>
           </TabsList>
 
