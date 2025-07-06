@@ -213,18 +213,6 @@ const CROSponsorDashboard = ({
   return <div className="min-h-screen bg-studio-bg">
       <Header role="cro-sponsor" onLogout={onLogout} />
 
-      {/* User Context Bar */}
-      <div className="bg-studio-surface border-b border-studio-border px-6 py-3">
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <div className="flex items-center space-x-4">
-            <Building2 className="h-4 w-4 text-studio-text-muted" />
-            <span className="text-sm font-medium text-studio-text">
-              {getContextTitle()}
-            </span>
-          </div>
-          <StudyDropdown />
-        </div>
-      </div>
 
       <main className="p-6 max-w-7xl mx-auto">
         <div className="space-y-2 mb-6">
