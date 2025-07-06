@@ -41,30 +41,15 @@ const Auth = () => {
   useEffect(() => {
     if (user && userRole && !forceLogin && !redirecting) {
       setRedirecting(true);
-      const redirectUser = async () => {
-        try {
-          if (userRole === 'participant') {
-            navigate('/participant', { replace: true });
-          } else if (userRole === 'investigator') {
-            navigate('/investigator', { replace: true });
-          } else if (userRole === 'cro_sponsor') {
-            navigate('/cro-sponsor', { replace: true });
-          } else {
-            toast({
-              title: 'Error',
-              description: 'No se encontró un rol asignado para este usuario.',
-              variant: 'destructive'
-            });
-            setRedirecting(false);
-          }
-        } catch (error) {
-          console.error('Error during redirect:', error);
-          setRedirecting(false);
-        }
-      };
-      redirectUser();
+      if (userRole === 'participant') {
+        navigate('/participant', { replace: true });
+      } else if (userRole === 'investigator') {
+        navigate('/investigator', { replace: true });
+      } else if (userRole === 'cro_sponsor') {
+        navigate('/cro-sponsor', { replace: true });
+      }
     }
-  }, [user, userRole, forceLogin, redirecting, navigate, toast]);
+  }, [user, userRole, forceLogin, redirecting, navigate]);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
