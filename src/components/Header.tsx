@@ -33,22 +33,29 @@ const Header = ({
         return role?.replace('-', '/');
     }
   };
-  return <header className="bg-studio-surface border-b border-studio-border px-6 py-4">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <h1 className="text-2xl font-light tracking-widest text-studio-text">
-            STUDIO
-          </h1>
-        </div>
+  return <header className="bg-studio-surface border-b border-studio-border">
+      <div className="px-6 py-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <h1 className="text-2xl font-light tracking-widest text-studio-text">
+              STUDIO
+            </h1>
+          </div>
 
-        <div className="flex items-center space-x-3">
-          {(role === 'investigator' || role === 'cro-sponsor') && <StudyDropdown />}
-          <Button variant="outline" size="sm" onClick={handleSettings}>
-            <Settings className="h-4 w-4 mr-2" />
-            {t('header.settings')}
-          </Button>
+          <div className="flex items-center space-x-3">
+            <Button variant="outline" size="sm" onClick={handleSettings}>
+              <Settings className="h-4 w-4 mr-2" />
+              {t('header.settings')}
+            </Button>
+          </div>
         </div>
       </div>
+      
+      {(role === 'investigator' || role === 'cro-sponsor') && (
+        <div className="px-6 py-3 border-t border-studio-border bg-studio-bg">
+          <StudyDropdown />
+        </div>
+      )}
     </header>;
 };
 export default Header;
