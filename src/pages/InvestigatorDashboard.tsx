@@ -124,15 +124,14 @@ const InvestigatorDashboard = () => {
   };
 
   const handlePlsSignup = () => {
-    if (plsSignedUp) return;
     setShowPlsDialog(true);
   };
 
-  const handlePlsConfirm = (email: string) => {
+  const handlePlsConfirm = (emails: string[]) => {
     setPlsSignedUp(true);
     localStorage.setItem('pls-signed-up', 'true');
-    localStorage.setItem('pls-signup-email', email);
-    alert(t('pls.success'));
+    localStorage.setItem('pls-signup-emails', JSON.stringify(emails));
+    alert(`${t('pls.success')} ${emails.length} ${emails.length === 1 ? 'email registrado' : 'emails registrados'}.`);
   };
 
   return (
@@ -300,10 +299,9 @@ const InvestigatorDashboard = () => {
                 variant={plsSignedUp ? "secondary" : "studio"} 
                 className="w-full justify-start"
                 onClick={handlePlsSignup}
-                disabled={plsSignedUp}
               >
                 <BookOpen className="h-4 w-4 mr-2" />
-                {plsSignedUp ? t('pls.already.signed') : t('pls.signup')}
+                {plsSignedUp ? t('pls.manage.emails') : t('pls.signup')}
               </Button>
             </CardContent>
           </Card>
