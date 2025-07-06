@@ -743,10 +743,15 @@ const CROSponsorDashboard = () => {
                       <Download className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
                     
-                    {/* Fantasy button for study results signups report */}
-                    <div className="pt-2 border-t border-studio-border">
-                      <StudySignupsReportDialog />
-                    </div>
+                    {/* Results Summary Subscription Report */}
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start h-auto py-3"
+                    >
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
+                        <StudySignupsReportDialog />
+                      </div>
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
