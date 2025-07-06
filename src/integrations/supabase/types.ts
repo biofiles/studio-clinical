@@ -386,9 +386,25 @@ export type Database = {
         }
         Returns: boolean
       }
+      log_security_event: {
+        Args: {
+          event_type: string
+          event_details?: Json
+          user_id_param?: string
+        }
+        Returns: undefined
+      }
       log_user_activity: {
         Args: { user_id: string; activity_type: string; details?: Json }
         Returns: undefined
+      }
+      sanitize_text: {
+        Args: { input_text: string }
+        Returns: string
+      }
+      validate_email: {
+        Args: { email_input: string }
+        Returns: boolean
       }
     }
     Enums: {
