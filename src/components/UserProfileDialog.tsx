@@ -1,24 +1,21 @@
-
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { User, Shield, Copy } from "lucide-react";
-
 interface UserProfileDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
-
-const UserProfileDialog = ({ open, onOpenChange }: UserProfileDialogProps) => {
+const UserProfileDialog = ({
+  open,
+  onOpenChange
+}: UserProfileDialogProps) => {
   const participantToken = "PTK-9283-WZ1";
-
   const handleCopyToken = () => {
     navigator.clipboard.writeText(participantToken);
     alert("Token copied to clipboard");
   };
-
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+  return <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-2">
@@ -35,7 +32,7 @@ const UserProfileDialog = ({ open, onOpenChange }: UserProfileDialogProps) => {
             <CardContent className="space-y-2">
               <div className="flex justify-between">
                 <span className="text-sm text-studio-text-muted">Study ID:</span>
-                <span className="text-sm font-medium text-studio-text">PROTO-2024-001</span>
+                <span className="text-sm font-medium text-studio-text">NVS-4578-301</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-sm text-studio-text-muted">Phase:</span>
@@ -63,35 +60,25 @@ const UserProfileDialog = ({ open, onOpenChange }: UserProfileDialogProps) => {
                 <code className="font-mono text-lg font-bold text-studio-text">
                   {participantToken}
                 </code>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleCopyToken}
-                >
+                <Button variant="outline" size="sm" onClick={handleCopyToken}>
                   <Copy className="h-4 w-4" />
                 </Button>
               </div>
               <p className="text-xs text-blue-600">
-                • Keep this token confidential<br/>
-                • Used for secure data linking<br/>
+                • Keep this token confidential<br />
+                • Used for secure data linking<br />
                 • HIPAA compliant anonymization
               </p>
             </CardContent>
           </Card>
 
           <div className="pt-2">
-            <Button 
-              onClick={() => onOpenChange(false)}
-              className="w-full"
-              variant="studio"
-            >
+            <Button onClick={() => onOpenChange(false)} className="w-full" variant="studio">
               Close
             </Button>
           </div>
         </div>
       </DialogContent>
-    </Dialog>
-  );
+    </Dialog>;
 };
-
 export default UserProfileDialog;
