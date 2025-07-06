@@ -9,12 +9,7 @@ import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, 
 import { toast } from "sonner";
 import { useStudy } from "@/contexts/StudyContext";
 import { useNavigate } from "react-router-dom";
-interface CROSponsorDashboardProps {
-  onLogout: () => void;
-}
-const CROSponsorDashboard = ({
-  onLogout
-}: CROSponsorDashboardProps) => {
+const CROSponsorDashboard = () => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [selectedStudyLocal, setSelectedStudyLocal] = useState<string | null>(null);
   const {
@@ -211,7 +206,7 @@ const CROSponsorDashboard = ({
     }
   };
   return <div className="min-h-screen bg-studio-bg">
-      <Header role="cro-sponsor" onLogout={onLogout} />
+      <Header role="cro-sponsor" />
 
 
       <main className="p-6 max-w-7xl mx-auto">

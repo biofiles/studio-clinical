@@ -1,28 +1,38 @@
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Settings, Building } from "lucide-react";
+import { Settings, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
+import { useAuth } from "@/contexts/AuthContext";
 import StudyDropdown from "@/components/StudyDropdown";
+
 interface HeaderProps {
   role?: string;
   onLogout?: () => void;
 }
+
 const Header = ({
   role,
   onLogout
 }: HeaderProps) => {
   const navigate = useNavigate();
-  const {
-    t
-  } = useLanguage();
-  const {
-    selectedStudy
-  } = useStudy();
+  const { t } = useLanguage();
+  const { selectedStudy } = useStudy();
+  const { signOut } = useAuth();
+
   const handleSettings = () => {
     navigate('/settings');
   };
+
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      navigate('/');
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  };
+
   const getRoleDisplay = (role: string) => {
     switch (role) {
       case 'investigator':
@@ -33,7 +43,9 @@ const Header = ({
         return role?.replace('-', '/');
     }
   };
-  return <header className="bg-studio-surface border-b border-studio-border">
+
+  return (
+    <header className="bg-studio-surface border-b border-studio-border">
       <div className="px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
@@ -47,6 +59,10 @@ const Header = ({
               <Settings className="h-4 w-4 mr-2" />
               {t('header.settings')}
             </Button>
+            <Button variant="outline" size="sm" onClick={handleLogout}>
+              <LogOut className="h-4 w-4 mr-2" />
+              Cerrar Sesión
+            </Button>
           </div>
         </div>
       </div>
@@ -56,6 +72,7 @@ const Header = ({
           <StudyDropdown />
         </div>
       )}
-    </header>;
+    </header>
+  );
 };
 export default Header;

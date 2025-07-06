@@ -14,11 +14,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
 import { useNavigate } from "react-router-dom";
 
-interface InvestigatorDashboardProps {
-  onLogout: () => void;
-}
-
-const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
+const InvestigatorDashboard = () => {
   const [showParticipantList, setShowParticipantList] = useState(false);
   const [showChatbot, setShowChatbot] = useState(false);
   const [showCalendarManagement, setShowCalendarManagement] = useState(false);
@@ -116,7 +112,6 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
     <div className="min-h-screen bg-studio-bg">
       <Header
         role="investigator"
-        onLogout={onLogout}
       />
 
       <main className="p-6 max-w-6xl mx-auto space-y-6">

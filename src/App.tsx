@@ -38,17 +38,17 @@ const App = () => (
                 } />
                 <Route path="/participant" element={
                   <ProtectedRoute>
-                    <ParticipantDashboard onLogout={() => window.location.href = '/'} />
+                    <ParticipantDashboard />
                   </ProtectedRoute>
                 } />
                 <Route path="/investigator" element={
                   <ProtectedRoute>
-                    <InvestigatorDashboard onLogout={() => window.location.href = '/'} />
+                    <InvestigatorDashboard />
                   </ProtectedRoute>
                 } />
                 <Route path="/cro-sponsor" element={
                   <ProtectedRoute>
-                    <CROSponsorDashboard onLogout={() => window.location.href = '/'} />
+                    <CROSponsorDashboard />
                   </ProtectedRoute>
                 } />
                 <Route path="/settings" element={

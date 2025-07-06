@@ -13,12 +13,7 @@ import AIChatbot from "@/components/AIChatbot";
 import EConsentDialog from "@/components/EConsentDialog";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode, Signature, Building, Settings, Scale } from "lucide-react";
-interface ParticipantDashboardProps {
-  onLogout: () => void;
-}
-const ParticipantDashboard = ({
-  onLogout
-}: ParticipantDashboardProps) => {
+const ParticipantDashboard = () => {
   const {
     t,
     language
