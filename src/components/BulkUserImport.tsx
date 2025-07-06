@@ -191,47 +191,48 @@ const BulkUserImport = ({ open, onOpenChange, userType }: BulkUserImportProps) =
   };
 
   const createParticipant = async (row: ImportRow) => {
-    // Create auth user first
-    const password = generateSecurePassword();
-    const { data: authData, error: authError } = await supabase.auth.admin.createUser({
-      email: row.email,
-      password: password,
-      email_confirm: true,
-      user_metadata: {
-        full_name: row.full_name
-      }
-    });
+    // Validate input
+    if (!row.email || !row.email.includes('@')) {
+      throw new Error('Invalid email address');
+    }
+    if (!row.full_name || row.full_name.trim().length < 2) {
+      throw new Error('Invalid full name');
+    }
+    if (!row.subject_id || row.subject_id.trim().length < 1) {
+      throw new Error('Subject ID is required');
+    }
 
-    if (authError) throw authError;
+    // Create invitation for participant instead of direct user creation
+    const { error: inviteError } = await supabase
+      .from('user_invitations')
+      .insert({
+        email: row.email.trim().toLowerCase(),
+        role: 'participant',
+        study_id: defaultStudy,
+        invited_by: user?.id,
+        full_name: row.full_name.trim()
+      });
 
-    // Create participant record
+    if (inviteError) {
+      throw inviteError;
+    }
+
+    // Create participant record with invitation status
     const { error: participantError } = await supabase
       .from('participants')
       .insert({
         study_id: defaultStudy,
-        subject_id: row.subject_id!,
-        first_name: row.full_name.split(' ')[0],
-        last_name: row.full_name.split(' ').slice(1).join(' '),
-        email: row.email,
-        arm: row.arm,
-        status: 'enrolled'
+        subject_id: row.subject_id.trim(),
+        first_name: row.full_name.trim().split(' ')[0],
+        last_name: row.full_name.trim().split(' ').slice(1).join(' ') || '',
+        email: row.email.trim().toLowerCase(),
+        arm: row.arm?.trim() || null,
+        status: 'invited'
       });
 
     if (participantError) {
-      await supabase.auth.admin.deleteUser(authData.user.id);
       throw participantError;
     }
-
-    // Create user role
-    await supabase
-      .from('user_roles')
-      .insert({
-        user_id: authData.user.id,
-        role: 'participant',
-        study_id: defaultStudy,
-        assigned_by: user?.id,
-        status: 'active'
-      });
   };
 
   const createInvestigator = async (row: ImportRow) => {
