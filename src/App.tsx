@@ -6,7 +6,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { StudyProvider } from "./contexts/StudyContext";
+import { AuthProvider } from "./contexts/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Index from "./pages/Index";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import StudySelection from "./pages/StudySelection";
 import ParticipantDashboard from "./pages/ParticipantDashboard";
@@ -18,26 +21,49 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <LanguageProvider>
-      <StudyProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/select-study" element={<StudySelection />} />
-              <Route path="/participant" element={<ParticipantDashboard onLogout={() => window.location.href = '/'} />} />
-              <Route path="/investigator" element={<InvestigatorDashboard onLogout={() => window.location.href = '/'} />} />
-              <Route path="/cro-sponsor" element={<CROSponsorDashboard onLogout={() => window.location.href = '/'} />} />
-              <Route path="/settings" element={<Settings />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </StudyProvider>
-    </LanguageProvider>
+    <AuthProvider>
+      <LanguageProvider>
+        <StudyProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/auth" element={<Auth />} />
+                <Route path="/select-study" element={
+                  <ProtectedRoute>
+                    <StudySelection />
+                  </ProtectedRoute>
+                } />
+                <Route path="/participant" element={
+                  <ProtectedRoute>
+                    <ParticipantDashboard onLogout={() => window.location.href = '/'} />
+                  </ProtectedRoute>
+                } />
+                <Route path="/investigator" element={
+                  <ProtectedRoute>
+                    <InvestigatorDashboard onLogout={() => window.location.href = '/'} />
+                  </ProtectedRoute>
+                } />
+                <Route path="/cro-sponsor" element={
+                  <ProtectedRoute>
+                    <CROSponsorDashboard onLogout={() => window.location.href = '/'} />
+                  </ProtectedRoute>
+                } />
+                <Route path="/settings" element={
+                  <ProtectedRoute>
+                    <Settings />
+                  </ProtectedRoute>
+                } />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </StudyProvider>
+      </LanguageProvider>
+    </AuthProvider>
   </QueryClientProvider>
 );
 

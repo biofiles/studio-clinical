@@ -1,5 +1,5 @@
 // FHIR Client for Clinical Research Data
-// Using direct API calls since we can't import supabase client in this context
+// Secure client that uses Supabase authentication
 import { 
   FHIRPatient, 
   FHIRResearchStudy, 
@@ -11,9 +11,11 @@ import {
 
 export class FHIRClient {
   private baseUrl: string;
+  private getAuthHeaders: () => Promise<Record<string, string>>;
   
-  constructor(baseUrl?: string) {
-    this.baseUrl = baseUrl || `https://xwixpiyptdykphqqfyru.supabase.co/functions/v1/fhir-server`;
+  constructor(baseUrl?: string, getAuthHeaders?: () => Promise<Record<string, string>>) {
+    this.baseUrl = baseUrl || `https://xwixpiyptdykphqqfyru.supabase.co/functions/v1`;
+    this.getAuthHeaders = getAuthHeaders || (async () => ({}));
   }
   
   // Convert study participant data to FHIR Patient
@@ -155,11 +157,12 @@ export class FHIRClient {
   // Export data to FHIR Bundle
   async exportToFHIRBundle(studyId: string): Promise<FHIRBundle> {
     try {
-      const response = await fetch(`https://xwixpiyptdykphqqfyru.supabase.co/functions/v1/fhir-export`, {
+      const authHeaders = await this.getAuthHeaders();
+      const response = await fetch(`${this.baseUrl}/fhir-export`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3aXhwaXlwdGR5a3BocXFmeXJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1MDcyMDQsImV4cCI6MjA2NzA4MzIwNH0.giE_0Mwzvs_TZHdqY1Q13WOc68GaqIyh18F445oefsQ`
+          ...authHeaders
         },
         body: JSON.stringify({ studyId })
       });
@@ -178,11 +181,12 @@ export class FHIRClient {
   // Import FHIR Bundle
   async importFHIRBundle(bundle: FHIRBundle): Promise<any> {
     try {
-      const response = await fetch(`https://xwixpiyptdykphqqfyru.supabase.co/functions/v1/fhir-import`, {
+      const authHeaders = await this.getAuthHeaders();
+      const response = await fetch(`${this.baseUrl}/fhir-import`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3aXhwaXlwdGR5a3BocXFmeXJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1MDcyMDQsImV4cCI6MjA2NzA4MzIwNH0.giE_0Mwzvs_TZHdqY1Q13WOc68GaqIyh18F445oefsQ`
+          ...authHeaders
         },
         body: JSON.stringify({ bundle })
       });
@@ -201,11 +205,12 @@ export class FHIRClient {
   // Validate FHIR Resource
   async validateResource(resource: any): Promise<any> {
     try {
-      const response = await fetch(`https://xwixpiyptdykphqqfyru.supabase.co/functions/v1/fhir-validate`, {
+      const authHeaders = await this.getAuthHeaders();
+      const response = await fetch(`${this.baseUrl}/fhir-validate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3aXhwaXlwdGR5a3BocXFmeXJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1MDcyMDQsImV4cCI6MjA2NzA4MzIwNH0.giE_0Mwzvs_TZHdqY1Q13WOc68GaqIyh18F445oefsQ`
+          ...authHeaders
         },
         body: JSON.stringify({ resource })
       });
@@ -224,11 +229,12 @@ export class FHIRClient {
   // Send to external FHIR server
   async sendToFHIRServer(endpoint: string, resource: any, headers?: Record<string, string>): Promise<any> {
     try {
-      const response = await fetch(`https://xwixpiyptdykphqqfyru.supabase.co/functions/v1/fhir-client`, {
+      const authHeaders = await this.getAuthHeaders();
+      const response = await fetch(`${this.baseUrl}/fhir-client`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3aXhwaXlwdGR5a3BocXFmeXJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1MDcyMDQsImV4cCI6MjA2NzA4MzIwNH0.giE_0Mwzvs_TZHdqY1Q13WOc68GaqIyh18F445oefsQ`
+          ...authHeaders
         },
         body: JSON.stringify({ 
           endpoint, 
@@ -252,11 +258,12 @@ export class FHIRClient {
   // Query external FHIR server
   async queryFHIRServer(endpoint: string, params?: Record<string, string>, headers?: Record<string, string>): Promise<any> {
     try {
-      const response = await fetch(`https://xwixpiyptdykphqqfyru.supabase.co/functions/v1/fhir-client`, {
+      const authHeaders = await this.getAuthHeaders();
+      const response = await fetch(`${this.baseUrl}/fhir-client`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3aXhwaXlwdGR5a3BocXFmeXJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1MDcyMDQsImV4cCI6MjA2NzA4MzIwNH0.giE_0Mwzvs_TZHdqY1Q13WOc68GaqIyh18F445oefsQ`
+          ...authHeaders
         },
         body: JSON.stringify({ 
           endpoint, 
@@ -278,5 +285,7 @@ export class FHIRClient {
   }
 }
 
-// Default client instance
-export const fhirClient = new FHIRClient();
+// Create authenticated FHIR client factory
+export const createAuthenticatedFHIRClient = (getAuthHeaders: () => Promise<Record<string, string>>) => {
+  return new FHIRClient(undefined, getAuthHeaders);
+};

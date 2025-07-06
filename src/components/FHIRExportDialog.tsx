@@ -9,7 +9,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Download, Upload, Globe, FileText, CheckCircle, AlertCircle } from "lucide-react";
 import { useStudy } from "@/contexts/StudyContext";
-import { fhirClient } from "@/lib/fhir-client";
+import { createAuthenticatedFHIRClient } from "@/lib/fhir-client";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 interface FHIRExportDialogProps {
@@ -33,6 +34,17 @@ const FHIRExportDialog = ({ open, onOpenChange }: FHIRExportDialogProps) => {
   const [fhirBundle, setFhirBundle] = useState("");
   const { selectedStudy } = useStudy();
 
+  // Create authenticated FHIR client
+  const getFHIRClient = () => {
+    const getAuthHeaders = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      return session?.access_token ? {
+        'Authorization': `Bearer ${session.access_token}`
+      } : {};
+    };
+    return createAuthenticatedFHIRClient(getAuthHeaders);
+  };
+
   const handleExport = async () => {
     if (!selectedStudy) {
       toast.error("No hay estudio seleccionado");
@@ -41,6 +53,7 @@ const FHIRExportDialog = ({ open, onOpenChange }: FHIRExportDialogProps) => {
 
     setIsExporting(true);
     try {
+      const fhirClient = getFHIRClient();
       const bundle = await fhirClient.exportToFHIRBundle(selectedStudy.id);
       const jsonString = JSON.stringify(bundle, null, 2);
       setExportResult(jsonString);
@@ -73,6 +86,7 @@ const FHIRExportDialog = ({ open, onOpenChange }: FHIRExportDialogProps) => {
     setIsImporting(true);
     try {
       const bundle = JSON.parse(fhirBundle);
+      const fhirClient = getFHIRClient();
       await fhirClient.importFHIRBundle(bundle);
       toast.success("Importación FHIR completada exitosamente");
       setFhirBundle("");
@@ -96,6 +110,7 @@ const FHIRExportDialog = ({ open, onOpenChange }: FHIRExportDialogProps) => {
 
     setIsExporting(true);
     try {
+      const fhirClient = getFHIRClient();
       const bundle = await fhirClient.exportToFHIRBundle(selectedStudy.id);
       await fhirClient.sendToFHIRServer(fhirServerUrl, bundle);
       toast.success("Datos enviados al servidor FHIR exitosamente");
@@ -277,6 +292,7 @@ const FHIRExportDialog = ({ open, onOpenChange }: FHIRExportDialogProps) => {
               <Button 
                 onClick={() => {
                   if (fhirServerUrl.trim()) {
+                    const fhirClient = getFHIRClient();
                     fhirClient.queryFHIRServer(fhirServerUrl + "/Patient")
                       .then(() => toast.success("Conexión exitosa"))
                       .catch(() => toast.error("Error de conexión"));
