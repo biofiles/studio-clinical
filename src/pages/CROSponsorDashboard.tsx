@@ -381,7 +381,7 @@ const CROSponsorDashboard = () => {
                 {selectedStudy ? (
                   <div className="space-y-6">
                     {/* Basic Study Information */}
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-3 gap-4">
                       <div className="space-y-2">
                         <span className="text-sm text-studio-text-muted">{t('study.protocol')}</span>
                         <p className="font-medium text-studio-text">{selectedStudy.protocol}</p>
@@ -389,6 +389,22 @@ const CROSponsorDashboard = () => {
                       <div className="space-y-2">
                         <span className="text-sm text-studio-text-muted">{t('study.phase')}</span>
                         <p className="font-medium text-studio-text">{selectedStudy.phase}</p>
+                      </div>
+                      <div className="space-y-2 row-span-3">
+                        <span className="text-sm text-studio-text-muted">{t('study.recent.alerts')}</span>
+                        <div className="space-y-2">
+                          {studyData && studyData.reports.alerts.slice(0, 2).map((alert, index) => (
+                            <div key={index} className="flex items-start space-x-2">
+                              {alert.type === 'success' && <CheckCircle className="h-3 w-3 text-primary mt-0.5 flex-shrink-0" />}
+                              {alert.type === 'info' && <AlertCircle className="h-3 w-3 text-studio-text-muted mt-0.5 flex-shrink-0" />}
+                              {alert.type === 'warning' && <AlertCircle className="h-3 w-3 text-destructive mt-0.5 flex-shrink-0" />}
+                              <div className="flex-1 min-w-0">
+                                <p className="text-xs text-studio-text leading-tight">{alert.message}</p>
+                                <p className="text-xs text-studio-text-muted">{alert.time}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                       <div className="space-y-2">
                         <span className="text-sm text-studio-text-muted">{t('study.status')}</span>
@@ -456,7 +472,7 @@ const CROSponsorDashboard = () => {
                           </Card>
                         </div>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <Card className="bg-studio-bg border-studio-border">
                             <CardHeader className="pb-3">
                               <CardTitle className="text-sm text-studio-text">{t('cro.budget.utilization')}</CardTitle>
@@ -492,25 +508,6 @@ const CROSponsorDashboard = () => {
                                        style={{ width: `${studyData.reports.timeline}%` }}></div>
                                 </div>
                               </div>
-                            </CardContent>
-                          </Card>
-
-                          <Card className="bg-studio-bg border-studio-border">
-                            <CardHeader className="pb-3">
-                              <CardTitle className="text-sm text-studio-text">{t('study.recent.alerts')}</CardTitle>
-                            </CardHeader>
-                            <CardContent className="space-y-3">
-                              {studyData.reports.alerts.slice(0, 2).map((alert, index) => (
-                                <div key={index} className="flex items-start space-x-2">
-                                  {alert.type === 'success' && <CheckCircle className="h-3 w-3 text-primary mt-0.5 flex-shrink-0" />}
-                                  {alert.type === 'info' && <AlertCircle className="h-3 w-3 text-studio-text-muted mt-0.5 flex-shrink-0" />}
-                                  {alert.type === 'warning' && <AlertCircle className="h-3 w-3 text-destructive mt-0.5 flex-shrink-0" />}
-                                  <div className="flex-1 min-w-0">
-                                    <p className="text-xs text-studio-text leading-tight">{alert.message}</p>
-                                    <p className="text-xs text-studio-text-muted">{alert.time}</p>
-                                  </div>
-                                </div>
-                              ))}
                             </CardContent>
                           </Card>
                         </div>
