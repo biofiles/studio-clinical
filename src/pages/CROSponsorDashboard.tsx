@@ -8,6 +8,8 @@ import StudyDropdown from "@/components/StudyDropdown";
 import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, FileText, Calendar, Users, Settings, Download } from "lucide-react";
 import FHIRExportDialog from "@/components/FHIRExportDialog";
 import UserManagementTab from "@/components/UserManagementTab";
+import UserActivityDashboard from "@/components/UserActivityDashboard";
+import BulkUserImport from "@/components/BulkUserImport";
 import { toast } from "sonner";
 import { useStudy } from "@/contexts/StudyContext";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -17,6 +19,8 @@ const CROSponsorDashboard = () => {
   const [selectedStudyLocal, setSelectedStudyLocal] = useState<string | null>(null);
   const [showFHIRExport, setShowFHIRExport] = useState(false);
   const [favoriteStudyId, setFavoriteStudyId] = useState<string | null>(null);
+  const [showActivityDashboard, setShowActivityDashboard] = useState(false);
+  const [showBulkImport, setShowBulkImport] = useState(false);
   const {
     selectedStudy,
     studies,

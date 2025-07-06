@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import Header from "@/components/Header";
 import ParticipantCreation from "@/components/ParticipantCreation";
+import ParticipantManagement from "@/components/ParticipantManagement";
 import { UserPlus, QrCode, Globe, Users, FileCheck, AlertTriangle, Calendar, Download, MessageCircle } from "lucide-react";
 import ParticipantList from "@/components/ParticipantList";
 import AIChatbot from "@/components/AIChatbot";
@@ -22,6 +23,7 @@ const InvestigatorDashboard = () => {
   const [showBarcodeScanner, setShowBarcodeScanner] = useState(false);
   const [showFHIRExport, setShowFHIRExport] = useState(false);
   const [showParticipantCreation, setShowParticipantCreation] = useState(false);
+  const [showParticipantManagement, setShowParticipantManagement] = useState(false);
   const { t } = useLanguage();
   const { selectedStudy } = useStudy();
   const navigate = useNavigate();
@@ -226,10 +228,10 @@ const InvestigatorDashboard = () => {
               <Button 
                 variant="studio" 
                 className="w-full justify-start"
-                onClick={() => setShowParticipantList(true)}
+                onClick={() => setShowParticipantManagement(true)}
               >
                 <Users className="h-4 w-4 mr-2" />
-                {t('dashboard.participant.list')}
+                Manage Participants
               </Button>
               <Button 
                 variant="studio" 
@@ -377,6 +379,11 @@ const InvestigatorDashboard = () => {
       <ParticipantCreation 
         open={showParticipantCreation}
         onOpenChange={setShowParticipantCreation}
+      />
+
+      <ParticipantManagement 
+        open={showParticipantManagement}
+        onOpenChange={setShowParticipantManagement}
       />
     </div>
   );
