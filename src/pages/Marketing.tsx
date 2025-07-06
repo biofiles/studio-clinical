@@ -12,9 +12,11 @@ import {
   Activity
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Marketing = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { t, language, setLanguage } = useLanguage();
 
   useEffect(() => {
     setIsVisible(true);
@@ -63,17 +65,25 @@ const Marketing = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <Activity className="w-5 h-5 text-primary-foreground" />
+              <div className="w-8 h-8 bg-muted rounded-lg flex items-center justify-center">
+                <Activity className="w-5 h-5 text-muted-foreground" />
               </div>
               <span className="text-xl font-semibold text-foreground">
                 STUDIO
               </span>
             </div>
             <nav className="flex items-center space-x-6">
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => setLanguage(language === 'spanish' ? 'english' : 'spanish')}
+                className="text-sm"
+              >
+                {language === 'spanish' ? 'EN' : 'ES'}
+              </Button>
               <Link to="/auth">
                 <Button size="sm" className="font-medium">
-                  Sign In
+                  {t('marketing.signin')}
                 </Button>
               </Link>
             </nav>
@@ -86,18 +96,17 @@ const Marketing = () => {
         <div className="container mx-auto max-w-4xl">
           <div className={`text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             <h1 className="text-5xl md:text-6xl font-light mb-6 text-foreground tracking-tight">
-              Clinical trials.
+              {t('marketing.hero.title')}
               <br />
-              <span className="font-medium">Simplified.</span>
+              <span className="font-medium">{t('marketing.hero.subtitle')}</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-12 leading-relaxed max-w-2xl mx-auto">
-              Everything you need to manage clinical trials in one integrated platform. 
-              Digital diaries, eConsent, scheduling, and patient engagement — all seamlessly connected.
+              {t('marketing.hero.description')}
             </p>
             
             <Link to="/auth">
               <Button size="lg" className="px-8 py-3 text-base font-medium rounded-xl shadow-sm hover:shadow-md transition-all duration-200">
-                Try STUDIO
+                {t('marketing.hero.cta')}
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
@@ -155,12 +164,12 @@ const Marketing = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-20">
             <h2 className="text-4xl font-light mb-6 text-foreground">
-              Four core functions.
+              {t('marketing.features.title')}
               <br />
-              <span className="font-medium">One platform.</span>
+              <span className="font-medium">{t('marketing.features.subtitle')}</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Replace multiple systems with a single, integrated solution that handles every aspect of clinical trial management.
+              {t('marketing.features.description')}
             </p>
           </div>
 
@@ -195,10 +204,10 @@ const Marketing = () => {
       <section className="py-24 px-4 bg-muted/20">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-4xl font-light mb-8 text-foreground">
-            Everything connects.
+            {t('marketing.integration.title')}
           </h2>
           <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Stop managing multiple vendors and platforms. STUDIO integrates all essential clinical trial functions into one cohesive system.
+            {t('marketing.integration.description')}
           </p>
           
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
@@ -217,25 +226,23 @@ const Marketing = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h2 className="text-4xl font-light text-foreground">
-                Patient-first design.
+                {t('marketing.patient.title')}
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                The first clinical trial platform built with participants in mind. Our dedicated patient portal 
-                gives participants direct access to their study information, creating better engagement 
-                and higher retention rates.
+                {t('marketing.patient.description')}
               </p>
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
                   <Check className="w-5 h-5 text-primary" />
-                  <span className="text-muted-foreground">Mobile-optimized interface</span>
+                  <span className="text-muted-foreground">{t('marketing.patient.mobile')}</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Check className="w-5 h-5 text-primary" />
-                  <span className="text-muted-foreground">Real-time study updates</span>
+                  <span className="text-muted-foreground">{t('marketing.patient.updates')}</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Check className="w-5 h-5 text-primary" />
-                  <span className="text-muted-foreground">Simplified questionnaire completion</span>
+                  <span className="text-muted-foreground">{t('marketing.patient.questionnaires')}</span>
                 </div>
               </div>
             </div>
@@ -265,14 +272,14 @@ const Marketing = () => {
       <section className="py-24 px-4 bg-muted/20">
         <div className="container mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-light mb-6 text-foreground">
-            Ready to simplify your trials?
+            {t('marketing.cta.title')}
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Join research teams who have streamlined their clinical operations with STUDIO.
+            {t('marketing.cta.description')}
           </p>
           <Link to="/auth">
             <Button size="lg" className="px-8 py-3 text-base font-medium rounded-xl">
-              Get Started
+              {t('marketing.cta.button')}
             </Button>
           </Link>
         </div>
@@ -283,15 +290,15 @@ const Marketing = () => {
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <div className="w-6 h-6 bg-primary rounded flex items-center justify-center">
-                <Activity className="w-4 h-4 text-primary-foreground" />
+              <div className="w-6 h-6 bg-muted rounded flex items-center justify-center">
+                <Activity className="w-4 h-4 text-muted-foreground" />
               </div>
               <span className="text-lg font-medium">STUDIO</span>
             </div>
             <div className="flex items-center space-x-6 text-sm text-muted-foreground">
-              <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
-              <a href="#" className="hover:text-foreground transition-colors">Terms</a>
-              <a href="#" className="hover:text-foreground transition-colors">Contact</a>
+              <a href="#" className="hover:text-foreground transition-colors">{t('marketing.privacy')}</a>
+              <a href="#" className="hover:text-foreground transition-colors">{t('marketing.terms')}</a>
+              <a href="#" className="hover:text-foreground transition-colors">{t('marketing.contact')}</a>
             </div>
           </div>
         </div>

@@ -6,7 +6,7 @@ import { Progress } from "@/components/ui/progress";
 import Header from "@/components/Header";
 import ParticipantCreation from "@/components/ParticipantCreation";
 import ParticipantManagement from "@/components/ParticipantManagement";
-import { UserPlus, QrCode, Globe, Users, FileCheck, AlertTriangle, Calendar, Download, MessageCircle } from "lucide-react";
+import { UserPlus, QrCode, Globe, Users, FileCheck, AlertTriangle, Calendar, Download, MessageCircle, BookOpen } from "lucide-react";
 import ParticipantList from "@/components/ParticipantList";
 import AIChatbot from "@/components/AIChatbot";
 import CalendarManagement from "@/components/CalendarManagement";
@@ -24,6 +24,7 @@ const InvestigatorDashboard = () => {
   const [showFHIRExport, setShowFHIRExport] = useState(false);
   const [showParticipantCreation, setShowParticipantCreation] = useState(false);
   const [showParticipantManagement, setShowParticipantManagement] = useState(false);
+  const [plsSignedUp, setPlsSignedUp] = useState(false);
   const { t } = useLanguage();
   const { selectedStudy } = useStudy();
   const navigate = useNavigate();
@@ -110,6 +111,11 @@ const InvestigatorDashboard = () => {
 
   const handleQuestionnaires = () => {
     alert("Opening questionnaire management interface...");
+  };
+
+  const handlePlsSignup = () => {
+    setPlsSignedUp(true);
+    alert(t('pls.success'));
   };
 
   return (
@@ -272,6 +278,15 @@ const InvestigatorDashboard = () => {
               >
                 <Download className="h-4 w-4 mr-2" />
                 {t('dashboard.export.questionnaires')}
+              </Button>
+              <Button 
+                variant={plsSignedUp ? "secondary" : "studio"} 
+                className="w-full justify-start"
+                onClick={handlePlsSignup}
+                disabled={plsSignedUp}
+              >
+                <BookOpen className="h-4 w-4 mr-2" />
+                {plsSignedUp ? t('pls.already.signed') : t('pls.signup')}
               </Button>
             </CardContent>
           </Card>

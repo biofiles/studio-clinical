@@ -396,7 +396,6 @@ const translations = {
     'activity.no.found': 'No activities found',
     
     // Bulk Import
-    'bulk.import': 'Bulk User Import',
     'bulk.import.csv': 'Import Users from CSV',
     'bulk.template.download': 'Download CSV Template',
     'bulk.file.select': 'Select CSV File',
@@ -405,6 +404,36 @@ const translations = {
     'bulk.import.button': 'Import Users',
     'bulk.importing': 'Importing...',
     'bulk.template.note': 'Download the template to see the required format for bulk user import.',
+    
+    // Plain Language Summary
+    'pls.signup': 'Sign up for Plain Language Summary',
+    'pls.title': 'Plain Language Summary Signup',
+    'pls.description': 'Receive a plain language summary of study results once the study is completed',
+    'pls.success': 'Successfully signed up for plain language summary!',
+    'pls.already.signed': 'Already signed up for study summary',
+    
+    // Marketing Page
+    'marketing.hero.title': 'Clinical trials.',
+    'marketing.hero.subtitle': 'Simplified.',
+    'marketing.hero.description': 'Everything you need to manage clinical trials in one integrated platform. Digital diaries, eConsent, scheduling, and patient engagement — all seamlessly connected.',
+    'marketing.hero.cta': 'Try STUDIO',
+    'marketing.features.title': 'Four core functions.',
+    'marketing.features.subtitle': 'One platform.',
+    'marketing.features.description': 'Replace multiple systems with a single, integrated solution that handles every aspect of clinical trial management.',
+    'marketing.integration.title': 'Everything connects.',
+    'marketing.integration.description': 'Stop managing multiple vendors and platforms. STUDIO integrates all essential clinical trial functions into one cohesive system.',
+    'marketing.patient.title': 'Patient-first design.',
+    'marketing.patient.description': 'The first clinical trial platform built with participants in mind. Our dedicated patient portal gives participants direct access to their study information, creating better engagement and higher retention rates.',
+    'marketing.patient.mobile': 'Mobile-optimized interface',
+    'marketing.patient.updates': 'Real-time study updates',
+    'marketing.patient.questionnaires': 'Simplified questionnaire completion',
+    'marketing.cta.title': 'Ready to simplify your trials?',
+    'marketing.cta.description': 'Join research teams who have streamlined their clinical operations with STUDIO.',
+    'marketing.cta.button': 'Get Started',
+    'marketing.signin': 'Sign In',
+    'marketing.privacy': 'Privacy',
+    'marketing.terms': 'Terms',
+    'marketing.contact': 'Contact',
   },
   spanish: {
     // Header
@@ -721,7 +750,37 @@ const translations = {
     'alert.site.activation': 'Nuevo sitio activado en Boston Medical Center',
     'alert.data.validation': 'Problemas de validación de datos resueltos',
     'alert.regulatory.submission': 'Envío regulatorio preparado',
-    'alert.biomarker.analysis': 'Hito de análisis de biomarcadores completado'
+    'alert.biomarker.analysis': 'Hito de análisis de biomarcadores completado',
+    
+    // Plain Language Summary (Spanish)
+    'pls.signup': 'Inscribirse para Resumen en Lenguaje Sencillo',
+    'pls.title': 'Inscripción para Resumen en Lenguaje Sencillo',
+    'pls.description': 'Recibe un resumen en lenguaje sencillo de los resultados del estudio una vez que se complete',
+    'pls.success': '¡Inscripción exitosa para resumen en lenguaje sencillo!',
+    'pls.already.signed': 'Ya inscrito para resumen del estudio',
+    
+    // Marketing Page (Spanish)
+    'marketing.hero.title': 'Ensayos clínicos.',
+    'marketing.hero.subtitle': 'Simplificados.',
+    'marketing.hero.description': 'Todo lo que necesitas para gestionar ensayos clínicos en una plataforma integrada. Diarios digitales, consentimiento electrónico, programación y participación de pacientes, todo conectado sin problemas.',
+    'marketing.hero.cta': 'Probar STUDIO',
+    'marketing.features.title': 'Cuatro funciones principales.',
+    'marketing.features.subtitle': 'Una plataforma.',
+    'marketing.features.description': 'Reemplaza múltiples sistemas con una solución única e integrada que maneja todos los aspectos de la gestión de ensayos clínicos.',
+    'marketing.integration.title': 'Todo se conecta.',
+    'marketing.integration.description': 'Deja de gestionar múltiples proveedores y plataformas. STUDIO integra todas las funciones esenciales de ensayos clínicos en un sistema cohesivo.',
+    'marketing.patient.title': 'Diseño centrado en el paciente.',
+    'marketing.patient.description': 'La primera plataforma de ensayos clínicos construida pensando en los participantes. Nuestro portal dedicado al paciente da a los participantes acceso directo a su información del estudio, creando mejor participación y tasas de retención más altas.',
+    'marketing.patient.mobile': 'Interfaz optimizada para móviles',
+    'marketing.patient.updates': 'Actualizaciones del estudio en tiempo real',
+    'marketing.patient.questionnaires': 'Finalización simplificada de cuestionarios',
+    'marketing.cta.title': '¿Listo para simplificar tus ensayos?',
+    'marketing.cta.description': 'Únete a equipos de investigación que han optimizado sus operaciones clínicas con STUDIO.',
+    'marketing.cta.button': 'Comenzar',
+    'marketing.signin': 'Iniciar Sesión',
+    'marketing.privacy': 'Privacidad',
+    'marketing.terms': 'Términos',
+    'marketing.contact': 'Contacto',
   }
 };
 

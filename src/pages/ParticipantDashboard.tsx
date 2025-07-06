@@ -12,7 +12,7 @@ import QuestionnairesView from "@/components/QuestionnairesView";
 import AIChatbot from "@/components/AIChatbot";
 import EConsentDialog from "@/components/EConsentDialog";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode, Signature, Building, Settings, Scale } from "lucide-react";
+import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode, Signature, Building, Settings, Scale, BookOpen } from "lucide-react";
 const ParticipantDashboard = () => {
   const {
     t,
@@ -26,6 +26,7 @@ const ParticipantDashboard = () => {
   const [showEConsent, setShowEConsent] = useState(false);
   const [eConsentMode, setEConsentMode] = useState<'sign' | 'view'>('sign');
   const [surveyCompleted, setSurveyCompleted] = useState(false);
+  const [plsSignedUp, setPlsSignedUp] = useState(false);
   const studyProgress = 65;
   const daysLeft = 30;
   const participantToken = "PTK-9283-WZ1";
@@ -58,6 +59,11 @@ const ParticipantDashboard = () => {
   };
   const handleExportPDF = () => {
     alert(t('activity.pdf.export'));
+  };
+
+  const handlePlsSignup = () => {
+    setPlsSignedUp(true);
+    alert(t('pls.success'));
   };
   const getActivityIcon = (type: string) => {
     switch (type) {
@@ -531,6 +537,17 @@ const ParticipantDashboard = () => {
               <Button variant="studio" className="w-full justify-start" onClick={handleExportPDF}>
                 <Download className="h-4 w-4 mr-2" />
                 {t('profile.export.pdf')}
+              </Button>
+
+              {/* Plain Language Summary Signup */}
+              <Button 
+                variant={plsSignedUp ? "secondary" : "studio"} 
+                className="w-full justify-start" 
+                onClick={handlePlsSignup}
+                disabled={plsSignedUp}
+              >
+                <BookOpen className="h-4 w-4 mr-2" />
+                {plsSignedUp ? t('pls.already.signed') : t('pls.signup')}
               </Button>
 
               <Card className="bg-blue-50 border-blue-200">
