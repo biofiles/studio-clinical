@@ -4,11 +4,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import Header from "@/components/Header";
-import { Users, FileCheck, AlertTriangle, BarChart3, Calendar, UserCheck, MessageCircle, Download, Settings, QrCode } from "lucide-react";
+import { Users, FileCheck, AlertTriangle, BarChart3, Calendar, UserCheck, MessageCircle, Download, Settings, QrCode, Globe } from "lucide-react";
 import ParticipantList from "@/components/ParticipantList";
 import AIChatbot from "@/components/AIChatbot";
 import CalendarManagement from "@/components/CalendarManagement";
 import BarcodeScanner from "@/components/BarcodeScanner";
+import FHIRExportDialog from "@/components/FHIRExportDialog";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +23,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
   const [showChatbot, setShowChatbot] = useState(false);
   const [showCalendarManagement, setShowCalendarManagement] = useState(false);
   const [showBarcodeScanner, setShowBarcodeScanner] = useState(false);
+  const [showFHIRExport, setShowFHIRExport] = useState(false);
   const { t } = useLanguage();
   const { selectedStudy } = useStudy();
   const navigate = useNavigate();
@@ -251,6 +253,14 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
               <Button 
                 variant="studio" 
                 className="w-full justify-start"
+                onClick={() => setShowFHIRExport(true)}
+              >
+                <Globe className="h-4 w-4 mr-2" />
+                Interoperabilidad FHIR
+              </Button>
+              <Button 
+                variant="studio" 
+                className="w-full justify-start"
                 onClick={handleExportQuestionnaires}
               >
                 <Download className="h-4 w-4 mr-2" />
@@ -352,6 +362,11 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
       <BarcodeScanner 
         open={showBarcodeScanner}
         onOpenChange={setShowBarcodeScanner}
+      />
+
+      <FHIRExportDialog 
+        open={showFHIRExport}
+        onOpenChange={setShowFHIRExport}
       />
     </div>
   );
