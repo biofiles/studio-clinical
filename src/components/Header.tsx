@@ -59,10 +59,6 @@ const Header = ({
               <Settings className="h-4 w-4 mr-2" />
               {t('header.settings')}
             </Button>
-            <Button variant="outline" size="sm" onClick={handleLogout}>
-              <LogOut className="h-4 w-4 mr-2" />
-              Cerrar Sesión
-            </Button>
           </div>
         </div>
       </div>
