@@ -1,9 +1,5 @@
 // FHIR Client for Clinical Research Data
-import { createClient } from "@supabase/supabase-js";
-
-const supabaseUrl = "https://xwixpiyptdykphqqfyru.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3aXhwaXlwdGR5a3BocXFmeXJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1MDcyMDQsImV4cCI6MjA2NzA4MzIwNH0.giE_0Mwzvs_TZHdqY1Q13WOc68GaqIyh18F445oefsQ";
-const supabase = createClient(supabaseUrl, supabaseKey);
+// Using direct API calls since we can't import supabase client in this context
 import { 
   FHIRPatient, 
   FHIRResearchStudy, 
@@ -159,12 +155,20 @@ export class FHIRClient {
   // Export data to FHIR Bundle
   async exportToFHIRBundle(studyId: string): Promise<FHIRBundle> {
     try {
-      const { data, error } = await supabase.functions.invoke('fhir-export', {
-        body: { studyId }
+      const response = await fetch(`https://xwixpiyptdykphqqfyru.supabase.co/functions/v1/fhir-export`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3aXhwaXlwdGR5a3BocXFmeXJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1MDcyMDQsImV4cCI6MjA2NzA4MzIwNH0.giE_0Mwzvs_TZHdqY1Q13WOc68GaqIyh18F445oefsQ`
+        },
+        body: JSON.stringify({ studyId })
       });
       
-      if (error) throw error;
-      return data;
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      return await response.json();
     } catch (error) {
       console.error('FHIR Export Error:', error);
       throw error;
@@ -174,12 +178,20 @@ export class FHIRClient {
   // Import FHIR Bundle
   async importFHIRBundle(bundle: FHIRBundle): Promise<any> {
     try {
-      const { data, error } = await supabase.functions.invoke('fhir-import', {
-        body: { bundle }
+      const response = await fetch(`https://xwixpiyptdykphqqfyru.supabase.co/functions/v1/fhir-import`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3aXhwaXlwdGR5a3BocXFmeXJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1MDcyMDQsImV4cCI6MjA2NzA4MzIwNH0.giE_0Mwzvs_TZHdqY1Q13WOc68GaqIyh18F445oefsQ`
+        },
+        body: JSON.stringify({ bundle })
       });
       
-      if (error) throw error;
-      return data;
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      return await response.json();
     } catch (error) {
       console.error('FHIR Import Error:', error);
       throw error;
@@ -189,12 +201,20 @@ export class FHIRClient {
   // Validate FHIR Resource
   async validateResource(resource: any): Promise<any> {
     try {
-      const { data, error } = await supabase.functions.invoke('fhir-validate', {
-        body: { resource }
+      const response = await fetch(`https://xwixpiyptdykphqqfyru.supabase.co/functions/v1/fhir-validate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3aXhwaXlwdGR5a3BocXFmeXJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1MDcyMDQsImV4cCI6MjA2NzA4MzIwNH0.giE_0Mwzvs_TZHdqY1Q13WOc68GaqIyh18F445oefsQ`
+        },
+        body: JSON.stringify({ resource })
       });
       
-      if (error) throw error;
-      return data;
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      return await response.json();
     } catch (error) {
       console.error('FHIR Validation Error:', error);
       throw error;
@@ -204,17 +224,25 @@ export class FHIRClient {
   // Send to external FHIR server
   async sendToFHIRServer(endpoint: string, resource: any, headers?: Record<string, string>): Promise<any> {
     try {
-      const { data, error } = await supabase.functions.invoke('fhir-client', {
-        body: { 
+      const response = await fetch(`https://xwixpiyptdykphqqfyru.supabase.co/functions/v1/fhir-client`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3aXhwaXlwdGR5a3BocXFmeXJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1MDcyMDQsImV4cCI6MjA2NzA4MzIwNH0.giE_0Mwzvs_TZHdqY1Q13WOc68GaqIyh18F445oefsQ`
+        },
+        body: JSON.stringify({ 
           endpoint, 
           resource, 
           headers: headers || {},
           method: 'POST'
-        }
+        })
       });
       
-      if (error) throw error;
-      return data;
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      return await response.json();
     } catch (error) {
       console.error('FHIR Client Error:', error);
       throw error;
@@ -224,17 +252,25 @@ export class FHIRClient {
   // Query external FHIR server
   async queryFHIRServer(endpoint: string, params?: Record<string, string>, headers?: Record<string, string>): Promise<any> {
     try {
-      const { data, error } = await supabase.functions.invoke('fhir-client', {
-        body: { 
+      const response = await fetch(`https://xwixpiyptdykphqqfyru.supabase.co/functions/v1/fhir-client`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3aXhwaXlwdGR5a3BocXFmeXJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1MDcyMDQsImV4cCI6MjA2NzA4MzIwNH0.giE_0Mwzvs_TZHdqY1Q13WOc68GaqIyh18F445oefsQ`
+        },
+        body: JSON.stringify({ 
           endpoint, 
           params: params || {},
           headers: headers || {},
           method: 'GET'
-        }
+        })
       });
       
-      if (error) throw error;
-      return data;
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      return await response.json();
     } catch (error) {
       console.error('FHIR Query Error:', error);
       throw error;
