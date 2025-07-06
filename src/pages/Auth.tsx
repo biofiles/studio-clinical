@@ -30,39 +30,27 @@ const Auth = () => {
   const [redirecting, setRedirecting] = useState(false);
   const [userRole, setUserRole] = useState<string | null>(null);
 
-  // Get user role and handle redirect
+  // Get user role for already logged in users
   useEffect(() => {
-    if (user && !forceLogin && !redirecting) {
+    if (user && !userRole) {
+      getUserRole().then(setUserRole);
+    }
+  }, [user, userRole, getUserRole]);
+
+  // Handle redirect for already logged in users (not forced to show login)
+  useEffect(() => {
+    if (user && userRole && !forceLogin && !redirecting) {
       setRedirecting(true);
       
-      const handleRedirect = async () => {
-        try {
-          const role = await getUserRole();
-          setUserRole(role);
-          
-          if (role === 'participant') {
-            navigate('/participant', { replace: true });
-          } else if (role === 'investigator') {
-            navigate('/investigator', { replace: true });
-          } else if (role === 'cro_sponsor') {
-            navigate('/cro-sponsor', { replace: true });
-          } else {
-            toast({
-              title: 'Error',
-              description: 'No se encontró un rol asignado para este usuario.',
-              variant: 'destructive'
-            });
-            setRedirecting(false);
-          }
-        } catch (error) {
-          console.error('Error during redirect:', error);
-          setRedirecting(false);
-        }
-      };
-      
-      handleRedirect();
+      if (userRole === 'participant') {
+        navigate('/participant', { replace: true });
+      } else if (userRole === 'investigator') {
+        navigate('/investigator', { replace: true });
+      } else if (userRole === 'cro_sponsor') {
+        navigate('/cro-sponsor', { replace: true });
+      }
     }
-  }, [user, forceLogin, redirecting, navigate, getUserRole, toast]);
+  }, [user, userRole, forceLogin, redirecting, navigate]);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
@@ -80,7 +68,36 @@ const Auth = () => {
         return;
       }
       
-      // Let the useEffect handle the redirect
+      // Wait a bit for the auth state to update, then get role and redirect
+      setTimeout(async () => {
+        try {
+          const role = await getUserRole();
+          setUserRole(role);
+          
+          if (role === 'participant') {
+            navigate('/participant', { replace: true });
+          } else if (role === 'investigator') {
+            navigate('/investigator', { replace: true });
+          } else if (role === 'cro_sponsor') {
+            navigate('/cro-sponsor', { replace: true });
+          } else {
+            toast({
+              title: 'Error',
+              description: 'No se encontró un rol asignado para este usuario.',
+              variant: 'destructive'
+            });
+            setSubmitting(false);
+          }
+        } catch (error) {
+          console.error('Error getting user role:', error);
+          toast({
+            title: 'Error',
+            description: 'Error al obtener el rol del usuario',
+            variant: 'destructive'
+          });
+          setSubmitting(false);
+        }
+      }, 100);
       
     } catch (error) {
       toast({
