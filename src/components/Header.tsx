@@ -1,47 +1,23 @@
 import { Button } from "@/components/ui/button";
-import { Settings, LogOut } from "lucide-react";
+import { Settings } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
-import { useAuth } from "@/contexts/AuthContext";
 import StudyDropdown from "@/components/StudyDropdown";
 
 interface HeaderProps {
   role?: string;
-  onLogout?: () => void;
 }
 
 const Header = ({
-  role,
-  onLogout
+  role
 }: HeaderProps) => {
   const navigate = useNavigate();
   const { t } = useLanguage();
   const { selectedStudy } = useStudy();
-  const { signOut } = useAuth();
 
   const handleSettings = () => {
     navigate('/settings');
-  };
-
-  const handleLogout = async () => {
-    try {
-      await signOut();
-      navigate('/');
-    } catch (error) {
-      console.error('Error during logout:', error);
-    }
-  };
-
-  const getRoleDisplay = (role: string) => {
-    switch (role) {
-      case 'investigator':
-        return 'Site';
-      case 'cro-sponsor':
-        return 'Sponsor/CRO';
-      default:
-        return role?.replace('-', '/');
-    }
   };
 
   return (
@@ -58,10 +34,6 @@ const Header = ({
             <Button variant="outline" size="sm" onClick={handleSettings}>
               <Settings className="h-4 w-4 mr-2" />
               {t('header.settings')}
-            </Button>
-            <Button variant="outline" size="sm" onClick={handleLogout}>
-              <LogOut className="h-4 w-4 mr-2" />
-              Cerrar Sesión
             </Button>
           </div>
         </div>
