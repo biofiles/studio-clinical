@@ -724,9 +724,9 @@ const CROSponsorDashboard = () => {
                       className="w-full justify-start h-auto py-3"
                       onClick={() => toast.success("Generating Site Users Report...", { description: "Report will be available for download shortly" })}
                     >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
-                        <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.site.users.report')}</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Detailed site investigator and staff activity report</span>
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
+                        <span className="font-medium text-sm sm:text-base truncate w-full">{t('cro.site.users.report')}</span>
+                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words w-full overflow-hidden">Detailed site investigator and staff activity report</span>
                       </div>
                       <Download className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
@@ -736,9 +736,9 @@ const CROSponsorDashboard = () => {
                       className="w-full justify-start h-auto py-3"
                       onClick={() => toast.success("Generating Questionnaire Report...", { description: "Comprehensive questionnaire data compilation started" })}
                     >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
-                        <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.questionnaire.report')}</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Complete questionnaire responses and compliance data</span>
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
+                        <span className="font-medium text-sm sm:text-base truncate w-full">{t('cro.questionnaire.report')}</span>
+                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words w-full overflow-hidden">Complete questionnaire responses and compliance data</span>
                       </div>
                       <Download className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
@@ -748,9 +748,9 @@ const CROSponsorDashboard = () => {
                       className="w-full justify-start h-auto py-3"
                       onClick={() => toast.success("Generating Milestones Report...", { description: "Study timeline and milestone tracking report in progress" })}
                     >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
-                        <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.milestones.report')}</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Timeline tracking and milestone achievement analysis</span>
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
+                        <span className="font-medium text-sm sm:text-base truncate w-full">{t('cro.milestones.report')}</span>
+                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words w-full overflow-hidden">Timeline tracking and milestone achievement analysis</span>
                       </div>
                       <Download className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
@@ -773,9 +773,9 @@ const CROSponsorDashboard = () => {
                       className="w-full justify-start h-auto py-3"
                       onClick={() => setShowFHIRExport(true)}
                     >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
-                        <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.export.fhir')}</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Export study data in FHIR R4 format for regulatory submission</span>
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
+                        <span className="font-medium text-sm sm:text-base truncate w-full">{t('cro.export.fhir')}</span>
+                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words w-full overflow-hidden">Export study data in FHIR R4 format for regulatory submission</span>
                       </div>
                       <Globe className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
@@ -785,9 +785,9 @@ const CROSponsorDashboard = () => {
                       className="w-full justify-start h-auto py-3"
                       onClick={() => toast.success("Initiating HL7 Export...", { description: "HL7 message format export for healthcare systems integration" })}
                     >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
-                        <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.export.hl7')}</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Generate HL7 messages for healthcare system integration</span>
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
+                        <span className="font-medium text-sm sm:text-base truncate w-full">{t('cro.export.hl7')}</span>
+                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words w-full overflow-hidden">Generate HL7 messages for healthcare system integration</span>
                       </div>
                       <FileText className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
@@ -797,9 +797,9 @@ const CROSponsorDashboard = () => {
                       className="w-full justify-start h-auto py-3"
                       onClick={() => toast.success("Connecting to CDISC API...", { description: "Validating study data against CDISC STDM standards" })}
                     >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
-                        <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.validate.cdisc')}</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Validate against CDISC Study Data Tabulation Model</span>
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
+                        <span className="font-medium text-sm sm:text-base truncate w-full">{t('cro.validate.cdisc')}</span>
+                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words w-full overflow-hidden">Validate against CDISC Study Data Tabulation Model</span>
                       </div>
                       <Shield className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
