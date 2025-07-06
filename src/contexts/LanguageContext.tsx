@@ -368,7 +368,6 @@ const translations = {
     'participant.account.created': 'Account Created Successfully!',
     'participant.login.email': 'Login Email',
     'participant.temp.password': 'Temporary Password',
-    'participant.token': 'Participant Token',
     'participant.copy.all': 'Copy All Credentials',
     'participant.generate.qr': 'Generate QR Code',
     'participant.send.email': 'Send via Email',
