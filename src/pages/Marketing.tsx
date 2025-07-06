@@ -9,18 +9,26 @@ import {
   ArrowRight,
   Check,
   ChevronRight,
-  Activity
+  Activity,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useTheme } from 'next-themes';
 
 const Marketing = () => {
   const [isVisible, setIsVisible] = useState(false);
   const { t, language, setLanguage } = useLanguage();
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
 
   const coreFeatures = [
     {
@@ -73,16 +81,28 @@ const Marketing = () => {
               <select 
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
-                className="bg-transparent text-sm font-medium text-gray-600 border-none outline-none cursor-pointer hover:text-gray-900 transition-colors"
+                className="bg-transparent text-sm font-medium text-gray-600 border-none outline-none cursor-pointer hover:text-gray-900 transition-colors dark:text-gray-400 dark:hover:text-gray-100"
               >
                 <option value="spanish">Español</option>
                 <option value="english">English</option>
               </select>
-              <Link to="/auth">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={toggleTheme}
+                className="h-8 w-8 p-0 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+              >
+                {theme === 'dark' ? (
+                  <Sun className="h-4 w-4" />
+                ) : (
+                  <Moon className="h-4 w-4" />
+                )}
+              </Button>
+              <Link to="/auth?force=true">
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                  className="text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 dark:text-gray-400 dark:hover:text-gray-100 dark:hover:bg-gray-800"
                 >
                   {t('marketing.signin')}
                 </Button>
@@ -106,10 +126,10 @@ const Marketing = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link to="/auth">
+              <Link to="/auth?force=true">
                 <Button 
                   size="lg" 
-                  className="px-8 py-4 text-base font-medium rounded-full bg-black text-white hover:bg-gray-800 transition-all duration-300 shadow-sm hover:shadow-lg"
+                  className="px-8 py-4 text-base font-medium rounded-full bg-black text-white hover:bg-gray-800 transition-all duration-300 shadow-sm hover:shadow-lg dark:bg-white dark:text-black dark:hover:bg-gray-200"
                 >
                   {t('marketing.hero.cta')}
                   <ArrowRight className="ml-2 w-4 h-4" />
@@ -282,10 +302,10 @@ const Marketing = () => {
           <p className="text-xl text-gray-600 mb-12 font-light">
             {t('marketing.cta.description')}
           </p>
-          <Link to="/auth">
+          <Link to="/auth?force=true">
             <Button 
               size="lg" 
-              className="px-8 py-4 text-base font-medium rounded-full bg-black text-white hover:bg-gray-800 transition-all duration-300 shadow-sm hover:shadow-lg"
+              className="px-8 py-4 text-base font-medium rounded-full bg-black text-white hover:bg-gray-800 transition-all duration-300 shadow-sm hover:shadow-lg dark:bg-white dark:text-black dark:hover:bg-gray-200"
             >
               {t('marketing.cta.button')}
             </Button>

@@ -46,7 +46,7 @@ const Index = () => {
                   Learn More
                 </Button>
               </Link>
-              <Link to="/auth">
+              <Link to="/auth?force=true">
                 <Button className="shadow-lg hover:shadow-xl transition-all duration-300">
                   Sign In
                 </Button>
@@ -69,7 +69,7 @@ const Index = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Link to="/auth">
+              <Link to="/auth?force=true">
                 <Button size="lg" className="px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300 group">
                   Get Started
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

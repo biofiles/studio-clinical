@@ -27,12 +27,12 @@ const Header = ({
   const handleLogout = async () => {
     try {
       await signOut();
-      // Force navigation to marketing page instead of home
-      window.location.href = '/marketing';
+      // Force navigation to auth page with force parameter to show login form
+      window.location.href = '/auth?force=true';
     } catch (error) {
       console.error('Error during logout:', error);
-      // Even if logout fails, redirect to marketing
-      window.location.href = '/marketing';
+      // Even if logout fails, redirect to auth with force
+      window.location.href = '/auth?force=true';
     }
   };
 

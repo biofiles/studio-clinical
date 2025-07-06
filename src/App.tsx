@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { StudyProvider } from "./contexts/StudyContext";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -23,51 +24,53 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <LanguageProvider>
-        <StudyProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/marketing" element={<Marketing />} />
-                <Route path="/auth" element={<Auth />} />
-                <Route path="/select-study" element={
-                  <ProtectedRoute>
-                    <StudySelection />
-                  </ProtectedRoute>
-                } />
-                <Route path="/participant" element={
-                  <ProtectedRoute>
-                    <ParticipantDashboard />
-                  </ProtectedRoute>
-                } />
-                <Route path="/investigator" element={
-                  <ProtectedRoute>
-                    <InvestigatorDashboard />
-                  </ProtectedRoute>
-                } />
-                <Route path="/cro-sponsor" element={
-                  <ProtectedRoute>
-                    <CROSponsorDashboard />
-                  </ProtectedRoute>
-                } />
-                <Route path="/settings" element={
-                  <ProtectedRoute>
-                    <Settings />
-                  </ProtectedRoute>
-                } />
-                <Route path="/unauthorized" element={<Unauthorized />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </TooltipProvider>
-        </StudyProvider>
-      </LanguageProvider>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <LanguageProvider>
+          <StudyProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/marketing" element={<Marketing />} />
+                  <Route path="/auth" element={<Auth />} />
+                  <Route path="/select-study" element={
+                    <ProtectedRoute>
+                      <StudySelection />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/participant" element={
+                    <ProtectedRoute>
+                      <ParticipantDashboard />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/investigator" element={
+                    <ProtectedRoute>
+                      <InvestigatorDashboard />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/cro-sponsor" element={
+                    <ProtectedRoute>
+                      <CROSponsorDashboard />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/settings" element={
+                    <ProtectedRoute>
+                      <Settings />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/unauthorized" element={<Unauthorized />} />
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </TooltipProvider>
+          </StudyProvider>
+        </LanguageProvider>
+      </AuthProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 
