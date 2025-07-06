@@ -743,7 +743,7 @@ const CROSponsorDashboard = () => {
                       <Download className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
                     
-                    <Button 
+                     <Button 
                       variant="outline" 
                       className="w-full justify-start h-auto py-3"
                       onClick={() => toast.success("Generating Milestones Report...", { description: "Study timeline and milestone tracking report in progress" })}
@@ -751,6 +751,18 @@ const CROSponsorDashboard = () => {
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
                         <span className="font-medium text-sm sm:text-base truncate w-full">{t('cro.milestones.report')}</span>
                         <span className="text-xs text-studio-text-muted line-clamp-2 break-words w-full overflow-hidden">Timeline tracking and milestone achievement analysis</span>
+                      </div>
+                      <Download className="h-4 w-4 ml-2 flex-shrink-0" />
+                    </Button>
+                    
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start h-auto py-3"
+                      onClick={() => toast.success("Generating eConsent Report...", { description: "Electronic consent status and signature tracking report" })}
+                    >
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
+                        <span className="font-medium text-sm sm:text-base truncate w-full">eConsent Report</span>
+                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words w-full overflow-hidden">Electronic consent signatures, versions, and compliance tracking</span>
                       </div>
                       <Download className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
