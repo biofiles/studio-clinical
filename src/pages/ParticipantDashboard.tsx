@@ -13,12 +13,16 @@ import AIChatbot from "@/components/AIChatbot";
 import EConsentDialog from "@/components/EConsentDialog";
 import PlsSignupDialog from "@/components/PlsSignupDialog";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode, Signature, Building, Settings, Scale, BookOpen } from "lucide-react";
+
 const ParticipantDashboard = () => {
   const {
     t,
     language
   } = useLanguage();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [showCalendar, setShowCalendar] = useState(false);
   const [showQuestionnaires, setShowQuestionnaires] = useState(false);
@@ -29,6 +33,7 @@ const ParticipantDashboard = () => {
   const [eConsentMode, setEConsentMode] = useState<'sign' | 'view'>('sign');
   const [surveyCompleted, setSurveyCompleted] = useState(false);
   const [plsSignedUp, setPlsSignedUp] = useState(false);
+  const [participantData, setParticipantData] = useState<any>(null);
 
   // Load PLS signup status from localStorage
   useEffect(() => {
@@ -37,9 +42,44 @@ const ParticipantDashboard = () => {
       setPlsSignedUp(true);
     }
   }, []);
+
+  // Fetch participant data for the current user
+  useEffect(() => {
+    const fetchParticipantData = async () => {
+      if (!user?.id) return;
+
+      try {
+        // Get user roles to find participant data
+        const { data: userRoles } = await supabase
+          .from('user_roles')
+          .select('study_id')
+          .eq('user_id', user.id)
+          .eq('role', 'participant')
+          .single();
+
+        if (userRoles?.study_id) {
+          // Get participant data
+          const { data: participant } = await supabase
+            .from('participants')
+            .select('*, studies(*)')
+            .eq('study_id', userRoles.study_id)
+            .single();
+
+          if (participant) {
+            setParticipantData(participant);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching participant data:', error);
+      }
+    };
+
+    fetchParticipantData();
+  }, [user]);
+
   const studyProgress = 65;
   const daysLeft = 30;
-  const participantToken = "PTK-9283-WZ1";
+  const participantToken = participantData?.subject_id || "PTK-9283-WZ1";
   const upcomingActivities = [{
     date: t('common.next'),
     activity: t('activity.weekly.survey'),
@@ -604,7 +644,9 @@ const ParticipantDashboard = () => {
         open={showPlsDialog} 
         onOpenChange={setShowPlsDialog}
         onConfirm={handlePlsConfirm}
-        userEmail="participant@example.com"
+        userEmail={user?.email || "participant@example.com"}
+        participantId={participantData?.id}
+        studyId={participantData?.study_id}
       />
     </div>;
 };

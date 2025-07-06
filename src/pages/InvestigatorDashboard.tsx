@@ -15,6 +15,7 @@ import BarcodeScanner from "@/components/BarcodeScanner";
 import FHIRExportDialog from "@/components/FHIRExportDialog";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
+import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const InvestigatorDashboard = () => {
@@ -29,6 +30,7 @@ const InvestigatorDashboard = () => {
   const [plsSignedUp, setPlsSignedUp] = useState(false);
   const { t } = useLanguage();
   const { selectedStudy } = useStudy();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   // Redirect to study selection if no study is selected
@@ -420,7 +422,7 @@ const InvestigatorDashboard = () => {
         open={showPlsDialog} 
         onOpenChange={setShowPlsDialog}
         onConfirm={handlePlsConfirm}
-        userEmail="investigator@example.com"
+        userEmail={user?.email || "investigator@example.com"}
       />
     </div>
   );

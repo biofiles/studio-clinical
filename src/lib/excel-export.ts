@@ -235,3 +235,37 @@ export const fetchParticipantsData = async (studyId?: string) => {
     return [];
   }
 };
+
+export const fetchStudyResultsSignupsData = async (studyId?: string) => {
+  try {
+    let query = supabase
+      .from('study_results_signups')
+      .select(`
+        *,
+        participants(subject_id, first_name, last_name),
+        studies(name, protocol, sponsor)
+      `);
+
+    if (studyId) {
+      query = query.eq('study_id', studyId);
+    }
+
+    const { data, error } = await query;
+
+    if (error) throw error;
+
+    return data?.map(signup => ({
+      'Participant ID': signup.participants?.subject_id || 'N/A',
+      'Participant Name': `${signup.participants?.first_name || ''} ${signup.participants?.last_name || ''}`.trim() || 'N/A',
+      'Email': signup.email,
+      'Study Name': signup.studies?.name || 'N/A',
+      'Protocol': signup.studies?.protocol || 'N/A',
+      'Sponsor': signup.studies?.sponsor || 'N/A',
+      'Signed Up Date': new Date(signup.signed_up_at).toLocaleDateString(),
+      'Signed Up Time': new Date(signup.signed_up_at).toLocaleTimeString()
+    })) || [];
+  } catch (error) {
+    console.error('Error fetching study results signups data:', error);
+    return [];
+  }
+};

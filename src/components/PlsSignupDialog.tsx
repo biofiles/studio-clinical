@@ -5,15 +5,19 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Mail, BookOpen } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 interface PlsSignupDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onConfirm: (emails: string[]) => void;
   userEmail?: string;
+  participantId?: string;
+  studyId?: string;
 }
 
-const PlsSignupDialog = ({ open, onOpenChange, onConfirm, userEmail = "" }: PlsSignupDialogProps) => {
+const PlsSignupDialog = ({ open, onOpenChange, onConfirm, userEmail = "", participantId, studyId }: PlsSignupDialogProps) => {
   const { t } = useLanguage();
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -45,10 +49,45 @@ const PlsSignupDialog = ({ open, onOpenChange, onConfirm, userEmail = "" }: PlsS
     setIsSubmitting(true);
     
     try {
+      // Save to database if we have the required data
+      if (participantId && studyId) {
+        // Check if signup already exists
+        const { data: existingSignup } = await supabase
+          .from('study_results_signups')
+          .select('id')
+          .eq('participant_id', participantId)
+          .eq('email', trimmedEmail)
+          .single();
+
+        if (existingSignup) {
+          toast.error("Already signed up", { description: "This email is already registered for study results." });
+          setIsSubmitting(false);
+          return;
+        }
+
+        const { error } = await supabase
+          .from('study_results_signups')
+          .insert({
+            participant_id: participantId,
+            study_id: studyId,
+            email: trimmedEmail
+          });
+
+        if (error) throw error;
+
+        toast.success(t('pls.success'));
+      } else {
+        // Fallback to localStorage for non-participant users (investigators, etc.)
+        localStorage.setItem('pls-signed-up', 'true');
+        localStorage.setItem('pls-signup-emails', JSON.stringify([trimmedEmail]));
+        toast.success(t('pls.success'));
+      }
+
       onConfirm([trimmedEmail]);
       onOpenChange(false);
     } catch (error) {
-      console.error('Error confirming PLS signup:', error);
+      console.error('Error saving PLS signup:', error);
+      toast.error("Signup failed", { description: "Unable to save your signup. Please try again." });
     } finally {
       setIsSubmitting(false);
     }

@@ -20,7 +20,8 @@ import {
   fetchQuestionnaireData, 
   fetchMilestonesData, 
   fetchEConsentData,
-  fetchParticipantsData 
+  fetchParticipantsData,
+  fetchStudyResultsSignupsData 
 } from "@/lib/excel-export";
 const CROSponsorDashboard = () => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
@@ -819,6 +820,30 @@ const CROSponsorDashboard = () => {
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
                         <span className="font-medium text-sm sm:text-base truncate w-full">eConsent Report</span>
                         <span className="text-xs text-studio-text-muted line-clamp-2 break-words w-full overflow-hidden">Electronic consent signatures, versions, and compliance tracking</span>
+                      </div>
+                      <Download className="h-4 w-4 ml-2 flex-shrink-0" />
+                    </Button>
+
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start h-auto py-3"
+                      onClick={async () => {
+                        try {
+                          const data = await fetchStudyResultsSignupsData(selectedStudy?.id);
+                          exportToExcel([{
+                            sheetName: 'Study Results Signups',
+                            data,
+                            headers: ['Participant ID', 'Participant Name', 'Email', 'Study Name', 'Protocol', 'Sponsor', 'Signed Up Date', 'Signed Up Time']
+                          }], 'Study_Results_Signups_Report');
+                          toast.success("Study Results Signups Report Generated", { description: "Plain language summary signups report downloaded successfully" });
+                        } catch (error) {
+                          toast.error("Export Failed", { description: "Unable to generate study results signups report" });
+                        }
+                      }}
+                    >
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
+                        <span className="font-medium text-sm sm:text-base truncate w-full">Study Results Summary Signups</span>
+                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words w-full overflow-hidden">Participants signed up for plain language study results summary</span>
                       </div>
                       <Download className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>

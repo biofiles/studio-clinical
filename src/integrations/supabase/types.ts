@@ -199,6 +199,51 @@ export type Database = {
         }
         Relationships: []
       }
+      study_results_signups: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          participant_id: string | null
+          signed_up_at: string
+          study_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          participant_id?: string | null
+          signed_up_at?: string
+          study_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          participant_id?: string | null
+          signed_up_at?: string
+          study_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "study_results_signups_participant_id_fkey"
+            columns: ["participant_id"]
+            isOneToOne: false
+            referencedRelation: "participants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "study_results_signups_study_id_fkey"
+            columns: ["study_id"]
+            isOneToOne: false
+            referencedRelation: "studies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_activity_log: {
         Row: {
           activity_type: string
