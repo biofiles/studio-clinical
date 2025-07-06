@@ -53,18 +53,43 @@ const Auth = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
+    
     try {
+      console.log('Attempting login with:', email);
       const { error } = await signIn(email, password);
+      
       if (error) {
+        console.error('Login error:', error);
         toast({
           title: 'Error de autenticación',
           description: error.message,
           variant: 'destructive'
         });
         setSubmitting(false);
+        return;
       }
-      // Success will be handled by the useEffect redirect
+      
+      console.log('Login successful, getting user role...');
+      // After successful login, get role and redirect
+      const role = await getUserRole();
+      console.log('User role:', role);
+      
+      if (role === 'participant') {
+        navigate('/participant', { replace: true });
+      } else if (role === 'investigator') {
+        navigate('/investigator', { replace: true });
+      } else if (role === 'cro_sponsor') {
+        navigate('/cro-sponsor', { replace: true });
+      } else {
+        toast({
+          title: 'Error',
+          description: 'No se encontró un rol asignado para este usuario.',
+          variant: 'destructive'
+        });
+        setSubmitting(false);
+      }
     } catch (error) {
+      console.error('Login error:', error);
       toast({
         title: 'Error',
         description: 'Ocurrió un error inesperado',
