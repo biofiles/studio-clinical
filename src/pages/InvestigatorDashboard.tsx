@@ -121,7 +121,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
             {t('dashboard.title')}
           </h2>
           <p className="text-studio-text-muted">
-            {selectedStudy ? `${selectedStudy.protocol} | ${selectedStudy.name}` : t('dashboard.protocol')}
+            {selectedStudy ? `${selectedStudy.protocol} | ${selectedStudy.name} | ${selectedStudy.sponsor}` : t('dashboard.protocol')}
           </p>
         </div>
 
