@@ -406,11 +406,11 @@ const translations = {
     'bulk.template.note': 'Download the template to see the required format for bulk user import.',
     
     // Plain Language Summary
-    'pls.signup': 'Sign up for Plain Language Summary',
-    'pls.title': 'Plain Language Summary Signup',
-    'pls.description': 'Receive a plain language summary of study results once the study is completed',
-    'pls.success': 'Successfully signed up for plain language summary!',
-    'pls.already.signed': 'Already signed up for study summary',
+    'pls.signup': 'Receive study results summary when analysis is complete',
+    'pls.title': 'Study Results Summary Signup',
+    'pls.description': 'Receive a plain language summary of study results once data analysis is finished',
+    'pls.success': 'Successfully signed up! You will receive a plain language summary of the study results once data analysis is complete.',
+    'pls.already.signed': 'Already signed up for study results',
     
     // Marketing Page
     'marketing.hero.title': 'Clinical trials.',
@@ -753,11 +753,11 @@ const translations = {
     'alert.biomarker.analysis': 'Hito de análisis de biomarcadores completado',
     
     // Plain Language Summary (Spanish)
-    'pls.signup': 'Inscribirse para Resumen en Lenguaje Sencillo',
-    'pls.title': 'Inscripción para Resumen en Lenguaje Sencillo',
-    'pls.description': 'Recibe un resumen en lenguaje sencillo de los resultados del estudio una vez que se complete',
-    'pls.success': '¡Inscripción exitosa para resumen en lenguaje sencillo!',
-    'pls.already.signed': 'Ya inscrito para resumen del estudio',
+    'pls.signup': 'Recibir resumen de resultados cuando termine el análisis',
+    'pls.title': 'Inscripción para Resumen de Resultados del Estudio',
+    'pls.description': 'Recibe un resumen en lenguaje sencillo de los resultados del estudio una vez que termine el análisis de datos',
+    'pls.success': '¡Inscripción exitosa! Recibirás un resumen en lenguaje sencillo de los resultados del estudio una vez que termine el análisis de datos.',
+    'pls.already.signed': 'Ya inscrito para recibir resultados del estudio',
     
     // Marketing Page (Spanish)
     'marketing.hero.title': 'Ensayos clínicos.',
