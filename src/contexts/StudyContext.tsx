@@ -5,7 +5,7 @@ interface Study {
   name: string;
   protocol: string;
   phase: string;
-  status: 'active' | 'recruiting' | 'completed';
+  status: 'not_yet_recruiting' | 'recruiting' | 'enrolling_by_invitation' | 'active_not_recruiting' | 'suspended' | 'terminated' | 'completed' | 'withdrawn' | 'unknown';
   sites: number;
   participants: number;
   sponsor: string;
@@ -25,7 +25,7 @@ const mockStudies: Study[] = [
     name: 'PARADIGM-CV',
     protocol: 'NVS-4578-301',
     phase: 'Phase III',
-    status: 'active',
+    status: 'recruiting',
     sites: 18,
     participants: 385,
     sponsor: 'Novartis AG'
@@ -45,7 +45,7 @@ const mockStudies: Study[] = [
     name: 'HORIZON-Onc',
     protocol: 'RO-7198457-104',
     phase: 'Phase I/II',
-    status: 'active',
+    status: 'active_not_recruiting',
     sites: 9,
     participants: 94,
     sponsor: 'Roche Ltd.'
@@ -55,7 +55,7 @@ const mockStudies: Study[] = [
     name: 'GUARDIAN-Ped',
     protocol: 'JNJ-83475219-201',
     phase: 'Phase II/III',
-    status: 'recruiting',
+    status: 'enrolling_by_invitation',
     sites: 22,
     participants: 278,
     sponsor: 'Johnson & Johnson'

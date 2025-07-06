@@ -376,7 +376,7 @@ const CROSponsorDashboard = () => {
                       </div>
                       <div className="space-y-2">
                         <span className="text-sm text-studio-text-muted">{t('study.status')}</span>
-                        <p className="font-medium text-studio-text">{selectedStudy.status}</p>
+                        <p className="font-medium text-studio-text">{t(`study.status.${selectedStudy.status}`)}</p>
                       </div>
                       <div className="space-y-2">
                         <span className="text-sm text-studio-text-muted">{t('study.sites.count')}</span>
@@ -396,6 +396,50 @@ const CROSponsorDashboard = () => {
                     {studyData && (
                       <div className="space-y-4">
                         <h4 className="text-md font-medium text-studio-text border-b border-studio-border pb-2">{t('cro.performance.metrics')}</h4>
+                        
+                        {/* Recruitment and Site Metrics */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                          <Card className="bg-studio-bg border-studio-border">
+                            <CardHeader className="pb-3">
+                              <CardTitle className="text-sm text-studio-text">{t('study.recruitment.metrics')}</CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-3">
+                              <div className="flex justify-between">
+                                <span className="text-studio-text-muted text-sm">{t('study.recruitment.rate')}</span>
+                                <span className="text-studio-text text-sm font-medium">12.5 {t('study.patients.per.month')}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-studio-text-muted text-sm">{t('cro.current')}</span>
+                                <span className="text-studio-text text-sm">{studyData.participants.enrollment.current}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-studio-text-muted text-sm">{t('cro.target')}</span>
+                                <span className="text-studio-text text-sm">{studyData.participants.enrollment.target}</span>
+                              </div>
+                            </CardContent>
+                          </Card>
+                          
+                          <Card className="bg-studio-bg border-studio-border">
+                            <CardHeader className="pb-3">
+                              <CardTitle className="text-sm text-studio-text">{t('study.site.metrics')}</CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-3">
+                              <div className="flex justify-between">
+                                <span className="text-studio-text-muted text-sm">{t('study.sites.opened')}</span>
+                                <span className="text-studio-text text-sm font-medium">{selectedStudy.sites}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-studio-text-muted text-sm">{t('study.sites.planned')}</span>
+                                <span className="text-studio-text text-sm">{selectedStudy.sites + 3}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-studio-text-muted text-sm">{t('study.site.activation.rate')}</span>
+                                <span className="text-studio-text text-sm">45 {t('study.days.to.activate')}</span>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </div>
+                        
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           <Card className="bg-studio-bg border-studio-border">
                             <CardHeader className="pb-3">

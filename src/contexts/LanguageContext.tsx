@@ -239,9 +239,6 @@ const translations = {
     'study.selector.subtitle': 'Choose the study you want to access',
     'study.sites': 'sites',
     'study.participants': 'participants',
-    'study.status.active': 'Active',
-    'study.status.recruiting': 'Recruiting',
-    'study.status.completed': 'Completed',
     
     // CRO/Sponsor Dashboard
     'cro.portfolio.overview': 'Portfolio Overview',
@@ -297,7 +294,28 @@ const translations = {
     'study.sites.count': 'Sites',
     'study.participants.count': 'Participants',
     'study.status': 'Status',
-    'study.recent.alerts': 'Recent Alerts'
+    'study.recent.alerts': 'Recent Alerts',
+    
+    // ClinicalTrials.gov Status Values
+    'study.status.not.yet.recruiting': 'Not yet recruiting',
+    'study.status.recruiting': 'Recruiting',
+    'study.status.enrolling.by.invitation': 'Enrolling by invitation',
+    'study.status.active.not.recruiting': 'Active, not recruiting',
+    'study.status.suspended': 'Suspended',
+    'study.status.terminated': 'Terminated',
+    'study.status.completed': 'Completed',
+    'study.status.withdrawn': 'Withdrawn',
+    'study.status.unknown': 'Unknown status',
+    
+    // Recruitment and Site Metrics
+    'study.recruitment.metrics': 'Recruitment Metrics',
+    'study.site.metrics': 'Site Opening Metrics',
+    'study.recruitment.rate': 'Recruitment Rate',
+    'study.patients.per.month': 'patients/month',
+    'study.sites.opened': 'Sites Opened',
+    'study.sites.planned': 'Sites Planned',
+    'study.site.activation.rate': 'Site Activation Rate',
+    'study.days.to.activate': 'days to activate'
   },
   spanish: {
     // Header
@@ -528,9 +546,6 @@ const translations = {
     'study.selector.subtitle': 'Elige el estudio al que quieres acceder',
     'study.sites': 'sitios',
     'study.participants': 'participantes',
-    'study.status.active': 'Activo',
-    'study.status.recruiting': 'Reclutando',
-    'study.status.completed': 'Completado',
     
     // CRO/Sponsor Dashboard
     'cro.portfolio.overview': 'Resumen del Portafolio',
@@ -586,7 +601,28 @@ const translations = {
     'study.sites.count': 'Sitios',
     'study.participants.count': 'Participantes',
     'study.status': 'Estado',
-    'study.recent.alerts': 'Alertas Recientes'
+    'study.recent.alerts': 'Alertas Recientes',
+    
+    // ClinicalTrials.gov Status Values (Spanish)
+    'study.status.not.yet.recruiting': 'Aún no reclutando',
+    'study.status.recruiting': 'Reclutando',
+    'study.status.enrolling.by.invitation': 'Inscribiendo por invitación',
+    'study.status.active.not.recruiting': 'Activo, no reclutando',
+    'study.status.suspended': 'Suspendido',
+    'study.status.terminated': 'Terminado',
+    'study.status.completed': 'Completado',
+    'study.status.withdrawn': 'Retirado',
+    'study.status.unknown': 'Estado desconocido',
+    
+    // Recruitment and Site Metrics (Spanish)
+    'study.recruitment.metrics': 'Métricas de Reclutamiento',
+    'study.site.metrics': 'Métricas de Apertura de Sitios',
+    'study.recruitment.rate': 'Tasa de Reclutamiento',
+    'study.patients.per.month': 'pacientes/mes',
+    'study.sites.opened': 'Sitios Abiertos',
+    'study.sites.planned': 'Sitios Planificados',
+    'study.site.activation.rate': 'Tasa de Activación de Sitios',
+    'study.days.to.activate': 'días para activar'
   }
 };
 

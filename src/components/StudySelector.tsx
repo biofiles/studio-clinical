@@ -25,12 +25,24 @@ const StudySelector = ({ userRole }: StudySelectorProps) => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active':
-        return 'bg-progress-success/10 text-progress-success border-progress-success/20';
+      case 'not_yet_recruiting':
+        return 'bg-progress-gray/10 text-progress-gray border-progress-gray/20';
       case 'recruiting':
         return 'bg-progress-info/10 text-progress-info border-progress-info/20';
+      case 'enrolling_by_invitation':
+        return 'bg-progress-accent/10 text-progress-accent border-progress-accent/20';
+      case 'active_not_recruiting':
+        return 'bg-progress-success/10 text-progress-success border-progress-success/20';
+      case 'suspended':
+        return 'bg-progress-warning/10 text-progress-warning border-progress-warning/20';
+      case 'terminated':
+        return 'bg-progress-destructive/10 text-progress-destructive border-progress-destructive/20';
       case 'completed':
         return 'bg-progress-gray/10 text-progress-gray border-progress-gray/20';
+      case 'withdrawn':
+        return 'bg-progress-destructive/10 text-progress-destructive border-progress-destructive/20';
+      case 'unknown':
+        return 'bg-studio-border text-studio-text-muted';
       default:
         return 'bg-studio-border text-studio-text-muted';
     }
