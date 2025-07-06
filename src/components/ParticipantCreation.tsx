@@ -24,8 +24,7 @@ const ParticipantCreation = ({ open, onOpenChange }: ParticipantCreationProps) =
     last_name: "",
     email: "",
     date_of_birth: "",
-    gender: "",
-    ethnicity: ""
+    gender: ""
   });
   const [generatedCredentials, setGeneratedCredentials] = useState({
     email: "",
@@ -147,8 +146,7 @@ Please keep these credentials secure.
       last_name: "",
       email: "",
       date_of_birth: "",
-      gender: "",
-      ethnicity: ""
+      gender: ""
     });
     setGeneratedCredentials({ email: "", password: "", token: "" });
     onOpenChange(false);
@@ -237,23 +235,6 @@ Please keep these credentials secure.
               </div>
             </div>
             
-            <div>
-              <Label htmlFor="ethnicity">Ethnicity</Label>
-              <Select
-                value={participantForm.ethnicity}
-                onValueChange={(value) => setParticipantForm(prev => ({ ...prev, ethnicity: value }))}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select ethnicity" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="hispanic">Hispanic or Latino</SelectItem>
-                  <SelectItem value="not_hispanic">Not Hispanic or Latino</SelectItem>
-                  <SelectItem value="unknown">Unknown</SelectItem>
-                  <SelectItem value="not_reported">Not Reported</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
 
             <div className="flex justify-end space-x-2 pt-4">
               <Button variant="outline" onClick={handleClose}>
