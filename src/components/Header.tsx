@@ -39,20 +39,7 @@ const Header = ({
           <h1 className="text-2xl font-light tracking-widest text-studio-text">
             STUDIO
           </h1>
-          {role && role !== 'participant' && <div className="flex items-center space-x-4">
-              <span className="text-studio-text-muted">•</span>
-              <span className="text-sm text-studio-text-muted capitalize">
-                {getRoleDisplay(role)}
-              </span>
-              {role === 'investigator' && <>
-                  <span className="text-studio-text-muted">•</span>
-                  <StudyDropdown />
-                </>}
-              {role === 'cro-sponsor' && selectedStudy && <>
-                  
-                  
-                </>}
-            </div>}
+          {role && role !== 'participant'}
         </div>
 
         <div className="flex items-center space-x-3">
