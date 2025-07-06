@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Activity, Search, Calendar, User, Shield, Filter, Download, RefreshCw } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { toast } from "sonner";
 
 interface ActivityLog {
@@ -36,6 +37,7 @@ const UserActivityDashboard = ({ open, onOpenChange }: UserActivityDashboardProp
   const [dateFilter, setDateFilter] = useState("all");
 
   const { user } = useAuth();
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (open) {
@@ -194,7 +196,7 @@ const UserActivityDashboard = ({ open, onOpenChange }: UserActivityDashboardProp
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Activity className="h-5 w-5" />
-              <h2 className="text-xl font-semibold text-studio-text">User Activity Dashboard</h2>
+              <h2 className="text-xl font-semibold text-studio-text">{t('activity.dashboard')}</h2>
             </div>
             <Button variant="outline" onClick={() => onOpenChange(false)}>
               Close
@@ -209,7 +211,7 @@ const UserActivityDashboard = ({ open, onOpenChange }: UserActivityDashboardProp
               <CardContent className="p-4">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-studio-text">{activityStats.total}</div>
-                  <div className="text-sm text-studio-text-muted">Total Activities</div>
+                  <div className="text-sm text-studio-text-muted">{t('activity.total')}</div>
                 </div>
               </CardContent>
             </Card>
@@ -217,7 +219,7 @@ const UserActivityDashboard = ({ open, onOpenChange }: UserActivityDashboardProp
               <CardContent className="p-4">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-blue-600">{activityStats.today}</div>
-                  <div className="text-sm text-studio-text-muted">Today</div>
+                  <div className="text-sm text-studio-text-muted">{t('activity.today')}</div>
                 </div>
               </CardContent>
             </Card>
@@ -225,7 +227,7 @@ const UserActivityDashboard = ({ open, onOpenChange }: UserActivityDashboardProp
               <CardContent className="p-4">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-green-600">{activityStats.thisWeek}</div>
-                  <div className="text-sm text-studio-text-muted">This Week</div>
+                  <div className="text-sm text-studio-text-muted">{t('activity.week')}</div>
                 </div>
               </CardContent>
             </Card>
@@ -233,7 +235,7 @@ const UserActivityDashboard = ({ open, onOpenChange }: UserActivityDashboardProp
               <CardContent className="p-4">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-purple-600">{activityStats.uniqueUsers}</div>
-                  <div className="text-sm text-studio-text-muted">Active Users</div>
+                  <div className="text-sm text-studio-text-muted">{t('activity.active.users')}</div>
                 </div>
               </CardContent>
             </Card>
@@ -246,17 +248,17 @@ const UserActivityDashboard = ({ open, onOpenChange }: UserActivityDashboardProp
                 <div className="flex items-center space-x-2 flex-1">
                   <Search className="h-4 w-4 text-studio-text-muted" />
                   <Input
-                    placeholder="Search activities, users..."
+                    placeholder={t('activity.search.placeholder')}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
                 </div>
                 <Select value={activityTypeFilter} onValueChange={setActivityTypeFilter}>
                   <SelectTrigger className="w-48">
-                    <SelectValue placeholder="Activity Type" />
+                    <SelectValue placeholder={t('activity.type')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All Activities</SelectItem>
+                    <SelectItem value="all">{t('activity.all.activities')}</SelectItem>
                     {uniqueActivityTypes.map(type => (
                       <SelectItem key={type} value={type}>
                         {type.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
@@ -269,10 +271,10 @@ const UserActivityDashboard = ({ open, onOpenChange }: UserActivityDashboardProp
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All Time</SelectItem>
-                    <SelectItem value="today">Today</SelectItem>
-                    <SelectItem value="week">This Week</SelectItem>
-                    <SelectItem value="month">This Month</SelectItem>
+                    <SelectItem value="all">{t('activity.all.time')}</SelectItem>
+                    <SelectItem value="today">{t('activity.today')}</SelectItem>
+                    <SelectItem value="week">{t('activity.week')}</SelectItem>
+                    <SelectItem value="month">{t('activity.this.month')}</SelectItem>
                   </SelectContent>
                 </Select>
                 <Button variant="outline" size="sm" onClick={fetchActivities}>
@@ -285,21 +287,21 @@ const UserActivityDashboard = ({ open, onOpenChange }: UserActivityDashboardProp
           {/* Activity Table */}
           <Card>
             <CardHeader>
-              <CardTitle>Recent Activity</CardTitle>
+              <CardTitle>{t('activity.recent')}</CardTitle>
             </CardHeader>
             <CardContent>
               {loading ? (
                 <div className="text-center py-8">
-                  <p className="text-studio-text-muted">Loading activities...</p>
+                  <p className="text-studio-text-muted">{t('activity.loading')}</p>
                 </div>
               ) : (
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>User</TableHead>
-                      <TableHead>Activity</TableHead>
-                      <TableHead>Details</TableHead>
-                      <TableHead>Time</TableHead>
+                      <TableHead>{t('activity.user')}</TableHead>
+                      <TableHead>{t('activity.activity')}</TableHead>
+                      <TableHead>{t('activity.details')}</TableHead>
+                      <TableHead>{t('activity.time')}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -308,7 +310,7 @@ const UserActivityDashboard = ({ open, onOpenChange }: UserActivityDashboardProp
                         <TableCell>
                           <div>
                             <p className="font-medium text-studio-text">
-                              {activity.user_profile?.full_name || 'Unknown User'}
+                              {activity.user_profile?.full_name || t('activity.unknown.user')}
                             </p>
                             <p className="text-sm text-studio-text-muted">
                               {activity.user_profile?.email || activity.user_id}
@@ -344,7 +346,7 @@ const UserActivityDashboard = ({ open, onOpenChange }: UserActivityDashboardProp
 
               {!loading && filteredActivities.length === 0 && (
                 <div className="text-center py-8">
-                  <p className="text-studio-text-muted">No activities found</p>
+                  <p className="text-studio-text-muted">{t('activity.no.found')}</p>
                 </div>
               )}
             </CardContent>

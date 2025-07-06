@@ -11,6 +11,7 @@ import { Upload, Download, FileText, CheckCircle, AlertCircle, Users } from "luc
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useStudy } from "@/contexts/StudyContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { toast } from "sonner";
 
 interface BulkUserImportProps {
@@ -40,6 +41,7 @@ const BulkUserImport = ({ open, onOpenChange, userType }: BulkUserImportProps) =
   const [defaultStudy, setDefaultStudy] = useState('');
 
   const { user } = useAuth();
+  const { t } = useLanguage();
   const { studies } = useStudy();
 
   const downloadTemplate = () => {

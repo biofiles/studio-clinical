@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useStudy } from "@/contexts/StudyContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { toast } from "sonner";
 
 interface User {
@@ -39,6 +40,7 @@ const UserManagementTab = () => {
 
   const { user } = useAuth();
   const { studies } = useStudy();
+  const { t } = useLanguage();
 
   useEffect(() => {
     fetchUsers();
@@ -125,7 +127,7 @@ const UserManagementTab = () => {
 
       if (inviteError) throw inviteError;
 
-      toast.success('User invitation sent successfully');
+      toast.success(t('user.invitation.sent'));
       setShowInviteDialog(false);
       setInviteForm({ email: "", full_name: "", role: "investigator", study_id: "" });
       fetchUsers();
@@ -144,7 +146,7 @@ const UserManagementTab = () => {
 
       if (error) throw error;
 
-      toast.success(`User ${newStatus === 'active' ? 'activated' : 'deactivated'} successfully`);
+      toast.success(`User ${newStatus === 'active' ? t('user.activated') : t('user.deactivated')}`);
       fetchUsers();
     } catch (error) {
       console.error('Error updating user status:', error);
@@ -190,22 +192,22 @@ const UserManagementTab = () => {
           <div className="flex items-center justify-between">
             <CardTitle className="text-studio-text flex items-center space-x-2">
               <Shield className="h-5 w-5" />
-              <span>User Management</span>
+              <span>{t('user.management')}</span>
             </CardTitle>
             <Dialog open={showInviteDialog} onOpenChange={setShowInviteDialog}>
               <DialogTrigger asChild>
                 <Button variant="studio">
                   <UserPlus className="h-4 w-4 mr-2" />
-                  Invite User
+                  {t('user.invite')}
                 </Button>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>Invite New User</DialogTitle>
+                  <DialogTitle>{t('user.invite.new')}</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-4">
                   <div>
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email">{t('user.email')}</Label>
                     <Input
                       id="email"
                       type="email"
@@ -215,7 +217,7 @@ const UserManagementTab = () => {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="full_name">Full Name</Label>
+                    <Label htmlFor="full_name">{t('user.full.name')}</Label>
                     <Input
                       id="full_name"
                       value={inviteForm.full_name}
@@ -224,7 +226,7 @@ const UserManagementTab = () => {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="role">Role</Label>
+                    <Label htmlFor="role">{t('user.role')}</Label>
                     <Select
                       value={inviteForm.role}
                       onValueChange={(value) => setInviteForm(prev => ({ ...prev, role: value }))}
@@ -239,7 +241,7 @@ const UserManagementTab = () => {
                     </Select>
                   </div>
                   <div>
-                    <Label htmlFor="study">Study (Optional)</Label>
+                    <Label htmlFor="study">{t('user.study')} (Optional)</Label>
                     <Select
                       value={inviteForm.study_id}
                       onValueChange={(value) => setInviteForm(prev => ({ ...prev, study_id: value }))}
@@ -248,7 +250,7 @@ const UserManagementTab = () => {
                         <SelectValue placeholder="Select a study" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">All Studies</SelectItem>
+                        <SelectItem value="">{t('user.all.studies')}</SelectItem>
                         {studies.map(study => (
                           <SelectItem key={study.id} value={study.id}>
                             {study.name}
@@ -262,7 +264,7 @@ const UserManagementTab = () => {
                       Cancel
                     </Button>
                     <Button onClick={handleInviteUser}>
-                      Send Invitation
+                      {t('user.send.invitation')}
                     </Button>
                   </div>
                 </div>
@@ -275,7 +277,7 @@ const UserManagementTab = () => {
             <div className="flex items-center space-x-2">
               <Search className="h-4 w-4 text-studio-text-muted" />
               <Input
-                placeholder="Search users..."
+                placeholder={t('user.search')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="max-w-sm"
@@ -284,17 +286,17 @@ const UserManagementTab = () => {
 
             {loading ? (
               <div className="text-center py-8">
-                <p className="text-studio-text-muted">Loading users...</p>
+                <p className="text-studio-text-muted">{t('user.loading')}</p>
               </div>
             ) : (
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>User</TableHead>
-                    <TableHead>Role</TableHead>
-                    <TableHead>Study</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Created</TableHead>
+                    <TableHead>{t('activity.user')}</TableHead>
+                    <TableHead>{t('user.role')}</TableHead>
+                    <TableHead>{t('user.study')}</TableHead>
+                    <TableHead>{t('user.status')}</TableHead>
+                    <TableHead>{t('user.created')}</TableHead>
                     <TableHead></TableHead>
                   </TableRow>
                 </TableHeader>
@@ -314,7 +316,7 @@ const UserManagementTab = () => {
                       </TableCell>
                       <TableCell>
                         <span className="text-studio-text">
-                          {user.study_name || 'All Studies'}
+                          {user.study_name || t('user.all.studies')}
                         </span>
                       </TableCell>
                       <TableCell>
@@ -341,11 +343,11 @@ const UserManagementTab = () => {
                             <DropdownMenuItem
                               onClick={() => handleStatusChange(user.id, user.status === 'active' ? 'inactive' : 'active')}
                             >
-                              {user.status === 'active' ? 'Deactivate' : 'Activate'}
+                              {user.status === 'active' ? t('user.deactivate') : t('user.activate')}
                             </DropdownMenuItem>
                             <DropdownMenuItem>
                               <Mail className="h-4 w-4 mr-2" />
-                              Resend Invitation
+                              {t('user.resend.invitation')}
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -358,7 +360,7 @@ const UserManagementTab = () => {
 
             {!loading && filteredUsers.length === 0 && (
               <div className="text-center py-8">
-                <p className="text-studio-text-muted">No users found</p>
+                <p className="text-studio-text-muted">{t('user.no.found')}</p>
               </div>
             )}
           </div>

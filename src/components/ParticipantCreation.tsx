@@ -25,7 +25,7 @@ const ParticipantCreation = ({ open, onOpenChange }: ParticipantCreationProps) =
     email: "",
     date_of_birth: "",
     gender: "",
-    arm: ""
+    ethnicity: ""
   });
   const [generatedCredentials, setGeneratedCredentials] = useState({
     email: "",
@@ -63,22 +63,22 @@ const ParticipantCreation = ({ open, onOpenChange }: ParticipantCreationProps) =
       const token = generateParticipantToken();
       const participantEmail = participantForm.email || `${participantForm.subject_id.toLowerCase()}@temp.studioclinical.com`;
 
-      // Create auth user
-      const { data: authData, error: authError } = await supabase.auth.admin.createUser({
-        email: participantEmail,
-        password: password,
-        email_confirm: true,
-        user_metadata: {
-          full_name: `${participantForm.first_name} ${participantForm.last_name}`,
-          participant_token: token
-        }
-      });
+      // Create invitation for participant instead of direct user creation
+      const { error: inviteError } = await supabase
+        .from('user_invitations')
+        .insert({
+          email: participantEmail,
+          role: 'participant',
+          study_id: selectedStudy.id,
+          invited_by: user?.id,
+          full_name: `${participantForm.first_name} ${participantForm.last_name}`
+        });
 
-      if (authError) {
-        throw authError;
+      if (inviteError) {
+        throw inviteError;
       }
 
-      // Create participant record
+      // Create participant record with placeholder ID
       const { error: participantError } = await supabase
         .from('participants')
         .insert({
@@ -89,30 +89,11 @@ const ParticipantCreation = ({ open, onOpenChange }: ParticipantCreationProps) =
           email: participantEmail,
           date_of_birth: participantForm.date_of_birth || null,
           gender: participantForm.gender || null,
-          arm: participantForm.arm || null,
-          status: 'enrolled'
+          status: 'invited'
         });
 
       if (participantError) {
-        // Cleanup auth user if participant creation fails
-        await supabase.auth.admin.deleteUser(authData.user.id);
         throw participantError;
-      }
-
-      // Create user role
-      const { error: roleError } = await supabase
-        .from('user_roles')
-        .insert({
-          user_id: authData.user.id,
-          role: 'participant',
-          study_id: selectedStudy.id,
-          assigned_by: user?.id,
-          status: 'active'
-        });
-
-      if (roleError) {
-        console.error('Role assignment error:', roleError);
-        // Don't fail the whole process for role assignment
       }
 
       // Log activity
@@ -120,9 +101,9 @@ const ParticipantCreation = ({ open, onOpenChange }: ParticipantCreationProps) =
         user_id: user?.id,
         activity_type: 'participant_created',
         details: {
-          participant_id: authData.user.id,
           subject_id: participantForm.subject_id,
-          study_id: selectedStudy.id
+          study_id: selectedStudy.id,
+          email: participantEmail
         }
       });
 
@@ -133,7 +114,7 @@ const ParticipantCreation = ({ open, onOpenChange }: ParticipantCreationProps) =
       });
 
       setStep(2);
-      toast.success('Participant account created successfully');
+      toast.success('Participant invitation created successfully');
 
     } catch (error) {
       console.error('Error creating participant:', error);
@@ -167,7 +148,7 @@ Please keep these credentials secure.
       email: "",
       date_of_birth: "",
       gender: "",
-      arm: ""
+      ethnicity: ""
     });
     setGeneratedCredentials({ email: "", password: "", token: "" });
     onOpenChange(false);
@@ -185,25 +166,14 @@ Please keep these credentials secure.
 
         {step === 1 && (
           <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="subject_id">Subject ID *</Label>
-                <Input
-                  id="subject_id"
-                  value={participantForm.subject_id}
-                  onChange={(e) => setParticipantForm(prev => ({ ...prev, subject_id: e.target.value }))}
-                  placeholder="S001, P001, etc."
-                />
-              </div>
-              <div>
-                <Label htmlFor="arm">Study Arm</Label>
-                <Input
-                  id="arm"
-                  value={participantForm.arm}
-                  onChange={(e) => setParticipantForm(prev => ({ ...prev, arm: e.target.value }))}
-                  placeholder="Control, Treatment A, etc."
-                />
-              </div>
+            <div>
+              <Label htmlFor="subject_id">Subject ID *</Label>
+              <Input
+                id="subject_id"
+                value={participantForm.subject_id}
+                onChange={(e) => setParticipantForm(prev => ({ ...prev, subject_id: e.target.value }))}
+                placeholder="S001, P001, etc."
+              />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -266,6 +236,24 @@ Please keep these credentials secure.
                 </Select>
               </div>
             </div>
+            
+            <div>
+              <Label htmlFor="ethnicity">Ethnicity</Label>
+              <Select
+                value={participantForm.ethnicity}
+                onValueChange={(value) => setParticipantForm(prev => ({ ...prev, ethnicity: value }))}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select ethnicity" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="hispanic">Hispanic or Latino</SelectItem>
+                  <SelectItem value="not_hispanic">Not Hispanic or Latino</SelectItem>
+                  <SelectItem value="unknown">Unknown</SelectItem>
+                  <SelectItem value="not_reported">Not Reported</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
 
             <div className="flex justify-end space-x-2 pt-4">
               <Button variant="outline" onClick={handleClose}>
@@ -285,7 +273,7 @@ Please keep these credentials secure.
           <div className="space-y-6">
             <Card className="bg-green-50 border-green-200">
               <CardHeader>
-                <CardTitle className="text-green-800 text-lg">Account Created Successfully!</CardTitle>
+                <CardTitle className="text-green-800 text-lg">Participant Invitation Created Successfully!</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-3">
@@ -334,8 +322,8 @@ Please keep these credentials secure.
                 </div>
 
                 <div className="text-sm text-green-700">
-                  <p>• Share these credentials securely with the participant</p>
-                  <p>• The participant should change their password on first login</p>
+                  <p>• An invitation email will be sent to the participant</p>
+                  <p>• The participant will create their own secure password</p>
                   <p>• The participant token is used for data privacy and compliance</p>
                 </div>
               </CardContent>
