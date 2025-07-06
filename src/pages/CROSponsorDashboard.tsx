@@ -123,8 +123,8 @@ const CROSponsorDashboard = () => {
             budget: { spent: 2.8, total: 3.5, percentage: 80 },
             timeline: 72,
             alerts: [
-              { type: "info", message: "Cardiology milestone achieved ahead of schedule", time: "1 hour ago" },
-              { type: "success", message: "PARADIGM-CV interim analysis completed", time: "3 days ago" }
+              { type: "info", message: t('alert.cardiology.milestone'), time: "1 hour ago" },
+              { type: "success", message: t('alert.interim.analysis'), time: "3 days ago" }
             ]
           }
         };
@@ -158,8 +158,8 @@ const CROSponsorDashboard = () => {
             budget: { spent: 1.6, total: 2.2, percentage: 73 },
             timeline: 68,
             alerts: [
-              { type: "warning", message: "Diabetes endpoint review scheduled", time: "4 hours ago" },
-              { type: "info", message: "ATLAS-DM2 site training completed", time: "2 days ago" }
+              { type: "warning", message: t('alert.enrollment.target'), time: "4 hours ago" },
+              { type: "info", message: t('alert.safety.review'), time: "2 days ago" }
             ]
           }
         };
@@ -194,8 +194,8 @@ const CROSponsorDashboard = () => {
             budget: { spent: 1.9, total: 2.8, percentage: 68 },
             timeline: 61,
             alerts: [
-              { type: "warning", message: "Oncology biomarker delays reported", time: "6 hours ago" },
-              { type: "success", message: "HORIZON-Onc Phase I completed", time: "1 week ago" }
+              { type: "warning", message: t('alert.site.activation'), time: "6 hours ago" },
+              { type: "success", message: t('alert.biomarker.analysis'), time: "1 week ago" }
             ]
           }
         };
@@ -231,8 +231,8 @@ const CROSponsorDashboard = () => {
             budget: { spent: 2.1, total: 2.9, percentage: 72 },
             timeline: 79,
             alerts: [
-              { type: "success", message: "Pediatric enrollment exceeding targets", time: "2 hours ago" },
-              { type: "info", message: "GUARDIAN-Ped safety data reviewed", time: "1 day ago" }
+              { type: "success", message: t('alert.enrollment.target'), time: "2 hours ago" },
+              { type: "info", message: t('alert.regulatory.submission'), time: "1 day ago" }
             ]
           }
         };
@@ -355,7 +355,7 @@ const CROSponsorDashboard = () => {
             <Card className="bg-studio-surface border-studio-border">
               <CardHeader>
                 <CardTitle className="text-studio-text flex items-center justify-between">
-                  <span>{selectedStudy ? `${selectedStudy.name} ${t('common.details')}` : t('cro.select.study')}</span>
+                  <span>{selectedStudy ? selectedStudy.name : t('cro.select.study')}</span>
                   {selectedStudy && (
                     <Button
                       variant={favoriteStudyId === selectedStudy.id ? "default" : "outline"}
@@ -388,7 +388,7 @@ const CROSponsorDashboard = () => {
                       </div>
                       <div className="space-y-2">
                         <span className="text-sm text-studio-text-muted">{t('study.phase')}</span>
-                        <p className="font-medium text-studio-text">{selectedStudy.phase}</p>
+                        <p className="font-medium text-studio-text">{selectedStudy.phase.replace('Phase', t('study.phase'))}</p>
                       </div>
                       <div className="space-y-2 row-span-3">
                         <span className="text-sm text-studio-text-muted">{t('study.recent.alerts')}</span>

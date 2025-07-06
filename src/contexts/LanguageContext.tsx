@@ -315,7 +315,17 @@ const translations = {
     'study.sites.opened': 'Sites Opened',
     'study.sites.planned': 'Sites Planned',
     'study.site.activation.rate': 'Site Activation Rate',
-    'study.days.to.activate': 'days to activate'
+    'study.days.to.activate': 'days to activate',
+    
+    // Alert Messages
+    'alert.cardiology.milestone': 'Cardiology milestone achieved ahead of schedule',
+    'alert.interim.analysis': 'PARADIGM-CV interim analysis completed',
+    'alert.enrollment.target': 'Enrollment target reached for Q4',
+    'alert.safety.review': 'Monthly safety review completed',
+    'alert.site.activation': 'New site activated in Boston Medical Center',
+    'alert.data.validation': 'Data validation issues resolved',
+    'alert.regulatory.submission': 'Regulatory submission prepared',
+    'alert.biomarker.analysis': 'Biomarker analysis milestone completed'
   },
   spanish: {
     // Header
@@ -622,7 +632,17 @@ const translations = {
     'study.sites.opened': 'Sitios Abiertos',
     'study.sites.planned': 'Sitios Planificados',
     'study.site.activation.rate': 'Tasa de Activación de Sitios',
-    'study.days.to.activate': 'días para activar'
+    'study.days.to.activate': 'días para activar',
+    
+    // Alert Messages (Spanish)
+    'alert.cardiology.milestone': 'Hito de cardiología logrado antes de lo previsto',
+    'alert.interim.analysis': 'Análisis intermedio de PARADIGM-CV completado',
+    'alert.enrollment.target': 'Meta de inscripción alcanzada para Q4',
+    'alert.safety.review': 'Revisión mensual de seguridad completada',
+    'alert.site.activation': 'Nuevo sitio activado en Boston Medical Center',
+    'alert.data.validation': 'Problemas de validación de datos resueltos',
+    'alert.regulatory.submission': 'Envío regulatorio preparado',
+    'alert.biomarker.analysis': 'Hito de análisis de biomarcadores completado'
   }
 };
 
