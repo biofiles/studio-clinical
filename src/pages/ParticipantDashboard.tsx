@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,7 @@ import CalendarView from "@/components/CalendarView";
 import QuestionnairesView from "@/components/QuestionnairesView";
 import AIChatbot from "@/components/AIChatbot";
 import EConsentDialog from "@/components/EConsentDialog";
+import PlsSignupDialog from "@/components/PlsSignupDialog";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode, Signature, Building, Settings, Scale, BookOpen } from "lucide-react";
 const ParticipantDashboard = () => {
@@ -24,9 +25,18 @@ const ParticipantDashboard = () => {
   const [showProfile, setShowProfile] = useState(false);
   const [showChatbot, setShowChatbot] = useState(false);
   const [showEConsent, setShowEConsent] = useState(false);
+  const [showPlsDialog, setShowPlsDialog] = useState(false);
   const [eConsentMode, setEConsentMode] = useState<'sign' | 'view'>('sign');
   const [surveyCompleted, setSurveyCompleted] = useState(false);
   const [plsSignedUp, setPlsSignedUp] = useState(false);
+
+  // Load PLS signup status from localStorage
+  useEffect(() => {
+    const savedStatus = localStorage.getItem('pls-signed-up');
+    if (savedStatus === 'true') {
+      setPlsSignedUp(true);
+    }
+  }, []);
   const studyProgress = 65;
   const daysLeft = 30;
   const participantToken = "PTK-9283-WZ1";
@@ -62,7 +72,14 @@ const ParticipantDashboard = () => {
   };
 
   const handlePlsSignup = () => {
+    if (plsSignedUp) return;
+    setShowPlsDialog(true);
+  };
+
+  const handlePlsConfirm = (email: string) => {
     setPlsSignedUp(true);
+    localStorage.setItem('pls-signed-up', 'true');
+    localStorage.setItem('pls-signup-email', email);
     alert(t('pls.success'));
   };
   const getActivityIcon = (type: string) => {
@@ -584,6 +601,13 @@ const ParticipantDashboard = () => {
       <AIChatbot open={showChatbot} onOpenChange={setShowChatbot} />
 
       <EConsentDialog open={showEConsent} onOpenChange={setShowEConsent} mode={eConsentMode} />
+
+      <PlsSignupDialog 
+        open={showPlsDialog} 
+        onOpenChange={setShowPlsDialog}
+        onConfirm={handlePlsConfirm}
+        userEmail="participant@example.com"
+      />
     </div>;
 };
 export default ParticipantDashboard;

@@ -6,6 +6,7 @@ import { Progress } from "@/components/ui/progress";
 import Header from "@/components/Header";
 import ParticipantCreation from "@/components/ParticipantCreation";
 import ParticipantManagement from "@/components/ParticipantManagement";
+import PlsSignupDialog from "@/components/PlsSignupDialog";
 import { UserPlus, QrCode, Globe, Users, FileCheck, AlertTriangle, Calendar, Download, MessageCircle, BookOpen } from "lucide-react";
 import ParticipantList from "@/components/ParticipantList";
 import AIChatbot from "@/components/AIChatbot";
@@ -24,6 +25,7 @@ const InvestigatorDashboard = () => {
   const [showFHIRExport, setShowFHIRExport] = useState(false);
   const [showParticipantCreation, setShowParticipantCreation] = useState(false);
   const [showParticipantManagement, setShowParticipantManagement] = useState(false);
+  const [showPlsDialog, setShowPlsDialog] = useState(false);
   const [plsSignedUp, setPlsSignedUp] = useState(false);
   const { t } = useLanguage();
   const { selectedStudy } = useStudy();
@@ -35,6 +37,14 @@ const InvestigatorDashboard = () => {
       navigate('/select-study');
     }
   }, [selectedStudy, navigate]);
+
+  // Load PLS signup status from localStorage
+  useEffect(() => {
+    const savedStatus = localStorage.getItem('pls-signed-up');
+    if (savedStatus === 'true') {
+      setPlsSignedUp(true);
+    }
+  }, []);
 
   // Dynamic data based on selected study
   const getStudyData = () => {
@@ -114,7 +124,14 @@ const InvestigatorDashboard = () => {
   };
 
   const handlePlsSignup = () => {
+    if (plsSignedUp) return;
+    setShowPlsDialog(true);
+  };
+
+  const handlePlsConfirm = (email: string) => {
     setPlsSignedUp(true);
+    localStorage.setItem('pls-signed-up', 'true');
+    localStorage.setItem('pls-signup-email', email);
     alert(t('pls.success'));
   };
 
@@ -399,6 +416,13 @@ const InvestigatorDashboard = () => {
       <ParticipantManagement 
         open={showParticipantManagement}
         onOpenChange={setShowParticipantManagement}
+      />
+
+      <PlsSignupDialog 
+        open={showPlsDialog} 
+        onOpenChange={setShowPlsDialog}
+        onConfirm={handlePlsConfirm}
+        userEmail="investigator@example.com"
       />
     </div>
   );

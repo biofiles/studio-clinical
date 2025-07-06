@@ -407,10 +407,16 @@ const translations = {
     
     // Plain Language Summary
     'pls.signup': 'Sign up for Plain Language Summary',
-    'pls.title': 'Plain Language Summary Signup',
-    'pls.description': 'Receive a plain language summary of study results once the study is completed',
+    'pls.title': 'Plain Language Summary Signup', 
+    'pls.description': 'Receive a plain language summary of study results once data analysis is complete',
     'pls.success': 'Successfully signed up for plain language summary!',
     'pls.already.signed': 'Already signed up for study summary',
+    'pls.email.confirmation.title': 'Confirm Email for Study Summary',
+    'pls.email.confirmation.description': 'Confirm the email address where you would like to receive the plain language summary of study results once data analysis is complete.',
+    'pls.email.address': 'Email Address',
+    'pls.email.placeholder': 'Enter your email address',
+    'pls.email.note': 'This email will only be used to send you the study results summary.',
+    'pls.confirm.signup': 'Confirm Signup',
     
     // Marketing Page
     'marketing.hero.title': 'Clinical trials.',
@@ -755,9 +761,15 @@ const translations = {
     // Plain Language Summary (Spanish)
     'pls.signup': 'Inscribirse para Resumen en Lenguaje Sencillo',
     'pls.title': 'Inscripción para Resumen en Lenguaje Sencillo',
-    'pls.description': 'Recibe un resumen en lenguaje sencillo de los resultados del estudio una vez que se complete',
+    'pls.description': 'Recibe un resumen en lenguaje sencillo de los resultados del estudio una vez que se complete el análisis de los datos',
     'pls.success': '¡Inscripción exitosa para resumen en lenguaje sencillo!',
     'pls.already.signed': 'Ya inscrito para resumen del estudio',
+    'pls.email.confirmation.title': 'Confirmar Email para Resumen del Estudio',
+    'pls.email.confirmation.description': 'Confirma la dirección de correo electrónico donde te gustaría recibir el resumen en lenguaje sencillo de los resultados del estudio una vez que se complete el análisis de los datos.',
+    'pls.email.address': 'Dirección de Email',
+    'pls.email.placeholder': 'Ingresa tu dirección de email',
+    'pls.email.note': 'Este email solo se usará para enviarte el resumen de los resultados del estudio.',
+    'pls.confirm.signup': 'Confirmar Inscripción',
     
     // Marketing Page (Spanish)
     'marketing.hero.title': 'Ensayos clínicos.',
