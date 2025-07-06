@@ -59,30 +59,31 @@ const Marketing = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="border-b bg-background sticky top-0 z-50 backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-4">
+      <header className="bg-white/80 backdrop-blur-xl sticky top-0 z-50 border-b border-gray-200/50">
+        <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-muted rounded-lg flex items-center justify-center">
-                <Activity className="w-5 h-5 text-muted-foreground" />
-              </div>
-              <span className="text-xl font-semibold text-foreground">
+            <div className="flex items-center">
+              <span className="text-2xl font-light tracking-wider text-gray-600">
                 STUDIO
               </span>
             </div>
-            <nav className="flex items-center space-x-6">
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => setLanguage(language === 'spanish' ? 'english' : 'spanish')}
-                className="text-sm"
+            <nav className="flex items-center space-x-8">
+              <select 
+                value={language}
+                onChange={(e) => setLanguage(e.target.value)}
+                className="bg-transparent text-sm font-medium text-gray-600 border-none outline-none cursor-pointer hover:text-gray-900 transition-colors"
               >
-                {language === 'spanish' ? 'EN' : 'ES'}
-              </Button>
+                <option value="spanish">Español</option>
+                <option value="english">English</option>
+              </select>
               <Link to="/auth">
-                <Button size="sm" className="font-medium">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                >
                   {t('marketing.signin')}
                 </Button>
               </Link>
@@ -92,63 +93,67 @@ const Marketing = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="py-24 px-4">
-        <div className="container mx-auto max-w-4xl">
+      <section className="py-32 px-6">
+        <div className="max-w-5xl mx-auto">
           <div className={`text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-            <h1 className="text-5xl md:text-6xl font-light mb-6 text-foreground tracking-tight">
+            <h1 className="text-6xl md:text-7xl font-light mb-8 text-gray-900 tracking-tight leading-tight">
               {t('marketing.hero.title')}
               <br />
-              <span className="font-medium">{t('marketing.hero.subtitle')}</span>
+              <span className="font-normal">{t('marketing.hero.subtitle')}</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-12 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 mb-16 leading-relaxed max-w-3xl mx-auto font-light">
               {t('marketing.hero.description')}
             </p>
             
-            <Link to="/auth">
-              <Button size="lg" className="px-8 py-3 text-base font-medium rounded-xl shadow-sm hover:shadow-md transition-all duration-200">
-                {t('marketing.hero.cta')}
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link to="/auth">
+                <Button 
+                  size="lg" 
+                  className="px-8 py-4 text-base font-medium rounded-full bg-black text-white hover:bg-gray-800 transition-all duration-300 shadow-sm hover:shadow-lg"
+                >
+                  {t('marketing.hero.cta')}
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Screenshot Preview */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto max-w-6xl">
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
           <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10 pointer-events-none" />
-              <div className="bg-card border rounded-2xl p-8 shadow-xl">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="space-y-4">
-                    <div className="bg-muted/30 rounded-lg p-6">
-                      <Users className="w-8 h-8 text-primary mb-3" />
-                      <h3 className="font-medium mb-2">CRO Dashboard</h3>
-                      <div className="space-y-2">
-                        <div className="h-2 bg-muted rounded" />
-                        <div className="h-2 bg-muted rounded w-3/4" />
+              <div className="bg-white border border-gray-200/50 rounded-3xl p-12 shadow-2xl shadow-gray-900/10">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  <div className="space-y-6">
+                    <div className="bg-gray-50/50 rounded-2xl p-8">
+                      <Users className="w-10 h-10 text-gray-600 mb-4" />
+                      <h3 className="font-medium mb-3 text-gray-900">CRO Dashboard</h3>
+                      <div className="space-y-3">
+                        <div className="h-2 bg-gray-200 rounded" />
+                        <div className="h-2 bg-gray-200 rounded w-3/4" />
                       </div>
                     </div>
                   </div>
-                  <div className="space-y-4">
-                    <div className="bg-muted/30 rounded-lg p-6">
-                      <Calendar className="w-8 h-8 text-primary mb-3" />
-                      <h3 className="font-medium mb-2">Site Management</h3>
-                      <div className="space-y-2">
-                        <div className="h-2 bg-muted rounded w-5/6" />
-                        <div className="h-2 bg-muted rounded" />
+                  <div className="space-y-6">
+                    <div className="bg-gray-50/50 rounded-2xl p-8">
+                      <Calendar className="w-10 h-10 text-gray-600 mb-4" />
+                      <h3 className="font-medium mb-3 text-gray-900">Site Management</h3>
+                      <div className="space-y-3">
+                        <div className="h-2 bg-gray-200 rounded w-5/6" />
+                        <div className="h-2 bg-gray-200 rounded" />
                       </div>
                     </div>
                   </div>
-                  <div className="space-y-4">
-                    <div className="bg-muted/30 rounded-lg p-6">
-                      <Smartphone className="w-8 h-8 text-primary mb-3" />
-                      <h3 className="font-medium mb-2">Patient Portal</h3>
-                      <div className="space-y-2">
-                        <div className="h-2 bg-muted rounded" />
-                        <div className="h-2 bg-muted rounded w-2/3" />
+                  <div className="space-y-6">
+                    <div className="bg-gray-50/50 rounded-2xl p-8">
+                      <Smartphone className="w-10 h-10 text-gray-600 mb-4" />
+                      <h3 className="font-medium mb-3 text-gray-900">Patient Portal</h3>
+                      <div className="space-y-3">
+                        <div className="h-2 bg-gray-200 rounded" />
+                        <div className="h-2 bg-gray-200 rounded w-2/3" />
                       </div>
                     </div>
                   </div>
@@ -160,37 +165,37 @@ const Marketing = () => {
       </section>
 
       {/* Core Features */}
-      <section className="py-24 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl font-light mb-6 text-foreground">
+      <section className="py-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-24">
+            <h2 className="text-5xl md:text-6xl font-light mb-8 text-gray-900 tracking-tight">
               {t('marketing.features.title')}
               <br />
-              <span className="font-medium">{t('marketing.features.subtitle')}</span>
+              <span className="font-normal">{t('marketing.features.subtitle')}</span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
               {t('marketing.features.description')}
             </p>
           </div>
 
-          <div className="space-y-24">
+          <div className="space-y-32">
             {coreFeatures.map((feature, index) => (
-              <div key={index} className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
-                <div className={`space-y-6 ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                      <feature.icon className="w-6 h-6 text-primary" />
+              <div key={index} className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
+                <div className={`space-y-8 ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+                  <div className="flex items-center space-x-6">
+                    <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center">
+                      <feature.icon className="w-8 h-8 text-gray-700" />
                     </div>
-                    <h3 className="text-2xl font-medium text-foreground">{feature.title}</h3>
+                    <h3 className="text-3xl font-light text-gray-900">{feature.title}</h3>
                   </div>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
+                  <p className="text-xl text-gray-600 leading-relaxed font-light">
                     {feature.description}
                   </p>
                 </div>
                 <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''}`}>
-                  <div className="bg-card border rounded-2xl p-8 shadow-lg">
-                    <div className="aspect-video bg-muted/20 rounded-xl flex items-center justify-center">
-                      <feature.icon className="w-16 h-16 text-muted-foreground/40" />
+                  <div className="bg-white border border-gray-200/50 rounded-3xl p-12 shadow-2xl shadow-gray-900/10">
+                    <div className="aspect-video bg-gray-50 rounded-2xl flex items-center justify-center">
+                      <feature.icon className="w-20 h-20 text-gray-400" />
                     </div>
                   </div>
                 </div>
@@ -201,18 +206,18 @@ const Marketing = () => {
       </section>
 
       {/* Integration Value */}
-      <section className="py-24 px-4 bg-muted/20">
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-4xl font-light mb-8 text-foreground">
+      <section className="py-32 px-6 bg-gray-50/50">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-5xl font-light mb-12 text-gray-900 tracking-tight">
             {t('marketing.integration.title')}
           </h2>
-          <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 mb-16 max-w-3xl mx-auto font-light">
             {t('marketing.integration.description')}
           </p>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {integrations.map((integration, index) => (
-              <div key={index} className="bg-card border rounded-lg p-4 text-sm font-medium text-center">
+              <div key={index} className="bg-white border border-gray-200/50 rounded-2xl p-6 text-base font-medium text-center text-gray-700 shadow-sm hover:shadow-md transition-all duration-300">
                 {integration}
               </div>
             ))}
@@ -221,45 +226,45 @@ const Marketing = () => {
       </section>
 
       {/* Patient Portal Innovation */}
-      <section className="py-24 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-4xl font-light text-foreground">
+      <section className="py-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8">
+              <h2 className="text-5xl font-light text-gray-900 tracking-tight">
                 {t('marketing.patient.title')}
               </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
+              <p className="text-xl text-gray-600 leading-relaxed font-light">
                 {t('marketing.patient.description')}
               </p>
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <Check className="w-5 h-5 text-primary" />
-                  <span className="text-muted-foreground">{t('marketing.patient.mobile')}</span>
+              <div className="space-y-4">
+                <div className="flex items-center space-x-4">
+                  <Check className="w-6 h-6 text-gray-700" />
+                  <span className="text-lg text-gray-600">{t('marketing.patient.mobile')}</span>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <Check className="w-5 h-5 text-primary" />
-                  <span className="text-muted-foreground">{t('marketing.patient.updates')}</span>
+                <div className="flex items-center space-x-4">
+                  <Check className="w-6 h-6 text-gray-700" />
+                  <span className="text-lg text-gray-600">{t('marketing.patient.updates')}</span>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <Check className="w-5 h-5 text-primary" />
-                  <span className="text-muted-foreground">{t('marketing.patient.questionnaires')}</span>
+                <div className="flex items-center space-x-4">
+                  <Check className="w-6 h-6 text-gray-700" />
+                  <span className="text-lg text-gray-600">{t('marketing.patient.questionnaires')}</span>
                 </div>
               </div>
             </div>
-            <div className="bg-card border rounded-2xl p-8 shadow-lg">
-              <div className="space-y-6">
-                <div className="bg-muted/20 rounded-xl p-6">
-                  <div className="flex items-center space-x-3 mb-4">
-                    <div className="w-8 h-8 bg-primary rounded-full" />
-                    <div className="space-y-1">
-                      <div className="h-3 bg-muted rounded w-24" />
-                      <div className="h-2 bg-muted rounded w-16" />
+            <div className="bg-white border border-gray-200/50 rounded-3xl p-12 shadow-2xl shadow-gray-900/10">
+              <div className="space-y-8">
+                <div className="bg-gray-50 rounded-2xl p-8">
+                  <div className="flex items-center space-x-4 mb-6">
+                    <div className="w-10 h-10 bg-gray-300 rounded-full" />
+                    <div className="space-y-2">
+                      <div className="h-3 bg-gray-200 rounded w-24" />
+                      <div className="h-2 bg-gray-200 rounded w-16" />
                     </div>
                   </div>
                   <div className="space-y-3">
-                    <div className="h-2 bg-muted rounded" />
-                    <div className="h-2 bg-muted rounded w-3/4" />
-                    <div className="h-2 bg-muted rounded w-1/2" />
+                    <div className="h-2 bg-gray-200 rounded" />
+                    <div className="h-2 bg-gray-200 rounded w-3/4" />
+                    <div className="h-2 bg-gray-200 rounded w-1/2" />
                   </div>
                 </div>
               </div>
@@ -269,16 +274,19 @@ const Marketing = () => {
       </section>
 
       {/* Simple CTA */}
-      <section className="py-24 px-4 bg-muted/20">
-        <div className="container mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-light mb-6 text-foreground">
+      <section className="py-32 px-6 bg-gray-50/50">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-light mb-8 text-gray-900 tracking-tight">
             {t('marketing.cta.title')}
           </h2>
-          <p className="text-lg text-muted-foreground mb-8">
+          <p className="text-xl text-gray-600 mb-12 font-light">
             {t('marketing.cta.description')}
           </p>
           <Link to="/auth">
-            <Button size="lg" className="px-8 py-3 text-base font-medium rounded-xl">
+            <Button 
+              size="lg" 
+              className="px-8 py-4 text-base font-medium rounded-full bg-black text-white hover:bg-gray-800 transition-all duration-300 shadow-sm hover:shadow-lg"
+            >
               {t('marketing.cta.button')}
             </Button>
           </Link>
@@ -286,19 +294,16 @@ const Marketing = () => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t py-12 px-4">
-        <div className="container mx-auto">
+      <footer className="border-t border-gray-200 py-16 px-6">
+        <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <div className="w-6 h-6 bg-muted rounded flex items-center justify-center">
-                <Activity className="w-4 h-4 text-muted-foreground" />
-              </div>
-              <span className="text-lg font-medium">STUDIO</span>
+            <div className="flex items-center mb-6 md:mb-0">
+              <span className="text-xl font-light tracking-wider text-gray-600">STUDIO</span>
             </div>
-            <div className="flex items-center space-x-6 text-sm text-muted-foreground">
-              <a href="#" className="hover:text-foreground transition-colors">{t('marketing.privacy')}</a>
-              <a href="#" className="hover:text-foreground transition-colors">{t('marketing.terms')}</a>
-              <a href="#" className="hover:text-foreground transition-colors">{t('marketing.contact')}</a>
+            <div className="flex items-center space-x-8 text-sm text-gray-500">
+              <a href="#" className="hover:text-gray-700 transition-colors">{t('marketing.privacy')}</a>
+              <a href="#" className="hover:text-gray-700 transition-colors">{t('marketing.terms')}</a>
+              <a href="#" className="hover:text-gray-700 transition-colors">{t('marketing.contact')}</a>
             </div>
           </div>
         </div>
