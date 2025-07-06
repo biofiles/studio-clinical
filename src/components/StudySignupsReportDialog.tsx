@@ -1,88 +1,70 @@
-import { useState, useEffect } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Download, FileText, Mail, Calendar, Users } from "lucide-react";
+import { Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import { useStudy } from "@/contexts/StudyContext";
-import { Badge } from "@/components/ui/badge";
-
-interface SignupData {
-  id: string;
-  email: string;
-  signed_up_at: string;
-  study_id: string;
-  participant_id: string | null;
-}
+import * as XLSX from 'xlsx';
 
 const StudySignupsReportDialog = () => {
-  const [open, setOpen] = useState(false);
-  const [signups, setSignups] = useState<SignupData[]>([]);
-  const [loading, setLoading] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const { toast } = useToast();
-  const { selectedStudy, studies } = useStudy();
-
-  const fetchSignups = async () => {
-    setLoading(true);
-    try {
-      const { data, error } = await supabase
-        .from('study_results_signups')
-        .select('*')
-        .order('signed_up_at', { ascending: false });
-
-      if (error) throw error;
-      setSignups(data || []);
-    } catch (error: any) {
-      console.error("Error fetching signups:", error);
-      toast({
-        title: "Error",
-        description: "No se pudieron cargar los registros",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (open) {
-      fetchSignups();
-    }
-  }, [open]);
 
   const handleDownloadReport = async () => {
     setIsDownloading(true);
     
     try {
-      // Generate CSV content
-      const csvHeader = "Estudio,Protocolo,Email,Fecha de Registro,Estado\n";
-      const csvContent = signups.map(signup => {
-        const study = studies.find(s => s.id === signup.study_id);
-        const studyName = study ? study.name : "Estudio no encontrado";
-        const protocol = study ? study.protocol : "";
-        const date = new Date(signup.signed_up_at).toLocaleDateString('es-ES');
-        const status = signup.participant_id ? "Participante Activo" : "Registro Externo";
-        
-        return `"${studyName}","${protocol}","${signup.email}","${date}","${status}"`;
-      }).join("\n");
+      // Generate fake data for participants who signed up
+      const fakeData = [
+        {
+          'Estudio': 'Estudio de Diabetes Tipo 2',
+          'Protocolo': 'DT2-2024-001',
+          'Email': 'maria.garcia@email.com',
+          'Fecha de Registro': '2024-01-15',
+          'Estado': 'Participante Activo'
+        },
+        {
+          'Estudio': 'Estudio de Hipertensión',
+          'Protocolo': 'HTA-2024-002',
+          'Email': 'carlos.rodriguez@email.com',
+          'Fecha de Registro': '2024-01-20',
+          'Estado': 'Registro Externo'
+        },
+        {
+          'Estudio': 'Estudio de Obesidad',
+          'Protocolo': 'OB-2024-003',
+          'Email': 'ana.martinez@email.com',
+          'Fecha de Registro': '2024-02-01',
+          'Estado': 'Participante Activo'
+        },
+        {
+          'Estudio': 'Estudio de Diabetes Tipo 2',
+          'Protocolo': 'DT2-2024-001',
+          'Email': 'jose.lopez@email.com',
+          'Fecha de Registro': '2024-02-10',
+          'Estado': 'Registro Externo'
+        },
+        {
+          'Estudio': 'Estudio de Hipertensión',
+          'Protocolo': 'HTA-2024-002',
+          'Email': 'lucia.fernandez@email.com',
+          'Fecha de Registro': '2024-02-15',
+          'Estado': 'Participante Activo'
+        }
+      ];
 
-      const csvBlob = new Blob([csvHeader + csvContent], { type: 'text/csv;charset=utf-8;' });
-      const csvUrl = URL.createObjectURL(csvBlob);
+      // Create workbook and worksheet
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.json_to_sheet(fakeData);
       
-      const link = document.createElement('a');
-      link.href = csvUrl;
-      link.download = `reporte_suscripciones_resultados_${new Date().toISOString().split('T')[0]}.csv`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(csvUrl);
+      // Add worksheet to workbook
+      XLSX.utils.book_append_sheet(wb, ws, "Suscripciones");
+      
+      // Generate file and download
+      const fileName = `reporte_suscripciones_resultados_${new Date().toISOString().split('T')[0]}.xlsx`;
+      XLSX.writeFile(wb, fileName);
 
       toast({
         title: "¡Descarga exitosa!",
-        description: "El reporte CSV ha sido descargado correctamente.",
+        description: "El reporte XLSX ha sido descargado correctamente.",
       });
     } catch (error) {
       console.error("Error downloading report:", error);
@@ -96,158 +78,23 @@ const StudySignupsReportDialog = () => {
     }
   };
 
-  const getStudyStats = () => {
-    const totalSignups = signups.length;
-    const studyGroups = signups.reduce((acc, signup) => {
-      const study = studies.find(s => s.id === signup.study_id);
-      const studyName = study ? study.name : "Desconocido";
-      acc[studyName] = (acc[studyName] || 0) + 1;
-      return acc;
-    }, {} as Record<string, number>);
-
-    const activeParticipants = signups.filter(s => s.participant_id).length;
-    const externalSignups = totalSignups - activeParticipants;
-
-    return { totalSignups, studyGroups, activeParticipants, externalSignups };
-  };
-
-  const stats = getStudyStats();
-
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button 
-          variant="outline" 
-          className="w-full justify-start h-auto py-3"
-        >
-          <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
-            <span className="font-medium text-sm sm:text-base truncate pr-2">Reporte de Suscripciones a Resumen del Estudio</span>
-            <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Lista de emails suscritos para recibir resumenes de resultados</span>
-          </div>
-          <Download className="h-4 w-4 ml-2 flex-shrink-0" />
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="flex items-center space-x-2">
-            <FileText className="h-5 w-5" />
-            <span>Reporte de Suscripciones a Resultados</span>
-          </DialogTitle>
-        </DialogHeader>
-
-        {/* Statistics Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-blue-600">{stats.totalSignups}</div>
-              <div className="text-sm text-blue-600">Total Suscripciones</div>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-green-600">{stats.activeParticipants}</div>
-              <div className="text-sm text-green-600">Participantes Activos</div>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-purple-600">{stats.externalSignups}</div>
-              <div className="text-sm text-purple-600">Registros Externos</div>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-orange-600">{Object.keys(stats.studyGroups).length}</div>
-              <div className="text-sm text-orange-600">Estudios con Suscripciones</div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-medium">Registros Detallados</h3>
-          <Button 
-            onClick={handleDownloadReport}
-            disabled={isDownloading || signups.length === 0}
-            className="bg-green-600 hover:bg-green-700"
-          >
-            {isDownloading ? (
-              <>Descargando...</>
-            ) : (
-              <>
-                <Download className="h-4 w-4 mr-2" />
-                Descargar CSV
-              </>
-            )}
-          </Button>
-        </div>
-
-        {loading ? (
-          <div className="text-center py-8">Cargando registros...</div>
-        ) : signups.length === 0 ? (
-          <Card className="bg-gray-50 border-gray-200">
-            <CardContent className="p-8 text-center">
-              <Mail className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600">No hay suscripciones registradas aún</p>
-            </CardContent>
-          </Card>
-        ) : (
-          <div className="border rounded-lg">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Estudio</TableHead>
-                  <TableHead>Protocolo</TableHead>
-                  <TableHead>Email</TableHead>
-                  <TableHead>Fecha de Registro</TableHead>
-                  <TableHead>Estado</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {signups.map((signup) => {
-                  const study = studies.find(s => s.id === signup.study_id);
-                  return (
-                    <TableRow key={signup.id}>
-                      <TableCell className="font-medium">
-                        {study ? study.name : "Estudio no encontrado"}
-                      </TableCell>
-                      <TableCell className="text-sm text-gray-600">
-                        {study ? study.protocol : "-"}
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center space-x-2">
-                          <Mail className="h-4 w-4 text-gray-400" />
-                          <span>{signup.email}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center space-x-2">
-                          <Calendar className="h-4 w-4 text-gray-400" />
-                          <span>{new Date(signup.signed_up_at).toLocaleDateString('es-ES')}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <Badge 
-                          variant={signup.participant_id ? "default" : "secondary"}
-                          className={signup.participant_id ? 
-                            "bg-green-100 text-green-800 border-green-200" : 
-                            "bg-blue-100 text-blue-800 border-blue-200"
-                          }
-                        >
-                          {signup.participant_id ? "Participante Activo" : "Registro Externo"}
-                        </Badge>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </div>
-        )}
-      </DialogContent>
-    </Dialog>
+    <Button 
+      variant="outline" 
+      className="w-full justify-start h-auto py-3"
+      onClick={handleDownloadReport}
+      disabled={isDownloading}
+    >
+      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
+        <span className="font-medium text-sm sm:text-base truncate pr-2">
+          {isDownloading ? "Descargando..." : "Reporte de Suscripciones a Resumen del Estudio"}
+        </span>
+        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">
+          Lista de emails suscritos para recibir resumenes de resultados
+        </span>
+      </div>
+      <Download className="h-4 w-4 ml-2 flex-shrink-0" />
+    </Button>
   );
 };
 
