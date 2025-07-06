@@ -100,6 +100,10 @@ const CROSponsorDashboard = () => {
             qualityReviews: 15,
             dataValidation: 3
           },
+          recruitmentMetrics: {
+            rate: 12.5,
+            siteActivationDays: 45
+          },
           schedule: [
             { event: "Primer Sitio Iniciado", protocol: selectedStudy.protocol, date: "Oct 2024", type: "milestone", status: "completed" },
             { event: "Primer Sitio Activado", protocol: selectedStudy.protocol, date: "Nov 2024", type: "milestone", status: "completed" },
@@ -133,6 +137,10 @@ const CROSponsorDashboard = () => {
             qualityReviews: 8,
             dataValidation: 2
           },
+          recruitmentMetrics: {
+            rate: 8.3,
+            siteActivationDays: 62
+          },
           schedule: [
             { event: "Primer Sitio Iniciado", protocol: selectedStudy.protocol, date: "Jan 2025", type: "milestone", status: "completed" },
             { event: "Primer Sitio Activado", protocol: selectedStudy.protocol, date: "Feb 2025", type: "milestone", status: "completed" },
@@ -163,6 +171,10 @@ const CROSponsorDashboard = () => {
             monthlyHealth: 86,
             qualityReviews: 22,
             dataValidation: 9
+          },
+          recruitmentMetrics: {
+            rate: 6.7,
+            siteActivationDays: 89
           },
           schedule: [
             { event: "Primer Sitio Iniciado", protocol: selectedStudy.protocol, date: "May 2024", type: "milestone", status: "completed" },
@@ -195,6 +207,10 @@ const CROSponsorDashboard = () => {
             monthlyHealth: 97,
             qualityReviews: 6,
             dataValidation: 1
+          },
+          recruitmentMetrics: {
+            rate: 15.2,
+            siteActivationDays: 38
           },
           schedule: [
             { event: "Primer Sitio Iniciado", protocol: selectedStudy.protocol, date: "Mar 2024", type: "milestone", status: "completed" },
@@ -406,7 +422,7 @@ const CROSponsorDashboard = () => {
                             <CardContent className="space-y-3">
                               <div className="flex justify-between">
                                 <span className="text-studio-text-muted text-sm">{t('study.recruitment.rate')}</span>
-                                <span className="text-studio-text text-sm font-medium">12.5 {t('study.patients.per.month')}</span>
+                                <span className="text-studio-text text-sm font-medium">{studyData.recruitmentMetrics ? studyData.recruitmentMetrics.rate : 12.5} {t('study.patients.per.month')}</span>
                               </div>
                               <div className="flex justify-between">
                                 <span className="text-studio-text-muted text-sm">{t('cro.current')}</span>
@@ -434,7 +450,7 @@ const CROSponsorDashboard = () => {
                               </div>
                               <div className="flex justify-between">
                                 <span className="text-studio-text-muted text-sm">{t('study.site.activation.rate')}</span>
-                                <span className="text-studio-text text-sm">45 {t('study.days.to.activate')}</span>
+                                <span className="text-studio-text text-sm">{studyData.recruitmentMetrics ? studyData.recruitmentMetrics.siteActivationDays : 45} {t('study.days.to.activate')}</span>
                               </div>
                             </CardContent>
                           </Card>
