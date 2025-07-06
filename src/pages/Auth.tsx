@@ -1,81 +1,56 @@
-import { useState } from 'react';
-import { Navigate, useSearchParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Separator } from '@/components/ui/separator';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
-import { Eye, EyeOff, Lock, User, ArrowLeft } from 'lucide-react';
+import { Eye, EyeOff, Lock, User } from 'lucide-react';
 
 const Auth = () => {
-  const [searchParams] = useSearchParams();
-  const role = searchParams.get('role');
-  const { user, signIn, signUp } = useAuth();
+  const { user, signIn, getUserRole } = useAuth();
   const { toast } = useToast();
   
-  const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  if (user) {
-    // Redirect based on role
-    if (role === 'participant') {
-      return <Navigate to="/participant" replace />;
-    } else if (role === 'investigator') {
-      return <Navigate to="/investigator" replace />;
-    } else if (role === 'cro-sponsor') {
-      return <Navigate to="/cro-sponsor" replace />;
+  // Redirect based on user's role when they log in
+  useEffect(() => {
+    if (user) {
+      const redirectUser = async () => {
+        const role = await getUserRole();
+        
+        if (role === 'participant') {
+          window.location.href = '/participant';
+        } else if (role === 'investigator') {
+          window.location.href = '/investigator';
+        } else if (role === 'cro_sponsor') {
+          window.location.href = '/cro-sponsor';
+        } else {
+          window.location.href = '/';
+        }
+      };
+      
+      redirectUser();
     }
-    return <Navigate to="/" replace />;
-  }
-
-  const getRoleDisplayName = (role: string | null) => {
-    switch (role) {
-      case 'participant':
-        return 'Participante';
-      case 'investigator':
-        return 'Investigador del Sitio';
-      case 'cro-sponsor':
-        return 'CRO/Patrocinador';
-      default:
-        return 'Usuario';
-    }
-  };
+  }, [user, getUserRole]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (isSignUp && password !== confirmPassword) {
-      toast({
-        title: 'Error',
-        description: 'Las contraseñas no coinciden',
-        variant: 'destructive',
-      });
-      return;
-    }
-
     setLoading(true);
 
     try {
-      const { error } = isSignUp 
-        ? await signUp(email, password)
-        : await signIn(email, password);
+      const { error } = await signIn(email, password);
 
       if (error) {
         toast({
-          title: 'Error',
+          title: 'Error de autenticación',
           description: error.message,
           variant: 'destructive',
-        });
-      } else if (isSignUp) {
-        toast({
-          title: 'Cuenta creada',
-          description: 'Revisa tu email para confirmar tu cuenta',
         });
       }
     } catch (error) {
@@ -97,20 +72,15 @@ const Auth = () => {
             STUDIO
           </h1>
           <p className="text-studio-text-muted text-sm">
-            {isSignUp ? 'Crear cuenta' : 'Iniciar sesión'}
+            Iniciar sesión en el sistema
           </p>
         </div>
 
         <Card className="bg-studio-surface border-studio-border">
           <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <User className="h-5 w-5" />
-                <span>{isSignUp ? 'Crear Cuenta' : 'Iniciar Sesión'}</span>
-              </div>
-              <div className="text-sm text-studio-text-muted">
-                {getRoleDisplayName(role)}
-              </div>
+            <CardTitle className="flex items-center space-x-2">
+              <User className="h-5 w-5" />
+              <span>Iniciar Sesión</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -154,53 +124,26 @@ const Auth = () => {
                 </div>
               </div>
 
-              {isSignUp && (
-                <div className="space-y-2">
-                  <Label htmlFor="confirmPassword">Confirmar Contraseña</Label>
-                  <Input
-                    id="confirmPassword"
-                    type="password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    placeholder="••••••••"
-                    required
-                  />
-                </div>
-              )}
-
               <Button 
                 type="submit" 
                 className="w-full"
-                disabled={loading || !email || !password || (isSignUp && !confirmPassword)}
+                disabled={loading || !email || !password}
               >
                 <Lock className="h-4 w-4 mr-2" />
-                {loading ? 'Cargando...' : (isSignUp ? 'Crear Cuenta' : 'Iniciar Sesión')}
+                {loading ? 'Cargando...' : 'Iniciar Sesión'}
               </Button>
             </form>
-
-            <Separator />
-
-            <Button
-              variant="outline"
-              onClick={() => setIsSignUp(!isSignUp)}
-              className="w-full"
-            >
-              {isSignUp ? '¿Ya tienes cuenta? Iniciar Sesión' : '¿No tienes cuenta? Crear Cuenta'}
-            </Button>
-
-            <Button
-              variant="outline"
-              onClick={() => window.history.back()}
-              className="w-full"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Volver
-            </Button>
           </CardContent>
         </Card>
+        
+        <div className="text-center text-xs text-studio-text-muted">
+          <p>Cuentas de prueba:</p>
+          <p>Participante: participant@studioclinical.com</p>
+          <p>Investigador: site@studioclinical.com</p>
+          <p>CRO/Patrocinador: sponsor-cro@studioclinical.com</p>
+        </div>
       </div>
     </div>
   );
 };
-
 export default Auth;

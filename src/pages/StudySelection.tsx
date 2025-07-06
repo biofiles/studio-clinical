@@ -1,24 +1,40 @@
-import { useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import StudySelector from "@/components/StudySelector";
+import { useAuth } from "@/contexts/AuthContext";
 
 const StudySelection = () => {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const role = searchParams.get('role') as 'investigator' | 'cro-sponsor';
+  const { user, getUserRole } = useAuth();
+  const [userRole, setUserRole] = useState<'investigator' | 'cro-sponsor' | null>(null);
 
   useEffect(() => {
-    // Redirect if no valid role is provided
-    if (!role || (role !== 'investigator' && role !== 'cro-sponsor')) {
+    // Redirect if no user is logged in
+    if (!user) {
       navigate('/');
+      return;
     }
-  }, [role, navigate]);
 
-  if (!role || (role !== 'investigator' && role !== 'cro-sponsor')) {
+    // Check user role and redirect if not investigator or cro_sponsor
+    const checkRole = async () => {
+      const role = await getUserRole();
+      if (!role || (role !== 'investigator' && role !== 'cro_sponsor')) {
+        navigate('/');
+      } else {
+        // Map cro_sponsor to cro-sponsor for the component
+        const mappedRole = role === 'cro_sponsor' ? 'cro-sponsor' : role;
+        setUserRole(mappedRole as 'investigator' | 'cro-sponsor');
+      }
+    };
+    
+    checkRole();
+  }, [user, getUserRole, navigate]);
+
+  if (!user || !userRole) {
     return null;
   }
 
-  return <StudySelector userRole={role} />;
+  return <StudySelector userRole={userRole} />;
 };
 
 export default StudySelection;

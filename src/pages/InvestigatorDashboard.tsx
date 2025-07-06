@@ -31,7 +31,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
   // Redirect to study selection if no study is selected
   useEffect(() => {
     if (!selectedStudy) {
-      navigate('/select-study?role=investigator');
+      navigate('/select-study');
     }
   }, [selectedStudy, navigate]);
 

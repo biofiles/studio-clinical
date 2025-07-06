@@ -1,15 +1,16 @@
-import { useNavigate } from "react-router-dom";
-import Login from "@/components/Login";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Index = () => {
-  const navigate = useNavigate();
+  const { user } = useAuth();
 
-  const handleRoleSelect = (role: 'participant' | 'investigator' | 'cro-sponsor') => {
-    // Redirect to authentication page with role parameter
-    navigate(`/auth?role=${role}`);
-  };
+  // If user is logged in, redirect to auth page to handle role-based routing
+  if (user) {
+    return <Navigate to="/auth" replace />;
+  }
 
-  return <Login onRoleSelect={handleRoleSelect} />;
+  // Redirect to auth page for login
+  return <Navigate to="/auth" replace />;
 };
 
 export default Index;
