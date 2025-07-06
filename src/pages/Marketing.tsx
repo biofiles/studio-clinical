@@ -67,13 +67,13 @@ const Marketing = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-background">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-xl sticky top-0 z-50 border-b border-gray-200/50">
+      <header className="bg-white/80 backdrop-blur-xl sticky top-0 z-50 border-b border-gray-200/50 dark:bg-background/80 dark:border-border">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <span className="text-2xl font-light tracking-wider text-gray-600">
+              <span className="text-2xl font-light tracking-wider text-gray-600 dark:text-foreground">
                 STUDIO
               </span>
             </div>
@@ -116,12 +116,12 @@ const Marketing = () => {
       <section className="py-32 px-6">
         <div className="max-w-5xl mx-auto">
           <div className={`text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-            <h1 className="text-6xl md:text-7xl font-light mb-8 text-gray-900 tracking-tight leading-tight">
+            <h1 className="text-6xl md:text-7xl font-light mb-8 text-gray-900 dark:text-foreground tracking-tight leading-tight">
               {t('marketing.hero.title')}
               <br />
               <span className="font-normal">{t('marketing.hero.subtitle')}</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-16 leading-relaxed max-w-3xl mx-auto font-light">
+            <p className="text-xl text-gray-600 dark:text-muted-foreground mb-16 leading-relaxed max-w-3xl mx-auto font-light">
               {t('marketing.hero.description')}
             </p>
             
@@ -145,35 +145,35 @@ const Marketing = () => {
         <div className="max-w-7xl mx-auto">
           <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="relative">
-              <div className="bg-white border border-gray-200/50 rounded-3xl p-12 shadow-2xl shadow-gray-900/10">
+              <div className="bg-white dark:bg-card border border-gray-200/50 dark:border-border rounded-3xl p-12 shadow-2xl shadow-gray-900/10 dark:shadow-none">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   <div className="space-y-6">
-                    <div className="bg-gray-50/50 rounded-2xl p-8">
-                      <Users className="w-10 h-10 text-gray-600 mb-4" />
-                      <h3 className="font-medium mb-3 text-gray-900">CRO Dashboard</h3>
+                    <div className="bg-gray-50/50 dark:bg-accent/50 rounded-2xl p-8">
+                      <Users className="w-10 h-10 text-gray-600 dark:text-foreground mb-4" />
+                      <h3 className="font-medium mb-3 text-gray-900 dark:text-foreground">CRO Dashboard</h3>
                       <div className="space-y-3">
-                        <div className="h-2 bg-gray-200 rounded" />
-                        <div className="h-2 bg-gray-200 rounded w-3/4" />
+                        <div className="h-2 bg-gray-200 dark:bg-muted rounded" />
+                        <div className="h-2 bg-gray-200 dark:bg-muted rounded w-3/4" />
                       </div>
                     </div>
                   </div>
                   <div className="space-y-6">
-                    <div className="bg-gray-50/50 rounded-2xl p-8">
-                      <Calendar className="w-10 h-10 text-gray-600 mb-4" />
-                      <h3 className="font-medium mb-3 text-gray-900">Site Management</h3>
+                    <div className="bg-gray-50/50 dark:bg-accent/50 rounded-2xl p-8">
+                      <Calendar className="w-10 h-10 text-gray-600 dark:text-foreground mb-4" />
+                      <h3 className="font-medium mb-3 text-gray-900 dark:text-foreground">Site Management</h3>
                       <div className="space-y-3">
-                        <div className="h-2 bg-gray-200 rounded w-5/6" />
-                        <div className="h-2 bg-gray-200 rounded" />
+                        <div className="h-2 bg-gray-200 dark:bg-muted rounded w-5/6" />
+                        <div className="h-2 bg-gray-200 dark:bg-muted rounded" />
                       </div>
                     </div>
                   </div>
                   <div className="space-y-6">
-                    <div className="bg-gray-50/50 rounded-2xl p-8">
-                      <Smartphone className="w-10 h-10 text-gray-600 mb-4" />
-                      <h3 className="font-medium mb-3 text-gray-900">Patient Portal</h3>
+                    <div className="bg-gray-50/50 dark:bg-accent/50 rounded-2xl p-8">
+                      <Smartphone className="w-10 h-10 text-gray-600 dark:text-foreground mb-4" />
+                      <h3 className="font-medium mb-3 text-gray-900 dark:text-foreground">Patient Portal</h3>
                       <div className="space-y-3">
-                        <div className="h-2 bg-gray-200 rounded" />
-                        <div className="h-2 bg-gray-200 rounded w-2/3" />
+                        <div className="h-2 bg-gray-200 dark:bg-muted rounded" />
+                        <div className="h-2 bg-gray-200 dark:bg-muted rounded w-2/3" />
                       </div>
                     </div>
                   </div>
@@ -188,12 +188,12 @@ const Marketing = () => {
       <section className="py-32 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-24">
-            <h2 className="text-5xl md:text-6xl font-light mb-8 text-gray-900 tracking-tight">
+            <h2 className="text-5xl md:text-6xl font-light mb-8 text-gray-900 dark:text-foreground tracking-tight">
               {t('marketing.features.title')}
               <br />
               <span className="font-normal">{t('marketing.features.subtitle')}</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
+            <p className="text-xl text-gray-600 dark:text-muted-foreground max-w-3xl mx-auto font-light">
               {t('marketing.features.description')}
             </p>
           </div>
@@ -226,18 +226,18 @@ const Marketing = () => {
       </section>
 
       {/* Integration Value */}
-      <section className="py-32 px-6 bg-gray-50/50">
+      <section className="py-32 px-6 bg-gray-50/50 dark:bg-muted/30">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-5xl font-light mb-12 text-gray-900 tracking-tight">
+          <h2 className="text-5xl font-light mb-12 text-gray-900 dark:text-foreground tracking-tight">
             {t('marketing.integration.title')}
           </h2>
-          <p className="text-xl text-gray-600 mb-16 max-w-3xl mx-auto font-light">
+          <p className="text-xl text-gray-600 dark:text-muted-foreground mb-16 max-w-3xl mx-auto font-light">
             {t('marketing.integration.description')}
           </p>
           
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {integrations.map((integration, index) => (
-              <div key={index} className="bg-white border border-gray-200/50 rounded-2xl p-6 text-base font-medium text-center text-gray-700 shadow-sm hover:shadow-md transition-all duration-300">
+              <div key={index} className="bg-white dark:bg-card border border-gray-200/50 dark:border-border rounded-2xl p-6 text-base font-medium text-center text-gray-700 dark:text-foreground shadow-sm hover:shadow-md transition-all duration-300">
                 {integration}
               </div>
             ))}
@@ -294,12 +294,12 @@ const Marketing = () => {
       </section>
 
       {/* Simple CTA */}
-      <section className="py-32 px-6 bg-gray-50/50">
+      <section className="py-32 px-6 bg-gray-50/50 dark:bg-muted/30">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-light mb-8 text-gray-900 tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-light mb-8 text-gray-900 dark:text-foreground tracking-tight">
             {t('marketing.cta.title')}
           </h2>
-          <p className="text-xl text-gray-600 mb-12 font-light">
+          <p className="text-xl text-gray-600 dark:text-muted-foreground mb-12 font-light">
             {t('marketing.cta.description')}
           </p>
           <Link to="/auth?force=true">
@@ -314,16 +314,16 @@ const Marketing = () => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 py-16 px-6">
+      <footer className="border-t border-gray-200 dark:border-border py-16 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center mb-6 md:mb-0">
-              <span className="text-xl font-light tracking-wider text-gray-600">STUDIO</span>
+              <span className="text-xl font-light tracking-wider text-gray-600 dark:text-foreground">STUDIO</span>
             </div>
-            <div className="flex items-center space-x-8 text-sm text-gray-500">
-              <a href="#" className="hover:text-gray-700 transition-colors">{t('marketing.privacy')}</a>
-              <a href="#" className="hover:text-gray-700 transition-colors">{t('marketing.terms')}</a>
-              <a href="#" className="hover:text-gray-700 transition-colors">{t('marketing.contact')}</a>
+            <div className="flex items-center space-x-8 text-sm text-gray-500 dark:text-muted-foreground">
+              <a href="#" className="hover:text-gray-700 dark:hover:text-foreground transition-colors">{t('marketing.privacy')}</a>
+              <a href="#" className="hover:text-gray-700 dark:hover:text-foreground transition-colors">{t('marketing.terms')}</a>
+              <a href="#" className="hover:text-gray-700 dark:hover:text-foreground transition-colors">{t('marketing.contact')}</a>
             </div>
           </div>
         </div>

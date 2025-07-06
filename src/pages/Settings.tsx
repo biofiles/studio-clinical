@@ -16,12 +16,12 @@ const Settings = () => {
   const handleLogout = async () => {
     try {
       await signOut();
-      // Force navigation to auth page with force parameter to show login form
-      window.location.href = '/auth?force=true';
+      // Go directly to login without stopping at marketing
+      navigate('/auth?force=true', { replace: true });
     } catch (error) {
       console.error('Error during logout:', error);
-      // Even if logout fails, redirect to auth with force
-      window.location.href = '/auth?force=true';
+      // Even if logout fails, redirect to login
+      navigate('/auth?force=true', { replace: true });
     }
   };
 
