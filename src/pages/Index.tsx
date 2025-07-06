@@ -5,9 +5,23 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Stethoscope, ArrowRight, Users, BarChart3, Shield } from "lucide-react";
 
 const Index = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
 
-  // If user is logged in, redirect to auth page to handle role-based routing
+  // Show loading while checking auth state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center mx-auto mb-4">
+            <Stethoscope className="w-5 h-5 text-primary-foreground animate-pulse" />
+          </div>
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // If user is logged in, redirect to auth page which handles role-based routing
   if (user) {
     return <Navigate to="/auth" replace />;
   }

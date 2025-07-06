@@ -10,6 +10,7 @@ import { Eye, EyeOff, Lock, User, Copy } from 'lucide-react';
 const Auth = () => {
   const {
     user,
+    loading: authLoading,
     signIn,
     getUserRole
   } = useAuth();
@@ -19,7 +20,7 @@ const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [redirecting, setRedirecting] = useState(false);
 
   // Redirect based on user's role when they log in
@@ -59,7 +60,7 @@ const Auth = () => {
   }, [user, getUserRole, toast, redirecting]);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setSubmitting(true);
     try {
       const {
         error
@@ -70,16 +71,16 @@ const Auth = () => {
           description: error.message,
           variant: 'destructive'
         });
-        setLoading(false);
+        setSubmitting(false);
       }
-      // Don't set loading to false here - let the redirect effect handle it
+      // Don't set submitting to false here - let the redirect effect handle it
     } catch (error) {
       toast({
         title: 'Error',
         description: 'Ocurrió un error inesperado',
         variant: 'destructive'
       });
-      setLoading(false);
+      setSubmitting(false);
     }
   };
   const copyToClipboard = async (text: string, label: string) => {
@@ -98,11 +99,16 @@ const Auth = () => {
     }
   };
 
-  // Show loading spinner while redirecting
-  if (redirecting) {
-    return <div className="min-h-screen bg-studio-bg flex items-center justify-center">
-        <div className="text-studio-text">Cargando...</div>
-      </div>;
+  // Show loading spinner while checking auth or redirecting
+  if (authLoading || redirecting) {
+    return (
+      <div className="min-h-screen bg-studio-bg flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-studio-text text-4xl font-light tracking-widest mb-4">STUDIO</div>
+          <div className="text-studio-text-muted">Cargando...</div>
+        </div>
+      </div>
+    );
   }
   return <div className="min-h-screen bg-studio-bg flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-8">
@@ -137,9 +143,9 @@ const Auth = () => {
                 </div>
               </div>
 
-              <Button type="submit" className="w-full" disabled={loading || !email || !password}>
+              <Button type="submit" className="w-full" disabled={submitting || !email || !password}>
                 <Lock className="h-4 w-4 mr-2" />
-                {loading ? 'Cargando...' : 'Iniciar Sesión'}
+                {submitting ? 'Cargando...' : 'Iniciar Sesión'}
               </Button>
             </form>
           </CardContent>

@@ -27,9 +27,12 @@ const Header = ({
   const handleLogout = async () => {
     try {
       await signOut();
-      navigate('/');
+      // Force navigation to marketing page instead of home
+      window.location.href = '/marketing';
     } catch (error) {
       console.error('Error during logout:', error);
+      // Even if logout fails, redirect to marketing
+      window.location.href = '/marketing';
     }
   };
 
@@ -58,6 +61,10 @@ const Header = ({
             <Button variant="outline" size="sm" onClick={handleSettings}>
               <Settings className="h-4 w-4 mr-2" />
               {t('header.settings')}
+            </Button>
+            <Button variant="outline" size="sm" onClick={handleLogout}>
+              <LogOut className="h-4 w-4 mr-2" />
+              {t('header.logout')}
             </Button>
           </div>
         </div>

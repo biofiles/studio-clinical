@@ -16,9 +16,12 @@ const Settings = () => {
   const handleLogout = async () => {
     try {
       await signOut();
-      navigate('/');
+      // Force navigation to marketing page instead of home
+      window.location.href = '/marketing';
     } catch (error) {
       console.error('Error during logout:', error);
+      // Even if logout fails, redirect to marketing
+      window.location.href = '/marketing';
     }
   };
 
