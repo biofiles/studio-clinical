@@ -5,13 +5,15 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Header from "@/components/Header";
 import StudyDropdown from "@/components/StudyDropdown";
-import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, FileText, Calendar, Users, Settings } from "lucide-react";
+import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, FileText, Calendar, Users, Settings, Download } from "lucide-react";
+import FHIRExportDialog from "@/components/FHIRExportDialog";
 import { toast } from "sonner";
 import { useStudy } from "@/contexts/StudyContext";
 import { useNavigate } from "react-router-dom";
 const CROSponsorDashboard = () => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [selectedStudyLocal, setSelectedStudyLocal] = useState<string | null>(null);
+  const [showFHIRExport, setShowFHIRExport] = useState(false);
   const {
     selectedStudy,
     studies,
@@ -81,9 +83,14 @@ const CROSponsorDashboard = () => {
             dataValidation: 3
           },
           schedule: [
-            { event: "First Patient Last Visit", protocol: selectedStudy.protocol, date: "Mar 2025" },
-            { event: "Database Lock", protocol: selectedStudy.protocol, date: "Jun 2025" },
-            { event: "Statistical Analysis Plan", protocol: selectedStudy.protocol, date: "Jul 2025" }
+            { event: "Primer Sitio Iniciado", protocol: selectedStudy.protocol, date: "Oct 2024", type: "milestone", status: "completed" },
+            { event: "Primer Sitio Activado", protocol: selectedStudy.protocol, date: "Nov 2024", type: "milestone", status: "completed" },
+            { event: "First Patient First Visit (FPFV)", protocol: selectedStudy.protocol, date: "Dec 2024", type: "milestone", status: "completed" },
+            { event: "First Patient Last Visit (FPLV)", protocol: selectedStudy.protocol, date: "Mar 2025", type: "milestone", status: "pending" },
+            { event: "Last Patient First Visit (LPFV)", protocol: selectedStudy.protocol, date: "May 2025", type: "milestone", status: "pending" },
+            { event: "Last Patient Last Visit (LPLV)", protocol: selectedStudy.protocol, date: "Sep 2025", type: "milestone", status: "pending" },
+            { event: "Database Lock", protocol: selectedStudy.protocol, date: "Jun 2025", type: "regulatory", status: "pending" },
+            { event: "Statistical Analysis Plan", protocol: selectedStudy.protocol, date: "Jul 2025", type: "regulatory", status: "pending" }
           ],
           participants: {
             enrollment: { current: 385, target: 450, percentage: 86 },
@@ -109,8 +116,12 @@ const CROSponsorDashboard = () => {
             dataValidation: 2
           },
           schedule: [
-            { event: "Mid-study Analysis", protocol: selectedStudy.protocol, date: "Aug 2025" },
-            { event: "Safety Review", protocol: selectedStudy.protocol, date: "Sep 2025" }
+            { event: "Primer Sitio Iniciado", protocol: selectedStudy.protocol, date: "Jan 2025", type: "milestone", status: "completed" },
+            { event: "Primer Sitio Activado", protocol: selectedStudy.protocol, date: "Feb 2025", type: "milestone", status: "completed" },
+            { event: "First Patient First Visit (FPFV)", protocol: selectedStudy.protocol, date: "Mar 2025", type: "milestone", status: "completed" },
+            { event: "Mid-study Analysis", protocol: selectedStudy.protocol, date: "Aug 2025", type: "regulatory", status: "pending" },
+            { event: "Last Patient First Visit (LPFV)", protocol: selectedStudy.protocol, date: "Oct 2025", type: "milestone", status: "pending" },
+            { event: "Safety Review", protocol: selectedStudy.protocol, date: "Sep 2025", type: "regulatory", status: "pending" }
           ],
           participants: {
             enrollment: { current: 162, target: 200, percentage: 81 },
@@ -136,8 +147,13 @@ const CROSponsorDashboard = () => {
             dataValidation: 9
           },
           schedule: [
-            { event: "Interim Safety Analysis", protocol: selectedStudy.protocol, date: "Oct 2025" },
-            { event: "Biomarker Analysis Complete", protocol: selectedStudy.protocol, date: "Nov 2025" }
+            { event: "Primer Sitio Iniciado", protocol: selectedStudy.protocol, date: "May 2024", type: "milestone", status: "completed" },
+            { event: "Primer Sitio Activado", protocol: selectedStudy.protocol, date: "Jun 2024", type: "milestone", status: "completed" },
+            { event: "First Patient First Visit (FPFV)", protocol: selectedStudy.protocol, date: "Jul 2024", type: "milestone", status: "completed" },
+            { event: "First Patient Last Visit (FPLV)", protocol: selectedStudy.protocol, date: "Feb 2025", type: "milestone", status: "completed" },
+            { event: "Interim Safety Analysis", protocol: selectedStudy.protocol, date: "Oct 2025", type: "regulatory", status: "pending" },
+            { event: "Last Patient Last Visit (LPLV)", protocol: selectedStudy.protocol, date: "Dec 2025", type: "milestone", status: "pending" },
+            { event: "Biomarker Analysis Complete", protocol: selectedStudy.protocol, date: "Nov 2025", type: "regulatory", status: "pending" }
           ],
           participants: {
             enrollment: { current: 94, target: 120, percentage: 78 },
@@ -163,8 +179,14 @@ const CROSponsorDashboard = () => {
             dataValidation: 1
           },
           schedule: [
-            { event: "Pediatric Safety Review", protocol: selectedStudy.protocol, date: "Sep 2025" },
-            { event: "Growth Assessment Analysis", protocol: selectedStudy.protocol, date: "Dec 2025" }
+            { event: "Primer Sitio Iniciado", protocol: selectedStudy.protocol, date: "Mar 2024", type: "milestone", status: "completed" },
+            { event: "Primer Sitio Activado", protocol: selectedStudy.protocol, date: "Apr 2024", type: "milestone", status: "completed" },
+            { event: "First Patient First Visit (FPFV)", protocol: selectedStudy.protocol, date: "May 2024", type: "milestone", status: "completed" },
+            { event: "First Patient Last Visit (FPLV)", protocol: selectedStudy.protocol, date: "Jan 2025", type: "milestone", status: "completed" },
+            { event: "Last Patient First Visit (LPFV)", protocol: selectedStudy.protocol, date: "Jul 2025", type: "milestone", status: "pending" },
+            { event: "Pediatric Safety Review", protocol: selectedStudy.protocol, date: "Sep 2025", type: "regulatory", status: "pending" },
+            { event: "Last Patient Last Visit (LPLV)", protocol: selectedStudy.protocol, date: "Nov 2025", type: "milestone", status: "pending" },
+            { event: "Growth Assessment Analysis", protocol: selectedStudy.protocol, date: "Dec 2025", type: "regulatory", status: "pending" }
           ],
           participants: {
             enrollment: { current: 278, target: 320, percentage: 87 },
@@ -304,7 +326,8 @@ const CROSponsorDashboard = () => {
               </CardHeader>
               <CardContent>
                 {selectedStudy ? (
-                  <div className="space-y-4">
+                  <div className="space-y-6">
+                    {/* Basic Study Information */}
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <span className="text-sm text-studio-text-muted">Protocol</span>
@@ -333,6 +356,71 @@ const CROSponsorDashboard = () => {
                         <p className="font-medium text-studio-text text-2xl">{selectedStudy.participants}</p>
                       </div>
                     </div>
+
+                    {/* Study Performance Metrics */}
+                    {studyData && (
+                      <div className="space-y-4">
+                        <h4 className="text-md font-medium text-studio-text border-b border-studio-border pb-2">Performance Metrics</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <Card className="bg-studio-bg border-studio-border">
+                            <CardHeader className="pb-3">
+                              <CardTitle className="text-sm text-studio-text">Budget Utilization</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                              <div className="space-y-2">
+                                <div className="flex justify-between">
+                                  <span className="text-studio-text-muted text-sm">Spent</span>
+                                  <span className="text-studio-text text-sm">
+                                    ${studyData.reports.budget.spent}M/${studyData.reports.budget.total}M
+                                  </span>
+                                </div>
+                                <div className="w-full bg-muted rounded-full h-2">
+                                  <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" 
+                                       style={{ width: `${studyData.reports.budget.percentage}%` }}></div>
+                                </div>
+                              </div>
+                            </CardContent>
+                          </Card>
+
+                          <Card className="bg-studio-bg border-studio-border">
+                            <CardHeader className="pb-3">
+                              <CardTitle className="text-sm text-studio-text">Timeline Progress</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                              <div className="space-y-2">
+                                <div className="flex justify-between">
+                                  <span className="text-studio-text-muted text-sm">Completion</span>
+                                  <span className="text-studio-text text-sm">{studyData.reports.timeline}%</span>
+                                </div>
+                                <div className="w-full bg-muted rounded-full h-2">
+                                  <div className="bg-[hsl(var(--progress-accent))] h-2 rounded-full" 
+                                       style={{ width: `${studyData.reports.timeline}%` }}></div>
+                                </div>
+                              </div>
+                            </CardContent>
+                          </Card>
+
+                          <Card className="bg-studio-bg border-studio-border">
+                            <CardHeader className="pb-3">
+                              <CardTitle className="text-sm text-studio-text">Recent Alerts</CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-3">
+                              {studyData.reports.alerts.slice(0, 2).map((alert, index) => (
+                                <div key={index} className="flex items-start space-x-2">
+                                  {alert.type === 'success' && <CheckCircle className="h-3 w-3 text-primary mt-0.5 flex-shrink-0" />}
+                                  {alert.type === 'info' && <AlertCircle className="h-3 w-3 text-studio-text-muted mt-0.5 flex-shrink-0" />}
+                                  {alert.type === 'warning' && <AlertCircle className="h-3 w-3 text-destructive mt-0.5 flex-shrink-0" />}
+                                  <div className="flex-1 min-w-0">
+                                    <p className="text-xs text-studio-text leading-tight">{alert.message}</p>
+                                    <p className="text-xs text-studio-text-muted">{alert.time}</p>
+                                  </div>
+                                </div>
+                              ))}
+                            </CardContent>
+                          </Card>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div className="text-center py-8 text-studio-text-muted">
@@ -404,17 +492,38 @@ const CROSponsorDashboard = () => {
           <TabsContent value="schedule" className="space-y-6">
             <Card className="bg-studio-surface border-studio-border">
               <CardHeader>
-                <CardTitle className="text-studio-text">Study Milestones</CardTitle>
+                <CardTitle className="text-studio-text">Study Milestones & Key Dates</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {studyData && studyData.schedule.map((milestone, index) => (
-                    <div key={index} className="flex justify-between items-center p-3 bg-studio-bg rounded">
-                      <div>
-                        <p className="font-medium text-studio-text">{milestone.event}</p>
+                    <div key={index} className="flex justify-between items-center p-3 bg-studio-bg rounded border-l-4 border-l-transparent" 
+                         style={{
+                           borderLeftColor: milestone.status === 'completed' ? 'hsl(var(--primary))' : 
+                                          milestone.type === 'milestone' ? 'hsl(var(--progress-success))' : 
+                                          'hsl(var(--progress-accent))'
+                         }}>
+                      <div className="flex-1">
+                        <div className="flex items-center space-x-2">
+                          <p className="font-medium text-studio-text">{milestone.event}</p>
+                          {milestone.status === 'completed' && (
+                            <CheckCircle className="h-4 w-4 text-primary" />
+                          )}
+                          {milestone.status === 'pending' && (
+                            <Clock className="h-4 w-4 text-studio-text-muted" />
+                          )}
+                        </div>
                         <p className="text-sm text-studio-text-muted">{milestone.protocol}</p>
+                        <div className="flex items-center space-x-2 mt-1">
+                          <Badge variant="outline" className="text-xs">
+                            {milestone.type === 'milestone' ? 'Milestone' : 'Regulatory'}
+                          </Badge>
+                          <Badge variant={milestone.status === 'completed' ? 'default' : 'secondary'} className="text-xs">
+                            {milestone.status === 'completed' ? 'Completado' : 'Pendiente'}
+                          </Badge>
+                        </div>
                       </div>
-                      <span className="text-studio-text">{milestone.date}</span>
+                      <span className="text-studio-text font-medium">{milestone.date}</span>
                     </div>
                   ))}
                   {!studyData && (
@@ -489,67 +598,145 @@ const CROSponsorDashboard = () => {
           </TabsContent>
 
           <TabsContent value="reports" className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-lg font-medium text-studio-text">Study Reports & Analytics</h3>
+              <p className="text-sm text-studio-text-muted">Generate and download comprehensive study reports</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Downloadable Reports */}
               <Card className="bg-studio-surface border-studio-border">
                 <CardHeader>
-                  <CardTitle className="text-studio-text">Budget Utilization</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <div className="flex justify-between">
-                      <span className="text-studio-text-muted">Spent</span>
-                      <span className="text-studio-text">
-                        {studyData ? `$${studyData.reports.budget.spent}M/$${studyData.reports.budget.total}M` : '$2.4M/$3.2M'}
-                      </span>
-                    </div>
-                    <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" 
-                           style={{ width: `${studyData ? studyData.reports.budget.percentage : 75}%` }}></div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-studio-surface border-studio-border">
-                <CardHeader>
-                  <CardTitle className="text-studio-text">Timeline Progress</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <div className="flex justify-between">
-                      <span className="text-studio-text-muted">Completion</span>
-                      <span className="text-studio-text">{studyData ? studyData.reports.timeline : 67}%</span>
-                    </div>
-                    <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-[hsl(var(--progress-accent))] h-2 rounded-full" 
-                           style={{ width: `${studyData ? studyData.reports.timeline : 67}%` }}></div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-studio-surface border-studio-border">
-                <CardHeader>
-                  <CardTitle className="text-studio-text">Recent Alerts</CardTitle>
+                  <CardTitle className="text-studio-text flex items-center space-x-2">
+                    <Download className="h-5 w-5" />
+                    <span>Downloadable Reports</span>
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {(studyData ? studyData.reports.alerts : alerts).map((alert, index) => (
-                    <div key={index} className="flex items-start space-x-3">
-                      {alert.type === 'warning' && <AlertCircle className="h-4 w-4 text-destructive mt-0.5" />}
-                      {alert.type === 'info' && <AlertCircle className="h-4 w-4 text-studio-text-muted mt-0.5" />}
-                      {alert.type === 'success' && <CheckCircle className="h-4 w-4 text-primary mt-0.5" />}
-                      <div className="flex-1">
-                        <p className="text-sm text-studio-text">{alert.message}</p>
-                        <p className="text-xs text-studio-text-muted">{alert.time}</p>
+                  <div className="space-y-3">
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start h-auto py-3"
+                      onClick={() => toast.success("Generating Site Users Report...", { description: "Report will be available for download shortly" })}
+                    >
+                      <div className="flex flex-col items-start space-y-1 flex-1">
+                        <span className="font-medium">Reporte de Usuarios del Sitio</span>
+                        <span className="text-xs text-studio-text-muted">Detailed site investigator and staff activity report</span>
                       </div>
-                    </div>
-                  ))}
+                      <Download className="h-4 w-4 ml-2" />
+                    </Button>
+                    
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start h-auto py-3"
+                      onClick={() => toast.success("Generating Questionnaire Report...", { description: "Comprehensive questionnaire data compilation started" })}
+                    >
+                      <div className="flex flex-col items-start space-y-1 flex-1">
+                        <span className="font-medium">Reporte de Cuestionarios</span>
+                        <span className="text-xs text-studio-text-muted">Complete questionnaire responses and compliance data</span>
+                      </div>
+                      <Download className="h-4 w-4 ml-2" />
+                    </Button>
+                    
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start h-auto py-3"
+                      onClick={() => toast.success("Generating Milestones Report...", { description: "Study timeline and milestone tracking report in progress" })}
+                    >
+                      <div className="flex flex-col items-start space-y-1 flex-1">
+                        <span className="font-medium">Reporte de Milestones</span>
+                        <span className="text-xs text-studio-text-muted">Timeline tracking and milestone achievement analysis</span>
+                      </div>
+                      <Download className="h-4 w-4 ml-2" />
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Interoperability Module */}
+              <Card className="bg-studio-surface border-studio-border">
+                <CardHeader>
+                  <CardTitle className="text-studio-text flex items-center space-x-2">
+                    <Globe className="h-5 w-5" />
+                    <span>Interoperabilidad</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="space-y-3">
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start h-auto py-3"
+                      onClick={() => setShowFHIRExport(true)}
+                    >
+                      <div className="flex flex-col items-start space-y-1 flex-1">
+                        <span className="font-medium">Exportar FHIR</span>
+                        <span className="text-xs text-studio-text-muted">Export study data in FHIR R4 format for regulatory submission</span>
+                      </div>
+                      <Globe className="h-4 w-4 ml-2" />
+                    </Button>
+                    
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start h-auto py-3"
+                      onClick={() => toast.success("Initiating HL7 Export...", { description: "HL7 message format export for healthcare systems integration" })}
+                    >
+                      <div className="flex flex-col items-start space-y-1 flex-1">
+                        <span className="font-medium">Exportar HL7</span>
+                        <span className="text-xs text-studio-text-muted">Generate HL7 messages for healthcare system integration</span>
+                      </div>
+                      <FileText className="h-4 w-4 ml-2" />
+                    </Button>
+                    
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start h-auto py-3"
+                      onClick={() => toast.success("Connecting to CDISC API...", { description: "Validating study data against CDISC STDM standards" })}
+                    >
+                      <div className="flex flex-col items-start space-y-1 flex-1">
+                        <span className="font-medium">Validación CDISC</span>
+                        <span className="text-xs text-studio-text-muted">Validate against CDISC Study Data Tabulation Model</span>
+                      </div>
+                      <Shield className="h-4 w-4 ml-2" />
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             </div>
+
+            {/* Additional Analytics Section */}
+            <Card className="bg-studio-surface border-studio-border">
+              <CardHeader>
+                <CardTitle className="text-studio-text">Advanced Analytics</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="text-center p-4 bg-studio-bg rounded">
+                    <TrendingUp className="h-8 w-8 mx-auto mb-2 text-primary" />
+                    <h4 className="font-medium text-studio-text">Performance Trends</h4>
+                    <p className="text-sm text-studio-text-muted mt-1">Cross-study performance analysis and benchmarking</p>
+                  </div>
+                  <div className="text-center p-4 bg-studio-bg rounded">
+                    <Users className="h-8 w-8 mx-auto mb-2 text-primary" />
+                    <h4 className="font-medium text-studio-text">Site Comparisons</h4>
+                    <p className="text-sm text-studio-text-muted mt-1">Comparative analysis across all study sites</p>
+                  </div>
+                  <div className="text-center p-4 bg-studio-bg rounded">
+                    <FileText className="h-8 w-8 mx-auto mb-2 text-primary" />
+                    <h4 className="font-medium text-studio-text">Regulatory Readiness</h4>
+                    <p className="text-sm text-studio-text-muted mt-1">Compliance status and regulatory submission preparation</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
         </Tabs>
       </main>
+
+      {/* FHIR Export Dialog */}
+      <FHIRExportDialog 
+        open={showFHIRExport}
+        onOpenChange={setShowFHIRExport}
+      />
     </div>;
 };
 export default CROSponsorDashboard;
