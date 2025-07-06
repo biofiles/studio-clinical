@@ -367,29 +367,27 @@ const CROSponsorDashboard = () => {
                     {/* Basic Study Information */}
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <span className="text-sm text-studio-text-muted">Protocol</span>
+                        <span className="text-sm text-studio-text-muted">{t('study.protocol')}</span>
                         <p className="font-medium text-studio-text">{selectedStudy.protocol}</p>
                       </div>
                       <div className="space-y-2">
-                        <span className="text-sm text-studio-text-muted">Phase</span>
+                        <span className="text-sm text-studio-text-muted">{t('study.phase')}</span>
                         <p className="font-medium text-studio-text">{selectedStudy.phase}</p>
                       </div>
                       <div className="space-y-2">
-                        <span className="text-sm text-studio-text-muted">Status</span>
-                        <Badge className={getStatusColor(selectedStudy.status)}>
-                          {selectedStudy.status}
-                        </Badge>
+                        <span className="text-sm text-studio-text-muted">{t('study.status')}</span>
+                        <p className="font-medium text-studio-text">{selectedStudy.status}</p>
                       </div>
                       <div className="space-y-2">
-                        <span className="text-sm text-studio-text-muted">Sites</span>
+                        <span className="text-sm text-studio-text-muted">{t('study.sites.count')}</span>
                         <p className="font-medium text-studio-text">{selectedStudy.sites}</p>
                       </div>
                       <div className="space-y-2">
-                        <span className="text-sm text-studio-text-muted">Sponsor</span>
+                        <span className="text-sm text-studio-text-muted">{t('study.sponsor')}</span>
                         <p className="font-medium text-studio-text">{selectedStudy.sponsor}</p>
                       </div>
                       <div className="space-y-2">
-                        <span className="text-sm text-studio-text-muted">Participants</span>
+                        <span className="text-sm text-studio-text-muted">{t('study.participants.count')}</span>
                         <p className="font-medium text-studio-text text-2xl">{selectedStudy.participants}</p>
                       </div>
                     </div>
@@ -439,7 +437,7 @@ const CROSponsorDashboard = () => {
 
                           <Card className="bg-studio-bg border-studio-border">
                             <CardHeader className="pb-3">
-                              <CardTitle className="text-sm text-studio-text">Recent Alerts</CardTitle>
+                              <CardTitle className="text-sm text-studio-text">{t('study.recent.alerts')}</CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-3">
                               {studyData.reports.alerts.slice(0, 2).map((alert, index) => (

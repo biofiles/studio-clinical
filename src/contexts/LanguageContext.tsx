@@ -288,7 +288,16 @@ const translations = {
     'cro.export.fhir': 'Export FHIR Data',
     'cro.export.hl7': 'Export HL7 Messages',
     'cro.validate.cdisc': 'Validate CDISC Standards',
-    'cro.advanced.analytics': 'Advanced Analytics'
+    'cro.advanced.analytics': 'Advanced Analytics',
+    
+    // Study Details Attributes
+    'study.protocol': 'Protocol',
+    'study.phase': 'Phase',
+    'study.sponsor': 'Sponsor',
+    'study.sites.count': 'Sites',
+    'study.participants.count': 'Participants',
+    'study.status': 'Status',
+    'study.recent.alerts': 'Recent Alerts'
   },
   spanish: {
     // Header
@@ -568,7 +577,16 @@ const translations = {
     'cro.export.fhir': 'Exportar Datos FHIR',
     'cro.export.hl7': 'Exportar Mensajes HL7',
     'cro.validate.cdisc': 'Validar Estándares CDISC',
-    'cro.advanced.analytics': 'Análisis Avanzado'
+    'cro.advanced.analytics': 'Análisis Avanzado',
+    
+    // Study Details Attributes
+    'study.protocol': 'Protocolo',
+    'study.phase': 'Fase',
+    'study.sponsor': 'Patrocinador',
+    'study.sites.count': 'Sitios',
+    'study.participants.count': 'Participantes',
+    'study.status': 'Estado',
+    'study.recent.alerts': 'Alertas Recientes'
   }
 };
 
