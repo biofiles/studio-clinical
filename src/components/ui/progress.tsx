@@ -4,7 +4,7 @@ import * as ProgressPrimitive from "@radix-ui/react-progress"
 import { cn } from "@/lib/utils"
 
 interface ProgressProps extends React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> {
-  color?: 'primary' | 'success' | 'info' | 'accent' | 'gray'
+  color?: 'primary' | 'success' | 'info' | 'accent' | 'warning' | 'gray'
 }
 
 const Progress = React.forwardRef<
@@ -17,6 +17,7 @@ const Progress = React.forwardRef<
       case 'success': return 'bg-[hsl(var(--progress-success))]';
       case 'info': return 'bg-[hsl(var(--progress-info))]';
       case 'accent': return 'bg-[hsl(var(--progress-accent))]';
+      case 'warning': return 'bg-[hsl(var(--progress-warning))]';
       case 'gray': return 'bg-[hsl(var(--progress-gray))]';
       default: return 'bg-[hsl(var(--progress-primary))]';
     }

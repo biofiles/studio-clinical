@@ -48,6 +48,7 @@ All colors MUST be HSL.
     --progress-success: 155 65% 42%;
     --progress-info: 200 85% 50%;
     --progress-accent: 280 65% 55%;
+    --progress-warning: 45 93% 55%;
     --progress-gray: 0 0% 55%;
 
     --radius: 0.5rem;

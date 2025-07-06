@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import Header from "@/components/Header";
 import { Users, FileCheck, AlertTriangle, BarChart3, Calendar, UserCheck, MessageCircle, Download, Settings } from "lucide-react";
 import ParticipantList from "@/components/ParticipantList";
@@ -262,10 +263,11 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                     {studyData ? `${studyData.enrolled.current}/${studyData.enrolled.total} (${studyData.enrolled.percentage}%)` : '0/0 (0%)'}
                   </span>
                 </div>
-                <div className="w-full bg-muted rounded-full h-2">
-                  <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" 
-                       style={{ width: `${studyData ? studyData.enrolled.percentage : 0}%` }}></div>
-                </div>
+                <Progress 
+                  value={studyData ? studyData.enrolled.percentage : 0} 
+                  color="primary"
+                  className="h-2"
+                />
               </div>
             </CardContent>
           </Card>
@@ -280,10 +282,11 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                   <span className="text-studio-text-muted">{t('dashboard.daily.diaries')}</span>
                   <span className="text-studio-text">{studyData ? studyData.diaryCompliance : 0}%</span>
                 </div>
-                <div className="w-full bg-muted rounded-full h-2">
-                  <div className={`h-2 rounded-full ${studyData && studyData.diaryCompliance < 90 ? 'bg-[hsl(var(--progress-warning))]' : 'bg-[hsl(var(--progress-success))]'}`} 
-                       style={{ width: `${studyData ? studyData.diaryCompliance : 0}%` }}></div>
-                </div>
+                <Progress 
+                  value={studyData ? studyData.diaryCompliance : 0} 
+                  color={studyData && studyData.diaryCompliance < 90 ? 'warning' : 'success'}
+                  className="h-2"
+                />
               </div>
             </CardContent>
           </Card>
@@ -298,10 +301,11 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                   <span className="text-studio-text-muted">{t('dashboard.site.visits')}</span>
                   <span className="text-studio-text">{studyData ? studyData.visitCompliance : 0}%</span>
                 </div>
-                <div className="w-full bg-muted rounded-full h-2">
-                  <div className={`h-2 rounded-full ${studyData && studyData.visitCompliance < 90 ? 'bg-[hsl(var(--progress-warning))]' : 'bg-[hsl(var(--progress-info))]'}`} 
-                       style={{ width: `${studyData ? studyData.visitCompliance : 0}%` }}></div>
-                </div>
+                <Progress 
+                  value={studyData ? studyData.visitCompliance : 0} 
+                  color={studyData && studyData.visitCompliance < 90 ? 'warning' : 'info'}
+                  className="h-2"
+                />
               </div>
             </CardContent>
           </Card>
