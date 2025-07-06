@@ -105,7 +105,7 @@ const ParticipantDashboard = () => {
             {t('common.welcome')}
           </h2>
           <p className="text-studio-text-muted text-sm sm:text-base">
-            Protocolo NVS-4578-301 | Patrocinador: Novartis AG | PARADIGM-CV
+            PARADIGM-CV | {t('study.protocol')}: NVS-4578-301 | {t('study.sponsor')}: Novartis AG
           </p>
         </div>
 

@@ -482,7 +482,7 @@ const translations = {
     'participant.schedule.visit': 'Programar Visita',
     'participant.barcode.click': 'Haga clic para ver el código de barras',
     'participant.profile': 'Perfil',
-    'participant.your.schedule': 'Tu Agenda',
+    'participant.your.schedule': 'Su Horario',
     'participant.days.remaining': 'días restantes',
     'participant.token': 'Token de Participante',
     
