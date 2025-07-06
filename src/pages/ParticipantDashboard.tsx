@@ -82,7 +82,7 @@ const ParticipantDashboard = () => {
             {t('common.welcome')}
           </h2>
           <p className="text-studio-text-muted text-xs sm:text-sm">
-            Protocolo PROTO-2024-001 | Patrocinador: Novartis AG
+            Protocolo NVS-4578-301 | Patrocinador: Novartis AG | PARADIGM-CV
           </p>
         </div>
 

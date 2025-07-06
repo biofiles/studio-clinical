@@ -9,17 +9,35 @@ import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, 
 import FHIRExportDialog from "@/components/FHIRExportDialog";
 import { toast } from "sonner";
 import { useStudy } from "@/contexts/StudyContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
 const CROSponsorDashboard = () => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [selectedStudyLocal, setSelectedStudyLocal] = useState<string | null>(null);
   const [showFHIRExport, setShowFHIRExport] = useState(false);
+  const [favoriteStudyId, setFavoriteStudyId] = useState<string | null>(null);
   const {
     selectedStudy,
     studies,
     setSelectedStudy
   } = useStudy();
+  const { t } = useLanguage();
   const navigate = useNavigate();
+  
+  // Load favorite study from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('favoriteStudyId');
+    if (saved) {
+      setFavoriteStudyId(saved);
+      // If no study is currently selected, select the favorite one
+      if (!selectedStudy) {
+        const favoriteStudy = studies.find(s => s.id === saved);
+        if (favoriteStudy) {
+          setSelectedStudy(favoriteStudy);
+        }
+      }
+    }
+  }, [selectedStudy, studies, setSelectedStudy]);
   const localStudies = [{
     id: "PROTO-2024-001",
     title: "Phase II Oncology Trial",
@@ -234,10 +252,10 @@ const CROSponsorDashboard = () => {
       <main className="p-6 max-w-7xl mx-auto">
         <div className="space-y-2 mb-6">
           <h2 className="text-xl font-medium text-studio-text">
-            Portfolio Overview
+            {t('cro.portfolio.overview')}
           </h2>
           <p className="text-studio-text-muted">
-            Global Research Operations Dashboard
+            {t('cro.global.research.ops')}
           </p>
         </div>
 
@@ -247,10 +265,10 @@ const CROSponsorDashboard = () => {
             <CardContent className="p-6">
               <div className="flex items-center space-x-2">
                 <Building2 className="h-5 w-5 text-studio-text-muted" />
-                <span className="text-2xl font-semibold text-studio-text">23</span>
+                <span className="text-2xl font-semibold text-studio-text">4</span>
               </div>
               <p className="text-studio-text-muted text-sm mt-1">
-                Active studies
+                {t('cro.active.studies')}
               </p>
             </CardContent>
           </Card>
@@ -259,10 +277,10 @@ const CROSponsorDashboard = () => {
             <CardContent className="p-6">
               <div className="flex items-center space-x-2">
                 <Globe className="h-5 w-5 text-studio-text-muted" />
-                <span className="text-2xl font-semibold text-studio-text">47</span>
+                <span className="text-2xl font-semibold text-studio-text">61</span>
               </div>
               <p className="text-studio-text-muted text-sm mt-1">
-                Research sites
+                {t('cro.research.sites')}
               </p>
             </CardContent>
           </Card>
@@ -271,10 +289,10 @@ const CROSponsorDashboard = () => {
             <CardContent className="p-6">
               <div className="flex items-center space-x-2">
                 <TrendingUp className="h-5 w-5 text-studio-text-muted" />
-                <span className="text-2xl font-semibold text-studio-text">1,247</span>
+                <span className="text-2xl font-semibold text-studio-text">919</span>
               </div>
               <p className="text-studio-text-muted text-sm mt-1">
-                Total participants
+                {t('cro.total.participants')}
               </p>
             </CardContent>
           </Card>
@@ -283,10 +301,10 @@ const CROSponsorDashboard = () => {
             <CardContent className="p-6">
               <div className="flex items-center space-x-2">
                 <Shield className="h-5 w-5 text-studio-text-muted" />
-                <span className="text-2xl font-semibold text-studio-text">98.5%</span>
+                <span className="text-2xl font-semibold text-studio-text">95.2%</span>
               </div>
               <p className="text-studio-text-muted text-sm mt-1">
-                Compliance rate
+                {t('cro.compliance.rate')}
               </p>
             </CardContent>
           </Card>
@@ -297,31 +315,50 @@ const CROSponsorDashboard = () => {
           <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="details" className="flex items-center space-x-2">
               <Building2 className="h-4 w-4" />
-              <span>Study Details</span>
+              <span>{t('cro.study.details')}</span>
             </TabsTrigger>
             <TabsTrigger value="questionnaires" className="flex items-center space-x-2">
               <FileText className="h-4 w-4" />
-              <span>Questionnaires</span>
+              <span>{t('cro.questionnaires')}</span>
             </TabsTrigger>
             <TabsTrigger value="schedule" className="flex items-center space-x-2">
               <Calendar className="h-4 w-4" />
-              <span>Schedule</span>
+              <span>{t('cro.schedule')}</span>
             </TabsTrigger>
             <TabsTrigger value="participants" className="flex items-center space-x-2">
               <Users className="h-4 w-4" />
-              <span>Participants</span>
+              <span>{t('cro.participants')}</span>
             </TabsTrigger>
             <TabsTrigger value="reports" className="flex items-center space-x-2">
               <TrendingUp className="h-4 w-4" />
-              <span>Reports</span>
+              <span>{t('cro.reports')}</span>
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="details" className="space-y-6">
             <Card className="bg-studio-surface border-studio-border">
               <CardHeader>
-                <CardTitle className="text-studio-text">
-                  {selectedStudy ? `${selectedStudy.name} Details` : 'Select a Study'}
+                <CardTitle className="text-studio-text flex items-center justify-between">
+                  <span>{selectedStudy ? `${selectedStudy.name} ${t('common.details')}` : t('cro.select.study')}</span>
+                  {selectedStudy && (
+                    <Button
+                      variant={favoriteStudyId === selectedStudy.id ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => {
+                        if (favoriteStudyId === selectedStudy.id) {
+                          setFavoriteStudyId(null);
+                          localStorage.removeItem('favoriteStudyId');
+                          toast.success(t('cro.remove.favorite'));
+                        } else {
+                          setFavoriteStudyId(selectedStudy.id);
+                          localStorage.setItem('favoriteStudyId', selectedStudy.id);
+                          toast.success(t('cro.set.favorite'));
+                        }
+                      }}
+                    >
+                      {favoriteStudyId === selectedStudy.id ? t('cro.remove.favorite') : t('cro.set.favorite')}
+                    </Button>
+                  )}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -360,16 +397,16 @@ const CROSponsorDashboard = () => {
                     {/* Study Performance Metrics */}
                     {studyData && (
                       <div className="space-y-4">
-                        <h4 className="text-md font-medium text-studio-text border-b border-studio-border pb-2">Performance Metrics</h4>
+                        <h4 className="text-md font-medium text-studio-text border-b border-studio-border pb-2">{t('cro.performance.metrics')}</h4>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           <Card className="bg-studio-bg border-studio-border">
                             <CardHeader className="pb-3">
-                              <CardTitle className="text-sm text-studio-text">Budget Utilization</CardTitle>
+                              <CardTitle className="text-sm text-studio-text">{t('cro.budget.utilization')}</CardTitle>
                             </CardHeader>
                             <CardContent>
                               <div className="space-y-2">
                                 <div className="flex justify-between">
-                                  <span className="text-studio-text-muted text-sm">Spent</span>
+                                  <span className="text-studio-text-muted text-sm">{t('cro.spent')}</span>
                                   <span className="text-studio-text text-sm">
                                     ${studyData.reports.budget.spent}M/${studyData.reports.budget.total}M
                                   </span>
@@ -384,12 +421,12 @@ const CROSponsorDashboard = () => {
 
                           <Card className="bg-studio-bg border-studio-border">
                             <CardHeader className="pb-3">
-                              <CardTitle className="text-sm text-studio-text">Timeline Progress</CardTitle>
+                              <CardTitle className="text-sm text-studio-text">{t('cro.timeline.progress')}</CardTitle>
                             </CardHeader>
                             <CardContent>
                               <div className="space-y-2">
                                 <div className="flex justify-between">
-                                  <span className="text-studio-text-muted text-sm">Completion</span>
+                                  <span className="text-studio-text-muted text-sm">{t('cro.completion')}</span>
                                   <span className="text-studio-text text-sm">{studyData.reports.timeline}%</span>
                                 </div>
                                 <div className="w-full bg-muted rounded-full h-2">
@@ -434,7 +471,7 @@ const CROSponsorDashboard = () => {
 
           <TabsContent value="questionnaires" className="space-y-6">
             <div className="flex justify-between items-center">
-              <h3 className="text-lg font-medium text-studio-text">Questionnaire Management</h3>
+              <h3 className="text-lg font-medium text-studio-text">{t('cro.questionnaire.analytics')}</h3>
               <Button onClick={handlePDFGeneration} disabled={isGeneratingPDF} variant="outline" size="sm" className="flex items-center space-x-2">
                 {isGeneratingPDF ? <>
                     <div className="animate-spin h-3 w-3 border border-primary border-t-transparent rounded-full" />
@@ -449,20 +486,20 @@ const CROSponsorDashboard = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Card className="bg-studio-surface border-studio-border">
                 <CardHeader>
-                  <CardTitle className="text-studio-text">Completion Rates</CardTitle>
+                  <CardTitle className="text-studio-text">{t('cro.response.rates')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     <div className="flex justify-between">
-                      <span className="text-studio-text-muted">Daily Symptom Diary</span>
+                      <span className="text-studio-text-muted">{t('cro.daily.symptom')}</span>
                       <span className="text-studio-text">{studyData ? studyData.questionnaires.dailySymptom : 89}%</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-studio-text-muted">Weekly QoL Assessment</span>
+                      <span className="text-studio-text-muted">{t('cro.weekly.qol')}</span>
                       <span className="text-studio-text">{studyData ? studyData.questionnaires.weeklyQoL : 76}%</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-studio-text-muted">Monthly Health Survey</span>
+                      <span className="text-studio-text-muted">{t('cro.monthly.health')}</span>
                       <span className="text-studio-text">{studyData ? studyData.questionnaires.monthlyHealth : 92}%</span>
                     </div>
                   </div>
@@ -471,16 +508,16 @@ const CROSponsorDashboard = () => {
 
               <Card className="bg-studio-surface border-studio-border">
                 <CardHeader>
-                  <CardTitle className="text-studio-text">Pending Reviews</CardTitle>
+                  <CardTitle className="text-studio-text">{t('cro.quality.reviews')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-studio-text">Quality Review Required</span>
+                      <span className="text-studio-text">{t('cro.quality.reviews')}</span>
                       <span className="bg-[hsl(var(--progress-accent))]/10 text-[hsl(var(--progress-accent))] border border-[hsl(var(--progress-accent))]/20 px-2 py-1 rounded text-xs">{studyData ? studyData.questionnaires.qualityReviews : 23}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-studio-text">Data Validation</span>
+                      <span className="text-studio-text">{t('cro.data.validation')}</span>
                       <span className="bg-destructive/10 text-destructive border border-destructive/20 px-2 py-1 rounded text-xs">{studyData ? studyData.questionnaires.dataValidation : 7}</span>
                     </div>
                   </div>
@@ -492,7 +529,7 @@ const CROSponsorDashboard = () => {
           <TabsContent value="schedule" className="space-y-6">
             <Card className="bg-studio-surface border-studio-border">
               <CardHeader>
-                <CardTitle className="text-studio-text">Study Milestones & Key Dates</CardTitle>
+                <CardTitle className="text-studio-text">{t('cro.milestone.schedule')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -516,10 +553,10 @@ const CROSponsorDashboard = () => {
                         <p className="text-sm text-studio-text-muted">{milestone.protocol}</p>
                         <div className="flex items-center space-x-2 mt-1">
                           <Badge variant="outline" className="text-xs">
-                            {milestone.type === 'milestone' ? 'Milestone' : 'Regulatory'}
+                            {milestone.type === 'milestone' ? t('common.milestone') : t('common.regulatory')}
                           </Badge>
                           <Badge variant={milestone.status === 'completed' ? 'default' : 'secondary'} className="text-xs">
-                            {milestone.status === 'completed' ? 'Completado' : 'Pendiente'}
+                            {milestone.status === 'completed' ? t('cro.milestone.completed') : t('cro.milestone.pending')}
                           </Badge>
                         </div>
                       </div>
@@ -541,12 +578,12 @@ const CROSponsorDashboard = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <Card className="bg-studio-surface border-studio-border">
                 <CardHeader>
-                  <CardTitle className="text-studio-text">Enrollment Progress</CardTitle>
+                  <CardTitle className="text-studio-text">{t('cro.enrollment.tracker')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="text-studio-text-muted">Target</span>
+                      <span className="text-studio-text-muted">{t('cro.target')}</span>
                       <span className="text-studio-text">
                         {studyData ? `${studyData.participants.enrollment.current}/${studyData.participants.enrollment.target}` : '1,247/1,500'}
                       </span>
@@ -561,12 +598,12 @@ const CROSponsorDashboard = () => {
 
               <Card className="bg-studio-surface border-studio-border">
                 <CardHeader>
-                  <CardTitle className="text-studio-text">Retention Rate</CardTitle>
+                  <CardTitle className="text-studio-text">{t('cro.retention.rate')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="text-studio-text-muted">Active</span>
+                      <span className="text-studio-text-muted">{t('common.active')}</span>
                       <span className="text-studio-text">{studyData ? studyData.participants.retention : 94.2}%</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
@@ -579,7 +616,7 @@ const CROSponsorDashboard = () => {
 
               <Card className="bg-studio-surface border-studio-border">
                 <CardHeader>
-                  <CardTitle className="text-studio-text">Compliance</CardTitle>
+                  <CardTitle className="text-studio-text">{t('cro.compliance.score')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
@@ -599,8 +636,8 @@ const CROSponsorDashboard = () => {
 
           <TabsContent value="reports" className="space-y-6">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-lg font-medium text-studio-text">Study Reports & Analytics</h3>
-              <p className="text-sm text-studio-text-muted">Generate and download comprehensive study reports</p>
+              <h3 className="text-lg font-medium text-studio-text">{t('cro.reports')} & {t('cro.advanced.analytics')}</h3>
+              <p className="text-sm text-studio-text-muted">{t('cro.download.reports')}</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -609,7 +646,7 @@ const CROSponsorDashboard = () => {
                 <CardHeader>
                   <CardTitle className="text-studio-text flex items-center space-x-2">
                     <Download className="h-5 w-5" />
-                    <span>Downloadable Reports</span>
+                    <span>{t('cro.download.reports')}</span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -620,7 +657,7 @@ const CROSponsorDashboard = () => {
                       onClick={() => toast.success("Generating Site Users Report...", { description: "Report will be available for download shortly" })}
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1">
-                        <span className="font-medium">Reporte de Usuarios del Sitio</span>
+                        <span className="font-medium">{t('cro.site.users.report')}</span>
                         <span className="text-xs text-studio-text-muted">Detailed site investigator and staff activity report</span>
                       </div>
                       <Download className="h-4 w-4 ml-2" />
@@ -632,7 +669,7 @@ const CROSponsorDashboard = () => {
                       onClick={() => toast.success("Generating Questionnaire Report...", { description: "Comprehensive questionnaire data compilation started" })}
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1">
-                        <span className="font-medium">Reporte de Cuestionarios</span>
+                        <span className="font-medium">{t('cro.questionnaire.report')}</span>
                         <span className="text-xs text-studio-text-muted">Complete questionnaire responses and compliance data</span>
                       </div>
                       <Download className="h-4 w-4 ml-2" />
@@ -644,7 +681,7 @@ const CROSponsorDashboard = () => {
                       onClick={() => toast.success("Generating Milestones Report...", { description: "Study timeline and milestone tracking report in progress" })}
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1">
-                        <span className="font-medium">Reporte de Milestones</span>
+                        <span className="font-medium">{t('cro.milestones.report')}</span>
                         <span className="text-xs text-studio-text-muted">Timeline tracking and milestone achievement analysis</span>
                       </div>
                       <Download className="h-4 w-4 ml-2" />
@@ -658,7 +695,7 @@ const CROSponsorDashboard = () => {
                 <CardHeader>
                   <CardTitle className="text-studio-text flex items-center space-x-2">
                     <Globe className="h-5 w-5" />
-                    <span>Interoperabilidad</span>
+                    <span>{t('cro.interoperability')}</span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -669,7 +706,7 @@ const CROSponsorDashboard = () => {
                       onClick={() => setShowFHIRExport(true)}
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1">
-                        <span className="font-medium">Exportar FHIR</span>
+                        <span className="font-medium">{t('cro.export.fhir')}</span>
                         <span className="text-xs text-studio-text-muted">Export study data in FHIR R4 format for regulatory submission</span>
                       </div>
                       <Globe className="h-4 w-4 ml-2" />
@@ -681,7 +718,7 @@ const CROSponsorDashboard = () => {
                       onClick={() => toast.success("Initiating HL7 Export...", { description: "HL7 message format export for healthcare systems integration" })}
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1">
-                        <span className="font-medium">Exportar HL7</span>
+                        <span className="font-medium">{t('cro.export.hl7')}</span>
                         <span className="text-xs text-studio-text-muted">Generate HL7 messages for healthcare system integration</span>
                       </div>
                       <FileText className="h-4 w-4 ml-2" />
@@ -693,7 +730,7 @@ const CROSponsorDashboard = () => {
                       onClick={() => toast.success("Connecting to CDISC API...", { description: "Validating study data against CDISC STDM standards" })}
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1">
-                        <span className="font-medium">Validación CDISC</span>
+                        <span className="font-medium">{t('cro.validate.cdisc')}</span>
                         <span className="text-xs text-studio-text-muted">Validate against CDISC Study Data Tabulation Model</span>
                       </div>
                       <Shield className="h-4 w-4 ml-2" />
@@ -706,7 +743,7 @@ const CROSponsorDashboard = () => {
             {/* Additional Analytics Section */}
             <Card className="bg-studio-surface border-studio-border">
               <CardHeader>
-                <CardTitle className="text-studio-text">Advanced Analytics</CardTitle>
+                <CardTitle className="text-studio-text">{t('cro.advanced.analytics')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
