@@ -16,27 +16,49 @@ const Auth = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [redirecting, setRedirecting] = useState(false);
 
   // Redirect based on user's role when they log in
   useEffect(() => {
-    if (user) {
+    if (user && !redirecting) {
+      setRedirecting(true);
+      
       const redirectUser = async () => {
-        const role = await getUserRole();
+        // Wait a moment for the trigger to assign the role
+        await new Promise(resolve => setTimeout(resolve, 1000));
         
-        if (role === 'participant') {
-          window.location.href = '/participant';
-        } else if (role === 'investigator') {
-          window.location.href = '/investigator';
-        } else if (role === 'cro_sponsor') {
-          window.location.href = '/cro-sponsor';
-        } else {
-          window.location.href = '/';
+        try {
+          const role = await getUserRole();
+          
+          if (role === 'participant') {
+            window.location.href = '/participant';
+          } else if (role === 'investigator') {
+            window.location.href = '/investigator';
+          } else if (role === 'cro_sponsor') {
+            window.location.href = '/cro-sponsor';
+          } else {
+            // If no role found, show an error and allow them to try again
+            toast({
+              title: 'Error',
+              description: 'No se encontró un rol asignado para este usuario. Intente con una cuenta válida.',
+              variant: 'destructive',
+            });
+            setRedirecting(false);
+          }
+        } catch (error) {
+          console.error('Error during redirect:', error);
+          toast({
+            title: 'Error',
+            description: 'Error al verificar el rol del usuario',
+            variant: 'destructive',
+          });
+          setRedirecting(false);
         }
       };
       
       redirectUser();
     }
-  }, [user, getUserRole]);
+  }, [user, getUserRole, toast, redirecting]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,17 +74,27 @@ const Auth = () => {
           description: error.message,
           variant: 'destructive',
         });
+        setLoading(false);
       }
+      // Don't set loading to false here - let the redirect effect handle it
     } catch (error) {
       toast({
         title: 'Error',
         description: 'Ocurrió un error inesperado',
         variant: 'destructive',
       });
-    } finally {
       setLoading(false);
     }
   };
+
+  // Show loading spinner while redirecting
+  if (redirecting) {
+    return (
+      <div className="min-h-screen bg-studio-bg flex items-center justify-center">
+        <div className="text-studio-text">Cargando...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-studio-bg flex items-center justify-center p-4">
