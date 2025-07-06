@@ -7,7 +7,6 @@ import { Download, FileText, Mail, Calendar, Users } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useStudy } from "@/contexts/StudyContext";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { Badge } from "@/components/ui/badge";
 
 interface SignupData {
@@ -25,7 +24,6 @@ const StudySignupsReportDialog = () => {
   const [isDownloading, setIsDownloading] = useState(false);
   const { toast } = useToast();
   const { selectedStudy, studies } = useStudy();
-  const { t } = useLanguage();
 
   const fetchSignups = async () => {
     setLoading(true);
@@ -41,7 +39,7 @@ const StudySignupsReportDialog = () => {
       console.error("Error fetching signups:", error);
       toast({
         title: "Error",
-        description: t('report.signups.no.signups'),
+        description: "No se pudieron cargar los registros",
         variant: "destructive",
       });
     } finally {
@@ -60,13 +58,13 @@ const StudySignupsReportDialog = () => {
     
     try {
       // Generate CSV content
-      const csvHeader = `${t('report.signups.study')},${t('report.signups.protocol')},${t('report.signups.email')},${t('report.signups.registration.date')},${t('report.signups.status')}\n`;
+      const csvHeader = "Estudio,Protocolo,Email,Fecha de Registro,Estado\n";
       const csvContent = signups.map(signup => {
         const study = studies.find(s => s.id === signup.study_id);
-        const studyName = study ? study.name : t('report.signups.study') + " no encontrado";
+        const studyName = study ? study.name : "Estudio no encontrado";
         const protocol = study ? study.protocol : "";
         const date = new Date(signup.signed_up_at).toLocaleDateString('es-ES');
-        const status = signup.participant_id ? t('report.signups.active.participant') : t('report.signups.external.registration');
+        const status = signup.participant_id ? "Participante Activo" : "Registro Externo";
         
         return `"${studyName}","${protocol}","${signup.email}","${date}","${status}"`;
       }).join("\n");
@@ -83,14 +81,14 @@ const StudySignupsReportDialog = () => {
       URL.revokeObjectURL(csvUrl);
 
       toast({
-        title: t('report.signups.download.success'),
-        description: t('report.signups.download.description'),
+        title: "¡Descarga exitosa!",
+        description: "El reporte CSV ha sido descargado correctamente.",
       });
     } catch (error) {
       console.error("Error downloading report:", error);
       toast({
         title: "Error",
-        description: t('report.signups.download.error'),
+        description: "No se pudo descargar el reporte",
         variant: "destructive",
       });
     } finally {
@@ -118,17 +116,16 @@ const StudySignupsReportDialog = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
-          <span className="font-medium text-sm sm:text-base truncate pr-2">{t('report.signups.title')}</span>
-          <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Download report of users registered for study results notifications</span>
-        </div>
-        <Download className="h-4 w-4 ml-2 flex-shrink-0" />
+        <Button variant="default" size="sm" className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 shadow-lg">
+          <Download className="h-4 w-4 mr-2" />
+          Reporte de Suscripciones
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-2">
             <FileText className="h-5 w-5" />
-            <span>{t('report.signups.title')}</span>
+            <span>Reporte de Suscripciones a Resultados</span>
           </DialogTitle>
         </DialogHeader>
 
@@ -137,57 +134,57 @@ const StudySignupsReportDialog = () => {
           <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
             <CardContent className="p-4 text-center">
               <div className="text-2xl font-bold text-blue-600">{stats.totalSignups}</div>
-              <div className="text-sm text-blue-600">{t('report.signups.total')}</div>
+              <div className="text-sm text-blue-600">Total Suscripciones</div>
             </CardContent>
           </Card>
           
           <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
             <CardContent className="p-4 text-center">
               <div className="text-2xl font-bold text-green-600">{stats.activeParticipants}</div>
-              <div className="text-sm text-green-600">{t('report.signups.active.participants')}</div>
+              <div className="text-sm text-green-600">Participantes Activos</div>
             </CardContent>
           </Card>
           
           <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
             <CardContent className="p-4 text-center">
               <div className="text-2xl font-bold text-purple-600">{stats.externalSignups}</div>
-              <div className="text-sm text-purple-600">{t('report.signups.external.signups')}</div>
+              <div className="text-sm text-purple-600">Registros Externos</div>
             </CardContent>
           </Card>
           
           <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
             <CardContent className="p-4 text-center">
               <div className="text-2xl font-bold text-orange-600">{Object.keys(stats.studyGroups).length}</div>
-              <div className="text-sm text-orange-600">{t('report.signups.studies.with.signups')}</div>
+              <div className="text-sm text-orange-600">Estudios con Suscripciones</div>
             </CardContent>
           </Card>
         </div>
 
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-medium">{t('report.signups.detailed.records')}</h3>
+          <h3 className="text-lg font-medium">Registros Detallados</h3>
           <Button 
             onClick={handleDownloadReport}
             disabled={isDownloading || signups.length === 0}
             className="bg-green-600 hover:bg-green-700"
           >
             {isDownloading ? (
-              <>{t('report.signups.downloading')}</>
+              <>Descargando...</>
             ) : (
               <>
                 <Download className="h-4 w-4 mr-2" />
-                {t('report.signups.download.csv')}
+                Descargar CSV
               </>
             )}
           </Button>
         </div>
 
         {loading ? (
-          <div className="text-center py-8">{t('common.loading')}</div>
+          <div className="text-center py-8">Cargando registros...</div>
         ) : signups.length === 0 ? (
           <Card className="bg-gray-50 border-gray-200">
             <CardContent className="p-8 text-center">
               <Mail className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600">{t('report.signups.no.signups')}</p>
+              <p className="text-gray-600">No hay suscripciones registradas aún</p>
             </CardContent>
           </Card>
         ) : (
@@ -195,11 +192,11 @@ const StudySignupsReportDialog = () => {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>{t('report.signups.study')}</TableHead>
-                  <TableHead>{t('report.signups.protocol')}</TableHead>
-                  <TableHead>{t('report.signups.email')}</TableHead>
-                  <TableHead>{t('report.signups.registration.date')}</TableHead>
-                  <TableHead>{t('report.signups.status')}</TableHead>
+                  <TableHead>Estudio</TableHead>
+                  <TableHead>Protocolo</TableHead>
+                  <TableHead>Email</TableHead>
+                  <TableHead>Fecha de Registro</TableHead>
+                  <TableHead>Estado</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -208,7 +205,7 @@ const StudySignupsReportDialog = () => {
                   return (
                     <TableRow key={signup.id}>
                       <TableCell className="font-medium">
-                        {study ? study.name : t('report.signups.study') + " no encontrado"}
+                        {study ? study.name : "Estudio no encontrado"}
                       </TableCell>
                       <TableCell className="text-sm text-gray-600">
                         {study ? study.protocol : "-"}
@@ -233,7 +230,7 @@ const StudySignupsReportDialog = () => {
                             "bg-blue-100 text-blue-800 border-blue-200"
                           }
                         >
-                          {signup.participant_id ? t('report.signups.active.participant') : t('report.signups.external.registration')}
+                          {signup.participant_id ? "Participante Activo" : "Registro Externo"}
                         </Badge>
                       </TableCell>
                     </TableRow>

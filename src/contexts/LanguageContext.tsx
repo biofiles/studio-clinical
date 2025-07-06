@@ -325,45 +325,7 @@ const translations = {
     'alert.site.activation': 'New site activated in Boston Medical Center',
     'alert.data.validation': 'Data validation issues resolved',
     'alert.regulatory.submission': 'Regulatory submission prepared',
-    'alert.biomarker.analysis': 'Biomarker analysis milestone completed',
-    
-    // Study Results Signup
-    'signup.results.title': 'Results Summary Registration',
-    'signup.results.participant': 'Receive Results Summary',
-    'signup.results.investigator': 'Manage Subscriptions',
-    'signup.results.description': 'An executive summary with the main study results once data analysis is complete.',
-    'signup.results.what.receive': 'What will you receive?',
-    'signup.results.email.label': 'Email addresses for notifications:',
-    'signup.results.email.placeholder': 'example@email.com',
-    'signup.results.add.email': 'Add another email',
-    'signup.results.register': 'Register',
-    'signup.results.registering': 'Registering...',
-    'signup.results.success.title': 'Registration successful!',
-    'signup.results.success.description': 'email(s) registered to receive study results summary.',
-    'signup.results.error.no.study': 'No study selected',
-    'signup.results.error.valid.email': 'Please enter at least one valid email',
-    'signup.results.error.generic': 'Could not complete registration. Please try again.',
-    
-    // Study Signups Report
-    'report.signups.title': 'Results Summary Subscription Report',
-    'report.signups.total': 'Total Subscriptions',
-    'report.signups.active.participants': 'Active Participants',
-    'report.signups.external.signups': 'External Registrations',
-    'report.signups.studies.with.signups': 'Studies with Subscriptions',
-    'report.signups.detailed.records': 'Detailed Records',
-    'report.signups.download.csv': 'Download CSV',
-    'report.signups.downloading': 'Downloading...',
-    'report.signups.no.signups': 'No subscriptions registered yet',
-    'report.signups.study': 'Study',
-    'report.signups.protocol': 'Protocol',
-    'report.signups.email': 'Email',
-    'report.signups.registration.date': 'Registration Date',
-    'report.signups.status': 'Status',
-    'report.signups.active.participant': 'Active Participant',
-    'report.signups.external.registration': 'External Registration',
-    'report.signups.download.success': 'Download successful!',
-    'report.signups.download.description': 'CSV report has been downloaded successfully.',
-    'report.signups.download.error': 'Could not download report'
+    'alert.biomarker.analysis': 'Biomarker analysis milestone completed'
   },
   spanish: {
     // Header
@@ -680,45 +642,7 @@ const translations = {
     'alert.site.activation': 'Nuevo sitio activado en Boston Medical Center',
     'alert.data.validation': 'Problemas de validación de datos resueltos',
     'alert.regulatory.submission': 'Envío regulatorio preparado',
-    'alert.biomarker.analysis': 'Hito de análisis de biomarcadores completado',
-    
-    // Study Results Signup (Spanish)
-    'signup.results.title': 'Registro para Resumen de Resultados',
-    'signup.results.participant': 'Recibir Resumen de Resultados',
-    'signup.results.investigator': 'Gestionar Suscripciones',
-    'signup.results.description': 'Un resumen ejecutivo con los resultados principales del estudio una vez que se complete el análisis de datos.',
-    'signup.results.what.receive': '¿Qué recibirás?',
-    'signup.results.email.label': 'Correos electrónicos para notificaciones:',
-    'signup.results.email.placeholder': 'ejemplo@correo.com',
-    'signup.results.add.email': 'Agregar otro email',
-    'signup.results.register': 'Registrar',
-    'signup.results.registering': 'Registrando...',
-    'signup.results.success.title': '¡Registro exitoso!',
-    'signup.results.success.description': 'email(s) registrados para recibir el resumen de resultados del estudio.',
-    'signup.results.error.no.study': 'No hay estudio seleccionado',
-    'signup.results.error.valid.email': 'Por favor ingrese al menos un email válido',
-    'signup.results.error.generic': 'No se pudo completar el registro. Intente nuevamente.',
-    
-    // Study Signups Report (Spanish)
-    'report.signups.title': 'Reporte de Suscripciones a Resumen de Resultados',
-    'report.signups.total': 'Total Suscripciones',
-    'report.signups.active.participants': 'Participantes Activos',
-    'report.signups.external.signups': 'Registros Externos',
-    'report.signups.studies.with.signups': 'Estudios con Suscripciones',
-    'report.signups.detailed.records': 'Registros Detallados',
-    'report.signups.download.csv': 'Descargar CSV',
-    'report.signups.downloading': 'Descargando...',
-    'report.signups.no.signups': 'No hay suscripciones registradas aún',
-    'report.signups.study': 'Estudio',
-    'report.signups.protocol': 'Protocolo',
-    'report.signups.email': 'Email',
-    'report.signups.registration.date': 'Fecha de Registro',
-    'report.signups.status': 'Estado',
-    'report.signups.active.participant': 'Participante Activo',
-    'report.signups.external.registration': 'Registro Externo',
-    'report.signups.download.success': '¡Descarga exitosa!',
-    'report.signups.download.description': 'El reporte CSV ha sido descargado correctamente.',
-    'report.signups.download.error': 'No se pudo descargar el reporte'
+    'alert.biomarker.analysis': 'Hito de análisis de biomarcadores completado'
   }
 };
 

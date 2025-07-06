@@ -49,7 +49,7 @@ const StudyResultsSignup = ({ variant = "participant", trigger }: StudyResultsSi
     if (!selectedStudy) {
       toast({
         title: "Error",
-        description: t('signup.results.error.no.study'),
+        description: "No hay estudio seleccionado",
         variant: "destructive",
       });
       return;
@@ -60,7 +60,7 @@ const StudyResultsSignup = ({ variant = "participant", trigger }: StudyResultsSi
     if (validEmails.length === 0) {
       toast({
         title: "Error",
-        description: t('signup.results.error.valid.email'),
+        description: "Por favor ingrese al menos un email válido",
         variant: "destructive",
       });
       return;
@@ -82,8 +82,8 @@ const StudyResultsSignup = ({ variant = "participant", trigger }: StudyResultsSi
       await Promise.all(signupPromises);
 
       toast({
-        title: t('signup.results.success.title'),
-        description: `${validEmails.length} ${t('signup.results.success.description')}`,
+        title: "¡Registro exitoso!",
+        description: `Se registraron ${validEmails.length} email(s) para recibir el resumen de resultados del estudio.`,
       });
 
       setEmails([""]);
@@ -92,7 +92,7 @@ const StudyResultsSignup = ({ variant = "participant", trigger }: StudyResultsSi
       console.error("Error registering emails:", error);
       toast({
         title: "Error",
-        description: t('signup.results.error.generic'),
+        description: "No se pudo completar el registro. Intente nuevamente.",
         variant: "destructive",
       });
     } finally {
@@ -103,7 +103,7 @@ const StudyResultsSignup = ({ variant = "participant", trigger }: StudyResultsSi
   const defaultTrigger = (
     <Button variant="studio" size="sm" className="w-full justify-start">
       <Mail className="h-4 w-4 mr-2" />
-      {variant === "participant" ? t('signup.results.participant') : t('signup.results.investigator')}
+      {variant === "participant" ? "Recibir Resumen de Resultados" : "Gestionar Suscripciones"}
     </Button>
   );
 
@@ -116,27 +116,27 @@ const StudyResultsSignup = ({ variant = "participant", trigger }: StudyResultsSi
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-2">
             <Mail className="h-5 w-5" />
-            <span>{t('signup.results.title')}</span>
+            <span>Registro para Resumen de Resultados</span>
           </DialogTitle>
         </DialogHeader>
         
         <Card className="bg-blue-50 border-blue-200">
           <CardContent className="p-4">
             <p className="text-sm text-blue-800">
-              <strong>{t('signup.results.what.receive')}</strong><br/>
-              {t('signup.results.description')}
+              <strong>¿Qué recibirás?</strong><br/>
+              Un resumen ejecutivo con los resultados principales del estudio una vez que se complete el análisis de datos.
             </p>
           </CardContent>
         </Card>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-3">
-            <Label>{t('signup.results.email.label')}</Label>
+            <Label>Correos electrónicos para notificaciones:</Label>
             {emails.map((email, index) => (
               <div key={index} className="flex space-x-2">
                 <Input
                   type="email"
-                  placeholder={t('signup.results.email.placeholder')}
+                  placeholder="ejemplo@correo.com"
                   value={email}
                   onChange={(e) => updateEmail(index, e.target.value)}
                   className="flex-1"
@@ -162,7 +162,7 @@ const StudyResultsSignup = ({ variant = "participant", trigger }: StudyResultsSi
             className="w-full"
           >
             <Plus className="h-4 w-4 mr-2" />
-            {t('signup.results.add.email')}
+            Agregar otro email
           </Button>
 
           <div className="flex space-x-2 pt-4">
@@ -172,7 +172,7 @@ const StudyResultsSignup = ({ variant = "participant", trigger }: StudyResultsSi
               onClick={() => setOpen(false)}
               className="flex-1"
             >
-              {t('common.cancel')}
+              Cancelar
             </Button>
             <Button
               type="submit"
@@ -180,11 +180,11 @@ const StudyResultsSignup = ({ variant = "participant", trigger }: StudyResultsSi
               className="flex-1"
             >
               {isSubmitting ? (
-                <>{t('signup.results.registering')}</>
+                <>Registrando...</>
               ) : (
                 <>
                   <Send className="h-4 w-4 mr-2" />
-                  {t('signup.results.register')}
+                  Registrar
                 </>
               )}
             </Button>

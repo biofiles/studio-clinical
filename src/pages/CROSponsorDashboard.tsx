@@ -743,8 +743,10 @@ const CROSponsorDashboard = () => {
                       <Download className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
                     
-                    {/* Results Summary Subscription Report */}
-                    <StudySignupsReportDialog />
+                    {/* Fantasy button for study results signups report */}
+                    <div className="pt-2 border-t border-studio-border">
+                      <StudySignupsReportDialog />
+                    </div>
                   </div>
                 </CardContent>
               </Card>
