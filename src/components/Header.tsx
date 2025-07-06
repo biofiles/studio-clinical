@@ -39,17 +39,10 @@ const Header = ({
           <h1 className="text-2xl font-light tracking-widest text-studio-text">
             STUDIO
           </h1>
-          {role === 'investigator' && <div className="flex items-center space-x-4">
-              <span className="text-studio-text-muted">•</span>
-              <StudyDropdown />
-            </div>}
-          {role === 'cro-sponsor' && <div className="flex items-center space-x-4">
-              <span className="text-studio-text-muted">•</span>
-              <StudyDropdown />
-            </div>}
         </div>
 
         <div className="flex items-center space-x-3">
+          {(role === 'investigator' || role === 'cro-sponsor') && <StudyDropdown />}
           <Button variant="outline" size="sm" onClick={handleSettings}>
             <Settings className="h-4 w-4 mr-2" />
             {t('header.settings')}
