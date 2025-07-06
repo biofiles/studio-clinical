@@ -77,20 +77,18 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   const getUserRole = async (): Promise<string | null> => {
-    if (!user) return null;
+    if (!user?.email) return null;
     
-    const { data, error } = await supabase
-      .from('user_roles')
-      .select('role')
-      .eq('user_id', user.id)
-      .maybeSingle();
-    
-    if (error) {
-      console.error('Error fetching user role:', error);
-      return null;
+    // Determine role based on email address
+    if (user.email === 'participant@studioclinical.com') {
+      return 'participant';
+    } else if (user.email === 'site@studioclinical.com') {
+      return 'investigator';
+    } else if (user.email === 'sponsor-cro@studioclinical.com') {
+      return 'cro_sponsor';
     }
     
-    return data?.role || null;
+    return null;
   };
 
   const value: AuthContextType = {

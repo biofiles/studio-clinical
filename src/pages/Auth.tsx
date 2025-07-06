@@ -24,9 +24,6 @@ const Auth = () => {
       setRedirecting(true);
       
       const redirectUser = async () => {
-        // Wait a moment for the trigger to assign the role
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
         try {
           const role = await getUserRole();
           
