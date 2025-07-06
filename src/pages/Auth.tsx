@@ -30,34 +30,39 @@ const Auth = () => {
   const [redirecting, setRedirecting] = useState(false);
   const [userRole, setUserRole] = useState<string | null>(null);
 
-  // Get user role when user is available
+  // Get user role and handle redirect
   useEffect(() => {
-    if (user && !forceLogin) {
-      getUserRole().then(setUserRole);
-    }
-  }, [user, getUserRole, forceLogin]);
-
-  // Handle automatic redirect for logged-in users (unless forced to show login)
-  useEffect(() => {
-    if (user && userRole && !forceLogin && !redirecting) {
+    if (user && !forceLogin && !redirecting) {
       setRedirecting(true);
       
-      if (userRole === 'participant') {
-        navigate('/participant', { replace: true });
-      } else if (userRole === 'investigator') {
-        navigate('/investigator', { replace: true });
-      } else if (userRole === 'cro_sponsor') {
-        navigate('/cro-sponsor', { replace: true });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'No se encontró un rol asignado para este usuario.',
-          variant: 'destructive'
-        });
-        setRedirecting(false);
-      }
+      const handleRedirect = async () => {
+        try {
+          const role = await getUserRole();
+          setUserRole(role);
+          
+          if (role === 'participant') {
+            navigate('/participant', { replace: true });
+          } else if (role === 'investigator') {
+            navigate('/investigator', { replace: true });
+          } else if (role === 'cro_sponsor') {
+            navigate('/cro-sponsor', { replace: true });
+          } else {
+            toast({
+              title: 'Error',
+              description: 'No se encontró un rol asignado para este usuario.',
+              variant: 'destructive'
+            });
+            setRedirecting(false);
+          }
+        } catch (error) {
+          console.error('Error during redirect:', error);
+          setRedirecting(false);
+        }
+      };
+      
+      handleRedirect();
     }
-  }, [user, userRole, forceLogin, redirecting, navigate, toast]);
+  }, [user, forceLogin, redirecting, navigate, getUserRole, toast]);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
