@@ -7,11 +7,15 @@ import { Label } from '@/components/ui/label';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { Eye, EyeOff, Lock, User, Copy } from 'lucide-react';
-
 const Auth = () => {
-  const { user, signIn, getUserRole } = useAuth();
-  const { toast } = useToast();
-  
+  const {
+    user,
+    signIn,
+    getUserRole
+  } = useAuth();
+  const {
+    toast
+  } = useToast();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -22,11 +26,9 @@ const Auth = () => {
   useEffect(() => {
     if (user && !redirecting) {
       setRedirecting(true);
-      
       const redirectUser = async () => {
         try {
           const role = await getUserRole();
-          
           if (role === 'participant') {
             window.location.href = '/participant';
           } else if (role === 'investigator') {
@@ -38,7 +40,7 @@ const Auth = () => {
             toast({
               title: 'Error',
               description: 'No se encontró un rol asignado para este usuario. Intente con una cuenta válida.',
-              variant: 'destructive',
+              variant: 'destructive'
             });
             setRedirecting(false);
           }
@@ -47,29 +49,26 @@ const Auth = () => {
           toast({
             title: 'Error',
             description: 'Error al verificar el rol del usuario',
-            variant: 'destructive',
+            variant: 'destructive'
           });
           setRedirecting(false);
         }
       };
-      
       redirectUser();
     }
   }, [user, getUserRole, toast, redirecting]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     setLoading(true);
-
     try {
-      const { error } = await signIn(email, password);
-
+      const {
+        error
+      } = await signIn(email, password);
       if (error) {
         toast({
           title: 'Error de autenticación',
           description: error.message,
-          variant: 'destructive',
+          variant: 'destructive'
         });
         setLoading(false);
       }
@@ -78,47 +77,40 @@ const Auth = () => {
       toast({
         title: 'Error',
         description: 'Ocurrió un error inesperado',
-        variant: 'destructive',
+        variant: 'destructive'
       });
       setLoading(false);
     }
   };
-
   const copyToClipboard = async (text: string, label: string) => {
     try {
       await navigator.clipboard.writeText(text);
       toast({
         title: 'Copiado',
-        description: `${label} copiado al portapapeles`,
+        description: `${label} copiado al portapapeles`
       });
     } catch (error) {
       toast({
         title: 'Error',
         description: 'No se pudo copiar al portapapeles',
-        variant: 'destructive',
+        variant: 'destructive'
       });
     }
   };
 
   // Show loading spinner while redirecting
   if (redirecting) {
-    return (
-      <div className="min-h-screen bg-studio-bg flex items-center justify-center">
+    return <div className="min-h-screen bg-studio-bg flex items-center justify-center">
         <div className="text-studio-text">Cargando...</div>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className="min-h-screen bg-studio-bg flex items-center justify-center p-4">
+  return <div className="min-h-screen bg-studio-bg flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
           <h1 className="text-4xl font-light tracking-widest text-studio-text mb-2">
             STUDIO
           </h1>
-          <p className="text-studio-text-muted text-sm">
-            Iniciar sesión en el sistema
-          </p>
+          
         </div>
 
         <Card className="bg-studio-surface border-studio-border">
@@ -132,48 +124,20 @@ const Auth = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="ejemplo@correo.com"
-                  required
-                />
+                <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="ejemplo@correo.com" required />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="password">Contraseña</Label>
                 <div className="relative">
-                  <Input
-                    id="password"
-                    type={showPassword ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••"
-                    required
-                  />
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? (
-                      <EyeOff className="h-4 w-4" />
-                    ) : (
-                      <Eye className="h-4 w-4" />
-                    )}
+                  <Input id="password" type={showPassword ? "text" : "password"} value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••" required />
+                  <Button type="button" variant="ghost" size="sm" className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent" onClick={() => setShowPassword(!showPassword)}>
+                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </Button>
                 </div>
               </div>
 
-              <Button 
-                type="submit" 
-                className="w-full"
-                disabled={loading || !email || !password}
-              >
+              <Button type="submit" className="w-full" disabled={loading || !email || !password}>
                 <Lock className="h-4 w-4 mr-2" />
                 {loading ? 'Cargando...' : 'Iniciar Sesión'}
               </Button>
@@ -187,36 +151,21 @@ const Auth = () => {
           <div className="space-y-2">
             <div className="flex items-center justify-between gap-2">
               <span>Participante: participant@studioclinical.com</span>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-6 w-6 p-0"
-                onClick={() => copyToClipboard('participant@studioclinical.com', 'Email de participante')}
-              >
+              <Button variant="ghost" size="sm" className="h-6 w-6 p-0" onClick={() => copyToClipboard('participant@studioclinical.com', 'Email de participante')}>
                 <Copy className="h-3 w-3" />
               </Button>
             </div>
             
             <div className="flex items-center justify-between gap-2">
               <span>Investigador: site@studioclinical.com</span>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-6 w-6 p-0"
-                onClick={() => copyToClipboard('site@studioclinical.com', 'Email de investigador')}
-              >
+              <Button variant="ghost" size="sm" className="h-6 w-6 p-0" onClick={() => copyToClipboard('site@studioclinical.com', 'Email de investigador')}>
                 <Copy className="h-3 w-3" />
               </Button>
             </div>
             
             <div className="flex items-center justify-between gap-2">
               <span>CRO/Patrocinador: sponsor-cro@studioclinical.com</span>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-6 w-6 p-0"
-                onClick={() => copyToClipboard('sponsor-cro@studioclinical.com', 'Email de CRO/Patrocinador')}
-              >
+              <Button variant="ghost" size="sm" className="h-6 w-6 p-0" onClick={() => copyToClipboard('sponsor-cro@studioclinical.com', 'Email de CRO/Patrocinador')}>
                 <Copy className="h-3 w-3" />
               </Button>
             </div>
@@ -225,19 +174,13 @@ const Auth = () => {
           <div className="pt-2 border-t border-studio-border/20">
             <div className="flex items-center justify-center gap-2">
               <span>Contraseña: studio</span>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-6 w-6 p-0"
-                onClick={() => copyToClipboard('studio', 'Contraseña')}
-              >
+              <Button variant="ghost" size="sm" className="h-6 w-6 p-0" onClick={() => copyToClipboard('studio', 'Contraseña')}>
                 <Copy className="h-3 w-3" />
               </Button>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
 export default Auth;
