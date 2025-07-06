@@ -17,6 +17,7 @@ import ParticipantDashboard from "./pages/ParticipantDashboard";
 import InvestigatorDashboard from "./pages/InvestigatorDashboard";
 import CROSponsorDashboard from "./pages/CROSponsorDashboard";
 import Settings from "./pages/Settings";
+import Marketing from "./pages/Marketing";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<Index />} />
+                <Route path="/marketing" element={<Marketing />} />
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/select-study" element={
                   <ProtectedRoute>

@@ -17,8 +17,8 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 15%;
 
-    --primary: 0 0% 94%;
-    --primary-foreground: 0 0% 15%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 98%;
 
     --secondary: 0 0% 96%;
     --secondary-foreground: 0 0% 20%;
@@ -42,6 +42,22 @@ All colors MUST be HSL.
     --studio-border: 0 0% 88%;
     --studio-text: 0 0% 15%;
     --studio-text-muted: 0 0% 45%;
+    
+    /* Marketing page gradients and effects */
+    --marketing-gradient-start: 217 91% 60%;
+    --marketing-gradient-end: 217 91% 70%;
+    --marketing-accent: 157 45% 55%;
+    --marketing-success: 142 76% 36%;
+    --marketing-glow: 217 91% 60%;
+    
+    --gradient-primary: linear-gradient(135deg, hsl(var(--marketing-gradient-start)), hsl(var(--marketing-gradient-end)));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--muted)/0.3) 100%);
+    --shadow-marketing: 0 25px 50px -12px hsl(var(--marketing-glow) / 0.25);
+    --shadow-card-hover: 0 20px 25px -5px hsl(var(--foreground) / 0.1);
+    
+    /* Animation durations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     
     /* Progress bar tokens - softer, more harmonious colors */
     --progress-primary: 210 85% 45%;
