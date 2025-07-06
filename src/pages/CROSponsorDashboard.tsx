@@ -14,6 +14,14 @@ import { toast } from "sonner";
 import { useStudy } from "@/contexts/StudyContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
+import { 
+  exportToExcel, 
+  fetchSiteUsersData, 
+  fetchQuestionnaireData, 
+  fetchMilestonesData, 
+  fetchEConsentData,
+  fetchParticipantsData 
+} from "@/lib/excel-export";
 const CROSponsorDashboard = () => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [selectedStudyLocal, setSelectedStudyLocal] = useState<string | null>(null);
@@ -722,7 +730,19 @@ const CROSponsorDashboard = () => {
                     <Button 
                       variant="outline" 
                       className="w-full justify-start h-auto py-3"
-                      onClick={() => toast.success("Generating Site Users Report...", { description: "Report will be available for download shortly" })}
+                      onClick={async () => {
+                        try {
+                          const data = await fetchSiteUsersData(selectedStudy?.id);
+                          exportToExcel([{
+                            sheetName: 'Site Users',
+                            data,
+                            headers: ['Full Name', 'Email', 'Role', 'Study', 'Protocol', 'Status', 'Assigned Date']
+                          }], 'Site_Users_Report');
+                          toast.success("Site Users Report Generated", { description: "Excel file downloaded successfully" });
+                        } catch (error) {
+                          toast.error("Export Failed", { description: "Unable to generate report" });
+                        }
+                      }}
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
                         <span className="font-medium text-sm sm:text-base truncate w-full">{t('cro.site.users.report')}</span>
@@ -734,7 +754,19 @@ const CROSponsorDashboard = () => {
                     <Button 
                       variant="outline" 
                       className="w-full justify-start h-auto py-3"
-                      onClick={() => toast.success("Generating Questionnaire Report...", { description: "Comprehensive questionnaire data compilation started" })}
+                      onClick={async () => {
+                        try {
+                          const data = await fetchQuestionnaireData(selectedStudy?.id);
+                          exportToExcel([{
+                            sheetName: 'Questionnaire Responses',
+                            data,
+                            headers: ['Participant ID', 'Participant Name', 'Study', 'Protocol', 'Questionnaire', 'Questionnaire ID', 'Status', 'Submitted Date', 'Created Date', 'Answers']
+                          }], 'Questionnaire_Report');
+                          toast.success("Questionnaire Report Generated", { description: "Excel file with responses downloaded successfully" });
+                        } catch (error) {
+                          toast.error("Export Failed", { description: "Unable to generate questionnaire report" });
+                        }
+                      }}
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
                         <span className="font-medium text-sm sm:text-base truncate w-full">{t('cro.questionnaire.report')}</span>
@@ -743,10 +775,22 @@ const CROSponsorDashboard = () => {
                       <Download className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
                     
-                     <Button 
+                    <Button 
                       variant="outline" 
                       className="w-full justify-start h-auto py-3"
-                      onClick={() => toast.success("Generating Milestones Report...", { description: "Study timeline and milestone tracking report in progress" })}
+                      onClick={async () => {
+                        try {
+                          const data = await fetchMilestonesData(selectedStudy?.id);
+                          exportToExcel([{
+                            sheetName: 'Study Milestones',
+                            data,
+                            headers: ['Study Name', 'Protocol', 'Phase', 'Sponsor', 'Status', 'Start Date', 'End Date', 'Created Date', 'Last Updated']
+                          }], 'Milestones_Report');
+                          toast.success("Milestones Report Generated", { description: "Study timeline report downloaded successfully" });
+                        } catch (error) {
+                          toast.error("Export Failed", { description: "Unable to generate milestones report" });
+                        }
+                      }}
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
                         <span className="font-medium text-sm sm:text-base truncate w-full">{t('cro.milestones.report')}</span>
@@ -758,7 +802,19 @@ const CROSponsorDashboard = () => {
                     <Button 
                       variant="outline" 
                       className="w-full justify-start h-auto py-3"
-                      onClick={() => toast.success("Generating eConsent Report...", { description: "Electronic consent status and signature tracking report" })}
+                      onClick={async () => {
+                        try {
+                          const data = await fetchEConsentData(selectedStudy?.id);
+                          exportToExcel([{
+                            sheetName: 'eConsent Report',
+                            data,
+                            headers: ['Participant ID', 'Participant Name', 'Study', 'Protocol', 'Consent Status', 'Consent Version', 'Initial Consent Date', 'Latest Consent Date', 'Withdrawal Date', 'Email']
+                          }], 'eConsent_Report');
+                          toast.success("eConsent Report Generated", { description: "Electronic consent report downloaded successfully" });
+                        } catch (error) {
+                          toast.error("Export Failed", { description: "Unable to generate eConsent report" });
+                        }
+                      }}
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
                         <span className="font-medium text-sm sm:text-base truncate w-full">eConsent Report</span>
