@@ -156,12 +156,7 @@ const ParticipantDashboard = () => {
                         <div className="flex-1">
                           <div className="flex items-center space-x-2 mb-1">
                             <p className="font-medium text-studio-text text-base sm:text-lg">{item.activity}</p>
-                            <Badge variant="secondary" className={`text-sm border ${
-                              item.type === 'visit' ? 'bg-destructive/10 text-destructive border-destructive/20' : 
-                              item.type === 'questionnaire' ? 'bg-[hsl(var(--progress-info))]/10 text-[hsl(var(--progress-info))] border-[hsl(var(--progress-info))]/20' : 
-                              item.type === 'diary' ? 'bg-[hsl(var(--progress-success))]/10 text-[hsl(var(--progress-success))] border-[hsl(var(--progress-success))]/20' : 
-                              'bg-muted text-muted-foreground border-border'
-                            }`}>
+                            <Badge variant="secondary" className={`text-sm border ${item.type === 'visit' ? 'bg-destructive/10 text-destructive border-destructive/20' : item.type === 'questionnaire' ? 'bg-[hsl(var(--progress-info))]/10 text-[hsl(var(--progress-info))] border-[hsl(var(--progress-info))]/20' : item.type === 'diary' ? 'bg-[hsl(var(--progress-success))]/10 text-[hsl(var(--progress-success))] border-[hsl(var(--progress-success))]/20' : 'bg-muted text-muted-foreground border-border'}`}>
                               {t(`activity.${item.type}`)}
                             </Badge>
                           </div>
@@ -171,11 +166,9 @@ const ParticipantDashboard = () => {
                             <MapPin className="h-4 w-4" />
                             <span>{item.location}</span>
                           </div>
-                          {item.notes && (
-                            <div className="bg-blue-50 border border-blue-200 rounded p-3 text-sm text-blue-800">
+                          {item.notes && <div className="bg-blue-50 border border-blue-200 rounded p-3 text-sm text-blue-800">
                               <strong>Important Notes:</strong> {item.notes}
-                            </div>
-                          )}
+                            </div>}
                         </div>
                       </div>
                       
@@ -485,7 +478,7 @@ const ParticipantDashboard = () => {
                       <h4 className="text-lg font-bold">STUDIO Clinical Trial</h4>
                       <p className="text-sm opacity-90">Patient ID Card</p>
                       <div className="space-y-1">
-                        <p className="text-xs opacity-75">Protocol: PROTO-2024-001</p>
+                        <p className="text-xs opacity-75">Protocolo: NVS-4578-301</p>
                         <p className="text-xs opacity-75">Site: Metro General Hospital</p>
                       </div>
                     </div>
@@ -533,10 +526,7 @@ const ParticipantDashboard = () => {
                 </CardContent>
               </Card>
 
-              <Button variant="studio" className="w-full justify-start" onClick={() => setShowProfile(true)}>
-                <User className="h-4 w-4 mr-2" />
-                {t('profile.view.settings')}
-              </Button>
+              
               
               <Button variant="studio" className="w-full justify-start" onClick={handleExportPDF}>
                 <Download className="h-4 w-4 mr-2" />
