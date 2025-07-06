@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import StudyDropdown from "@/components/StudyDropdown";
 import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, FileText, Calendar, Users, Settings, Download } from "lucide-react";
 import FHIRExportDialog from "@/components/FHIRExportDialog";
+import StudySignupsReportDialog from "@/components/StudySignupsReportDialog";
 import { toast } from "sonner";
 import { useStudy } from "@/contexts/StudyContext";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -741,6 +742,11 @@ const CROSponsorDashboard = () => {
                       </div>
                       <Download className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
+                    
+                    {/* Fantasy button for study results signups report */}
+                    <div className="pt-2 border-t border-studio-border">
+                      <StudySignupsReportDialog />
+                    </div>
                   </div>
                 </CardContent>
               </Card>

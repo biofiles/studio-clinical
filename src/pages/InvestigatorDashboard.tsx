@@ -10,6 +10,7 @@ import AIChatbot from "@/components/AIChatbot";
 import CalendarManagement from "@/components/CalendarManagement";
 import BarcodeScanner from "@/components/BarcodeScanner";
 import FHIRExportDialog from "@/components/FHIRExportDialog";
+import StudyResultsSignup from "@/components/StudyResultsSignup";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
 import { useNavigate } from "react-router-dom";
@@ -245,6 +246,7 @@ const InvestigatorDashboard = () => {
                 <QrCode className="h-4 w-4 mr-2" />
                 Escáner de Códigos
               </Button>
+              <StudyResultsSignup variant="investigator" />
               <Button 
                 variant="studio" 
                 className="w-full justify-start"

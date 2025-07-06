@@ -11,6 +11,7 @@ import CalendarView from "@/components/CalendarView";
 import QuestionnairesView from "@/components/QuestionnairesView";
 import AIChatbot from "@/components/AIChatbot";
 import EConsentDialog from "@/components/EConsentDialog";
+import StudyResultsSignup from "@/components/StudyResultsSignup";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode, Signature, Building, Settings, Scale } from "lucide-react";
 const ParticipantDashboard = () => {
@@ -527,6 +528,7 @@ const ParticipantDashboard = () => {
               </Card>
 
               
+              <StudyResultsSignup variant="participant" />
               
               <Button variant="studio" className="w-full justify-start" onClick={handleExportPDF}>
                 <Download className="h-4 w-4 mr-2" />
