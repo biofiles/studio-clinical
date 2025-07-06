@@ -1,17 +1,21 @@
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 import Header from "@/components/Header";
-import { Globe, LogOut, ArrowLeft } from "lucide-react";
+import { Globe, LogOut, ArrowLeft, Moon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useTheme } from "next-themes";
 
 const Settings = () => {
   const navigate = useNavigate();
   const { language, setLanguage, t } = useLanguage();
   const { signOut } = useAuth();
+  const { theme, setTheme } = useTheme();
 
   const handleLogout = async () => {
     try {
@@ -51,6 +55,7 @@ const Settings = () => {
         </div>
 
         <div className="space-y-6">
+          {/* Language Settings */}
           <Card className="bg-studio-surface border-studio-border">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-studio-text">
@@ -60,16 +65,14 @@ const Settings = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <label className="text-sm font-medium text-studio-text">
-                  {t('settings.display.language')}
-                </label>
+                <Label className="text-studio-text">{t('settings.display.language')}</Label>
                 <Select value={language} onValueChange={setLanguage}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select language" />
+                  <SelectTrigger className="bg-studio-bg border-studio-border">
+                    <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="english">English</SelectItem>
-                    <SelectItem value="spanish">Español (Spanish)</SelectItem>
+                    <SelectItem value="spanish">Español</SelectItem>
                   </SelectContent>
                 </Select>
                 <p className="text-xs text-studio-text-muted">
@@ -79,6 +82,31 @@ const Settings = () => {
             </CardContent>
           </Card>
 
+          {/* Theme Settings */}
+          <Card className="bg-studio-surface border-studio-border">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2 text-studio-text">
+                <Moon className="h-5 w-5" />
+                <span>Tema</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="space-y-1">
+                  <Label className="text-studio-text">Modo Oscuro</Label>
+                  <p className="text-xs text-studio-text-muted">
+                    Cambia entre tema claro y oscuro
+                  </p>
+                </div>
+                <Switch
+                  checked={theme === 'dark'}
+                  onCheckedChange={(checked) => setTheme(checked ? 'dark' : 'light')}
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Account Actions */}
           <Card className="bg-studio-surface border-studio-border">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-studio-text">

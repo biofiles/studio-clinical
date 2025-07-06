@@ -39,17 +39,39 @@ const Auth = () => {
 
   // Handle automatic redirect for logged-in users (unless forced to show login)
   useEffect(() => {
-    if (user && userRole && !forceLogin && !redirecting) {
+    if (user && !forceLogin && !redirecting) {
       setRedirecting(true);
-      if (userRole === 'participant') {
-        navigate('/participant', { replace: true });
-      } else if (userRole === 'investigator') {
-        navigate('/investigator', { replace: true });
-      } else if (userRole === 'cro_sponsor') {
-        navigate('/cro-sponsor', { replace: true });
-      }
+      
+      const redirectUser = async () => {
+        try {
+          console.log('User logged in, getting role for:', user.email);
+          const role = await getUserRole();
+          console.log('Got role:', role);
+          
+          if (role === 'participant') {
+            navigate('/participant', { replace: true });
+          } else if (role === 'investigator') {
+            navigate('/investigator', { replace: true });
+          } else if (role === 'cro_sponsor') {
+            navigate('/cro-sponsor', { replace: true });
+          } else {
+            console.error('No valid role found:', role);
+            toast({
+              title: 'Error',
+              description: 'No se encontró un rol asignado para este usuario.',
+              variant: 'destructive'
+            });
+            setRedirecting(false);
+          }
+        } catch (error) {
+          console.error('Error during redirect:', error);
+          setRedirecting(false);
+        }
+      };
+      
+      redirectUser();
     }
-  }, [user, userRole, forceLogin, redirecting, navigate]);
+  }, [user, forceLogin, redirecting, navigate, getUserRole, toast]);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
@@ -69,25 +91,9 @@ const Auth = () => {
         return;
       }
       
-      console.log('Login successful, getting user role...');
-      // After successful login, get role and redirect
-      const role = await getUserRole();
-      console.log('User role:', role);
+      console.log('Login successful, waiting for auth state...');
+      // Don't redirect immediately, let the auth state change handle it
       
-      if (role === 'participant') {
-        navigate('/participant', { replace: true });
-      } else if (role === 'investigator') {
-        navigate('/investigator', { replace: true });
-      } else if (role === 'cro_sponsor') {
-        navigate('/cro-sponsor', { replace: true });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'No se encontró un rol asignado para este usuario.',
-          variant: 'destructive'
-        });
-        setSubmitting(false);
-      }
     } catch (error) {
       console.error('Login error:', error);
       toast({
