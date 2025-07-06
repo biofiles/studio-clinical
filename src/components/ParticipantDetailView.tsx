@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { User, Calendar, FileText, Activity, AlertTriangle, Signature, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useStudy } from "@/contexts/StudyContext";
 
 interface ParticipantDetailViewProps {
   open: boolean;
@@ -13,119 +14,116 @@ interface ParticipantDetailViewProps {
 
 const ParticipantDetailView = ({ open, onOpenChange, participantId }: ParticipantDetailViewProps) => {
   const { t } = useLanguage();
+  const { selectedStudy } = useStudy();
 
-  if (!participantId) return null;
+  if (!participantId || !selectedStudy) return null;
 
-  // Mock participant data with different demographics for each participant
-  const participantData = {
-    P001: {
-      patientId: "P001",
-      token: "PTK-9283-WZ1",
-      enrollmentDate: "2024-10-15",
-      lastVisit: "2024-12-01",
-      nextVisit: "2024-12-15",
-      questionnairesCompleted: 8,
-      questionnairesTotal: 10,
-      visitStatus: 'scheduled' as const,
-      complianceRate: 96,
+  // Generate dynamic participant data based on study and participant ID
+  const generateParticipantData = (patientId: string, studyId: string) => {
+    const studyConfigs = {
+      '1': { // PARADIGM-CV
+        prefix: 'S',
+        tokenPrefix: 'NVS',
+        baseCompliance: 95,
+        totalQuestionnaires: 14,
+        totalVisits: 12,
+        studyName: 'PARADIGM-CV'
+      },
+      '2': { // ATLAS-DM2
+        prefix: 'P',
+        tokenPrefix: 'PF',
+        baseCompliance: 90,
+        totalQuestionnaires: 9,
+        totalVisits: 10,
+        studyName: 'ATLAS-DM2'
+      },
+      '3': { // HORIZON-Onc
+        prefix: 'H',
+        tokenPrefix: 'RO',
+        baseCompliance: 88,
+        totalQuestionnaires: 7,
+        totalVisits: 8,
+        studyName: 'HORIZON-Onc'
+      },
+      '4': { // GUARDIAN-Ped
+        prefix: 'G',
+        tokenPrefix: 'JNJ',
+        baseCompliance: 96,
+        totalQuestionnaires: 12,
+        totalVisits: 14,
+        studyName: 'GUARDIAN-Ped'
+      }
+    };
+
+    const config = studyConfigs[studyId as keyof typeof studyConfigs];
+    if (!config) return null;
+
+    // Generate consistent data based on participant ID
+    const idNum = parseInt(patientId.replace(/\D/g, '')) || 1;
+    const seed = idNum * 1000 + parseInt(studyId);
+    
+    // Generate deterministic random values
+    const random = (min: number, max: number) => {
+      const x = Math.sin(seed * (min + max)) * 10000;
+      return Math.floor((x - Math.floor(x)) * (max - min + 1)) + min;
+    };
+
+    const ages = [24, 29, 32, 45, 52, 58, 61, 67, 72];
+    const genders = ['Male', 'Female'];
+    const ethnicities = ['Caucasian', 'Hispanic/Latino', 'African American', 'Asian', 'Native American'];
+    
+    const baseDate = new Date('2025-05-01');
+    const enrollmentOffset = random(0, 60) * 24 * 60 * 60 * 1000;
+    const enrollmentDate = new Date(baseDate.getTime() + enrollmentOffset);
+    
+    const lastVisitOffset = random(1, 30) * 24 * 60 * 60 * 1000;
+    const lastVisit = new Date(Date.now() - lastVisitOffset);
+    
+    const nextVisitOffset = random(3, 14) * 24 * 60 * 60 * 1000;
+    const nextVisit = new Date(Date.now() + nextVisitOffset);
+
+    const compliance = Math.max(75, config.baseCompliance + random(-10, 8));
+    const questionnairesCompleted = Math.floor((config.totalQuestionnaires * compliance) / 100);
+    const visitsCompleted = Math.floor((config.totalVisits * (compliance + 5)) / 100);
+    
+    const visitStatuses: Array<'completed' | 'scheduled' | 'overdue'> = ['completed', 'scheduled', 'overdue'];
+    const visitStatus = compliance < 85 ? 'overdue' : visitStatuses[random(0, 1)];
+    
+    const icfVersions = ['v2.0', 'v2.1', 'v2.2'];
+    const icfVersion = icfVersions[random(0, icfVersions.length - 1)];
+    const icfStatus = compliance < 85 && random(0, 1) === 0 ? 'Re-consent Required' : 'Signed';
+
+    return {
+      patientId,
+      token: `${config.tokenPrefix}-${random(1000, 9999)}-${String.fromCharCode(65 + random(0, 25))}${String.fromCharCode(65 + random(0, 25))}${random(0, 9)}`,
+      enrollmentDate: enrollmentDate.toISOString().split('T')[0],
+      lastVisit: lastVisit.toISOString().split('T')[0],
+      nextVisit: nextVisit.toISOString().split('T')[0],
+      questionnairesCompleted,
+      questionnairesTotal: config.totalQuestionnaires,
+      visitStatus,
+      complianceRate: compliance,
       demographics: {
-        age: 45,
-        gender: "Female",
-        ethnicity: "Hispanic/Latino"
+        age: ages[random(0, ages.length - 1)],
+        gender: genders[random(0, genders.length - 1)],
+        ethnicity: ethnicities[random(0, ethnicities.length - 1)]
       },
       icfDetails: {
-        version: "v2.1",
-        signedDate: "2024-10-15",
-        status: "Signed"
-      }
-    },
-    P002: {
-      patientId: "P002",
-      token: "PTK-4751-QR3",
-      enrollmentDate: "2024-10-20",
-      lastVisit: "2024-12-05",
-      nextVisit: "2024-12-16",
-      questionnairesCompleted: 9,
-      questionnairesTotal: 10,
-      visitStatus: 'scheduled' as const,
-      complianceRate: 98,
-      demographics: {
-        age: 32,
-        gender: "Male",
-        ethnicity: "Caucasian"
+        version: icfVersion,
+        signedDate: enrollmentDate.toISOString().split('T')[0],
+        status: icfStatus
       },
-      icfDetails: {
-        version: "v2.1",
-        signedDate: "2024-10-20",
-        status: "Signed"
+      studyProgress: {
+        visitsCompleted,
+        visitsTotal: config.totalVisits,
+        questionnairesCompleted,
+        questionnairesTotal: config.totalQuestionnaires,
+        complianceRate: compliance
       }
-    },
-    P003: {
-      patientId: "P003",
-      token: "PTK-8239-MN7",
-      enrollmentDate: "2024-10-18",
-      lastVisit: "2024-11-28",
-      nextVisit: "2024-12-12",
-      questionnairesCompleted: 7,
-      questionnairesTotal: 10,
-      visitStatus: 'overdue' as const,
-      complianceRate: 89,
-      demographics: {
-        age: 58,
-        gender: "Female",
-        ethnicity: "African American"
-      },
-      icfDetails: {
-        version: "v2.0",
-        signedDate: "2024-10-18",
-        status: "Re-consent Required"
-      }
-    },
-    P004: {
-      patientId: "P004",
-      token: "PTK-5642-LP9",
-      enrollmentDate: "2024-11-01",
-      lastVisit: "2024-12-08",
-      nextVisit: "2024-12-20",
-      questionnairesCompleted: 6,
-      questionnairesTotal: 8,
-      visitStatus: 'completed' as const,
-      complianceRate: 94,
-      demographics: {
-        age: 67,
-        gender: "Male",
-        ethnicity: "Asian"
-      },
-      icfDetails: {
-        version: "v2.1",
-        signedDate: "2024-11-01",
-        status: "Signed"
-      }
-    },
-    P005: {
-      patientId: "P005",
-      token: "PTK-7194-KX2",
-      enrollmentDate: "2024-11-05",
-      lastVisit: "2024-12-02",
-      nextVisit: "2024-12-18",
-      questionnairesCompleted: 5,
-      questionnairesTotal: 8,
-      visitStatus: 'scheduled' as const,
-      complianceRate: 92,
-      demographics: {
-        age: 29,
-        gender: "Female",
-        ethnicity: "Native American"
-      },
-      icfDetails: {
-        version: "v2.1",
-        signedDate: "2024-11-05",
-        status: "Signed"
-      }
-    }
+    };
   };
 
-  const participant = participantData[participantId as keyof typeof participantData];
+  const participant = generateParticipantData(participantId, selectedStudy.id);
   if (!participant) return null;
 
   const participantDetails = {
@@ -136,29 +134,23 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
       email: "participant@example.com",
       preferredContact: "Email"
     },
-    studyProgress: {
-      visitsCompleted: participant.visitStatus === 'completed' ? 8 : 7,
-      visitsTotal: 12,
-      questionnairesCompleted: participant.questionnairesCompleted,
-      questionnairesTotal: participant.questionnairesTotal,
-      complianceRate: participant.complianceRate
-    },
+    studyProgress: participant.studyProgress,
     recentActivity: [
       { date: participant.lastVisit, activity: "Site Visit - Blood Draw", type: "visit" },
-      { date: "2024-12-02", activity: "Medication Adherence Survey", type: "questionnaire" },
-      { date: "2024-11-28", activity: "Follow-up Call", type: "call" },
-      { date: "2024-11-25", activity: "Weekly Survey", type: "questionnaire" }
+      { date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], activity: "Weekly Survey", type: "questionnaire" },
+      { date: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], activity: "Follow-up Call", type: "call" },
+      { date: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], activity: "Safety Assessment", type: "questionnaire" }
     ],
     upcomingEvents: [
       { date: participant.nextVisit, activity: "Site Visit", time: "2:00 PM" },
-      { date: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], activity: "Weekly Survey Due", time: "End of day" }
+      { date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], activity: "Weekly Survey Due", time: "End of day" }
     ],
     alerts: participant.visitStatus === 'overdue' 
       ? [
           { type: "warning", message: t('details.visit.overdue') },
           { type: "info", message: t('details.monthly.assessment') }
         ]
-      : participant.complianceRate < 95
+      : participant.complianceRate < 90
       ? [
           { type: "info", message: t('details.monthly.assessment') }
         ]
