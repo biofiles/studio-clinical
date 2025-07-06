@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import Unauthorized from "./pages/Unauthorized";
 import StudySelection from "./pages/StudySelection";
 import ParticipantDashboard from "./pages/ParticipantDashboard";
 import InvestigatorDashboard from "./pages/InvestigatorDashboard";
@@ -56,6 +57,7 @@ const App = () => (
                     <Settings />
                   </ProtectedRoute>
                 } />
+                <Route path="/unauthorized" element={<Unauthorized />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

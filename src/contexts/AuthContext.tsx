@@ -77,18 +77,22 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   const getUserRole = async (): Promise<string | null> => {
-    if (!user?.email) return null;
+    if (!user?.id) return null;
     
-    // Determine role based on email address
-    if (user.email === 'participant@studioclinical.com') {
-      return 'participant';
-    } else if (user.email === 'site@studioclinical.com') {
-      return 'investigator';
-    } else if (user.email === 'sponsor-cro@studioclinical.com') {
-      return 'cro_sponsor';
+    try {
+      const { data, error } = await supabase
+        .rpc('get_user_role', { check_user_id: user.id });
+      
+      if (error) {
+        console.error('Error fetching user role:', error);
+        return null;
+      }
+      
+      return data;
+    } catch (error) {
+      console.error('Error fetching user role:', error);
+      return null;
     }
-    
-    return null;
   };
 
   const value: AuthContextType = {

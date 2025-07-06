@@ -169,11 +169,18 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
     v1.0 (1 Oct 2024): Versión inicial
   `;
 
-  const highlightSearchTerms = (text: string) => {
+  const highlightSearchTerms = (text: string): React.ReactNode => {
     if (!searchTerm.trim()) return text;
     
     const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-    return text.replace(regex, '<mark class="bg-yellow-200 font-semibold">$1</mark>');
+    const parts = text.split(regex);
+    
+    return parts.map((part, index) => {
+      if (regex.test(part)) {
+        return <mark key={index} className="bg-yellow-200 font-semibold">{part}</mark>;
+      }
+      return part;
+    });
   };
 
   const handleSearch = () => {
@@ -489,10 +496,9 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
               <CardTitle>{t('econsent.document.title')}</CardTitle>
             </CardHeader>
             <CardContent>
-              <div 
-                className="prose max-w-none text-sm whitespace-pre-line bg-gray-50 p-4 rounded border max-h-60 overflow-y-auto"
-                dangerouslySetInnerHTML={{ __html: highlightSearchTerms(consentText) }}
-              />
+              <div className="prose max-w-none text-sm whitespace-pre-line bg-gray-50 p-4 rounded border max-h-60 overflow-y-auto">
+                {highlightSearchTerms(consentText)}
+              </div>
             </CardContent>
           </Card>
 
