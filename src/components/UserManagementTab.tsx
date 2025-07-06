@@ -109,7 +109,7 @@ const UserManagementTab = () => {
 
   const handleInviteUser = async () => {
     try {
-      if (!inviteForm.email || !inviteForm.full_name) {
+      if (!inviteForm.email || !inviteForm.full_name || !inviteForm.role) {
         toast.error('Please fill in all required fields');
         return;
       }
@@ -125,7 +125,10 @@ const UserManagementTab = () => {
           full_name: inviteForm.full_name
         });
 
-      if (inviteError) throw inviteError;
+      if (inviteError) {
+        console.error('Invitation error:', inviteError);
+        throw inviteError;
+      }
 
       toast.success(t('user.invitation.sent'));
       setShowInviteDialog(false);
