@@ -72,10 +72,15 @@ const StudySelector = ({ userRole }: StudySelectorProps) => {
                       {study.name}
                     </span>
                   </div>
+                  <div className="mb-2">
+                    <p className="text-sm text-studio-text-muted mb-1">
+                      Protocolo: <span className="font-medium text-studio-text">{study.protocol}</span>
+                    </p>
+                    <p className="text-sm text-studio-text-muted">
+                      Patrocinador: <span className="font-medium text-studio-text">{study.sponsor}</span>
+                    </p>
+                  </div>
                   <div className="flex items-center space-x-2 mb-2">
-                    <Badge variant="outline" className="text-xs">
-                      {study.protocol}
-                    </Badge>
                     <Badge variant="outline" className="text-xs">
                       {study.phase}
                     </Badge>
