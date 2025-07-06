@@ -303,7 +303,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
                 </div>
                 <Progress 
                   value={studyData ? studyData.visitCompliance : 0} 
-                  color={studyData && studyData.visitCompliance < 90 ? 'warning' : 'info'}
+                  color={studyData && studyData.visitCompliance < 90 ? 'warning' : 'success'}
                   className="h-2"
                 />
               </div>
