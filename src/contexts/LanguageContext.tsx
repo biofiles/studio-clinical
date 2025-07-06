@@ -33,7 +33,7 @@ const translations = {
     'dashboard.visit.compliance': 'Visit Compliance',
     'dashboard.enrollment': 'Enrollment',
     'dashboard.daily.diaries': 'Daily Diaries',
-    'dashboard.site.visits': 'Site Visits',
+    'dashboard.site.visits': 'Visits',
     
     // Participant Management
     'participant.management': 'Participant Management',
@@ -125,7 +125,7 @@ const translations = {
     'questionnaire.complete.now': 'Complete Now',
     
     // Visits
-    'visits.site.visits': 'Site Visits',
+    'visits.site.visits': 'Visits',
     'visits.baseline.completed': 'Baseline Visit - Completed',
     'visits.baseline.procedures': 'Blood draw, vital signs, questionnaires completed',
     'visits.notes': 'Visit Notes',
@@ -265,7 +265,7 @@ const translations = {
     'dashboard.visit.compliance': 'Cumplimiento de Visitas',
     'dashboard.enrollment': 'Inscripción',
     'dashboard.daily.diaries': 'Diarios Diarios',
-    'dashboard.site.visits': 'Visitas al Sitio',
+    'dashboard.site.visits': 'Visitas',
     
     // Participant Management
     'participant.management': 'Gestión de Participantes',
