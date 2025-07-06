@@ -116,9 +116,15 @@ const StudySignupsReportDialog = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="default" size="sm" className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 shadow-lg">
-          <Download className="h-4 w-4 mr-2" />
-          Reporte de Suscripciones
+        <Button 
+          variant="outline" 
+          className="w-full justify-start h-auto py-3"
+        >
+          <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
+            <span className="font-medium text-sm sm:text-base truncate pr-2">Reporte de Suscripciones a Resumen del Estudio</span>
+            <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Lista de emails suscritos para recibir resumenes de resultados</span>
+          </div>
+          <Download className="h-4 w-4 ml-2 flex-shrink-0" />
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
