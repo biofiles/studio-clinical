@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,75 +11,24 @@ import CalendarView from "@/components/CalendarView";
 import QuestionnairesView from "@/components/QuestionnairesView";
 import AIChatbot from "@/components/AIChatbot";
 import EConsentDialog from "@/components/EConsentDialog";
-import PlsSignupDialog from "@/components/PlsSignupDialog";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useAuth } from "@/contexts/AuthContext";
-import { supabase } from "@/integrations/supabase/client";
-import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode, Signature, Building, Settings, Scale, BookOpen } from "lucide-react";
-
+import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode, Signature, Building, Settings, Scale } from "lucide-react";
 const ParticipantDashboard = () => {
   const {
     t,
     language
   } = useLanguage();
-  const { user } = useAuth();
   const navigate = useNavigate();
   const [showCalendar, setShowCalendar] = useState(false);
   const [showQuestionnaires, setShowQuestionnaires] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showChatbot, setShowChatbot] = useState(false);
   const [showEConsent, setShowEConsent] = useState(false);
-  const [showPlsDialog, setShowPlsDialog] = useState(false);
   const [eConsentMode, setEConsentMode] = useState<'sign' | 'view'>('sign');
   const [surveyCompleted, setSurveyCompleted] = useState(false);
-  const [plsSignedUp, setPlsSignedUp] = useState(false);
-  const [participantData, setParticipantData] = useState<any>(null);
-
-  // Load PLS signup status from localStorage
-  useEffect(() => {
-    const savedStatus = localStorage.getItem('pls-signed-up');
-    if (savedStatus === 'true') {
-      setPlsSignedUp(true);
-    }
-  }, []);
-
-  // Fetch participant data for the current user
-  useEffect(() => {
-    const fetchParticipantData = async () => {
-      if (!user?.id) return;
-
-      try {
-        // Get user roles to find participant data
-        const { data: userRoles } = await supabase
-          .from('user_roles')
-          .select('study_id')
-          .eq('user_id', user.id)
-          .eq('role', 'participant')
-          .single();
-
-        if (userRoles?.study_id) {
-          // Get participant data
-          const { data: participant } = await supabase
-            .from('participants')
-            .select('*, studies(*)')
-            .eq('study_id', userRoles.study_id)
-            .single();
-
-          if (participant) {
-            setParticipantData(participant);
-          }
-        }
-      } catch (error) {
-        console.error('Error fetching participant data:', error);
-      }
-    };
-
-    fetchParticipantData();
-  }, [user]);
-
   const studyProgress = 65;
   const daysLeft = 30;
-  const participantToken = participantData?.subject_id || "PTK-9283-WZ1";
+  const participantToken = "PTK-9283-WZ1";
   const upcomingActivities = [{
     date: t('common.next'),
     activity: t('activity.weekly.survey'),
@@ -110,17 +59,6 @@ const ParticipantDashboard = () => {
   const handleExportPDF = () => {
     alert(t('activity.pdf.export'));
   };
-
-  const handlePlsSignup = () => {
-    setShowPlsDialog(true);
-  };
-
-  const handlePlsConfirm = (emails: string[]) => {
-    setPlsSignedUp(true);
-    localStorage.setItem('pls-signed-up', 'true');
-    localStorage.setItem('pls-signup-emails', JSON.stringify(emails));
-    alert(`${t('pls.success')} ${emails.length} ${emails.length === 1 ? 'email registrado' : 'emails registrados'}.`);
-  };
   const getActivityIcon = (type: string) => {
     switch (type) {
       case 'visit':
@@ -144,7 +82,7 @@ const ParticipantDashboard = () => {
             {t('common.welcome')}
           </h2>
           <p className="text-studio-text-muted text-sm sm:text-base">
-            PARADIGM-CV | {t('study.protocol')}: NVS-4578-301 | {t('study.sponsor')}: Novartis AG
+            Protocolo NVS-4578-301 | Patrocinador: Novartis AG | PARADIGM-CV
           </p>
         </div>
 
@@ -595,16 +533,6 @@ const ParticipantDashboard = () => {
                 {t('profile.export.pdf')}
               </Button>
 
-              {/* Plain Language Summary Signup */}
-              <Button 
-                variant={plsSignedUp ? "secondary" : "studio"} 
-                className="w-full justify-start"
-                onClick={handlePlsSignup}
-              >
-                <BookOpen className="h-4 w-4 mr-2" />
-                {plsSignedUp ? t('pls.manage.emails') : t('pls.signup')}
-              </Button>
-
               <Card className="bg-blue-50 border-blue-200">
                 <CardContent className="p-4">
                   <div className="flex items-start space-x-3">
@@ -639,15 +567,6 @@ const ParticipantDashboard = () => {
       <AIChatbot open={showChatbot} onOpenChange={setShowChatbot} />
 
       <EConsentDialog open={showEConsent} onOpenChange={setShowEConsent} mode={eConsentMode} />
-
-      <PlsSignupDialog 
-        open={showPlsDialog} 
-        onOpenChange={setShowPlsDialog}
-        onConfirm={handlePlsConfirm}
-        userEmail={user?.email || "participant@example.com"}
-        participantId={participantData?.id}
-        studyId={participantData?.study_id}
-      />
     </div>;
 };
 export default ParticipantDashboard;

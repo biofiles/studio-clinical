@@ -73,17 +73,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   const signOut = async () => {
-    try {
-      await supabase.auth.signOut();
-      // Clear local state immediately
-      setUser(null);
-      setSession(null);
-    } catch (error) {
-      console.error('Error signing out:', error);
-      // Still clear local state even if signOut fails
-      setUser(null);
-      setSession(null);
-    }
+    await supabase.auth.signOut();
   };
 
   const getUserRole = async (): Promise<string | null> => {

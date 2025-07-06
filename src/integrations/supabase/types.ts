@@ -199,159 +199,25 @@ export type Database = {
         }
         Relationships: []
       }
-      study_results_signups: {
-        Row: {
-          created_at: string
-          email: string
-          id: string
-          participant_id: string | null
-          signed_up_at: string
-          study_id: string | null
-          updated_at: string
-        }
-        Insert: {
-          created_at?: string
-          email: string
-          id?: string
-          participant_id?: string | null
-          signed_up_at?: string
-          study_id?: string | null
-          updated_at?: string
-        }
-        Update: {
-          created_at?: string
-          email?: string
-          id?: string
-          participant_id?: string | null
-          signed_up_at?: string
-          study_id?: string | null
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "study_results_signups_participant_id_fkey"
-            columns: ["participant_id"]
-            isOneToOne: false
-            referencedRelation: "participants"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "study_results_signups_study_id_fkey"
-            columns: ["study_id"]
-            isOneToOne: false
-            referencedRelation: "studies"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      user_activity_log: {
-        Row: {
-          activity_type: string
-          created_at: string
-          details: Json | null
-          id: string
-          ip_address: unknown | null
-          user_agent: string | null
-          user_id: string
-        }
-        Insert: {
-          activity_type: string
-          created_at?: string
-          details?: Json | null
-          id?: string
-          ip_address?: unknown | null
-          user_agent?: string | null
-          user_id: string
-        }
-        Update: {
-          activity_type?: string
-          created_at?: string
-          details?: Json | null
-          id?: string
-          ip_address?: unknown | null
-          user_agent?: string | null
-          user_id?: string
-        }
-        Relationships: []
-      }
-      user_invitations: {
-        Row: {
-          created_at: string
-          email: string
-          expires_at: string
-          full_name: string | null
-          id: string
-          invited_by: string
-          role: Database["public"]["Enums"]["app_role"]
-          status: string
-          study_id: string | null
-          token: string
-        }
-        Insert: {
-          created_at?: string
-          email: string
-          expires_at?: string
-          full_name?: string | null
-          id?: string
-          invited_by: string
-          role: Database["public"]["Enums"]["app_role"]
-          status?: string
-          study_id?: string | null
-          token?: string
-        }
-        Update: {
-          created_at?: string
-          email?: string
-          expires_at?: string
-          full_name?: string | null
-          id?: string
-          invited_by?: string
-          role?: Database["public"]["Enums"]["app_role"]
-          status?: string
-          study_id?: string | null
-          token?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "user_invitations_study_id_fkey"
-            columns: ["study_id"]
-            isOneToOne: false
-            referencedRelation: "studies"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       user_roles: {
         Row: {
-          assigned_at: string | null
-          assigned_by: string | null
           created_at: string
           id: string
-          permissions: Json | null
           role: Database["public"]["Enums"]["app_role"]
-          status: string | null
           study_id: string | null
           user_id: string
         }
         Insert: {
-          assigned_at?: string | null
-          assigned_by?: string | null
           created_at?: string
           id?: string
-          permissions?: Json | null
           role: Database["public"]["Enums"]["app_role"]
-          status?: string | null
           study_id?: string | null
           user_id: string
         }
         Update: {
-          assigned_at?: string | null
-          assigned_by?: string | null
           created_at?: string
           id?: string
-          permissions?: Json | null
           role?: Database["public"]["Enums"]["app_role"]
-          status?: string | null
           study_id?: string | null
           user_id?: string
         }
@@ -370,10 +236,6 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      generate_invitation_token: {
-        Args: Record<PropertyKey, never>
-        Returns: string
-      }
       get_user_role: {
         Args: { check_user_id: string; check_study_id?: string }
         Returns: Database["public"]["Enums"]["app_role"]
@@ -384,26 +246,6 @@ export type Database = {
           check_role: Database["public"]["Enums"]["app_role"]
           check_study_id?: string
         }
-        Returns: boolean
-      }
-      log_security_event: {
-        Args: {
-          event_type: string
-          event_details?: Json
-          user_id_param?: string
-        }
-        Returns: undefined
-      }
-      log_user_activity: {
-        Args: { user_id: string; activity_type: string; details?: Json }
-        Returns: undefined
-      }
-      sanitize_text: {
-        Args: { input_text: string }
-        Returns: string
-      }
-      validate_email: {
-        Args: { email_input: string }
         Returns: boolean
       }
     }

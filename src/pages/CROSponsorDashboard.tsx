@@ -7,29 +7,15 @@ import Header from "@/components/Header";
 import StudyDropdown from "@/components/StudyDropdown";
 import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, FileText, Calendar, Users, Settings, Download } from "lucide-react";
 import FHIRExportDialog from "@/components/FHIRExportDialog";
-import UserManagementTab from "@/components/UserManagementTab";
-import UserActivityDashboard from "@/components/UserActivityDashboard";
-import BulkUserImport from "@/components/BulkUserImport";
 import { toast } from "sonner";
 import { useStudy } from "@/contexts/StudyContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
-import { 
-  exportToExcel, 
-  fetchSiteUsersData, 
-  fetchQuestionnaireData, 
-  fetchMilestonesData, 
-  fetchEConsentData,
-  fetchParticipantsData,
-  fetchStudyResultsSignupsData 
-} from "@/lib/excel-export";
 const CROSponsorDashboard = () => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [selectedStudyLocal, setSelectedStudyLocal] = useState<string | null>(null);
   const [showFHIRExport, setShowFHIRExport] = useState(false);
   const [favoriteStudyId, setFavoriteStudyId] = useState<string | null>(null);
-  const [showActivityDashboard, setShowActivityDashboard] = useState(false);
-  const [showBulkImport, setShowBulkImport] = useState(false);
   const {
     selectedStudy,
     studies,
@@ -290,7 +276,7 @@ const CROSponsorDashboard = () => {
         </div>
 
         {/* Overview Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <Card className="bg-studio-surface border-studio-border">
             <CardContent className="p-6">
               <div className="flex items-center space-x-2">
@@ -342,30 +328,26 @@ const CROSponsorDashboard = () => {
 
         {/* Sectioned Content */}
         <Tabs defaultValue="details" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 h-auto gap-1">
-            <TabsTrigger value="details" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
-              <Building2 className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-xs">{t('cro.study.details')}</span>
+          <TabsList className="grid w-full grid-cols-5">
+            <TabsTrigger value="details" className="flex items-center space-x-2">
+              <Building2 className="h-4 w-4" />
+              <span>{t('cro.study.details')}</span>
             </TabsTrigger>
-            <TabsTrigger value="questionnaires" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
-              <FileText className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-xs">{t('cro.questionnaires')}</span>
+            <TabsTrigger value="questionnaires" className="flex items-center space-x-2">
+              <FileText className="h-4 w-4" />
+              <span>{t('cro.questionnaires')}</span>
             </TabsTrigger>
-            <TabsTrigger value="schedule" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
-              <Calendar className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-xs">{t('cro.schedule')}</span>
+            <TabsTrigger value="schedule" className="flex items-center space-x-2">
+              <Calendar className="h-4 w-4" />
+              <span>{t('cro.schedule')}</span>
             </TabsTrigger>
-            <TabsTrigger value="participants" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
-              <Users className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-xs">{t('cro.participants')}</span>
+            <TabsTrigger value="participants" className="flex items-center space-x-2">
+              <Users className="h-4 w-4" />
+              <span>{t('cro.participants')}</span>
             </TabsTrigger>
-            <TabsTrigger value="user-management" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
-              <Shield className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-xs">User Management</span>
-            </TabsTrigger>
-            <TabsTrigger value="reports" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
-              <TrendingUp className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-xs">{t('cro.reports')}</span>
+            <TabsTrigger value="reports" className="flex items-center space-x-2">
+              <TrendingUp className="h-4 w-4" />
+              <span>{t('cro.reports')}</span>
             </TabsTrigger>
           </TabsList>
 
@@ -707,10 +689,6 @@ const CROSponsorDashboard = () => {
             </div>
           </TabsContent>
 
-          <TabsContent value="user-management" className="space-y-6">
-            <UserManagementTab />
-          </TabsContent>
-
           <TabsContent value="reports" className="space-y-6">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-lg font-medium text-studio-text">{t('cro.reports')} & {t('cro.advanced.analytics')}</h3>
@@ -731,23 +709,11 @@ const CROSponsorDashboard = () => {
                     <Button 
                       variant="outline" 
                       className="w-full justify-start h-auto py-3"
-                      onClick={async () => {
-                        try {
-                          const data = await fetchSiteUsersData(selectedStudy?.id);
-                          exportToExcel([{
-                            sheetName: 'Site Users',
-                            data,
-                            headers: ['Full Name', 'Email', 'Role', 'Study', 'Protocol', 'Status', 'Assigned Date']
-                          }], 'Site_Users_Report');
-                          toast.success("Site Users Report Generated", { description: "Excel file downloaded successfully" });
-                        } catch (error) {
-                          toast.error("Export Failed", { description: "Unable to generate report" });
-                        }
-                      }}
+                      onClick={() => toast.success("Generating Site Users Report...", { description: "Report will be available for download shortly" })}
                     >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
-                        <span className="font-medium text-sm sm:text-base truncate w-full">{t('cro.site.users.report')}</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words w-full overflow-hidden">Detailed site investigator and staff activity report</span>
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
+                        <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.site.users.report')}</span>
+                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Detailed site investigator and staff activity report</span>
                       </div>
                       <Download className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
@@ -755,23 +721,11 @@ const CROSponsorDashboard = () => {
                     <Button 
                       variant="outline" 
                       className="w-full justify-start h-auto py-3"
-                      onClick={async () => {
-                        try {
-                          const data = await fetchQuestionnaireData(selectedStudy?.id);
-                          exportToExcel([{
-                            sheetName: 'Questionnaire Responses',
-                            data,
-                            headers: ['Participant ID', 'Participant Name', 'Study', 'Protocol', 'Questionnaire', 'Questionnaire ID', 'Status', 'Submitted Date', 'Created Date', 'Answers']
-                          }], 'Questionnaire_Report');
-                          toast.success("Questionnaire Report Generated", { description: "Excel file with responses downloaded successfully" });
-                        } catch (error) {
-                          toast.error("Export Failed", { description: "Unable to generate questionnaire report" });
-                        }
-                      }}
+                      onClick={() => toast.success("Generating Questionnaire Report...", { description: "Comprehensive questionnaire data compilation started" })}
                     >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
-                        <span className="font-medium text-sm sm:text-base truncate w-full">{t('cro.questionnaire.report')}</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words w-full overflow-hidden">Complete questionnaire responses and compliance data</span>
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
+                        <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.questionnaire.report')}</span>
+                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Complete questionnaire responses and compliance data</span>
                       </div>
                       <Download className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
@@ -779,71 +733,11 @@ const CROSponsorDashboard = () => {
                     <Button 
                       variant="outline" 
                       className="w-full justify-start h-auto py-3"
-                      onClick={async () => {
-                        try {
-                          const data = await fetchMilestonesData(selectedStudy?.id);
-                          exportToExcel([{
-                            sheetName: 'Study Milestones',
-                            data,
-                            headers: ['Study Name', 'Protocol', 'Phase', 'Sponsor', 'Status', 'Start Date', 'End Date', 'Created Date', 'Last Updated']
-                          }], 'Milestones_Report');
-                          toast.success("Milestones Report Generated", { description: "Study timeline report downloaded successfully" });
-                        } catch (error) {
-                          toast.error("Export Failed", { description: "Unable to generate milestones report" });
-                        }
-                      }}
+                      onClick={() => toast.success("Generating Milestones Report...", { description: "Study timeline and milestone tracking report in progress" })}
                     >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
-                        <span className="font-medium text-sm sm:text-base truncate w-full">{t('cro.milestones.report')}</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words w-full overflow-hidden">Timeline tracking and milestone achievement analysis</span>
-                      </div>
-                      <Download className="h-4 w-4 ml-2 flex-shrink-0" />
-                    </Button>
-                    
-                    <Button 
-                      variant="outline" 
-                      className="w-full justify-start h-auto py-3"
-                      onClick={async () => {
-                        try {
-                          const data = await fetchEConsentData(selectedStudy?.id);
-                          exportToExcel([{
-                            sheetName: 'eConsent Report',
-                            data,
-                            headers: ['Participant ID', 'Participant Name', 'Study', 'Protocol', 'Consent Status', 'Consent Version', 'Initial Consent Date', 'Latest Consent Date', 'Withdrawal Date', 'Email']
-                          }], 'eConsent_Report');
-                          toast.success("eConsent Report Generated", { description: "Electronic consent report downloaded successfully" });
-                        } catch (error) {
-                          toast.error("Export Failed", { description: "Unable to generate eConsent report" });
-                        }
-                      }}
-                    >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
-                        <span className="font-medium text-sm sm:text-base truncate w-full">eConsent Report</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words w-full overflow-hidden">Electronic consent signatures, versions, and compliance tracking</span>
-                      </div>
-                      <Download className="h-4 w-4 ml-2 flex-shrink-0" />
-                    </Button>
-
-                    <Button 
-                      variant="outline" 
-                      className="w-full justify-start h-auto py-3"
-                      onClick={async () => {
-                        try {
-                          const data = await fetchStudyResultsSignupsData(selectedStudy?.id);
-                          exportToExcel([{
-                            sheetName: 'Study Results Signups',
-                            data,
-                            headers: ['Participant ID', 'Participant Name', 'Email', 'Study Name', 'Protocol', 'Sponsor', 'Signed Up Date', 'Signed Up Time']
-                          }], 'Study_Results_Signups_Report');
-                          toast.success("Study Results Signups Report Generated", { description: "Plain language summary signups report downloaded successfully" });
-                        } catch (error) {
-                          toast.error("Export Failed", { description: "Unable to generate study results signups report" });
-                        }
-                      }}
-                    >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
-                        <span className="font-medium text-sm sm:text-base truncate w-full">Study Results Summary Signups</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words w-full overflow-hidden">Participants signed up for plain language study results summary</span>
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
+                        <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.milestones.report')}</span>
+                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Timeline tracking and milestone achievement analysis</span>
                       </div>
                       <Download className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
@@ -866,9 +760,9 @@ const CROSponsorDashboard = () => {
                       className="w-full justify-start h-auto py-3"
                       onClick={() => setShowFHIRExport(true)}
                     >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
-                        <span className="font-medium text-sm sm:text-base truncate w-full">{t('cro.export.fhir')}</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words w-full overflow-hidden">Export study data in FHIR R4 format for regulatory submission</span>
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
+                        <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.export.fhir')}</span>
+                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Export study data in FHIR R4 format for regulatory submission</span>
                       </div>
                       <Globe className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
@@ -878,9 +772,9 @@ const CROSponsorDashboard = () => {
                       className="w-full justify-start h-auto py-3"
                       onClick={() => toast.success("Initiating HL7 Export...", { description: "HL7 message format export for healthcare systems integration" })}
                     >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
-                        <span className="font-medium text-sm sm:text-base truncate w-full">{t('cro.export.hl7')}</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words w-full overflow-hidden">Generate HL7 messages for healthcare system integration</span>
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
+                        <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.export.hl7')}</span>
+                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Generate HL7 messages for healthcare system integration</span>
                       </div>
                       <FileText className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
@@ -890,9 +784,9 @@ const CROSponsorDashboard = () => {
                       className="w-full justify-start h-auto py-3"
                       onClick={() => toast.success("Connecting to CDISC API...", { description: "Validating study data against CDISC STDM standards" })}
                     >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 overflow-hidden">
-                        <span className="font-medium text-sm sm:text-base truncate w-full">{t('cro.validate.cdisc')}</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words w-full overflow-hidden">Validate against CDISC Study Data Tabulation Model</span>
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
+                        <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.validate.cdisc')}</span>
+                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Validate against CDISC Study Data Tabulation Model</span>
                       </div>
                       <Shield className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>

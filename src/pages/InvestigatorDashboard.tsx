@@ -4,10 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import Header from "@/components/Header";
-import ParticipantCreation from "@/components/ParticipantCreation";
-import ParticipantManagement from "@/components/ParticipantManagement";
-import PlsSignupDialog from "@/components/PlsSignupDialog";
-import { UserPlus, QrCode, Globe, Users, FileCheck, AlertTriangle, Calendar, Download, MessageCircle, BookOpen } from "lucide-react";
+import { Users, FileCheck, AlertTriangle, BarChart3, Calendar, UserCheck, MessageCircle, Download, Settings, QrCode, Globe } from "lucide-react";
 import ParticipantList from "@/components/ParticipantList";
 import AIChatbot from "@/components/AIChatbot";
 import CalendarManagement from "@/components/CalendarManagement";
@@ -15,7 +12,6 @@ import BarcodeScanner from "@/components/BarcodeScanner";
 import FHIRExportDialog from "@/components/FHIRExportDialog";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
-import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const InvestigatorDashboard = () => {
@@ -24,13 +20,8 @@ const InvestigatorDashboard = () => {
   const [showCalendarManagement, setShowCalendarManagement] = useState(false);
   const [showBarcodeScanner, setShowBarcodeScanner] = useState(false);
   const [showFHIRExport, setShowFHIRExport] = useState(false);
-  const [showParticipantCreation, setShowParticipantCreation] = useState(false);
-  const [showParticipantManagement, setShowParticipantManagement] = useState(false);
-  const [showPlsDialog, setShowPlsDialog] = useState(false);
-  const [plsSignedUp, setPlsSignedUp] = useState(false);
   const { t } = useLanguage();
   const { selectedStudy } = useStudy();
-  const { user } = useAuth();
   const navigate = useNavigate();
 
   // Redirect to study selection if no study is selected
@@ -39,14 +30,6 @@ const InvestigatorDashboard = () => {
       navigate('/select-study');
     }
   }, [selectedStudy, navigate]);
-
-  // Load PLS signup status from localStorage
-  useEffect(() => {
-    const savedStatus = localStorage.getItem('pls-signed-up');
-    if (savedStatus === 'true') {
-      setPlsSignedUp(true);
-    }
-  }, []);
 
   // Dynamic data based on selected study
   const getStudyData = () => {
@@ -123,17 +106,6 @@ const InvestigatorDashboard = () => {
 
   const handleQuestionnaires = () => {
     alert("Opening questionnaire management interface...");
-  };
-
-  const handlePlsSignup = () => {
-    setShowPlsDialog(true);
-  };
-
-  const handlePlsConfirm = (emails: string[]) => {
-    setPlsSignedUp(true);
-    localStorage.setItem('pls-signed-up', 'true');
-    localStorage.setItem('pls-signup-emails', JSON.stringify(emails));
-    alert(`${t('pls.success')} ${emails.length} ${emails.length === 1 ? 'email registrado' : 'emails registrados'}.`);
   };
 
   return (
@@ -244,18 +216,10 @@ const InvestigatorDashboard = () => {
               <Button 
                 variant="studio" 
                 className="w-full justify-start"
-                onClick={() => setShowParticipantCreation(true)}
-              >
-                <UserPlus className="h-4 w-4 mr-2" />
-                Create Participant Account
-              </Button>
-              <Button 
-                variant="studio" 
-                className="w-full justify-start"
-                onClick={() => setShowParticipantManagement(true)}
+                onClick={() => setShowParticipantList(true)}
               >
                 <Users className="h-4 w-4 mr-2" />
-                Manage Participants
+                {t('dashboard.participant.list')}
               </Button>
               <Button 
                 variant="studio" 
@@ -296,14 +260,6 @@ const InvestigatorDashboard = () => {
               >
                 <Download className="h-4 w-4 mr-2" />
                 {t('dashboard.export.questionnaires')}
-              </Button>
-              <Button 
-                variant={plsSignedUp ? "secondary" : "studio"} 
-                className="w-full justify-start"
-                onClick={handlePlsSignup}
-              >
-                <BookOpen className="h-4 w-4 mr-2" />
-                {plsSignedUp ? t('pls.manage.emails') : t('pls.signup')}
               </Button>
             </CardContent>
           </Card>
@@ -406,23 +362,6 @@ const InvestigatorDashboard = () => {
       <FHIRExportDialog 
         open={showFHIRExport}
         onOpenChange={setShowFHIRExport}
-      />
-
-      <ParticipantCreation 
-        open={showParticipantCreation}
-        onOpenChange={setShowParticipantCreation}
-      />
-
-      <ParticipantManagement 
-        open={showParticipantManagement}
-        onOpenChange={setShowParticipantManagement}
-      />
-
-      <PlsSignupDialog 
-        open={showPlsDialog} 
-        onOpenChange={setShowPlsDialog}
-        onConfirm={handlePlsConfirm}
-        userEmail={user?.email || "investigator@example.com"}
       />
     </div>
   );
