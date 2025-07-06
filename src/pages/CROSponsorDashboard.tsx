@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import StudyDropdown from "@/components/StudyDropdown";
 import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, FileText, Calendar, Users, Settings, Download } from "lucide-react";
 import FHIRExportDialog from "@/components/FHIRExportDialog";
+import UserManagementTab from "@/components/UserManagementTab";
 import { toast } from "sonner";
 import { useStudy } from "@/contexts/StudyContext";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -328,7 +329,7 @@ const CROSponsorDashboard = () => {
 
         {/* Sectioned Content */}
         <Tabs defaultValue="details" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="details" className="flex items-center space-x-2">
               <Building2 className="h-4 w-4" />
               <span>{t('cro.study.details')}</span>
@@ -344,6 +345,10 @@ const CROSponsorDashboard = () => {
             <TabsTrigger value="participants" className="flex items-center space-x-2">
               <Users className="h-4 w-4" />
               <span>{t('cro.participants')}</span>
+            </TabsTrigger>
+            <TabsTrigger value="user-management" className="flex items-center space-x-2">
+              <Shield className="h-4 w-4" />
+              <span>User Management</span>
             </TabsTrigger>
             <TabsTrigger value="reports" className="flex items-center space-x-2">
               <TrendingUp className="h-4 w-4" />
@@ -687,6 +692,10 @@ const CROSponsorDashboard = () => {
                 </CardContent>
               </Card>
             </div>
+          </TabsContent>
+
+          <TabsContent value="user-management" className="space-y-6">
+            <UserManagementTab />
           </TabsContent>
 
           <TabsContent value="reports" className="space-y-6">

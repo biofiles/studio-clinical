@@ -341,6 +341,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      log_user_activity: {
+        Args: { user_id: string; activity_type: string; details?: Json }
+        Returns: undefined
+      }
     }
     Enums: {
       app_role: "participant" | "investigator" | "cro_sponsor" | "admin"

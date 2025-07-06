@@ -4,7 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import Header from "@/components/Header";
-import { Users, FileCheck, AlertTriangle, BarChart3, Calendar, UserCheck, MessageCircle, Download, Settings, QrCode, Globe } from "lucide-react";
+import ParticipantCreation from "@/components/ParticipantCreation";
+import { UserPlus, QrCode, Globe, Users, FileCheck, AlertTriangle, Calendar, Download, MessageCircle } from "lucide-react";
 import ParticipantList from "@/components/ParticipantList";
 import AIChatbot from "@/components/AIChatbot";
 import CalendarManagement from "@/components/CalendarManagement";
@@ -20,6 +21,7 @@ const InvestigatorDashboard = () => {
   const [showCalendarManagement, setShowCalendarManagement] = useState(false);
   const [showBarcodeScanner, setShowBarcodeScanner] = useState(false);
   const [showFHIRExport, setShowFHIRExport] = useState(false);
+  const [showParticipantCreation, setShowParticipantCreation] = useState(false);
   const { t } = useLanguage();
   const { selectedStudy } = useStudy();
   const navigate = useNavigate();
@@ -216,6 +218,14 @@ const InvestigatorDashboard = () => {
               <Button 
                 variant="studio" 
                 className="w-full justify-start"
+                onClick={() => setShowParticipantCreation(true)}
+              >
+                <UserPlus className="h-4 w-4 mr-2" />
+                Create Participant Account
+              </Button>
+              <Button 
+                variant="studio" 
+                className="w-full justify-start"
                 onClick={() => setShowParticipantList(true)}
               >
                 <Users className="h-4 w-4 mr-2" />
@@ -362,6 +372,11 @@ const InvestigatorDashboard = () => {
       <FHIRExportDialog 
         open={showFHIRExport}
         onOpenChange={setShowFHIRExport}
+      />
+
+      <ParticipantCreation 
+        open={showParticipantCreation}
+        onOpenChange={setShowParticipantCreation}
       />
     </div>
   );

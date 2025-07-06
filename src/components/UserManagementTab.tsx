@@ -57,28 +57,44 @@ const UserManagementTab = () => {
           role,
           status,
           study_id,
-          created_at,
-          profiles!inner(
-            email,
-            full_name
-          ),
-          studies(
-            name
-          )
+          created_at
         `)
         .neq('role', 'participant');
 
       if (error) throw error;
 
-      const formattedUsers = userRoles?.map(ur => ({
-        id: ur.user_id,
-        email: ur.profiles.email || '',
-        full_name: ur.profiles.full_name || '',
-        role: ur.role,
-        status: ur.status || 'active',
-        study_name: ur.studies?.name,
-        created_at: ur.created_at
-      })) || [];
+      // Get user profiles separately
+      const userIds = userRoles?.map(ur => ur.user_id) || [];
+      const { data: profiles, error: profilesError } = await supabase
+        .from('profiles')
+        .select('user_id, email, full_name')
+        .in('user_id', userIds);
+
+      if (profilesError) throw profilesError;
+
+      // Get study names
+      const studyIds = userRoles?.map(ur => ur.study_id).filter(Boolean) || [];
+      const { data: studies, error: studiesError } = await supabase
+        .from('studies')
+        .select('id, name')
+        .in('id', studyIds);
+
+      if (studiesError) throw studiesError;
+
+      const formattedUsers = userRoles?.map(ur => {
+        const profile = profiles?.find(p => p.user_id === ur.user_id);
+        const study = studies?.find(s => s.id === ur.study_id);
+        
+        return {
+          id: ur.user_id,
+          email: profile?.email || '',
+          full_name: profile?.full_name || '',
+          role: ur.role,
+          status: ur.status || 'active',
+          study_name: study?.name,
+          created_at: ur.created_at
+        };
+      }) || [];
 
       setUsers(formattedUsers);
     } catch (error) {
