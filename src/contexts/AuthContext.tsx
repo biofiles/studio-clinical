@@ -90,11 +90,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     if (!user?.id) return null;
     
     try {
-      console.log('Getting role for user:', user.id);
       const { data, error } = await supabase
         .rpc('get_user_role', { check_user_id: user.id });
-      
-      console.log('Role query result:', { data, error });
       
       if (error) {
         console.error('Error fetching user role:', error);
@@ -103,7 +100,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       
       return data;
     } catch (error) {
-      console.error('Exception fetching user role:', error);
+      console.error('Error fetching user role:', error);
       return null;
     }
   };
