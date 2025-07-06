@@ -4,10 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import Header from "@/components/Header";
-import { Users, FileCheck, AlertTriangle, BarChart3, Calendar, UserCheck, MessageCircle, Download, Settings } from "lucide-react";
+import { Users, FileCheck, AlertTriangle, BarChart3, Calendar, UserCheck, MessageCircle, Download, Settings, QrCode } from "lucide-react";
 import ParticipantList from "@/components/ParticipantList";
 import AIChatbot from "@/components/AIChatbot";
 import CalendarManagement from "@/components/CalendarManagement";
+import BarcodeScanner from "@/components/BarcodeScanner";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +21,7 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
   const [showParticipantList, setShowParticipantList] = useState(false);
   const [showChatbot, setShowChatbot] = useState(false);
   const [showCalendarManagement, setShowCalendarManagement] = useState(false);
+  const [showBarcodeScanner, setShowBarcodeScanner] = useState(false);
   const { t } = useLanguage();
   const { selectedStudy } = useStudy();
   const navigate = useNavigate();
@@ -241,6 +243,14 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
               <Button 
                 variant="studio" 
                 className="w-full justify-start"
+                onClick={() => setShowBarcodeScanner(true)}
+              >
+                <QrCode className="h-4 w-4 mr-2" />
+                Escáner de Códigos
+              </Button>
+              <Button 
+                variant="studio" 
+                className="w-full justify-start"
                 onClick={handleExportQuestionnaires}
               >
                 <Download className="h-4 w-4 mr-2" />
@@ -337,6 +347,11 @@ const InvestigatorDashboard = ({ onLogout }: InvestigatorDashboardProps) => {
       <AIChatbot 
         open={showChatbot}
         onOpenChange={setShowChatbot}
+      />
+
+      <BarcodeScanner 
+        open={showBarcodeScanner}
+        onOpenChange={setShowBarcodeScanner}
       />
     </div>
   );
