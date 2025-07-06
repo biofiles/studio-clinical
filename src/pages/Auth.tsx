@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
-import { Eye, EyeOff, Lock, User } from 'lucide-react';
+import { Eye, EyeOff, Lock, User, Copy } from 'lucide-react';
 
 const Auth = () => {
   const { user, signIn, getUserRole } = useAuth();
@@ -81,6 +81,22 @@ const Auth = () => {
         variant: 'destructive',
       });
       setLoading(false);
+    }
+  };
+
+  const copyToClipboard = async (text: string, label: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast({
+        title: 'Copiado',
+        description: `${label} copiado al portapapeles`,
+      });
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'No se pudo copiar al portapapeles',
+        variant: 'destructive',
+      });
     }
   };
 
@@ -165,11 +181,60 @@ const Auth = () => {
           </CardContent>
         </Card>
         
-        <div className="text-center text-xs text-studio-text-muted">
-          <p>Cuentas de prueba:</p>
-          <p>Participante: participant@studioclinical.com</p>
-          <p>Investigador: site@studioclinical.com</p>
-          <p>CRO/Patrocinador: sponsor-cro@studioclinical.com</p>
+        <div className="text-center text-xs text-studio-text-muted space-y-3">
+          <p className="font-medium">Cuentas de prueba:</p>
+          
+          <div className="space-y-2">
+            <div className="flex items-center justify-between gap-2">
+              <span>Participante: participant@studioclinical.com</span>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-6 w-6 p-0"
+                onClick={() => copyToClipboard('participant@studioclinical.com', 'Email de participante')}
+              >
+                <Copy className="h-3 w-3" />
+              </Button>
+            </div>
+            
+            <div className="flex items-center justify-between gap-2">
+              <span>Investigador: site@studioclinical.com</span>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-6 w-6 p-0"
+                onClick={() => copyToClipboard('site@studioclinical.com', 'Email de investigador')}
+              >
+                <Copy className="h-3 w-3" />
+              </Button>
+            </div>
+            
+            <div className="flex items-center justify-between gap-2">
+              <span>CRO/Patrocinador: sponsor-cro@studioclinical.com</span>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-6 w-6 p-0"
+                onClick={() => copyToClipboard('sponsor-cro@studioclinical.com', 'Email de CRO/Patrocinador')}
+              >
+                <Copy className="h-3 w-3" />
+              </Button>
+            </div>
+          </div>
+          
+          <div className="pt-2 border-t border-studio-border/20">
+            <div className="flex items-center justify-center gap-2">
+              <span>Contraseña: studio</span>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-6 w-6 p-0"
+                onClick={() => copyToClipboard('studio', 'Contraseña')}
+              >
+                <Copy className="h-3 w-3" />
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
