@@ -45,7 +45,7 @@ const mockStudies: Study[] = [
     name: 'HORIZON-Onc',
     protocol: 'RO-7198457-104',
     phase: 'Phase I/II',
-    status: 'active_not_recruiting',
+    status: 'recruiting',
     sites: 9,
     participants: 94,
     sponsor: 'Roche Ltd.'
@@ -55,7 +55,7 @@ const mockStudies: Study[] = [
     name: 'GUARDIAN-Ped',
     protocol: 'JNJ-83475219-201',
     phase: 'Phase II/III',
-    status: 'enrolling_by_invitation',
+    status: 'recruiting',
     sites: 22,
     participants: 278,
     sponsor: 'Johnson & Johnson'

@@ -420,7 +420,7 @@ const CROSponsorDashboard = () => {
                       </div>
                       <div className="space-y-2">
                         <span className="text-sm text-studio-text-muted">{t('study.participants.count')}</span>
-                        <p className="font-medium text-studio-text text-2xl">{selectedStudy.participants}</p>
+                        <p className="font-medium text-studio-text">{selectedStudy.participants}</p>
                       </div>
                     </div>
 
