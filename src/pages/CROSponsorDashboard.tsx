@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Header from "@/components/Header";
 import StudyDropdown from "@/components/StudyDropdown";
-import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, FileText, Calendar, Users, Settings, Download } from "lucide-react";
+import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, FileText, Calendar, Users, Settings, Download, Activity, Database } from "lucide-react";
 import FHIRExportDialog from "@/components/FHIRExportDialog";
 import StudySignupsReportDialog from "@/components/StudySignupsReportDialog";
+import StudyResultsSignup from "@/components/StudyResultsSignup";
+import { AuditTrailDashboard } from "@/components/AuditTrailDashboard";
+import ParticipantList from "@/components/ParticipantList";
 import { toast } from "sonner";
 import { useStudy } from "@/contexts/StudyContext";
 import { useLanguage } from "@/contexts/LanguageContext";
