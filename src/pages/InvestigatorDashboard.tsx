@@ -125,7 +125,7 @@ const InvestigatorDashboard = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" data-onboarding="study-metrics">
           <Card className="bg-studio-surface border-studio-border">
             <CardContent className="p-6">
               <div className="flex items-center space-x-2">
@@ -218,6 +218,7 @@ const InvestigatorDashboard = () => {
                 variant="studio" 
                 className="w-full justify-start"
                 onClick={() => setShowParticipantList(true)}
+                data-onboarding="participant-list-btn"
               >
                 <Users className="h-4 w-4 mr-2" />
                 {t('dashboard.participant.list')}
@@ -226,6 +227,7 @@ const InvestigatorDashboard = () => {
                 variant="studio" 
                 className="w-full justify-start"
                 onClick={() => setShowCalendarManagement(true)}
+                data-onboarding="calendar-btn"
               >
                 <Calendar className="h-4 w-4 mr-2" />
                 {t('dashboard.manage.calendar')}
@@ -242,6 +244,7 @@ const InvestigatorDashboard = () => {
                 variant="studio" 
                 className="w-full justify-start"
                 onClick={() => setShowBarcodeScanner(true)}
+                data-onboarding="barcode-btn"
               >
                 <QrCode className="h-4 w-4 mr-2" />
                 Escáner de Códigos
@@ -251,6 +254,7 @@ const InvestigatorDashboard = () => {
                 variant="studio" 
                 className="w-full justify-start"
                 onClick={() => setShowFHIRExport(true)}
+                data-onboarding="fhir-btn"
               >
                 <Globe className="h-4 w-4 mr-2" />
                 Interoperabilidad FHIR
@@ -267,7 +271,7 @@ const InvestigatorDashboard = () => {
           </Card>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6" data-onboarding="progress-cards">
           <Card className="bg-studio-surface border-studio-border">
             <CardHeader>
               <CardTitle className="text-studio-text">{t('dashboard.study.progress')}</CardTitle>

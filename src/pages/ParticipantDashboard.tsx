@@ -78,7 +78,7 @@ const ParticipantDashboard = () => {
 
       <main className="p-3 sm:p-4 max-w-6xl mx-auto">{/* Reduced padding for mobile */}
         {/* Welcome Section - Mobile first */}
-        <div className="space-y-1 mb-4">
+        <div className="space-y-1 mb-4" data-onboarding="welcome-section">
           <h2 className="text-xl sm:text-2xl font-medium text-studio-text">
             {t('common.welcome')}
           </h2>
@@ -88,7 +88,7 @@ const ParticipantDashboard = () => {
         </div>
 
         {/* Progress Overview - Mobile optimized */}
-        <Card className="bg-studio-surface border-studio-border mb-4">{/* Reduced margin */}
+        <Card className="bg-studio-surface border-studio-border mb-4" data-onboarding="progress-card">{/* Reduced margin */}
           <CardContent className="p-4 sm:p-6">
             <div className="space-y-4 sm:space-y-0 sm:flex sm:items-center sm:justify-between">
               <div className="flex-1 sm:mr-6">

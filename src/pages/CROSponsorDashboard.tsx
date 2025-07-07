@@ -277,7 +277,7 @@ const CROSponsorDashboard = () => {
         </div>
 
         {/* Overview Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8" data-onboarding="portfolio-stats">
           <Card className="bg-studio-surface border-studio-border">
             <CardContent className="p-6">
               <div className="flex items-center space-x-2">
@@ -328,13 +328,13 @@ const CROSponsorDashboard = () => {
         </div>
 
         {/* Sectioned Content */}
-        <Tabs defaultValue="details" className="space-y-6">
+        <Tabs defaultValue="details" className="space-y-6" data-onboarding="main-tabs">
           <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="details" className="flex items-center space-x-2">
               <Building2 className="h-4 w-4" />
               <span>{t('cro.study.details')}</span>
             </TabsTrigger>
-            <TabsTrigger value="questionnaires" className="flex items-center space-x-2">
+            <TabsTrigger value="questionnaires" data-tab="questionnaires" className="flex items-center space-x-2">
               <FileText className="h-4 w-4" />
               <span>{t('cro.questionnaires')}</span>
             </TabsTrigger>
@@ -346,7 +346,7 @@ const CROSponsorDashboard = () => {
               <Users className="h-4 w-4" />
               <span>{t('cro.participants')}</span>
             </TabsTrigger>
-            <TabsTrigger value="reports" className="flex items-center space-x-2">
+            <TabsTrigger value="reports" data-tab="reports" className="flex items-center space-x-2">
               <TrendingUp className="h-4 w-4" />
               <span>{t('cro.reports')}</span>
             </TabsTrigger>

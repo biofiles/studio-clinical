@@ -29,7 +29,7 @@ const StudyDropdown = () => {
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu data-onboarding="study-dropdown">
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="max-w-64">
           <div className="flex items-center space-x-2 min-w-0">

@@ -3,15 +3,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Header from "@/components/Header";
-import { Globe, LogOut, ArrowLeft } from "lucide-react";
+import { Globe, LogOut, ArrowLeft, Play } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useOnboarding } from "@/contexts/OnboardingContext";
 
 const Settings = () => {
   const navigate = useNavigate();
   const { language, setLanguage, t } = useLanguage();
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
+  const { startOnboarding } = useOnboarding();
 
   const handleLogout = async () => {
     try {
@@ -24,6 +26,11 @@ const Settings = () => {
 
   const handleBack = () => {
     navigate(-1);
+  };
+
+  const handleStartTutorial = () => {
+    startOnboarding(user?.role);
+    navigate(-1); // Go back to the dashboard to start tutorial
   };
 
   return (
@@ -72,6 +79,35 @@ const Settings = () => {
                 <p className="text-xs text-studio-text-muted">
                   {t('settings.language.note')}
                 </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-studio-surface border-studio-border">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2 text-studio-text">
+                <Play className="h-5 w-5" />
+                <span>{t('settings.tutorial.section')}</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-sm font-medium text-studio-text mb-2">
+                    {t('settings.start.tutorial')}
+                  </h4>
+                  <p className="text-xs text-studio-text-muted mb-3">
+                    {t('settings.tutorial.description')}
+                  </p>
+                  <Button
+                    variant="outline"
+                    onClick={handleStartTutorial}
+                    className="flex items-center space-x-2"
+                  >
+                    <Play className="h-4 w-4" />
+                    <span>{t('settings.start.tutorial')}</span>
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>

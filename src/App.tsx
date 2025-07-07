@@ -7,6 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { StudyProvider } from "./contexts/StudyContext";
 import { AuthProvider } from "./contexts/AuthContext";
+import { OnboardingProvider } from "./contexts/OnboardingContext";
+import { OnboardingOverlay } from "./components/OnboardingOverlay";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
@@ -25,44 +27,47 @@ const App = () => (
     <AuthProvider>
       <LanguageProvider>
         <StudyProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/auth" element={<Auth />} />
-                <Route path="/select-study" element={
-                  <ProtectedRoute>
-                    <StudySelection />
-                  </ProtectedRoute>
-                } />
-                <Route path="/participant" element={
-                  <ProtectedRoute>
-                    <ParticipantDashboard />
-                  </ProtectedRoute>
-                } />
-                <Route path="/investigator" element={
-                  <ProtectedRoute>
-                    <InvestigatorDashboard />
-                  </ProtectedRoute>
-                } />
-                <Route path="/cro-sponsor" element={
-                  <ProtectedRoute>
-                    <CROSponsorDashboard />
-                  </ProtectedRoute>
-                } />
-                <Route path="/settings" element={
-                  <ProtectedRoute>
-                    <Settings />
-                  </ProtectedRoute>
-                } />
-                <Route path="/unauthorized" element={<Unauthorized />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </TooltipProvider>
+          <OnboardingProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/auth" element={<Auth />} />
+                  <Route path="/select-study" element={
+                    <ProtectedRoute>
+                      <StudySelection />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/participant" element={
+                    <ProtectedRoute>
+                      <ParticipantDashboard />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/investigator" element={
+                    <ProtectedRoute>
+                      <InvestigatorDashboard />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/cro-sponsor" element={
+                    <ProtectedRoute>
+                      <CROSponsorDashboard />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/settings" element={
+                    <ProtectedRoute>
+                      <Settings />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/unauthorized" element={<Unauthorized />} />
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+                <OnboardingOverlay />
+              </BrowserRouter>
+            </TooltipProvider>
+          </OnboardingProvider>
         </StudyProvider>
       </LanguageProvider>
     </AuthProvider>
