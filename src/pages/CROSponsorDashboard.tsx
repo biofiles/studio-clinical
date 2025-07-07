@@ -266,20 +266,20 @@ const CROSponsorDashboard = () => {
       <Header role="cro-sponsor" />
 
 
-      <main className="p-6 max-w-7xl mx-auto">
-        <div className="space-y-2 mb-6">
-          <h2 className="text-xl font-medium text-studio-text">
+      <main className="p-3 sm:p-4 max-w-7xl mx-auto">{/* Mobile-friendly padding */}
+        <div className="space-y-1 mb-4">{/* Reduced spacing for mobile */}
+          <h2 className="text-xl sm:text-2xl font-medium text-studio-text">{/* Responsive text */}
             {t('cro.portfolio.overview')}
           </h2>
-          <p className="text-studio-text-muted">
+          <p className="text-studio-text-muted text-sm sm:text-base">{/* Responsive text */}
             {t('cro.global.research.ops')}
           </p>
         </div>
 
-        {/* Overview Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8" data-onboarding="portfolio-stats">
-          <Card className="bg-studio-surface border-studio-border">
-            <CardContent className="p-6">
+        {/* Overview Stats - Mobile responsive */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8" data-onboarding="portfolio-stats">{/* Responsive grid */}
+                  <Card className="bg-studio-surface border-studio-border">
+            <CardContent className="p-4 sm:p-6">{/* Responsive padding */}
               <div className="flex items-center space-x-2">
                 <Building2 className="h-5 w-5 text-studio-text-muted" />
                 <span className="text-2xl font-semibold text-studio-text">4</span>
@@ -291,7 +291,7 @@ const CROSponsorDashboard = () => {
           </Card>
 
           <Card className="bg-studio-surface border-studio-border">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">{/* Responsive padding */}
               <div className="flex items-center space-x-2">
                 <Globe className="h-5 w-5 text-studio-text-muted" />
                 <span className="text-2xl font-semibold text-studio-text">61</span>
@@ -303,7 +303,7 @@ const CROSponsorDashboard = () => {
           </Card>
 
           <Card className="bg-studio-surface border-studio-border">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">{/* Responsive padding */}
               <div className="flex items-center space-x-2">
                 <TrendingUp className="h-5 w-5 text-studio-text-muted" />
                 <span className="text-2xl font-semibold text-studio-text">919</span>
@@ -315,7 +315,7 @@ const CROSponsorDashboard = () => {
           </Card>
 
           <Card className="bg-studio-surface border-studio-border">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">{/* Responsive padding */}
               <div className="flex items-center space-x-2">
                 <Shield className="h-5 w-5 text-studio-text-muted" />
                 <span className="text-2xl font-semibold text-studio-text">95.2%</span>
@@ -327,28 +327,28 @@ const CROSponsorDashboard = () => {
           </Card>
         </div>
 
-        {/* Sectioned Content */}
-        <Tabs defaultValue="details" className="space-y-6" data-onboarding="main-tabs">
-          <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="details" className="flex items-center space-x-2">
-              <Building2 className="h-4 w-4" />
-              <span>{t('cro.study.details')}</span>
+        {/* Sectioned Content - Mobile-friendly tabs */}
+        <Tabs defaultValue="details" className="space-y-3 sm:space-y-6" data-onboarding="main-tabs">{/* Responsive spacing */}
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-5 h-auto gap-1">{/* Mobile: 2 cols, Desktop: 5 cols */}
+            <TabsTrigger value="details" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
+              <Building2 className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-xs sm:text-sm">{t('cro.study.details')}</span>
             </TabsTrigger>
-            <TabsTrigger value="questionnaires" data-tab="questionnaires" className="flex items-center space-x-2">
-              <FileText className="h-4 w-4" />
-              <span>{t('cro.questionnaires')}</span>
+            <TabsTrigger value="questionnaires" data-tab="questionnaires" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
+              <FileText className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-xs sm:text-sm">{t('cro.questionnaires')}</span>
             </TabsTrigger>
-            <TabsTrigger value="schedule" className="flex items-center space-x-2">
-              <Calendar className="h-4 w-4" />
-              <span>{t('cro.schedule')}</span>
+            <TabsTrigger value="schedule" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
+              <Calendar className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-xs sm:text-sm">{t('cro.schedule')}</span>
             </TabsTrigger>
-            <TabsTrigger value="participants" className="flex items-center space-x-2">
-              <Users className="h-4 w-4" />
-              <span>{t('cro.participants')}</span>
+            <TabsTrigger value="participants" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
+              <Users className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-xs sm:text-sm">{t('cro.participants')}</span>
             </TabsTrigger>
-            <TabsTrigger value="reports" data-tab="reports" className="flex items-center space-x-2">
-              <TrendingUp className="h-4 w-4" />
-              <span>{t('cro.reports')}</span>
+            <TabsTrigger value="reports" data-tab="reports" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm col-span-2 sm:col-span-1">
+              <TrendingUp className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-xs sm:text-sm">{t('cro.reports')}</span>
             </TabsTrigger>
           </TabsList>
 
@@ -381,8 +381,8 @@ const CROSponsorDashboard = () => {
               <CardContent>
                 {selectedStudy ? (
                   <div className="space-y-6">
-                    {/* Basic Study Information */}
-                    <div className="grid grid-cols-3 gap-4">
+                    {/* Basic Study Information - Mobile responsive grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">{/* Responsive: 1 col mobile, 2 cols tablet, 3 cols desktop */}
                       <div className="space-y-2">
                         <span className="text-sm text-studio-text-muted">{t('study.protocol')}</span>
                         <p className="font-medium text-studio-text">{selectedStudy.protocol}</p>
