@@ -714,8 +714,7 @@ const CROSponsorDashboard = () => {
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
                         <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.site.users.report')}</span>
-                        <span className="text-xs text-studio-text-muted hidden sm:block line-clamp-2 break-words">Detailed site investigator and staff activity report</span>
-                        <span className="text-xs text-studio-text-muted sm:hidden">Site activity report</span>
+                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Detailed site investigator and staff activity report</span>
                       </div>
                       <Download className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
@@ -727,8 +726,7 @@ const CROSponsorDashboard = () => {
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
                         <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.questionnaire.report')}</span>
-                        <span className="text-xs text-studio-text-muted hidden sm:block line-clamp-2 break-words">Complete questionnaire responses and compliance data</span>
-                        <span className="text-xs text-studio-text-muted sm:hidden">Questionnaire data</span>
+                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Complete questionnaire responses and compliance data</span>
                       </div>
                       <Download className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
@@ -740,21 +738,7 @@ const CROSponsorDashboard = () => {
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
                         <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.milestones.report')}</span>
-                        <span className="text-xs text-studio-text-muted hidden sm:block line-clamp-2 break-words">Timeline tracking and milestone achievement analysis</span>
-                        <span className="text-xs text-studio-text-muted sm:hidden">Timeline & milestones</span>
-                      </div>
-                      <Download className="h-4 w-4 ml-2 flex-shrink-0" />
-                    </Button>
-                    
-                    <Button 
-                      variant="outline" 
-                      className="w-full justify-start h-auto py-3"
-                      onClick={() => toast.success("Generating Audit Trail Report...", { description: "Complete audit trail and regulatory compliance report in progress" })}
-                    >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
-                        <span className="font-medium text-sm sm:text-base truncate pr-2">Audit Trail Report</span>
-                        <span className="text-xs text-studio-text-muted hidden sm:block line-clamp-2 break-words">Complete audit trail and regulatory compliance tracking</span>
-                        <span className="text-xs text-studio-text-muted sm:hidden">Audit & compliance</span>
+                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Timeline tracking and milestone achievement analysis</span>
                       </div>
                       <Download className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
