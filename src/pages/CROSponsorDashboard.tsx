@@ -709,38 +709,44 @@ const CROSponsorDashboard = () => {
                   <div className="space-y-3">
                     <Button 
                       variant="outline" 
-                      className="w-full justify-start h-auto py-3"
+                      className="w-full justify-start h-auto py-3 px-4"
                       onClick={() => toast.success("Generating Site Users Report...", { description: "Report will be available for download shortly" })}
                     >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
-                        <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.site.users.report')}</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Detailed site investigator and staff activity report</span>
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
+                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.site.users.report')}</span>
+                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                          {t('cro.site.users.report.description')}
+                        </span>
                       </div>
-                      <Download className="h-4 w-4 ml-2 flex-shrink-0" />
+                      <Download className="h-4 w-4 flex-shrink-0" />
                     </Button>
                     
                     <Button 
                       variant="outline" 
-                      className="w-full justify-start h-auto py-3"
+                      className="w-full justify-start h-auto py-3 px-4"
                       onClick={() => toast.success("Generating Questionnaire Report...", { description: "Comprehensive questionnaire data compilation started" })}
                     >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
-                        <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.questionnaire.report')}</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Complete questionnaire responses and compliance data</span>
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
+                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.questionnaire.report')}</span>
+                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                          {t('cro.questionnaire.report.description')}
+                        </span>
                       </div>
-                      <Download className="h-4 w-4 ml-2 flex-shrink-0" />
+                      <Download className="h-4 w-4 flex-shrink-0" />
                     </Button>
                     
                     <Button 
                       variant="outline" 
-                      className="w-full justify-start h-auto py-3"
+                      className="w-full justify-start h-auto py-3 px-4"
                       onClick={() => toast.success("Generating Milestones Report...", { description: "Study timeline and milestone tracking report in progress" })}
                     >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
-                        <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.milestones.report')}</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Timeline tracking and milestone achievement analysis</span>
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
+                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.milestones.report')}</span>
+                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                          {t('cro.milestones.report.description')}
+                        </span>
                       </div>
-                      <Download className="h-4 w-4 ml-2 flex-shrink-0" />
+                      <Download className="h-4 w-4 flex-shrink-0" />
                     </Button>
                     
                     {/* Fantasy button for study results signups report */}
@@ -763,38 +769,44 @@ const CROSponsorDashboard = () => {
                   <div className="space-y-3">
                     <Button 
                       variant="outline" 
-                      className="w-full justify-start h-auto py-3"
+                      className="w-full justify-start h-auto py-3 px-4"
                       onClick={() => setShowFHIRExport(true)}
                     >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
-                        <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.export.fhir')}</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Export study data in FHIR R4 format for regulatory submission</span>
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
+                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.export.fhir')}</span>
+                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                          {t('cro.export.fhir.description')}
+                        </span>
                       </div>
-                      <Globe className="h-4 w-4 ml-2 flex-shrink-0" />
+                      <Globe className="h-4 w-4 flex-shrink-0" />
                     </Button>
                     
                     <Button 
                       variant="outline" 
-                      className="w-full justify-start h-auto py-3"
+                      className="w-full justify-start h-auto py-3 px-4"
                       onClick={() => toast.success("Initiating HL7 Export...", { description: "HL7 message format export for healthcare systems integration" })}
                     >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
-                        <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.export.hl7')}</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Generate HL7 messages for healthcare system integration</span>
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
+                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.export.hl7')}</span>
+                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                          {t('cro.export.hl7.description')}
+                        </span>
                       </div>
-                      <FileText className="h-4 w-4 ml-2 flex-shrink-0" />
+                      <FileText className="h-4 w-4 flex-shrink-0" />
                     </Button>
                     
                     <Button 
                       variant="outline" 
-                      className="w-full justify-start h-auto py-3"
+                      className="w-full justify-start h-auto py-3 px-4"
                       onClick={() => toast.success("Connecting to CDISC API...", { description: "Validating study data against CDISC STDM standards" })}
                     >
-                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
-                        <span className="font-medium text-sm sm:text-base truncate pr-2">{t('cro.validate.cdisc')}</span>
-                        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">Validate against CDISC Study Data Tabulation Model</span>
+                      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
+                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.validate.cdisc')}</span>
+                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                          {t('cro.validate.cdisc.description')}
+                        </span>
                       </div>
-                      <Shield className="h-4 w-4 ml-2 flex-shrink-0" />
+                      <Shield className="h-4 w-4 flex-shrink-0" />
                     </Button>
                   </div>
                 </CardContent>
