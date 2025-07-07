@@ -28,8 +28,17 @@ const Settings = () => {
   };
 
   const handleStartTutorial = () => {
-    startOnboarding(user?.role);
-    navigate(-1);
+    // Navigate to the appropriate dashboard first, then start onboarding
+    if (user?.role === 'investigator') {
+      navigate('/investigator');
+      setTimeout(() => startOnboarding('investigator'), 500);
+    } else if (user?.role === 'cro_sponsor') {
+      navigate('/cro-sponsor');
+      setTimeout(() => startOnboarding('cro_sponsor'), 500);
+    } else {
+      navigate('/participant');
+      setTimeout(() => startOnboarding('participant'), 500);
+    }
   };
 
   return (
