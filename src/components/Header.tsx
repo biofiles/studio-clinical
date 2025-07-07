@@ -5,6 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
 import { useAuth } from "@/contexts/AuthContext";
 import StudyDropdown from "@/components/StudyDropdown";
+import { useState, useEffect } from "react";
 
 interface HeaderProps {
   role?: string;
@@ -18,10 +19,23 @@ const Header = ({
   const navigate = useNavigate();
   const { t } = useLanguage();
   const { selectedStudy } = useStudy();
-  const { signOut } = useAuth();
+  const { signOut, getUserRole } = useAuth();
+  const [userRole, setUserRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchUserRole = async () => {
+      const fetchedRole = await getUserRole();
+      setUserRole(fetchedRole);
+    };
+    fetchUserRole();
+  }, [getUserRole]);
 
   const handleSettings = () => {
-    navigate('/profile');
+    if (userRole === 'participant') {
+      navigate('/profile');
+    } else {
+      navigate('/settings');
+    }
   };
 
   const handleLogout = async () => {
@@ -57,7 +71,7 @@ const Header = ({
             <div className="flex items-center space-x-3">
               <Button variant="outline" size="sm" onClick={handleSettings}>
                 <User className="h-4 w-4 mr-2" />
-                Configuración
+                {userRole === 'participant' ? t('header.profile') : 'Configuración'}
               </Button>
               {(role === 'cro_sponsor' || role === 'admin') && (
                 <Button 
