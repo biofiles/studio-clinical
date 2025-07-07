@@ -22,8 +22,13 @@ const ParticipantDashboard = () => {
     setLanguage
   } = useLanguage();
   const navigate = useNavigate();
-  const { signOut, user } = useAuth();
-  const { startOnboarding } = useOnboarding();
+  const {
+    signOut,
+    user
+  } = useAuth();
+  const {
+    startOnboarding
+  } = useOnboarding();
   const [showCalendar, setShowCalendar] = useState(false);
   const [showQuestionnaires, setShowQuestionnaires] = useState(false);
   const [showChatbot, setShowChatbot] = useState(false);
@@ -68,7 +73,6 @@ const ParticipantDashboard = () => {
       console.error('Error during logout:', error);
     }
   };
-
   const handleStartTutorial = () => {
     startOnboarding(user?.role);
   };
@@ -147,10 +151,7 @@ const ParticipantDashboard = () => {
               <Folder className="h-5 w-5 sm:h-4 sm:w-4" />
               <span className="text-xs sm:text-xs">{t('materials.title')}</span>
             </TabsTrigger>
-            <TabsTrigger value="settings" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
-              <Settings className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-xs">{t('settings.title')}</span>
-            </TabsTrigger>
+            
           </TabsList>
 
           <TabsContent value="schedule" className="space-y-3">{/* Reduced spacing */}
