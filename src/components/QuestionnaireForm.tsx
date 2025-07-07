@@ -1,4 +1,5 @@
 
+import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,8 +8,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Progress } from "@/components/ui/progress";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import { CheckCircle, ArrowLeft, ArrowRight } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Question {
   id: string;
@@ -50,6 +51,28 @@ const QuestionnaireForm = ({ open, onOpenChange, questionnaire, onComplete }: Qu
       // Complete questionnaire
       setIsCompleted(true);
       onComplete(questionnaire.id, responses);
+      
+      // Log questionnaire completion
+      setTimeout(async () => {
+        try {
+          const { data: { user } } = await supabase.auth.getUser();
+          if (user) {
+            await supabase.rpc('log_user_activity', {
+              user_id: user.id,
+              activity_type: 'QUESTIONNAIRE_COMPLETE',
+              details: {
+                questionnaire_id: questionnaire.id,
+                questionnaire_title: questionnaire.title,
+                responses_count: Object.keys(responses).length,
+                completion_rate: 100,
+                timestamp: new Date().toISOString()
+              }
+            });
+          }
+        } catch (error) {
+          console.error('Failed to log questionnaire completion:', error);
+        }
+      }, 0);
     }
   };
 

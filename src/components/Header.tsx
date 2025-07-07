@@ -59,7 +59,7 @@ const Header = ({
                 <User className="h-4 w-4 mr-2" />
                 {t('header.profile')}
               </Button>
-              {(role === 'investigator' || role === 'cro_sponsor' || role === 'admin') && (
+              {(role === 'cro_sponsor' || role === 'admin') && (
                 <Button 
                   variant="outline" 
                   size="sm" 
