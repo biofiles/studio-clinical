@@ -21,18 +21,16 @@ const Header = ({
   const { selectedStudy } = useStudy();
   const { signOut, getUserRole, user } = useAuth();
   const [userRole, setUserRole] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchUserRole = async () => {
-      if (user) {
+      if (user?.id) {
         const fetchedRole = await getUserRole();
         setUserRole(fetchedRole);
       }
-      setIsLoading(false);
     };
     fetchUserRole();
-  }, [getUserRole, user]);
+  }, [getUserRole, user?.id]);
 
   const handleSettings = () => {
     if (userRole === 'participant') {
@@ -73,10 +71,12 @@ const Header = ({
           </div>
 
             <div className="flex items-center space-x-3">
-              <Button variant="outline" size="sm" onClick={handleSettings} disabled={isLoading}>
-                <User className="h-4 w-4 mr-2" />
-                {isLoading ? '' : (userRole === 'participant' ? t('header.profile') : 'Configuración')}
-              </Button>
+              {userRole && (
+                <Button variant="outline" size="sm" onClick={handleSettings}>
+                  <User className="h-4 w-4 mr-2" />
+                  {userRole === 'participant' ? t('header.profile') : 'Configuración'}
+                </Button>
+              )}
               {(role === 'cro_sponsor' || role === 'admin') && (
                 <Button 
                   variant="outline" 
