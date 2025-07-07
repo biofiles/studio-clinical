@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Settings, LogOut } from "lucide-react";
+import { User, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
@@ -56,7 +56,7 @@ const Header = ({
 
           <div className="flex items-center space-x-3">
             <Button variant="outline" size="sm" onClick={handleSettings}>
-              <Settings className="h-4 w-4 mr-2" />
+              <User className="h-4 w-4 mr-2" />
               {t('header.profile')}
             </Button>
           </div>
