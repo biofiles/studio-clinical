@@ -485,7 +485,7 @@ const ParticipantDashboard = () => {
                     </div>
                     <div className="text-right space-y-1">
                       <div onClick={() => setShowProfile(true)} className="bg-white text-gray-800 px-3 py-2 rounded cursor-pointer hover:bg-gray-100 transition-colors">
-                        <div className="text-xs font-mono leading-tight">
+                        <div className="text-xs font-mono leading-tight text-center">
                           ||||||||||||||||<br />
                           {participantToken}<br />
                           ||||||||||||||||
