@@ -12,7 +12,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 const translations = {
   english: {
     // Header
-    'header.profile': 'Profile',
+    'header.settings': 'Settings',
     'header.logout': 'Logout',
     
     // Dashboard
@@ -147,9 +147,6 @@ const translations = {
     'details.gender': 'Gender',
     'details.ethnicity': 'Ethnicity',
     
-    // Materials
-    'materials.title': 'Materials',
-    
     // Settings
     'settings.title': 'Settings',
     'settings.subtitle': 'Manage your preferences and account',
@@ -163,10 +160,6 @@ const translations = {
     'settings.account.actions': 'Account Actions',
     'settings.sign.out': 'Sign Out',
     'settings.sign.out.note': 'You will be redirected to the login page',
-    'settings.moved.title': 'Settings Moved',
-    'settings.moved.description': 'All settings are now in your Profile page for easier access.',
-    'settings.go.to.profile': 'Go to Profile',
-    'profile.subtitle': 'Your participant information and study details',
     
     // Onboarding
     'onboarding.action.required': 'Action Required',
@@ -393,7 +386,7 @@ const translations = {
   },
   spanish: {
     // Header
-    'header.profile': 'Perfil',
+    'header.settings': 'Configuración',
     'header.logout': 'Cerrar Sesión',
     
     // Dashboard
@@ -506,9 +499,6 @@ const translations = {
     'profile.privacy.security': 'Privacidad y Seguridad',
     'profile.privacy.description': 'Sus datos están encriptados y protegidos según los estándares HIPAA. Todas las respuestas son desidentificadas para el análisis.',
     
-    // Materials
-    'materials.title': 'Materiales',
-    
     // Participant Details
     'details.title': 'Detalles del Participante',
     'details.alerts': 'Alertas',
@@ -542,10 +532,6 @@ const translations = {
     'settings.account.actions': 'Acciones de Cuenta',
     'settings.sign.out': 'Cerrar Sesión',
     'settings.sign.out.note': 'Serás redirigido a la página de inicio de sesión',
-    'settings.moved.title': 'Configuración Movida',
-    'settings.moved.description': 'Toda la configuración ahora está en tu página de Perfil para un acceso más fácil.',
-    'settings.go.to.profile': 'Ir al Perfil',
-    'profile.subtitle': 'Tu información de participante y detalles del estudio',
     
     // Onboarding
     'onboarding.action.required': 'Acción Requerida',

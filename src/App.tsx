@@ -18,7 +18,7 @@ import StudySelection from "./pages/StudySelection";
 import ParticipantDashboard from "./pages/ParticipantDashboard";
 import InvestigatorDashboard from "./pages/InvestigatorDashboard";
 import CROSponsorDashboard from "./pages/CROSponsorDashboard";
-import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
 
 const queryClient = new QueryClient();
 
@@ -55,9 +55,9 @@ const App = () => (
                       <CROSponsorDashboard />
                     </ProtectedRoute>
                   } />
-                  <Route path="/profile" element={
+                  <Route path="/settings" element={
                     <ProtectedRoute>
-                      <Profile />
+                      <Settings />
                     </ProtectedRoute>
                   } />
                   <Route path="/unauthorized" element={<Unauthorized />} />
