@@ -27,7 +27,7 @@ const Profile = () => {
   const [showProfile, setShowProfile] = useState(false);
   const participantToken = "PTK-9283-WZ1";
   const handleBack = () => {
-    navigate(-1);
+    navigate('/participant');
   };
   const handleExportPDF = () => {
     alert(t('profile.export.pdf'));
