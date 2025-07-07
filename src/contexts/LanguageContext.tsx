@@ -147,6 +147,9 @@ const translations = {
     'details.gender': 'Gender',
     'details.ethnicity': 'Ethnicity',
     
+    // Materials
+    'materials.title': 'Materials',
+    
     // Settings
     'settings.title': 'Settings',
     'settings.subtitle': 'Manage your preferences and account',
@@ -502,6 +505,9 @@ const translations = {
     'profile.export.pdf': 'Exportar Mis Respuestas (PDF)',
     'profile.privacy.security': 'Privacidad y Seguridad',
     'profile.privacy.description': 'Sus datos están encriptados y protegidos según los estándares HIPAA. Todas las respuestas son desidentificadas para el análisis.',
+    
+    // Materials
+    'materials.title': 'Materiales',
     
     // Participant Details
     'details.title': 'Detalles del Participante',
