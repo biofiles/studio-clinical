@@ -513,7 +513,6 @@ const ParticipantDashboard = () => {
               <Card className="bg-studio-surface border-studio-border">
                 <CardContent className="p-4">
                   <div className="flex items-center space-x-3">
-                    <Barcode className="h-8 w-8 text-studio-text-muted" />
                     <div className="flex-1">
                       <p className="font-medium text-studio-text">{t('participant.token')}</p>
                       <button onClick={() => setShowProfile(true)} className="text-lg font-mono bg-gray-100 px-3 py-1 rounded hover:bg-gray-200 transition-colors cursor-pointer border-2 border-dashed border-gray-300 hover:border-gray-400">
