@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -11,24 +10,28 @@ import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useOnboarding } from "@/contexts/OnboardingContext";
-
 const Profile = () => {
   const navigate = useNavigate();
-  const { language, setLanguage, t } = useLanguage();
-  const { signOut, user } = useAuth();
-  const { startOnboarding } = useOnboarding();
+  const {
+    language,
+    setLanguage,
+    t
+  } = useLanguage();
+  const {
+    signOut,
+    user
+  } = useAuth();
+  const {
+    startOnboarding
+  } = useOnboarding();
   const [showProfile, setShowProfile] = useState(false);
-
   const participantToken = "PTK-9283-WZ1";
-
   const handleBack = () => {
     navigate(-1);
   };
-
   const handleExportPDF = () => {
     alert(t('profile.export.pdf'));
   };
-
   const handleLogout = async () => {
     try {
       await signOut();
@@ -37,24 +40,16 @@ const Profile = () => {
       console.error('Error during logout:', error);
     }
   };
-
   const handleStartTutorial = () => {
     startOnboarding(user?.role);
     navigate(-1);
   };
-
-  return (
-    <div className="min-h-screen bg-studio-bg">
+  return <div className="min-h-screen bg-studio-bg">
       <Header />
 
       <main className="p-6 max-w-2xl mx-auto">
         <div className="flex items-center space-x-4 mb-6">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleBack}
-            className="flex items-center space-x-2"
-          >
+          <Button variant="outline" size="sm" onClick={handleBack} className="flex items-center space-x-2">
             <ArrowLeft className="h-4 w-4" />
             <span>{t('settings.back')}</span>
           </Button>
@@ -128,19 +123,7 @@ const Profile = () => {
             {t('profile.export.pdf')}
           </Button>
 
-          <Card className="bg-blue-50 border-blue-200">
-            <CardContent className="p-4">
-              <div className="flex items-start space-x-3">
-                <Shield className="h-5 w-5 text-blue-600 mt-0.5" />
-                <div>
-                  <p className="font-medium text-blue-800">{t('profile.privacy.security')}</p>
-                  <p className="text-xs text-blue-700 mt-1">
-                    {t('profile.privacy.description')}
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          
 
           {/* Settings Section */}
           <Card className="bg-studio-surface border-studio-border">
@@ -187,11 +170,7 @@ const Profile = () => {
                   <p className="text-xs text-studio-text-muted mb-3">
                     {t('settings.tutorial.description')}
                   </p>
-                  <Button
-                    variant="outline"
-                    onClick={handleStartTutorial}
-                    className="flex items-center space-x-2"
-                  >
+                  <Button variant="outline" onClick={handleStartTutorial} className="flex items-center space-x-2">
                     <Play className="h-4 w-4" />
                     <span>{t('settings.start.tutorial')}</span>
                   </Button>
@@ -216,11 +195,7 @@ const Profile = () => {
                   <p className="text-xs text-studio-text-muted mb-3">
                     {t('settings.sign.out.note')}
                   </p>
-                  <Button
-                    variant="outline"
-                    onClick={handleLogout}
-                    className="flex items-center space-x-2 text-red-600 border-red-200 hover:bg-red-50"
-                  >
+                  <Button variant="outline" onClick={handleLogout} className="flex items-center space-x-2 text-red-600 border-red-200 hover:bg-red-50">
                     <LogOut className="h-4 w-4" />
                     <span>{t('settings.sign.out')}</span>
                   </Button>
@@ -232,8 +207,6 @@ const Profile = () => {
       </main>
 
       <UserProfileDialog open={showProfile} onOpenChange={setShowProfile} />
-    </div>
-  );
+    </div>;
 };
-
 export default Profile;
