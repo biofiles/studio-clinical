@@ -515,84 +515,13 @@ const ParticipantDashboard = () => {
           </TabsContent>
 
           <TabsContent value="settings" className="space-y-4">
-            <h3 className="text-lg font-medium text-studio-text">{t('settings.title')}</h3>
-            
-            <div className="space-y-6">
-              <Card className="bg-studio-surface border-studio-border">
-                <CardContent className="p-4 space-y-4">
-                  <div className="flex items-center space-x-2 mb-3">
-                    <Globe className="h-5 w-5" />
-                    <span className="font-medium text-studio-text">{t('settings.language.preferences')}</span>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-studio-text">
-                      {t('settings.display.language')}
-                    </label>
-                    <Select value={language} onValueChange={setLanguage}>
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Select language" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="english">English</SelectItem>
-                        <SelectItem value="spanish">Español (Spanish)</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <p className="text-xs text-studio-text-muted">
-                      {t('settings.language.note')}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-studio-surface border-studio-border">
-                <CardContent className="p-4 space-y-4">
-                  <div className="flex items-center space-x-2 mb-3">
-                    <Play className="h-5 w-5" />
-                    <span className="font-medium text-studio-text">{t('settings.tutorial.section')}</span>
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-medium text-studio-text mb-2">
-                      {t('settings.start.tutorial')}
-                    </h4>
-                    <p className="text-xs text-studio-text-muted mb-3">
-                      {t('settings.tutorial.description')}
-                    </p>
-                    <Button
-                      variant="outline"
-                      onClick={handleStartTutorial}
-                      className="flex items-center space-x-2"
-                    >
-                      <Play className="h-4 w-4" />
-                      <span>{t('settings.start.tutorial')}</span>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-studio-surface border-studio-border">
-                <CardContent className="p-4 space-y-4">
-                  <div className="flex items-center space-x-2 mb-3">
-                    <LogOut className="h-5 w-5" />
-                    <span className="font-medium text-studio-text">{t('settings.account.actions')}</span>
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-medium text-studio-text mb-2">
-                      {t('settings.sign.out')}
-                    </h4>
-                    <p className="text-xs text-studio-text-muted mb-3">
-                      {t('settings.sign.out.note')}
-                    </p>
-                    <Button
-                      variant="outline"
-                      onClick={handleLogout}
-                      className="flex items-center space-x-2 text-red-600 border-red-200 hover:bg-red-50"
-                    >
-                      <LogOut className="h-4 w-4" />
-                      <span>{t('settings.sign.out')}</span>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+            <div className="text-center py-8">
+              <Settings className="h-12 w-12 mx-auto text-studio-text-muted mb-4" />
+              <h3 className="text-lg font-medium text-studio-text mb-2">{t('settings.moved.title')}</h3>
+              <p className="text-studio-text-muted mb-4">{t('settings.moved.description')}</p>
+              <Button variant="studio" onClick={() => navigate('/profile')}>
+                {t('settings.go.to.profile')}
+              </Button>
             </div>
           </TabsContent>
         </Tabs>

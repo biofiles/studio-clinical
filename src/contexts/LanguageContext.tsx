@@ -160,6 +160,10 @@ const translations = {
     'settings.account.actions': 'Account Actions',
     'settings.sign.out': 'Sign Out',
     'settings.sign.out.note': 'You will be redirected to the login page',
+    'settings.moved.title': 'Settings Moved',
+    'settings.moved.description': 'All settings are now in your Profile page for easier access.',
+    'settings.go.to.profile': 'Go to Profile',
+    'profile.subtitle': 'Your participant information and study details',
     
     // Onboarding
     'onboarding.action.required': 'Action Required',
@@ -532,6 +536,10 @@ const translations = {
     'settings.account.actions': 'Acciones de Cuenta',
     'settings.sign.out': 'Cerrar Sesión',
     'settings.sign.out.note': 'Serás redirigido a la página de inicio de sesión',
+    'settings.moved.title': 'Configuración Movida',
+    'settings.moved.description': 'Toda la configuración ahora está en tu página de Perfil para un acceso más fácil.',
+    'settings.go.to.profile': 'Ir al Perfil',
+    'profile.subtitle': 'Tu información de participante y detalles del estudio',
     
     // Onboarding
     'onboarding.action.required': 'Acción Requerida',
