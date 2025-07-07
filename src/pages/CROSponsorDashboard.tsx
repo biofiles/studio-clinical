@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Header from "@/components/Header";
 import StudyDropdown from "@/components/StudyDropdown";
-import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, FileText, Calendar, Users, Settings, Download, Activity, Database } from "lucide-react";
+import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, FileText, Calendar, Users, Settings, Download } from "lucide-react";
 import FHIRExportDialog from "@/components/FHIRExportDialog";
 import StudySignupsReportDialog from "@/components/StudySignupsReportDialog";
-import StudyResultsSignup from "@/components/StudyResultsSignup";
-import { AuditTrailDashboard } from "@/components/AuditTrailDashboard";
-import ParticipantList from "@/components/ParticipantList";
 import { toast } from "sonner";
 import { useStudy } from "@/contexts/StudyContext";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -829,143 +826,6 @@ const CROSponsorDashboard = () => {
                 </div>
               </CardContent>
             </Card>
-          </TabsContent>
-
-          {/* Reports Tab */}
-          <TabsContent value="reports" className="space-y-6">
-            <div className="flex justify-between items-center">
-              <div>
-                <h2 className="text-2xl font-bold text-studio-text-primary">Reportes y Auditoría</h2>
-                <p className="text-studio-text-muted">Reportes de compliance y registro de auditoría completo</p>
-              </div>
-            </div>
-
-            <Tabs defaultValue="audit-trail" className="space-y-4">
-              <TabsList>
-                <TabsTrigger value="audit-trail" className="flex items-center gap-2">
-                  <Shield className="h-4 w-4" />
-                  Audit Trail
-                </TabsTrigger>
-                <TabsTrigger value="compliance" className="flex items-center gap-2">
-                  <FileText className="h-4 w-4" />
-                  Compliance
-                </TabsTrigger>
-                <TabsTrigger value="signups" className="flex items-center gap-2">
-                  <Users className="h-4 w-4" />
-                  Signups
-                </TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="audit-trail">
-                <AuditTrailDashboard />
-              </TabsContent>
-
-              <TabsContent value="compliance">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-sm flex items-center gap-2">
-                        <Shield className="h-4 w-4" />
-                        Eventos de Seguridad
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="text-2xl font-bold text-orange-600">3</div>
-                      <p className="text-xs text-studio-text-muted">Últimos 30 días</p>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-sm flex items-center gap-2">
-                        <Activity className="h-4 w-4" />
-                        Actividad Sospechosa
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="text-2xl font-bold text-red-600">0</div>
-                      <p className="text-xs text-studio-text-muted">Sin alertas activas</p>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-sm flex items-center gap-2">
-                        <Database className="h-4 w-4" />
-                        Integridad de Datos
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="text-2xl font-bold text-green-600">99.8%</div>
-                      <p className="text-xs text-studio-text-muted">Última verificación</p>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                <Card className="mt-6">
-                  <CardHeader>
-                    <CardTitle>Reportes de Compliance</CardTitle>
-                    <CardDescription>
-                      Generar reportes automáticos para auditorías regulatorias
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <Button className="flex items-center gap-2 h-auto p-4 justify-start">
-                        <div className="flex flex-col items-start">
-                          <span className="font-medium">Reporte Mensual de Auditoría</span>
-                          <span className="text-xs text-studio-text-muted">Actividades del último mes</span>
-                        </div>
-                      </Button>
-                      
-                      <Button variant="outline" className="flex items-center gap-2 h-auto p-4 justify-start">
-                        <div className="flex flex-col items-start">
-                          <span className="font-medium">Reporte de Participantes</span>
-                          <span className="text-xs text-studio-text-muted">Estado y compliance de participantes</span>
-                        </div>
-                      </Button>
-                      
-                      <Button variant="outline" className="flex items-center gap-2 h-auto p-4 justify-start">
-                        <div className="flex flex-col items-start">
-                          <span className="font-medium">Reporte de Seguridad</span>
-                          <span className="text-xs text-studio-text-muted">Eventos de seguridad y accesos</span>
-                        </div>
-                      </Button>
-                      
-                      <Button variant="outline" className="flex items-center gap-2 h-auto p-4 justify-start">
-                        <div className="flex flex-col items-start">
-                          <span className="font-medium">Reporte Regulatorio</span>
-                          <span className="text-xs text-studio-text-muted">Para envío a autoridades</span>
-                        </div>
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-
-              <TabsContent value="signups">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Gestión de Signups para Resultados</CardTitle>
-                    <CardDescription>
-                      Administrar participantes registrados para recibir resultados del estudio
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center">
-                        <div className="text-sm text-studio-text-muted">
-                          Participantes registrados para resultados
-                        </div>
-                        <StudySignupsReportDialog />
-                      </div>
-                      
-                      <StudyResultsSignup />
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </Tabs>
           </TabsContent>
         </Tabs>
       </main>

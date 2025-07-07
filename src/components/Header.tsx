@@ -1,11 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { User, LogOut, Shield } from "lucide-react";
+import { User, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
 import { useAuth } from "@/contexts/AuthContext";
 import StudyDropdown from "@/components/StudyDropdown";
-import { useState, useEffect } from "react";
 
 interface HeaderProps {
   role?: string;
@@ -19,25 +18,10 @@ const Header = ({
   const navigate = useNavigate();
   const { t } = useLanguage();
   const { selectedStudy } = useStudy();
-  const { signOut, getUserRole, user } = useAuth();
-  const [userRole, setUserRole] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchUserRole = async () => {
-      if (user?.id) {
-        const fetchedRole = await getUserRole();
-        setUserRole(fetchedRole);
-      }
-    };
-    fetchUserRole();
-  }, [getUserRole, user?.id]);
+  const { signOut } = useAuth();
 
   const handleSettings = () => {
-    if (userRole === 'participant') {
-      navigate('/profile');
-    } else {
-      navigate('/settings');
-    }
+    navigate('/profile');
   };
 
   const handleLogout = async () => {
@@ -70,24 +54,12 @@ const Header = ({
             </h1>
           </div>
 
-            <div className="flex items-center space-x-3">
-              {userRole && (
-                <Button variant="outline" size="sm" onClick={handleSettings}>
-                  <User className="h-4 w-4 mr-2" />
-                  {userRole === 'participant' ? t('header.profile') : 'Configuración'}
-                </Button>
-              )}
-              {(role === 'cro_sponsor' || role === 'admin') && (
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={() => navigate('/audit-trail')}
-                >
-                  <Shield className="h-4 w-4 mr-2" />
-                  Audit Trail
-                </Button>
-              )}
-            </div>
+          <div className="flex items-center space-x-3">
+            <Button variant="outline" size="sm" onClick={handleSettings}>
+              <User className="h-4 w-4 mr-2" />
+              {t('header.profile')}
+            </Button>
+          </div>
         </div>
       </div>
       

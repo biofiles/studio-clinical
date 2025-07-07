@@ -41,9 +41,8 @@ const Profile = () => {
     }
   };
   const handleStartTutorial = () => {
-    // Navigate to participant dashboard first, then start onboarding
-    navigate('/participant');
-    setTimeout(() => startOnboarding('participant'), 500);
+    startOnboarding(user?.role);
+    navigate(-1);
   };
   return <div className="min-h-screen bg-studio-bg">
       <Header />

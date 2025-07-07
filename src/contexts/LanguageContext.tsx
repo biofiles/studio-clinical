@@ -246,7 +246,6 @@ const translations = {
     'econsent.status.superseded': 'Superseded',
     'econsent.status.pending': 'Pending',
     
-    
     // Common
     'common.welcome': 'Welcome',
     'common.loading': 'Loading...',

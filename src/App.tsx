@@ -19,8 +19,6 @@ import ParticipantDashboard from "./pages/ParticipantDashboard";
 import InvestigatorDashboard from "./pages/InvestigatorDashboard";
 import CROSponsorDashboard from "./pages/CROSponsorDashboard";
 import Profile from "./pages/Profile";
-import Settings from "./pages/Settings";
-import AuditTrail from "./pages/AuditTrail";
 
 const queryClient = new QueryClient();
 
@@ -60,16 +58,6 @@ const App = () => (
                   <Route path="/profile" element={
                     <ProtectedRoute>
                       <Profile />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/settings" element={
-                    <ProtectedRoute>
-                      <Settings />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/audit-trail" element={
-                    <ProtectedRoute>
-                      <AuditTrail />
                     </ProtectedRoute>
                   } />
                   <Route path="/unauthorized" element={<Unauthorized />} />
