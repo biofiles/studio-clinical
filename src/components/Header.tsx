@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { User, LogOut } from "lucide-react";
+import { User, LogOut, Shield } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
@@ -54,12 +54,22 @@ const Header = ({
             </h1>
           </div>
 
-          <div className="flex items-center space-x-3">
-            <Button variant="outline" size="sm" onClick={handleSettings}>
-              <User className="h-4 w-4 mr-2" />
-              {t('header.profile')}
-            </Button>
-          </div>
+            <div className="flex items-center space-x-3">
+              <Button variant="outline" size="sm" onClick={handleSettings}>
+                <User className="h-4 w-4 mr-2" />
+                {t('header.profile')}
+              </Button>
+              {(role === 'investigator' || role === 'cro_sponsor' || role === 'admin') && (
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={() => navigate('/audit-trail')}
+                >
+                  <Shield className="h-4 w-4 mr-2" />
+                  Audit Trail
+                </Button>
+              )}
+            </div>
         </div>
       </div>
       

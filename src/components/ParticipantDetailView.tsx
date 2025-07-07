@@ -5,6 +5,9 @@ import { Separator } from "@/components/ui/separator";
 import { User, Calendar, FileText, Activity, AlertTriangle, Signature, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
+import { ParticipantAuditTrail } from "./ParticipantAuditTrail";
+import { useAuditLog } from "@/hooks/useAuditLog";
+import { useEffect } from "react";
 
 interface ParticipantDetailViewProps {
   open: boolean;
@@ -14,6 +17,17 @@ interface ParticipantDetailViewProps {
 
 const ParticipantDetailView = ({ open, onOpenChange, participantId }: ParticipantDetailViewProps) => {
   const { t } = useLanguage();
+  const { logParticipantAction } = useAuditLog();
+
+  // Log when participant detail is viewed
+  useEffect(() => {
+    if (open && participantId) {
+      logParticipantAction('VIEW', participantId, {
+        action: 'view_participant_details',
+        timestamp: new Date().toISOString()
+      });
+    }
+  }, [open, participantId, logParticipantAction]);
   const { selectedStudy } = useStudy();
 
   if (!participantId || !selectedStudy) return null;
@@ -222,7 +236,15 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card>
               <CardHeader>
-                <CardTitle className="text-sm">{t('details.basic.info')}</CardTitle>
+                <div className="flex justify-between items-center">
+                  <CardTitle className="text-sm">{t('details.basic.info')}</CardTitle>
+                  <div className="flex gap-2">
+                    <ParticipantAuditTrail 
+                      participantId={participantId || ''} 
+                      participantName={participantDetails.patientId}
+                    />
+                  </div>
+                </div>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex justify-between">
