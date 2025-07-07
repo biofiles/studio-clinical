@@ -6,30 +6,33 @@ import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
-import UserProfileDialog from "@/components/UserProfileDialog";
 import CalendarView from "@/components/CalendarView";
 import QuestionnairesView from "@/components/QuestionnairesView";
 import AIChatbot from "@/components/AIChatbot";
 import EConsentDialog from "@/components/EConsentDialog";
-import StudyResultsSignup from "@/components/StudyResultsSignup";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, MapPin, Stethoscope, Barcode, Signature, Building, Settings, Scale } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useOnboarding } from "@/contexts/OnboardingContext";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Calendar, FileText, Bell, Activity, MessageCircle, Clock, CheckCircle, MapPin, Stethoscope, Signature, Scale, Settings, Globe, LogOut, Play, Folder, Shield } from "lucide-react";
 const ParticipantDashboard = () => {
   const {
     t,
-    language
+    language,
+    setLanguage
   } = useLanguage();
   const navigate = useNavigate();
+  const { signOut, user } = useAuth();
+  const { startOnboarding } = useOnboarding();
   const [showCalendar, setShowCalendar] = useState(false);
   const [showQuestionnaires, setShowQuestionnaires] = useState(false);
-  const [showProfile, setShowProfile] = useState(false);
   const [showChatbot, setShowChatbot] = useState(false);
   const [showEConsent, setShowEConsent] = useState(false);
+  const [showMaterials, setShowMaterials] = useState(false);
   const [eConsentMode, setEConsentMode] = useState<'sign' | 'view'>('sign');
   const [surveyCompleted, setSurveyCompleted] = useState(false);
   const studyProgress = 65;
   const daysLeft = 30;
-  const participantToken = "PTK-9283-WZ1";
   const upcomingActivities = [{
     date: t('common.next'),
     activity: t('activity.weekly.survey'),
@@ -57,8 +60,17 @@ const ParticipantDashboard = () => {
     setSurveyCompleted(true);
     alert(t('activity.survey.completed'));
   };
-  const handleExportPDF = () => {
-    alert(t('activity.pdf.export'));
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      navigate('/');
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  };
+
+  const handleStartTutorial = () => {
+    startOnboarding(user?.role);
   };
   const getActivityIcon = (type: string) => {
     switch (type) {
@@ -131,9 +143,13 @@ const ParticipantDashboard = () => {
               <MapPin className="h-5 w-5 sm:h-4 sm:w-4" />
               <span className="text-xs sm:text-xs">{t('contact.info')}</span>
             </TabsTrigger>
-            <TabsTrigger value="profile" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
-              <User className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-xs">{t('participant.profile')}</span>
+            <TabsTrigger value="materials" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
+              <Folder className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-xs sm:text-xs">{t('materials.title')}</span>
+            </TabsTrigger>
+            <TabsTrigger value="settings" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
+              <Settings className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="text-xs sm:text-xs">{t('settings.title')}</span>
             </TabsTrigger>
           </TabsList>
 
@@ -467,84 +483,113 @@ const ParticipantDashboard = () => {
             </div>
           </TabsContent>
 
-          <TabsContent value="profile" className="space-y-3">
-            <h3 className="text-base font-medium text-studio-text">{t('participant.profile')}</h3>
-            
-            <div className="space-y-4">
-              {/* Patient ID Card */}
-              <Card className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between">
-                    <div className="space-y-2">
-                      <h4 className="text-lg font-bold">STUDIO Clinical Trial</h4>
-                      <p className="text-sm opacity-90">Patient ID Card</p>
-                      <div className="space-y-1">
-                        <p className="text-xs opacity-75">Protocolo: NVS-4578-301</p>
-                        <p className="text-xs opacity-75">Site: Metro General Hospital</p>
-                      </div>
-                    </div>
-                    <div className="text-right space-y-1">
-                      <div onClick={() => setShowProfile(true)} className="bg-white text-gray-800 px-3 py-2 rounded cursor-pointer hover:bg-gray-100 transition-colors">
-                        <div className="text-xs font-mono leading-tight">
-                          ||||||||||||||||<br />
-                          {participantToken}<br />
-                          ||||||||||||||||
-                        </div>
-                      </div>
-                      <p className="text-xs opacity-75">{t('contact.tap.for.details')}</p>
-                    </div>
-                  </div>
-                  <div className="mt-4 pt-3 border-t border-white/20">
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <p className="text-xs opacity-75">{t('contact.unblinding.emergency')}</p>
-                        <p className="text-sm font-semibold">24/7: +54 11 987-654-321</p>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-xs opacity-75">{t('contact.issued')}</p>
-                        <p className="text-xs">15 Oct 2024</p>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Participant Token Section */}
-              <Card className="bg-studio-surface border-studio-border">
-                <CardContent className="p-4">
-                  <div className="flex items-center space-x-3">
-                    <Barcode className="h-8 w-8 text-studio-text-muted" />
-                    <div className="flex-1">
-                      <p className="font-medium text-studio-text">{t('participant.token')}</p>
-                      <button onClick={() => setShowProfile(true)} className="text-lg font-mono bg-gray-100 px-3 py-1 rounded hover:bg-gray-200 transition-colors cursor-pointer border-2 border-dashed border-gray-300 hover:border-gray-400">
-                        {participantToken}
-                      </button>
-                      <p className="text-xs text-studio-text-muted mt-1">
-                        {t('contact.token.description')}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              
-              <StudyResultsSignup variant="participant" />
-              
-              <Button variant="studio" className="w-full justify-start" onClick={handleExportPDF}>
-                <Download className="h-4 w-4 mr-2" />
-                {t('profile.export.pdf')}
+          <TabsContent value="materials" className="space-y-4">
+            <div className="flex flex-col space-y-2">
+              <h3 className="text-lg sm:text-xl font-medium text-studio-text">{t('materials.title')}</h3>
+              <Button variant="studio" size="sm" onClick={() => setShowMaterials(true)} className="w-full text-sm">
+                <Folder className="h-4 w-4 mr-2" />
+                {t('materials.view.all')}
               </Button>
+            </div>
 
-              <Card className="bg-blue-50 border-blue-200">
-                <CardContent className="p-4">
-                  <div className="flex items-start space-x-3">
-                    <Shield className="h-5 w-5 text-blue-600 mt-0.5" />
-                    <div>
-                      <p className="font-medium text-blue-800">{t('profile.privacy.security')}</p>
-                      <p className="text-xs text-blue-700 mt-1">
-                        {t('profile.privacy.description')}
-                      </p>
-                    </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <Card className="bg-[hsl(var(--progress-info))]/5 border-[hsl(var(--progress-info))]/20">
+                <CardContent className="p-4 text-center">
+                  <div className="text-2xl sm:text-3xl font-bold text-[hsl(var(--progress-info))]">8</div>
+                  <div className="text-sm sm:text-base text-[hsl(var(--progress-info))]/80">{t('materials.available')}</div>
+                </CardContent>
+              </Card>
+              <Card className="bg-[hsl(var(--progress-success))]/5 border-[hsl(var(--progress-success))]/20">
+                <CardContent className="p-4 text-center">
+                  <div className="text-2xl sm:text-3xl font-bold text-[hsl(var(--progress-success))]">3</div>
+                  <div className="text-sm sm:text-base text-[hsl(var(--progress-success))]/80">{t('materials.new')}</div>
+                </CardContent>
+              </Card>
+              <Card className="bg-[hsl(var(--progress-primary))]/5 border-[hsl(var(--progress-primary))]/20 col-span-2 sm:col-span-1">
+                <CardContent className="p-4 text-center">
+                  <div className="text-2xl sm:text-3xl font-bold text-[hsl(var(--progress-primary))]">5</div>
+                  <div className="text-sm sm:text-base text-[hsl(var(--progress-primary))]/80">{t('materials.videos')}</div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="settings" className="space-y-4">
+            <h3 className="text-lg font-medium text-studio-text">{t('settings.title')}</h3>
+            
+            <div className="space-y-6">
+              <Card className="bg-studio-surface border-studio-border">
+                <CardContent className="p-4 space-y-4">
+                  <div className="flex items-center space-x-2 mb-3">
+                    <Globe className="h-5 w-5" />
+                    <span className="font-medium text-studio-text">{t('settings.language.preferences')}</span>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-studio-text">
+                      {t('settings.display.language')}
+                    </label>
+                    <Select value={language} onValueChange={setLanguage}>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select language" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="english">English</SelectItem>
+                        <SelectItem value="spanish">Español (Spanish)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <p className="text-xs text-studio-text-muted">
+                      {t('settings.language.note')}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-studio-surface border-studio-border">
+                <CardContent className="p-4 space-y-4">
+                  <div className="flex items-center space-x-2 mb-3">
+                    <Play className="h-5 w-5" />
+                    <span className="font-medium text-studio-text">{t('settings.tutorial.section')}</span>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium text-studio-text mb-2">
+                      {t('settings.start.tutorial')}
+                    </h4>
+                    <p className="text-xs text-studio-text-muted mb-3">
+                      {t('settings.tutorial.description')}
+                    </p>
+                    <Button
+                      variant="outline"
+                      onClick={handleStartTutorial}
+                      className="flex items-center space-x-2"
+                    >
+                      <Play className="h-4 w-4" />
+                      <span>{t('settings.start.tutorial')}</span>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-studio-surface border-studio-border">
+                <CardContent className="p-4 space-y-4">
+                  <div className="flex items-center space-x-2 mb-3">
+                    <LogOut className="h-5 w-5" />
+                    <span className="font-medium text-studio-text">{t('settings.account.actions')}</span>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium text-studio-text mb-2">
+                      {t('settings.sign.out')}
+                    </h4>
+                    <p className="text-xs text-studio-text-muted mb-3">
+                      {t('settings.sign.out.note')}
+                    </p>
+                    <Button
+                      variant="outline"
+                      onClick={handleLogout}
+                      className="flex items-center space-x-2 text-red-600 border-red-200 hover:bg-red-50"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      <span>{t('settings.sign.out')}</span>
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
@@ -563,8 +608,6 @@ const ParticipantDashboard = () => {
       <CalendarView open={showCalendar} onOpenChange={setShowCalendar} activities={upcomingActivities} />
       
       <QuestionnairesView open={showQuestionnaires} onOpenChange={setShowQuestionnaires} />
-
-      <UserProfileDialog open={showProfile} onOpenChange={setShowProfile} />
 
       <AIChatbot open={showChatbot} onOpenChange={setShowChatbot} />
 

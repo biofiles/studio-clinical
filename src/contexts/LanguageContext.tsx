@@ -12,7 +12,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 const translations = {
   english: {
     // Header
-    'header.settings': 'Settings',
+    'header.profile': 'Profile',
     'header.logout': 'Logout',
     
     // Dashboard
@@ -386,7 +386,7 @@ const translations = {
   },
   spanish: {
     // Header
-    'header.settings': 'Configuración',
+    'header.profile': 'Perfil',
     'header.logout': 'Cerrar Sesión',
     
     // Dashboard

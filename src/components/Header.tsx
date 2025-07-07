@@ -21,7 +21,7 @@ const Header = ({
   const { signOut } = useAuth();
 
   const handleSettings = () => {
-    navigate('/settings');
+    navigate('/profile');
   };
 
   const handleLogout = async () => {
@@ -57,7 +57,7 @@ const Header = ({
           <div className="flex items-center space-x-3">
             <Button variant="outline" size="sm" onClick={handleSettings}>
               <Settings className="h-4 w-4 mr-2" />
-              {t('header.settings')}
+              {t('header.profile')}
             </Button>
           </div>
         </div>
