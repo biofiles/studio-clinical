@@ -7,6 +7,7 @@ import { Progress } from "@/components/ui/progress";
 import { useState } from "react";
 import { FileText, Clock, CheckCircle, AlertCircle, RotateCcw } from "lucide-react";
 import QuestionnaireForm from "./QuestionnaireForm";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface QuestionnairesViewProps {
   open: boolean;
@@ -14,10 +15,11 @@ interface QuestionnairesViewProps {
 }
 
 const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => {
+  const { t } = useLanguage();
   const [questionnaires, setQuestionnaires] = useState([
     {
       id: 1,
-      title: "Daily Symptom Diary",
+      title: t('questionnaire.daily.symptom.diary'),
       description: "Record your daily symptoms and side effects",
       status: "pending",
       dueDate: "Today",
@@ -48,7 +50,7 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
     },
     {
       id: 2,
-      title: "Weekly Quality of Life Assessment",
+      title: t('questionnaire.weekly.qol.assessment'),
       description: "Assess your overall well-being and quality of life",
       status: "pending",
       dueDate: "Tomorrow",
@@ -84,7 +86,7 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
     },
     {
       id: 3,
-      title: "Medication Adherence Survey",
+      title: t('questionnaire.medication.adherence'),
       description: "Report on your medication compliance",
       status: "in-progress",
       dueDate: "Dec 16",
@@ -108,7 +110,7 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
     },
     {
       id: 4,
-      title: "Monthly Health Survey",
+      title: t('questionnaire.monthly.health'),
       description: "Comprehensive health and wellness questionnaire",
       status: "completed",
       dueDate: "Completed Nov 20",
@@ -179,7 +181,7 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
           <DialogHeader>
             <DialogTitle className="flex items-center space-x-2">
               <FileText className="h-5 w-5" />
-              <span>Your Questionnaires</span>
+              <span>{t('questionnaire.your.surveys')}</span>
             </DialogTitle>
           </DialogHeader>
           
@@ -191,7 +193,7 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
                   <div className="text-2xl font-bold text-[hsl(var(--progress-info))]">
                     {questionnaires.filter(q => q.status === 'pending').length}
                   </div>
-                  <div className="text-sm text-[hsl(var(--progress-info))]/80">Pending</div>
+                  <div className="text-sm text-[hsl(var(--progress-info))]/80">{t('questionnaire.pending')}</div>
                 </CardContent>
               </Card>
               <Card className="bg-[hsl(var(--progress-accent))]/5 border-[hsl(var(--progress-accent))]/20">
@@ -199,7 +201,7 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
                   <div className="text-2xl font-bold text-[hsl(var(--progress-accent))]">
                     {questionnaires.filter(q => q.status === 'in-progress').length}
                   </div>
-                  <div className="text-sm text-[hsl(var(--progress-accent))]/80">In Progress</div>
+                  <div className="text-sm text-[hsl(var(--progress-accent))]/80">{t('questionnaire.status.in.progress')}</div>
                 </CardContent>
               </Card>
               <Card className="bg-[hsl(var(--progress-success))]/5 border-[hsl(var(--progress-success))]/20">
@@ -207,7 +209,7 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
                   <div className="text-2xl font-bold text-[hsl(var(--progress-success))]">
                     {questionnaires.filter(q => q.status === 'completed').length}
                   </div>
-                  <div className="text-sm text-[hsl(var(--progress-success))]/80">Completed</div>
+                  <div className="text-sm text-[hsl(var(--progress-success))]/80">{t('questionnaire.completed')}</div>
                 </CardContent>
               </Card>
             </div>
@@ -221,12 +223,12 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
                       <div className="flex-1">
                         <div className="flex items-center space-x-2 mb-2">
                           <h3 className="font-medium text-studio-text">{questionnaire.title}</h3>
-                          <span className={`px-2 py-1 text-xs rounded border ${getStatusColor(questionnaire.status)}`}>
-                            <div className="flex items-center space-x-1">
-                              {getStatusIcon(questionnaire.status)}
-                              <span className="capitalize">{questionnaire.status.replace('-', ' ')}</span>
-                            </div>
-                          </span>
+                           <span className={`px-2 py-1 text-xs rounded border ${getStatusColor(questionnaire.status)}`}>
+                             <div className="flex items-center space-x-1">
+                               {getStatusIcon(questionnaire.status)}
+                               <span className="capitalize">{t(`questionnaire.status.${questionnaire.status.replace('-', '.')}`)}</span>
+                             </div>
+                           </span>
                         </div>
                         
                         <p className="text-sm text-studio-text-muted mb-3">
@@ -238,12 +240,12 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
                           <span>Est. time: {questionnaire.estimatedTime}</span>
                         </div>
                         
-                        {questionnaire.status === 'in-progress' && (
-                          <div className="mt-3">
-                            <div className="flex justify-between text-xs mb-1">
-                              <span>Progress</span>
-                              <span>{questionnaire.progress}%</span>
-                            </div>
+                         {questionnaire.status === 'in-progress' && (
+                           <div className="mt-3">
+                             <div className="flex justify-between text-xs mb-1">
+                               <span>{t('questionnaire.list.progress')}</span>
+                               <span>{questionnaire.progress}%</span>
+                             </div>
                             <Progress value={questionnaire.progress} className="h-2" />
                           </div>
                         )}
@@ -255,19 +257,19 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
                             variant="default"
                             size="sm"
                             onClick={() => handleStartQuestionnaire(questionnaire)}
-                          >
-                            {questionnaire.status === 'pending' ? 'Start' : 'Continue'}
-                          </Button>
+                           >
+                             {questionnaire.status === 'pending' ? t('questionnaire.complete.now') : t('questionnaire.form.next')}
+                           </Button>
                         )}
                         {questionnaire.status === 'completed' && (
                           <Button
                             variant="outline"
                             size="sm"
                             onClick={() => handleRetakeQuestionnaire(questionnaire)}
-                          >
-                            <RotateCcw className="h-4 w-4 mr-1" />
-                            Retake
-                          </Button>
+                           >
+                             <RotateCcw className="h-4 w-4 mr-1" />
+                             {t('questionnaire.form.complete')}
+                           </Button>
                         )}
                       </div>
                     </div>
@@ -277,8 +279,7 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
             </div>
 
             <div className="text-xs text-studio-text-muted bg-blue-50 p-3 rounded">
-              <strong>Privacy Notice:</strong> All questionnaire responses are encrypted and de-identified. 
-              Your data is processed in compliance with HIPAA, 21 CFR Part 11, and ICH-GCP standards.
+              <strong>{t('questionnaire.list.data.privacy')}:</strong> {t('questionnaire.list.privacy.note')}
             </div>
           </div>
         </DialogContent>

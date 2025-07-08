@@ -10,6 +10,7 @@ import AIChatbot from "@/components/AIChatbot";
 import CalendarManagement from "@/components/CalendarManagement";
 import BarcodeScanner from "@/components/BarcodeScanner";
 import FHIRExportDialog from "@/components/FHIRExportDialog";
+import InvestigatorQuestionnaires from "@/components/InvestigatorQuestionnaires";
 import StudyResultsSignup from "@/components/StudyResultsSignup";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
@@ -21,6 +22,7 @@ const InvestigatorDashboard = () => {
   const [showCalendarManagement, setShowCalendarManagement] = useState(false);
   const [showBarcodeScanner, setShowBarcodeScanner] = useState(false);
   const [showFHIRExport, setShowFHIRExport] = useState(false);
+  const [showQuestionnaires, setShowQuestionnaires] = useState(false);
   const { t } = useLanguage();
   const { selectedStudy } = useStudy();
   const navigate = useNavigate();
@@ -106,7 +108,7 @@ const InvestigatorDashboard = () => {
   };
 
   const handleQuestionnaires = () => {
-    alert("Opening questionnaire management interface...");
+    setShowQuestionnaires(true);
   };
 
   return (
@@ -366,8 +368,13 @@ const InvestigatorDashboard = () => {
       />
 
       <FHIRExportDialog 
-        open={showFHIRExport}
-        onOpenChange={setShowFHIRExport}
+        open={showFHIRExport} 
+        onOpenChange={setShowFHIRExport} 
+      />
+
+      <InvestigatorQuestionnaires
+        open={showQuestionnaires}
+        onOpenChange={setShowQuestionnaires}
       />
     </div>
   );
