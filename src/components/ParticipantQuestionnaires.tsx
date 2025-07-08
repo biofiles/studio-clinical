@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useState } from "react";
 import { FileText, CheckCircle, Clock, AlertCircle, Eye } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ParticipantQuestionnairesProps {
   open: boolean;
@@ -14,10 +15,11 @@ interface ParticipantQuestionnairesProps {
 }
 
 const ParticipantQuestionnaires = ({ open, onOpenChange, participantId }: ParticipantQuestionnairesProps) => {
+  const { t } = useLanguage();
   const [questionnaires] = useState([
     {
       id: 1,
-      title: "Daily Symptom Diary",
+      title: t('questionnaire.daily.symptom.diary'),
       status: "completed",
       dueDate: "2024-12-08",
       completedDate: "2024-12-08",
@@ -30,7 +32,7 @@ const ParticipantQuestionnaires = ({ open, onOpenChange, participantId }: Partic
     },
     {
       id: 2,
-      title: "Weekly Quality of Life Assessment",
+      title: t('questionnaire.weekly.qol.assessment'),
       status: "completed",
       dueDate: "2024-12-07",
       completedDate: "2024-12-06",
@@ -44,7 +46,7 @@ const ParticipantQuestionnaires = ({ open, onOpenChange, participantId }: Partic
     },
     {
       id: 3,
-      title: "Medication Adherence Survey",
+      title: t('questionnaire.medication.adherence'),
       status: "in-progress",
       dueDate: "2024-12-16",
       progress: 60,
@@ -55,14 +57,14 @@ const ParticipantQuestionnaires = ({ open, onOpenChange, participantId }: Partic
     },
     {
       id: 4,
-      title: "Monthly Health Survey",
+      title: t('questionnaire.monthly.health'),
       status: "pending",
       dueDate: "2024-12-20",
       progress: 0
     },
     {
       id: 5,
-      title: "Side Effects Assessment",
+      title: t('questionnaire.side.effects'),
       status: "overdue",
       dueDate: "2024-12-10",
       progress: 0
@@ -78,6 +80,16 @@ const ParticipantQuestionnaires = ({ open, onOpenChange, participantId }: Partic
       case 'pending': return 'bg-[hsl(var(--progress-info))]/10 text-[hsl(var(--progress-info))] border-[hsl(var(--progress-info))]/20';
       case 'overdue': return 'bg-destructive/10 text-destructive border-destructive/20';
       default: return 'bg-muted text-muted-foreground border-border';
+    }
+  };
+
+  const getStatusText = (status: string) => {
+    switch (status) {
+      case 'completed': return t('questionnaire.status.completed');
+      case 'in-progress': return t('questionnaire.status.in.progress');
+      case 'pending': return t('questionnaire.status.pending');
+      case 'overdue': return t('questionnaire.status.overdue');
+      default: return status;
     }
   };
 
@@ -97,9 +109,9 @@ const ParticipantQuestionnaires = ({ open, onOpenChange, participantId }: Partic
         .map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join(', ') : value}`)
         .join('\n');
       
-      alert(`Responses for "${questionnaire.title}":\n\n${responseText}`);
+      alert(`${t('questionnaire.list.responses.for')} "${questionnaire.title}":\n\n${responseText}`);
     } else {
-      alert('No responses recorded yet.');
+      alert(t('questionnaire.list.no.responses'));
     }
   };
 
@@ -114,7 +126,7 @@ const ParticipantQuestionnaires = ({ open, onOpenChange, participantId }: Partic
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-2">
             <FileText className="h-5 w-5" />
-            <span>Questionnaires - {participantId}</span>
+            <span>{t('questionnaire.list.title')} - {participantId}</span>
           </DialogTitle>
         </DialogHeader>
 
@@ -124,25 +136,25 @@ const ParticipantQuestionnaires = ({ open, onOpenChange, participantId }: Partic
             <Card className="bg-[hsl(var(--progress-success))]/5 border-[hsl(var(--progress-success))]/20">
               <CardContent className="p-4 text-center">
                 <div className="text-2xl font-bold text-[hsl(var(--progress-success))]">{completedCount}</div>
-                <div className="text-sm text-[hsl(var(--progress-success))]/80">Completed</div>
+                <div className="text-sm text-[hsl(var(--progress-success))]/80">{t('questionnaire.list.completed.count')}</div>
               </CardContent>
             </Card>
             <Card className="bg-[hsl(var(--progress-accent))]/5 border-[hsl(var(--progress-accent))]/20">
               <CardContent className="p-4 text-center">
                 <div className="text-2xl font-bold text-[hsl(var(--progress-accent))]">{inProgressCount}</div>
-                <div className="text-sm text-[hsl(var(--progress-accent))]/80">In Progress</div>
+                <div className="text-sm text-[hsl(var(--progress-accent))]/80">{t('questionnaire.list.in.progress.count')}</div>
               </CardContent>
             </Card>
             <Card className="bg-[hsl(var(--progress-info))]/5 border-[hsl(var(--progress-info))]/20">
               <CardContent className="p-4 text-center">
                 <div className="text-2xl font-bold text-[hsl(var(--progress-info))]">{pendingCount}</div>
-                <div className="text-sm text-[hsl(var(--progress-info))]/80">Pending</div>
+                <div className="text-sm text-[hsl(var(--progress-info))]/80">{t('questionnaire.list.pending.count')}</div>
               </CardContent>
             </Card>
             <Card className="bg-destructive/5 border-destructive/20">
               <CardContent className="p-4 text-center">
                 <div className="text-2xl font-bold text-destructive">{overdueCount}</div>
-                <div className="text-sm text-destructive/80">Overdue</div>
+                <div className="text-sm text-destructive/80">{t('questionnaire.list.overdue.count')}</div>
               </CardContent>
             </Card>
           </div>
@@ -159,23 +171,23 @@ const ParticipantQuestionnaires = ({ open, onOpenChange, participantId }: Partic
                         <span className={`px-2 py-1 text-xs rounded border ${getStatusColor(questionnaire.status)}`}>
                           <div className="flex items-center space-x-1">
                             {getStatusIcon(questionnaire.status)}
-                            <span className="capitalize">{questionnaire.status.replace('-', ' ')}</span>
+                            <span className="capitalize">{getStatusText(questionnaire.status)}</span>
                           </div>
                         </span>
                       </div>
                       
                       <div className="grid grid-cols-2 gap-4 text-sm text-studio-text-muted mb-3">
                         <div>
-                          <span className="font-medium">Due Date:</span> {new Date(questionnaire.dueDate).toLocaleDateString()}
+                          <span className="font-medium">{t('questionnaire.list.due.date')}:</span> {new Date(questionnaire.dueDate).toLocaleDateString()}
                         </div>
                         {questionnaire.completedDate && (
                           <div>
-                            <span className="font-medium">Completed:</span> {new Date(questionnaire.completedDate).toLocaleDateString()}
+                            <span className="font-medium">{t('questionnaire.list.completed.date')}:</span> {new Date(questionnaire.completedDate).toLocaleDateString()}
                           </div>
                         )}
                         {questionnaire.score && (
                           <div>
-                            <span className="font-medium">Score:</span> {questionnaire.score}/100
+                            <span className="font-medium">{t('questionnaire.list.score')}:</span> {questionnaire.score}/100
                           </div>
                         )}
                       </div>
@@ -183,7 +195,7 @@ const ParticipantQuestionnaires = ({ open, onOpenChange, participantId }: Partic
                       {questionnaire.status === 'in-progress' && questionnaire.progress !== undefined && (
                         <div className="mb-3">
                           <div className="flex justify-between text-xs mb-1">
-                            <span>Progress</span>
+                            <span>{t('questionnaire.list.progress')}</span>
                             <span>{questionnaire.progress}%</span>
                           </div>
                           <Progress value={questionnaire.progress} className="h-2" />
@@ -199,7 +211,7 @@ const ParticipantQuestionnaires = ({ open, onOpenChange, participantId }: Partic
                           onClick={() => handleViewResponses(questionnaire)}
                         >
                           <Eye className="h-4 w-4 mr-1" />
-                          View Responses
+                          {t('questionnaire.list.view.responses')}
                         </Button>
                       )}
                     </div>
@@ -210,8 +222,7 @@ const ParticipantQuestionnaires = ({ open, onOpenChange, participantId }: Partic
           </div>
 
           <div className="text-xs text-studio-text-muted bg-blue-50 p-3 rounded">
-            <strong>Data Privacy:</strong> All questionnaire responses are encrypted and stored securely. 
-            Access is limited to authorized study personnel and complies with HIPAA regulations.
+            <strong>{t('questionnaire.list.data.privacy')}:</strong> {t('questionnaire.list.privacy.note')}
           </div>
         </div>
       </DialogContent>

@@ -9,6 +9,7 @@ import { Progress } from "@/components/ui/progress";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { CheckCircle, ArrowLeft, ArrowRight } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Question {
   id: string;
@@ -35,6 +36,7 @@ const QuestionnaireForm = ({ open, onOpenChange, questionnaire, onComplete }: Qu
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [responses, setResponses] = useState<Record<string, any>>({});
   const [isCompleted, setIsCompleted] = useState(false);
+  const { t } = useLanguage();
 
   const form = useForm();
 
@@ -80,13 +82,13 @@ const QuestionnaireForm = ({ open, onOpenChange, questionnaire, onComplete }: Qu
           <div className="text-center py-6">
             <CheckCircle className="h-16 w-16 text-green-600 mx-auto mb-4" />
             <h3 className="text-lg font-medium text-studio-text mb-2">
-              Questionnaire Completed!
+              {t('questionnaire.form.completed')}
             </h3>
             <p className="text-sm text-studio-text-muted mb-4">
-              Thank you for completing "{questionnaire.title}". Your responses have been saved.
+              {t('questionnaire.form.thank.you')} "{questionnaire.title}". {t('questionnaire.form.responses.saved')}
             </p>
             <Button onClick={handleClose} className="w-full">
-              Close
+              {t('questionnaire.form.close')}
             </Button>
           </div>
         </DialogContent>
@@ -101,7 +103,7 @@ const QuestionnaireForm = ({ open, onOpenChange, questionnaire, onComplete }: Qu
           <Input
             value={responses[currentQuestion.id] || ''}
             onChange={(e) => handleResponseChange(currentQuestion.id, e.target.value)}
-            placeholder="Enter your response..."
+            placeholder={t('questionnaire.form.enter.response')}
             className="w-full"
           />
         );
@@ -151,8 +153,8 @@ const QuestionnaireForm = ({ open, onOpenChange, questionnaire, onComplete }: Qu
         return (
           <div className="space-y-3">
             <div className="flex justify-between text-xs text-studio-text-muted">
-              <span>Not at all</span>
-              <span>Extremely</span>
+              <span>{t('questionnaire.form.not.at.all')}</span>
+              <span>{t('questionnaire.form.extremely')}</span>
             </div>
             {/* Mobile-first responsive grid */}
             <div className="grid grid-cols-5 sm:grid-cols-10 gap-2">
@@ -174,7 +176,7 @@ const QuestionnaireForm = ({ open, onOpenChange, questionnaire, onComplete }: Qu
             {responses[currentQuestion.id] && (
               <div className="text-center">
                 <span className="text-sm text-studio-text-muted">
-                  Selected: <span className="font-medium text-blue-600">{responses[currentQuestion.id]}</span>
+                  {t('questionnaire.form.selected')}: <span className="font-medium text-blue-600">{responses[currentQuestion.id]}</span>
                 </span>
               </div>
             )}
@@ -196,8 +198,8 @@ const QuestionnaireForm = ({ open, onOpenChange, questionnaire, onComplete }: Qu
         <div className="space-y-6">
           <div>
             <div className="flex justify-between text-sm mb-2">
-              <span>Question {currentQuestionIndex + 1} of {questionnaire.questions.length}</span>
-              <span>{Math.round(progress)}% Complete</span>
+              <span>{t('questionnaire.form.question')} {currentQuestionIndex + 1} {t('questionnaire.form.of')} {questionnaire.questions.length}</span>
+              <span>{Math.round(progress)}% {t('questionnaire.form.complete')}</span>
             </div>
             <Progress value={progress} className="h-2" />
           </div>
@@ -216,14 +218,14 @@ const QuestionnaireForm = ({ open, onOpenChange, questionnaire, onComplete }: Qu
               disabled={currentQuestionIndex === 0}
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Previous
+              {t('questionnaire.form.previous')}
             </Button>
             
             <Button
               onClick={handleNext}
               disabled={currentQuestion.required && !responses[currentQuestion.id]}
             >
-              {currentQuestionIndex === questionnaire.questions.length - 1 ? 'Complete' : 'Next'}
+              {currentQuestionIndex === questionnaire.questions.length - 1 ? t('questionnaire.form.complete') : t('questionnaire.form.next')}
               {currentQuestionIndex < questionnaire.questions.length - 1 && (
                 <ArrowRight className="h-4 w-4 ml-2" />
               )}

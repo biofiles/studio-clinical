@@ -124,6 +124,50 @@ const translations = {
     'questionnaire.quick.survey': 'Quick 5-minute survey about your daily symptoms',
     'questionnaire.complete.now': 'Complete Now',
     
+    // Questionnaire Form
+    'questionnaire.form.question': 'Question',
+    'questionnaire.form.of': 'of',
+    'questionnaire.form.complete': 'Complete',
+    'questionnaire.form.completed': 'Questionnaire Completed!',
+    'questionnaire.form.thank.you': 'Thank you for completing',
+    'questionnaire.form.responses.saved': 'Your responses have been saved.',
+    'questionnaire.form.close': 'Close',
+    'questionnaire.form.previous': 'Previous',
+    'questionnaire.form.next': 'Next',
+    'questionnaire.form.enter.response': 'Enter your response...',
+    'questionnaire.form.not.at.all': 'Not at all',
+    'questionnaire.form.extremely': 'Extremely',
+    'questionnaire.form.selected': 'Selected',
+    
+    // Questionnaire List
+    'questionnaire.list.title': 'Questionnaires',
+    'questionnaire.list.completed.count': 'Completed',
+    'questionnaire.list.in.progress.count': 'In Progress',
+    'questionnaire.list.pending.count': 'Pending',
+    'questionnaire.list.overdue.count': 'Overdue',
+    'questionnaire.list.due.date': 'Due Date',
+    'questionnaire.list.completed.date': 'Completed',
+    'questionnaire.list.score': 'Score',
+    'questionnaire.list.progress': 'Progress',
+    'questionnaire.list.view.responses': 'View Responses',
+    'questionnaire.list.no.responses': 'No responses recorded yet.',
+    'questionnaire.list.responses.for': 'Responses for',
+    'questionnaire.list.data.privacy': 'Data Privacy',
+    'questionnaire.list.privacy.note': 'All questionnaire responses are encrypted and stored securely. Access is limited to authorized study personnel and complies with HIPAA regulations.',
+    
+    // Questionnaire Status
+    'questionnaire.status.completed': 'Completed',
+    'questionnaire.status.in.progress': 'In Progress', 
+    'questionnaire.status.pending': 'Pending',
+    'questionnaire.status.overdue': 'Overdue',
+    
+    // Sample Questionnaires
+    'questionnaire.daily.symptom.diary': 'Daily Symptom Diary',
+    'questionnaire.weekly.qol.assessment': 'Weekly Quality of Life Assessment',
+    'questionnaire.medication.adherence': 'Medication Adherence Survey',
+    'questionnaire.monthly.health': 'Monthly Health Survey',
+    'questionnaire.side.effects': 'Side Effects Assessment',
+    
     // Visits
     'visits.site.visits': 'Visits',
     'visits.baseline.completed': 'Baseline Visit - Completed',
@@ -487,6 +531,50 @@ const translations = {
     'questionnaire.thanks.completing': '¡Gracias por completar el cuestionario de hoy!',
     'questionnaire.quick.survey': 'Cuestionario rápido de 5 minutos sobre sus síntomas diarios',
     'questionnaire.complete.now': 'Completar Ahora',
+    
+    // Questionnaire Form
+    'questionnaire.form.question': 'Pregunta',
+    'questionnaire.form.of': 'de',
+    'questionnaire.form.complete': 'Completar',
+    'questionnaire.form.completed': '¡Cuestionario Completado!',
+    'questionnaire.form.thank.you': 'Gracias por completar',
+    'questionnaire.form.responses.saved': 'Sus respuestas han sido guardadas.',
+    'questionnaire.form.close': 'Cerrar',
+    'questionnaire.form.previous': 'Anterior',
+    'questionnaire.form.next': 'Siguiente',
+    'questionnaire.form.enter.response': 'Ingrese su respuesta...',
+    'questionnaire.form.not.at.all': 'Para nada',
+    'questionnaire.form.extremely': 'Extremadamente',
+    'questionnaire.form.selected': 'Seleccionado',
+    
+    // Questionnaire List
+    'questionnaire.list.title': 'Cuestionarios',
+    'questionnaire.list.completed.count': 'Completados',
+    'questionnaire.list.in.progress.count': 'En Progreso',
+    'questionnaire.list.pending.count': 'Pendientes',
+    'questionnaire.list.overdue.count': 'Vencidos',
+    'questionnaire.list.due.date': 'Fecha de Vencimiento',
+    'questionnaire.list.completed.date': 'Completado',
+    'questionnaire.list.score': 'Puntuación',
+    'questionnaire.list.progress': 'Progreso',
+    'questionnaire.list.view.responses': 'Ver Respuestas',
+    'questionnaire.list.no.responses': 'Aún no se han registrado respuestas.',
+    'questionnaire.list.responses.for': 'Respuestas para',
+    'questionnaire.list.data.privacy': 'Privacidad de Datos',
+    'questionnaire.list.privacy.note': 'Todas las respuestas de cuestionarios están encriptadas y almacenadas de forma segura. El acceso está limitado al personal autorizado del estudio y cumple con las regulaciones HIPAA.',
+    
+    // Questionnaire Status
+    'questionnaire.status.completed': 'Completado',
+    'questionnaire.status.in.progress': 'En Progreso', 
+    'questionnaire.status.pending': 'Pendiente',
+    'questionnaire.status.overdue': 'Vencido',
+    
+    // Sample Questionnaires
+    'questionnaire.daily.symptom.diary': 'Diario de Síntomas Diarios',
+    'questionnaire.weekly.qol.assessment': 'Evaluación Semanal de Calidad de Vida',
+    'questionnaire.medication.adherence': 'Encuesta de Adherencia a Medicamentos',
+    'questionnaire.monthly.health': 'Encuesta Mensual de Salud',
+    'questionnaire.side.effects': 'Evaluación de Efectos Secundarios',
     
     // Visits
     'visits.site.visits': 'Visitas',
