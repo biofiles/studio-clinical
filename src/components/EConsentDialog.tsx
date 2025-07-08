@@ -342,7 +342,7 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
           </DialogTitle>
           <p className="text-sm text-studio-text-muted">{t('econsent.subtitle')}</p>
           <div className="flex items-center space-x-2 text-xs text-studio-text-muted">
-            <span>Last Updated: December 1, 2024</span>
+            <span>{t('econsent.last.updated')}: December 1, 2024</span>
           </div>
         </DialogHeader>
 
@@ -351,7 +351,7 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Card>
               <CardHeader>
-                <CardTitle className="text-sm">Previous Signed ICFs</CardTitle>
+                <CardTitle className="text-sm">{t('econsent.previous.signed')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
                 <div className="text-xs space-y-1">
@@ -369,21 +369,21 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
             
             <Card>
               <CardHeader>
-                <CardTitle className="text-sm">Optional ICFs Available</CardTitle>
+                <CardTitle className="text-sm">{t('econsent.optional.available')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-xs">
-                    <span>Pharmacokinetics (PK)</span>
-                    <Button variant="outline" size="sm">Sign</Button>
+                    <span>{t('econsent.pharmacokinetics')}</span>
+                    <Button variant="outline" size="sm">{t('econsent.sign.button')}</Button>
                   </div>
                   <div className="flex items-center justify-between text-xs">
-                    <span>Biomarkers</span>
-                    <Button variant="outline" size="sm">Sign</Button>
+                    <span>{t('econsent.biomarkers')}</span>
+                    <Button variant="outline" size="sm">{t('econsent.sign.button')}</Button>
                   </div>
                   <div className="flex items-center justify-between text-xs">
-                    <span>Pregnant Partner</span>
-                    <Button variant="outline" size="sm">Sign</Button>
+                    <span>{t('econsent.pregnant.partner')}</span>
+                    <Button variant="outline" size="sm">{t('econsent.sign.button')}</Button>
                   </div>
                 </div>
               </CardContent>
@@ -393,7 +393,7 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
           {/* Enhanced Audio Controls */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-sm">Audio Playback Controls</CardTitle>
+              <CardTitle className="text-sm">{t('econsent.audio.playback')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center space-x-4">

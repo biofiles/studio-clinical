@@ -29,21 +29,33 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
         {
           id: "symptoms",
           type: "checkbox" as const,
-          question: "Which symptoms did you experience today?",
-          options: ["Headache", "Nausea", "Fatigue", "Dizziness", "Loss of appetite", "None"],
+          question: t('questionnaire.question.symptoms.today'),
+          options: [
+            t('questionnaire.option.headache'),
+            t('questionnaire.option.nausea'), 
+            t('questionnaire.option.fatigue'),
+            t('questionnaire.option.dizziness'),
+            t('questionnaire.option.loss.appetite'),
+            t('questionnaire.option.none')
+          ],
           required: true
         },
         {
           id: "severity",
           type: "scale" as const,
-          question: "On a scale of 1-10, how would you rate your overall symptom severity today?",
+          question: t('questionnaire.question.symptom.severity'),
           required: true
         },
         {
           id: "medication_taken",
           type: "multiple-choice" as const,
-          question: "Did you take your study medication today?",
-          options: ["Yes, as prescribed", "Yes, but missed a dose", "No, forgot", "No, side effects"],
+          question: t('questionnaire.question.medication.taken'),
+          options: [
+            t('questionnaire.option.yes.prescribed'),
+            t('questionnaire.option.yes.missed.dose'),
+            t('questionnaire.option.no.forgot'),
+            t('questionnaire.option.no.side.effects')
+          ],
           required: true
         }
       ]
@@ -60,26 +72,32 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
         {
           id: "physical_health",
           type: "scale" as const,
-          question: "How would you rate your physical health this week?",
+          question: t('questionnaire.question.physical.health'),
           required: true
         },
         {
           id: "emotional_wellbeing",
           type: "scale" as const,
-          question: "How would you rate your emotional well-being this week?",
+          question: t('questionnaire.question.emotional.wellbeing'),
           required: true
         },
         {
           id: "daily_activities",
           type: "multiple-choice" as const,
-          question: "How much did health problems limit your daily activities?",
-          options: ["Not at all", "A little bit", "Moderately", "Quite a bit", "Extremely"],
+          question: t('questionnaire.question.daily.activities'),
+          options: [
+            t('questionnaire.option.not.at.all'),
+            t('questionnaire.option.little.bit'),
+            t('questionnaire.option.moderately'),
+            t('questionnaire.option.quite.bit'),
+            t('questionnaire.option.extremely')
+          ],
           required: true
         },
         {
           id: "sleep_quality",
           type: "scale" as const,
-          question: "How would you rate your sleep quality this week?",
+          question: t('questionnaire.question.sleep.quality'),
           required: true
         }
       ]
@@ -96,14 +114,21 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
         {
           id: "doses_missed",
           type: "text" as const,
-          question: "How many doses did you miss this week?",
+          question: t('questionnaire.question.doses.missed'),
           required: true
         },
         {
           id: "reasons_missed",
           type: "checkbox" as const,
-          question: "If you missed doses, what were the reasons?",
-          options: ["Forgot", "Side effects", "Felt better", "Too busy", "Cost", "Other"],
+          question: t('questionnaire.question.reasons.missed'),
+          options: [
+            t('questionnaire.option.forgot'),
+            t('questionnaire.option.side.effects'),
+            t('questionnaire.option.felt.better'),
+            t('questionnaire.option.too.busy'),
+            t('questionnaire.option.cost'),
+            t('questionnaire.option.other')
+          ],
           required: false
         }
       ]
@@ -120,7 +145,7 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
         {
           id: "overall_health",
           type: "scale" as const,
-          question: "How would you rate your overall health?",
+          question: t('questionnaire.question.overall.health'),
           required: true
         }
       ]
