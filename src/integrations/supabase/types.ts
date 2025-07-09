@@ -14,6 +14,93 @@ export type Database = {
   }
   public: {
     Tables: {
+      consent_signatures: {
+        Row: {
+          consent_type: Database["public"]["Enums"]["consent_type"]
+          consent_version: string
+          created_at: string
+          id: string
+          investigator_auth_timestamp: string | null
+          investigator_full_name: string | null
+          investigator_ip_address: unknown | null
+          investigator_meaning_acknowledged: boolean | null
+          investigator_signature_data: string | null
+          investigator_signed_at: string | null
+          investigator_user_id: string | null
+          participant_auth_timestamp: string | null
+          participant_full_name: string | null
+          participant_id: string
+          participant_ip_address: unknown | null
+          participant_signature_data: string | null
+          participant_signed_at: string | null
+          signature_meaning_acknowledged: boolean
+          status: Database["public"]["Enums"]["consent_signature_status"]
+          study_id: string
+          updated_at: string
+        }
+        Insert: {
+          consent_type?: Database["public"]["Enums"]["consent_type"]
+          consent_version?: string
+          created_at?: string
+          id?: string
+          investigator_auth_timestamp?: string | null
+          investigator_full_name?: string | null
+          investigator_ip_address?: unknown | null
+          investigator_meaning_acknowledged?: boolean | null
+          investigator_signature_data?: string | null
+          investigator_signed_at?: string | null
+          investigator_user_id?: string | null
+          participant_auth_timestamp?: string | null
+          participant_full_name?: string | null
+          participant_id: string
+          participant_ip_address?: unknown | null
+          participant_signature_data?: string | null
+          participant_signed_at?: string | null
+          signature_meaning_acknowledged?: boolean
+          status?: Database["public"]["Enums"]["consent_signature_status"]
+          study_id: string
+          updated_at?: string
+        }
+        Update: {
+          consent_type?: Database["public"]["Enums"]["consent_type"]
+          consent_version?: string
+          created_at?: string
+          id?: string
+          investigator_auth_timestamp?: string | null
+          investigator_full_name?: string | null
+          investigator_ip_address?: unknown | null
+          investigator_meaning_acknowledged?: boolean | null
+          investigator_signature_data?: string | null
+          investigator_signed_at?: string | null
+          investigator_user_id?: string | null
+          participant_auth_timestamp?: string | null
+          participant_full_name?: string | null
+          participant_id?: string
+          participant_ip_address?: unknown | null
+          participant_signature_data?: string | null
+          participant_signed_at?: string | null
+          signature_meaning_acknowledged?: boolean
+          status?: Database["public"]["Enums"]["consent_signature_status"]
+          study_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "consent_signatures_participant_id_fkey"
+            columns: ["participant_id"]
+            isOneToOne: false
+            referencedRelation: "participants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "consent_signatures_study_id_fkey"
+            columns: ["study_id"]
+            isOneToOne: false
+            referencedRelation: "studies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       participants: {
         Row: {
           address: string | null
@@ -379,6 +466,18 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: string
       }
+      get_pending_consent_signatures: {
+        Args: { investigator_user_id: string; check_study_id?: string }
+        Returns: {
+          consent_id: string
+          participant_id: string
+          participant_name: string
+          subject_id: string
+          consent_type: Database["public"]["Enums"]["consent_type"]
+          participant_signed_at: string
+          days_pending: number
+        }[]
+      }
       get_user_role: {
         Args: { check_user_id: string; check_study_id?: string }
         Returns: Database["public"]["Enums"]["app_role"]
@@ -414,6 +513,15 @@ export type Database = {
     }
     Enums: {
       app_role: "participant" | "investigator" | "cro_sponsor" | "admin"
+      consent_signature_status:
+        | "participant_signed"
+        | "investigator_signed"
+        | "complete"
+      consent_type:
+        | "main_icf"
+        | "pharmacokinetics"
+        | "biomarkers"
+        | "pregnant_partner"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -542,6 +650,17 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["participant", "investigator", "cro_sponsor", "admin"],
+      consent_signature_status: [
+        "participant_signed",
+        "investigator_signed",
+        "complete",
+      ],
+      consent_type: [
+        "main_icf",
+        "pharmacokinetics",
+        "biomarkers",
+        "pregnant_partner",
+      ],
     },
   },
 } as const

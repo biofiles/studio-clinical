@@ -11,6 +11,7 @@ import CalendarManagement from "@/components/CalendarManagement";
 import BarcodeScanner from "@/components/BarcodeScanner";
 import FHIRExportDialog from "@/components/FHIRExportDialog";
 import InvestigatorQuestionnaires from "@/components/InvestigatorQuestionnaires";
+import InvestigatorConsentDashboard from "@/components/InvestigatorConsentDashboard";
 import StudyResultsSignup from "@/components/StudyResultsSignup";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
@@ -23,6 +24,7 @@ const InvestigatorDashboard = () => {
   const [showBarcodeScanner, setShowBarcodeScanner] = useState(false);
   const [showFHIRExport, setShowFHIRExport] = useState(false);
   const [showQuestionnaires, setShowQuestionnaires] = useState(false);
+  const [showConsentDashboard, setShowConsentDashboard] = useState(false);
   const { t } = useLanguage();
   const { selectedStudy } = useStudy();
   const navigate = useNavigate();
@@ -234,13 +236,21 @@ const InvestigatorDashboard = () => {
                 <Calendar className="h-4 w-4 mr-2" />
                 {t('dashboard.manage.calendar')}
               </Button>
-              <Button 
+                <Button 
                 variant="studio" 
                 className="w-full justify-start"
                 onClick={handleQuestionnaires}
               >
                 <FileCheck className="h-4 w-4 mr-2" />
                 {t('dashboard.questionnaires')}
+              </Button>
+              <Button 
+                variant="studio" 
+                className="w-full justify-start"
+                onClick={() => setShowConsentDashboard(true)}
+              >
+                <UserCheck className="h-4 w-4 mr-2" />
+                {t('consent.dashboard.title')}
               </Button>
               <Button 
                 variant="studio" 
@@ -375,6 +385,11 @@ const InvestigatorDashboard = () => {
       <InvestigatorQuestionnaires
         open={showQuestionnaires}
         onOpenChange={setShowQuestionnaires}
+      />
+
+      <InvestigatorConsentDashboard
+        open={showConsentDashboard}
+        onOpenChange={setShowConsentDashboard}
       />
     </div>
   );
