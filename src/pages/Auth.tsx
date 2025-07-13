@@ -11,7 +11,8 @@ const Auth = () => {
   const {
     user,
     signIn,
-    getUserRole
+    userRole,
+    roleLoading
   } = useAuth();
   const {
     toast
@@ -24,39 +25,26 @@ const Auth = () => {
 
   // Redirect based on user's role when they log in
   useEffect(() => {
-    if (user && !redirecting) {
+    if (user && userRole && !redirecting && !roleLoading) {
       setRedirecting(true);
-      const redirectUser = async () => {
-        try {
-          const role = await getUserRole();
-          if (role === 'participant') {
-            window.location.href = '/participant';
-          } else if (role === 'investigator') {
-            window.location.href = '/investigator';
-          } else if (role === 'cro_sponsor') {
-            window.location.href = '/cro-sponsor';
-          } else {
-            // If no role found, show an error and allow them to try again
-            toast({
-              title: 'Error',
-              description: 'No se encontró un rol asignado para este usuario. Intente con una cuenta válida.',
-              variant: 'destructive'
-            });
-            setRedirecting(false);
-          }
-        } catch (error) {
-          console.error('Error during redirect:', error);
-          toast({
-            title: 'Error',
-            description: 'Error al verificar el rol del usuario',
-            variant: 'destructive'
-          });
-          setRedirecting(false);
-        }
-      };
-      redirectUser();
+      
+      if (userRole === 'participant') {
+        window.location.href = '/participant';
+      } else if (userRole === 'investigator') {
+        window.location.href = '/investigator';
+      } else if (userRole === 'cro_sponsor') {
+        window.location.href = '/cro-sponsor';
+      } else {
+        // If no role found, show an error and allow them to try again
+        toast({
+          title: 'Error',
+          description: 'No se encontró un rol asignado para este usuario. Intente con una cuenta válida.',
+          variant: 'destructive'
+        });
+        setRedirecting(false);
+      }
     }
-  }, [user, getUserRole, toast, redirecting]);
+  }, [user, userRole, roleLoading, toast, redirecting]);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);

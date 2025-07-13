@@ -1,6 +1,6 @@
 import { useAuth } from '@/contexts/AuthContext';
 import { Navigate } from 'react-router-dom';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode } from 'react';
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -8,21 +8,7 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ children, requiredRole }: ProtectedRouteProps) => {
-  const { user, loading, getUserRole } = useAuth();
-  const [userRole, setUserRole] = useState<string | null>(null);
-  const [roleLoading, setRoleLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchUserRole = async () => {
-      if (user) {
-        const role = await getUserRole();
-        setUserRole(role);
-      }
-      setRoleLoading(false);
-    };
-
-    fetchUserRole();
-  }, [user, getUserRole]);
+  const { user, loading, userRole, roleLoading } = useAuth();
 
   if (loading || roleLoading) {
     return (

@@ -3,33 +3,25 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useState, useEffect } from 'react';
 
 const Index = () => {
-  const { user, getUserRole } = useAuth();
+  const { user, userRole, roleLoading } = useAuth();
   const [redirecting, setRedirecting] = useState(false);
 
   useEffect(() => {
-    if (user && !redirecting) {
+    if (user && userRole && !redirecting && !roleLoading) {
       setRedirecting(true);
-      const redirectUser = async () => {
-        try {
-          const role = await getUserRole();
-          if (role === 'participant') {
-            window.location.href = '/participant';
-          } else if (role === 'investigator') {
-            window.location.href = '/investigator';
-          } else if (role === 'cro_sponsor') {
-            window.location.href = '/cro-sponsor';
-          } else {
-            // If no role found, redirect to auth
-            window.location.href = '/auth';
-          }
-        } catch (error) {
-          console.error('Error during redirect:', error);
-          window.location.href = '/auth';
-        }
-      };
-      redirectUser();
+      
+      if (userRole === 'participant') {
+        window.location.href = '/participant';
+      } else if (userRole === 'investigator') {
+        window.location.href = '/investigator';
+      } else if (userRole === 'cro_sponsor') {
+        window.location.href = '/cro-sponsor';
+      } else {
+        // Fallback to login if no recognized role
+        window.location.href = '/auth';
+      }
     }
-  }, [user, getUserRole, redirecting]);
+  }, [user, userRole, roleLoading, redirecting]);
 
   // Show loading while redirecting
   if (redirecting) {
