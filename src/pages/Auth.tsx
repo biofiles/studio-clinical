@@ -4,8 +4,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
+import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import { Eye, EyeOff, Lock, User, Copy } from 'lucide-react';
 const Auth = () => {
   const {
@@ -22,27 +24,36 @@ const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [redirecting, setRedirecting] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState('Verificando permisos...');
 
   // Redirect based on user's role when they log in
   useEffect(() => {
     if (user && userRole && !redirecting && !roleLoading) {
       setRedirecting(true);
+      setLoadingMessage('Preparando dashboard...');
       
-      if (userRole === 'participant') {
-        window.location.href = '/participant';
-      } else if (userRole === 'investigator') {
-        window.location.href = '/investigator';
-      } else if (userRole === 'cro_sponsor') {
-        window.location.href = '/cro-sponsor';
-      } else {
-        // If no role found, show an error and allow them to try again
-        toast({
-          title: 'Error',
-          description: 'No se encontró un rol asignado para este usuario. Intente con una cuenta válida.',
-          variant: 'destructive'
-        });
-        setRedirecting(false);
-      }
+      // Add a small delay to show the loading message
+      setTimeout(() => {
+        setLoadingMessage('Casi listo...');
+        
+        setTimeout(() => {
+          if (userRole === 'participant') {
+            window.location.href = '/participant';
+          } else if (userRole === 'investigator') {
+            window.location.href = '/investigator';
+          } else if (userRole === 'cro_sponsor') {
+            window.location.href = '/cro-sponsor';
+          } else {
+            // If no role found, show an error and allow them to try again
+            toast({
+              title: 'Error',
+              description: 'No se encontró un rol asignado para este usuario. Intente con una cuenta válida.',
+              variant: 'destructive'
+            });
+            setRedirecting(false);
+          }
+        }, 500);
+      }, 800);
     }
   }, [user, userRole, roleLoading, toast, redirecting]);
   const handleSubmit = async (e: React.FormEvent) => {
@@ -88,9 +99,46 @@ const Auth = () => {
 
   // Show loading spinner while redirecting
   if (redirecting) {
-    return <div className="min-h-screen bg-studio-bg flex items-center justify-center">
-        <div className="text-studio-text">Cargando...</div>
-      </div>;
+    return (
+      <div className="min-h-screen bg-studio-bg flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="text-4xl font-light tracking-widest text-studio-text mb-8">
+            STUDIO
+          </div>
+          <LoadingSpinner size="lg" message={loadingMessage} className="text-studio-text justify-center" />
+        </div>
+      </div>
+    );
+  }
+
+  // Show skeleton loading while role is being fetched
+  if (user && roleLoading) {
+    return (
+      <div className="min-h-screen bg-studio-bg flex items-center justify-center p-4">
+        <div className="w-full max-w-md space-y-8">
+          <div className="text-center">
+            <h1 className="text-4xl font-light tracking-widest text-studio-text mb-2">
+              STUDIO
+            </h1>
+          </div>
+          <Card className="bg-studio-surface border-studio-border">
+            <CardHeader>
+              <Skeleton className="h-6 w-40" />
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-4">
+                <Skeleton className="h-16 w-full" />
+                <Skeleton className="h-16 w-full" />
+                <Skeleton className="h-10 w-full" />
+              </div>
+              <div className="text-center">
+                <LoadingSpinner size="md" message="Verificando permisos..." className="text-studio-text justify-center" />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
   }
   return <div className="min-h-screen bg-studio-bg flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-8">
@@ -126,8 +174,14 @@ const Auth = () => {
               </div>
 
               <Button type="submit" className="w-full" disabled={loading || !email || !password}>
-                <Lock className="h-4 w-4 mr-2" />
-                {loading ? 'Cargando...' : 'Iniciar Sesión'}
+                {loading ? (
+                  <LoadingSpinner size="sm" message="Iniciando sesión..." />
+                ) : (
+                  <>
+                    <Lock className="h-4 w-4 mr-2" />
+                    Iniciar Sesión
+                  </>
+                )}
               </Button>
             </form>
           </CardContent>
