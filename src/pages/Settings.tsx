@@ -12,7 +12,7 @@ import { useOnboarding } from "@/contexts/OnboardingContext";
 const Settings = () => {
   const navigate = useNavigate();
   const { language, setLanguage, t } = useLanguage();
-  const { signOut, user } = useAuth();
+  const { signOut, user, userRole } = useAuth();
   const { startOnboarding } = useOnboarding();
 
   const handleLogout = async () => {
@@ -29,9 +29,7 @@ const Settings = () => {
   };
 
   const handleStartTutorial = () => {
-    console.log('Starting tutorial for role:', user?.role);
-    console.log('User object:', user);
-    startOnboarding(user?.role);
+    startOnboarding(userRole);
     navigate(-1); // Go back to the dashboard to start tutorial
   };
 
@@ -104,6 +102,7 @@ const Settings = () => {
                   <Button
                     variant="outline"
                     onClick={handleStartTutorial}
+                    disabled={!userRole}
                     className="flex items-center space-x-2"
                   >
                     <Play className="h-4 w-4" />

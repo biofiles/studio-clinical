@@ -58,19 +58,12 @@ export const OnboardingProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
   const startOnboarding = useCallback((role?: string) => {
     const userRole = role || user?.role || 'participant';
-    console.log('startOnboarding called with role:', role);
-    console.log('user?.role from context:', user?.role);
-    console.log('final userRole:', userRole);
     const flow = getOnboardingFlow(userRole);
-    console.log('Retrieved flow:', flow);
     
     if (flow) {
       setCurrentFlow(flow);
       setCurrentStep(0);
       setIsActive(true);
-      console.log('Onboarding started successfully');
-    } else {
-      console.error('No flow found for role:', userRole);
     }
   }, [user?.role]);
 
