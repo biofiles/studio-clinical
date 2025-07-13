@@ -482,6 +482,10 @@ export type Database = {
         Args: { check_user_id: string; check_study_id?: string }
         Returns: Database["public"]["Enums"]["app_role"]
       }
+      get_user_role_fast: {
+        Args: { check_user_id: string; check_study_id?: string }
+        Returns: Database["public"]["Enums"]["app_role"]
+      }
       has_role: {
         Args: {
           check_user_id: string

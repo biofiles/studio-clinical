@@ -17,17 +17,16 @@ const Index = () => {
       } else if (userRole === 'cro_sponsor') {
         window.location.href = '/cro-sponsor';
       } else {
-        // Fallback to login if no recognized role
         window.location.href = '/auth';
       }
     }
   }, [user, userRole, roleLoading, redirecting]);
 
   // Show loading while redirecting
-  if (redirecting) {
+  if (redirecting || roleLoading) {
     return (
       <div className="min-h-screen bg-studio-bg flex items-center justify-center">
-        <div className="text-studio-text">Cargando...</div>
+        <div className="text-studio-text">Redirecting...</div>
       </div>
     );
   }

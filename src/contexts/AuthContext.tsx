@@ -33,13 +33,19 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [loading, setLoading] = useState(true);
   const [userRole, setUserRole] = useState<string | null>(null);
   const [roleLoading, setRoleLoading] = useState(false);
+  const [roleFetched, setRoleFetched] = useState(false);
 
-  // Fetch user role function
+  // Optimized role fetch function with caching
   const fetchUserRole = async (userId: string) => {
+    // Skip if already fetched for this session
+    if (roleFetched && userRole !== null) {
+      return;
+    }
+    
     setRoleLoading(true);
     try {
       const { data, error } = await supabase
-        .rpc('get_user_role', { check_user_id: userId });
+        .rpc('get_user_role_fast', { check_user_id: userId });
       
       if (error) {
         console.error('Error fetching user role:', error);
@@ -47,9 +53,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       } else {
         setUserRole(data);
       }
+      setRoleFetched(true);
     } catch (error) {
       console.error('Error fetching user role:', error);
       setUserRole(null);
+      setRoleFetched(true);
     } finally {
       setRoleLoading(false);
     }
@@ -69,6 +77,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         } else {
           setUserRole(null);
           setRoleLoading(false);
+          setRoleFetched(false);
         }
       }
     );
@@ -84,6 +93,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         fetchUserRole(session.user.id);
       } else {
         setRoleLoading(false);
+        setRoleFetched(false);
       }
     });
 
@@ -113,6 +123,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signOut = async () => {
     setUserRole(null);
+    setRoleFetched(false);
     await supabase.auth.signOut();
   };
 
