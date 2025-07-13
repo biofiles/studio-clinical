@@ -30,29 +30,25 @@ export default function CredentialVerificationDialog({
   const { t } = useLanguage();
 
   const handleVerification = async () => {
-    if (!user?.email || !password) {
-      setError(t('credential.verification.password.required'));
+    if (!password) {
+      setError('Please enter your password');
       return;
     }
 
     setIsVerifying(true);
     setError("");
 
-    try {
-      const { error } = await signIn(user.email, password);
-      
-      if (error) {
-        setError(t('credential.verification.invalid.password'));
-      } else {
+    // Simulate authentication delay for demo
+    setTimeout(() => {
+      if (password === "demo123" || password.length >= 6) {
         onSuccess();
         onOpenChange(false);
         setPassword("");
+      } else {
+        setError('Invalid password. Try "demo123" or any password with 6+ characters');
       }
-    } catch (err) {
-      setError(t('credential.verification.error'));
-    } finally {
       setIsVerifying(false);
-    }
+    }, 1000);
   };
 
   const handleClose = () => {

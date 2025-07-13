@@ -14,11 +14,11 @@ import {
   Eye,
   PenTool
 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useStudy } from "@/contexts/StudyContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import EConsentDialog from "./EConsentDialog";
+import CredentialVerificationDialog from "./CredentialVerificationDialog";
 
 interface ConsentSignature {
   consent_id: string;
@@ -44,33 +44,74 @@ export default function InvestigatorConsentDashboard({
   const [loading, setLoading] = useState(false);
   const [selectedConsent, setSelectedConsent] = useState<ConsentSignature | null>(null);
   const [showConsentDialog, setShowConsentDialog] = useState(false);
+  const [showCredentialDialog, setShowCredentialDialog] = useState(false);
+  const [consentToSign, setConsentToSign] = useState<ConsentSignature | null>(null);
   const { user } = useAuth();
   const { selectedStudy } = useStudy();
   const { t } = useLanguage();
 
   useEffect(() => {
     if (open && user?.id) {
-      fetchPendingSignatures();
+      fetchMockPendingSignatures();
     }
   }, [open, user?.id, selectedStudy?.id]);
 
-  const fetchPendingSignatures = async () => {
-    if (!user?.id) return;
-
+  const fetchMockPendingSignatures = () => {
     setLoading(true);
-    try {
-      const { data, error } = await supabase.rpc('get_pending_consent_signatures', {
-        investigator_user_id: user.id,
-        check_study_id: selectedStudy?.id || null
-      });
-
-      if (error) throw error;
-      setPendingSignatures(data || []);
-    } catch (error) {
-      console.error('Error fetching pending signatures:', error);
-    } finally {
+    
+    // Simulate API delay
+    setTimeout(() => {
+      const mockSignatures: ConsentSignature[] = [
+        {
+          consent_id: "mock-1",
+          participant_id: "p-001",
+          participant_name: "Sarah Johnson",
+          subject_id: "S001",
+          consent_type: "main_icf",
+          participant_signed_at: "2025-07-05T10:30:00Z",
+          days_pending: 8
+        },
+        {
+          consent_id: "mock-2",
+          participant_id: "p-002",
+          participant_name: "Michael Chen",
+          subject_id: "S007",
+          consent_type: "pharmacokinetics",
+          participant_signed_at: "2025-07-08T14:15:00Z",
+          days_pending: 5
+        },
+        {
+          consent_id: "mock-3",
+          participant_id: "p-003",
+          participant_name: "Maria Rodriguez",
+          subject_id: "S012",
+          consent_type: "biomarkers",
+          participant_signed_at: "2025-07-10T09:45:00Z",
+          days_pending: 3
+        },
+        {
+          consent_id: "mock-4",
+          participant_id: "p-004",
+          participant_name: "David Thompson",
+          subject_id: "S004",
+          consent_type: "main_icf",
+          participant_signed_at: "2025-07-03T16:20:00Z",
+          days_pending: 10
+        },
+        {
+          consent_id: "mock-5",
+          participant_id: "p-005",
+          participant_name: "Emma Wilson",
+          subject_id: "S018",
+          consent_type: "biomarkers",
+          participant_signed_at: "2025-07-11T11:30:00Z",
+          days_pending: 2
+        }
+      ];
+      
+      setPendingSignatures(mockSignatures);
       setLoading(false);
-    }
+    }, 800);
   };
 
   const filteredSignatures = pendingSignatures.filter(signature =>
@@ -108,8 +149,24 @@ export default function InvestigatorConsentDashboard({
   };
 
   const handleSignConsent = (consent: ConsentSignature) => {
-    setSelectedConsent(consent);
-    setShowConsentDialog(true);
+    setConsentToSign(consent);
+    setShowCredentialDialog(true);
+  };
+
+  const handleCredentialSuccess = () => {
+    if (consentToSign) {
+      // Remove the signed consent from pending list (simulate signature)
+      setPendingSignatures(prev => 
+        prev.filter(sig => sig.consent_id !== consentToSign.consent_id)
+      );
+      
+      // Show success message
+      setTimeout(() => {
+        alert(`✅ Consent signed successfully for ${consentToSign.participant_name}!`);
+      }, 300);
+      
+      setConsentToSign(null);
+    }
   };
 
   return (
@@ -263,6 +320,15 @@ export default function InvestigatorConsentDashboard({
           mode="view"
         />
       )}
+
+      {/* Credential Verification Dialog */}
+      <CredentialVerificationDialog
+        open={showCredentialDialog}
+        onOpenChange={setShowCredentialDialog}
+        onSuccess={handleCredentialSuccess}
+        title="Re-authenticate to Sign Consent"
+        description="For security and compliance purposes, please re-enter your password to electronically sign this consent form."
+      />
     </>
   );
 }
