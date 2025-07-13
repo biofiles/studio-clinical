@@ -29,6 +29,8 @@ const Settings = () => {
   };
 
   const handleStartTutorial = () => {
+    console.log('Starting tutorial for role:', user?.role);
+    console.log('User object:', user);
     startOnboarding(user?.role);
     navigate(-1); // Go back to the dashboard to start tutorial
   };

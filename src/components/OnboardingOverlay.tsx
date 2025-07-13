@@ -27,6 +27,9 @@ export const OnboardingOverlay: React.FC = () => {
   const [elementPosition, setElementPosition] = useState<ElementPosition | null>(null);
   const [tooltipPosition, setTooltipPosition] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
 
+  // Debug logging
+  console.log('OnboardingOverlay render - isActive:', isActive, 'currentFlow:', currentFlow, 'currentStep:', currentStep);
+
   const updateElementPosition = useCallback(() => {
     if (!currentFlow || !isActive) return;
 
