@@ -172,7 +172,7 @@ export default function InvestigatorConsentDashboard({
   return (
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="max-w-6xl max-h-[90vh] bg-studio-surface border-studio-border">
+        <DialogContent className="max-w-5xl w-[95vw] max-h-[85vh] overflow-hidden bg-studio-surface border-studio-border">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-studio-text">
               <FileCheck className="h-5 w-5 text-studio-accent" />
@@ -241,7 +241,7 @@ export default function InvestigatorConsentDashboard({
             </div>
 
             {/* Signatures List */}
-            <div className="space-y-3 max-h-96 overflow-y-auto">
+            <div className="space-y-3 max-h-64 overflow-y-auto">
               {loading ? (
                 <div className="text-center py-8 text-studio-text-muted">
                   {t('common.loading')}

@@ -329,6 +329,38 @@ const translations = {
     'econsent.signature.date': 'Date',
     'econsent.signature.agree': 'I agree to participate in this study',
     'econsent.signature.sign': 'Sign Document',
+
+    // Consent Dashboard
+    'consent.dashboard.title': 'Consent Management',
+    'consent.dashboard.pending': 'Pending Signatures',
+    'consent.dashboard.urgent': 'Urgent',
+    'consent.dashboard.high.priority': 'High Priority',
+    'consent.dashboard.normal': 'Normal',
+    'consent.dashboard.avg.days': 'Avg Days Pending',
+    'consent.dashboard.search.placeholder': 'Search participants or subject IDs...',
+    'consent.dashboard.no.results': 'No matching signatures found',
+    'consent.dashboard.no.pending': 'No pending signatures',
+    'consent.dashboard.signed.on': 'Signed on',
+    'consent.dashboard.days.pending': 'days pending',
+    'consent.dashboard.view': 'View',
+    'consent.dashboard.sign': 'Sign',
+
+    // Consent Types
+    'consent.type.main.icf': 'Main Informed Consent',
+    'consent.type.pharmacokinetics': 'Pharmacokinetics Study',
+    'consent.type.biomarkers': 'Biomarker Analysis',
+    'consent.type.pregnant.partner': 'Pregnant Partner Consent',
+
+    // Credential Verification
+    'credential.verification.title': 'Re-authenticate to Sign',
+    'credential.verification.description': 'For security and compliance purposes, please re-enter your password.',
+    'credential.verification.password.label': 'Password',
+    'credential.verification.password.placeholder': 'Enter your password',
+    'credential.verification.password.required': 'Password is required',
+    'credential.verification.invalid.password': 'Invalid password',
+    'credential.verification.error': 'Authentication failed',
+    'credential.verification.verify': 'Verify',
+    'credential.verification.verifying': 'Verifying...',
     'econsent.signature.clear': 'Clear Signature',
     'econsent.signature.complete': 'Consent Signed Successfully',
     'econsent.download.pdf': 'Download PDF',
