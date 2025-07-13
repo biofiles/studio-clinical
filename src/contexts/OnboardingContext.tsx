@@ -141,18 +141,14 @@ const getOnboardingFlow = (role: string): OnboardingFlow | null => {
             title: 'onboarding.participant.schedule.title',
             description: 'onboarding.participant.schedule.description',
             selector: '[data-tab="schedule"]',
-            position: 'bottom',
-            requiresAction: true,
-            actionDescription: 'onboarding.participant.schedule.action'
+            position: 'bottom'
           },
           {
             id: 'questionnaires',
             title: 'onboarding.participant.questionnaires.title',
             description: 'onboarding.participant.questionnaires.description',
             selector: '[data-tab="questionnaires"]',
-            position: 'bottom',
-            requiresAction: true,
-            actionDescription: 'onboarding.participant.questionnaires.action'
+            position: 'bottom'
           },
           {
             id: 'econsent',
@@ -201,7 +197,7 @@ const getOnboardingFlow = (role: string): OnboardingFlow | null => {
             title: 'onboarding.investigator.calendar.title',
             description: 'onboarding.investigator.calendar.description',
             selector: '[data-onboarding="calendar-btn"]',
-            position: 'left'
+            position: 'right'
           },
           {
             id: 'barcode',
@@ -257,18 +253,14 @@ const getOnboardingFlow = (role: string): OnboardingFlow | null => {
             title: 'onboarding.cro.questionnaires.title',
             description: 'onboarding.cro.questionnaires.description',
             selector: '[data-tab="questionnaires"]',
-            position: 'bottom',
-            requiresAction: true,
-            actionDescription: 'onboarding.cro.questionnaires.action'
+            position: 'bottom'
           },
           {
             id: 'reports',
             title: 'onboarding.cro.reports.title',
             description: 'onboarding.cro.reports.description',
             selector: '[data-tab="reports"]',
-            position: 'bottom',
-            requiresAction: true,
-            actionDescription: 'onboarding.cro.reports.action'
+            position: 'bottom'
           }
         ]
       };

@@ -49,7 +49,7 @@ export const OnboardingOverlay: React.FC = () => {
 
     setElementPosition(position);
 
-    // Calculate tooltip position with viewport boundary checks
+    // Calculate tooltip position with improved viewport boundary checks
     const tooltipOffset = 20;
     const tooltipWidth = 384; // max-w-sm = 24rem = 384px
     const tooltipHeight = 300; // estimated height
@@ -64,18 +64,18 @@ export const OnboardingOverlay: React.FC = () => {
     switch (actualPosition) {
       case 'top':
         tooltipTop = position.top - tooltipOffset - tooltipHeight;
-        tooltipLeft = position.left + position.width / 2;
+        tooltipLeft = position.left + position.width / 2 - tooltipWidth / 2;
         break;
       case 'bottom':
         tooltipTop = position.top + position.height + tooltipOffset;
-        tooltipLeft = position.left + position.width / 2;
+        tooltipLeft = position.left + position.width / 2 - tooltipWidth / 2;
         break;
       case 'left':
-        tooltipTop = position.top + position.height / 2;
+        tooltipTop = position.top + position.height / 2 - tooltipHeight / 2;
         tooltipLeft = position.left - tooltipOffset - tooltipWidth;
         break;
       case 'right':
-        tooltipTop = position.top + position.height / 2;
+        tooltipTop = position.top + position.height / 2 - tooltipHeight / 2;
         tooltipLeft = position.left + position.width + tooltipOffset;
         break;
     }
@@ -86,30 +86,52 @@ export const OnboardingOverlay: React.FC = () => {
       tooltipLeft += currentStepData.offset.x;
     }
 
-    // Viewport boundary checks and adjustments
-    // Check horizontal bounds
-    if (tooltipLeft < 20) {
-      tooltipLeft = 20;
-    } else if (tooltipLeft + tooltipWidth > viewportWidth - 20) {
-      tooltipLeft = viewportWidth - tooltipWidth - 20;
+    // Enhanced viewport boundary checks and smart repositioning
+    const margin = 20;
+    
+    // Check if tooltip goes out of bounds horizontally
+    if (tooltipLeft < margin) {
+      if (actualPosition === 'left') {
+        // Switch to right position if left doesn't fit
+        tooltipLeft = position.left + position.width + tooltipOffset;
+        if (tooltipLeft + tooltipWidth > viewportWidth - margin) {
+          // Center it if neither side fits
+          tooltipLeft = Math.max(margin, (viewportWidth - tooltipWidth) / 2);
+        }
+      } else {
+        tooltipLeft = margin;
+      }
+    } else if (tooltipLeft + tooltipWidth > viewportWidth - margin) {
+      if (actualPosition === 'right') {
+        // Switch to left position if right doesn't fit
+        tooltipLeft = position.left - tooltipOffset - tooltipWidth;
+        if (tooltipLeft < margin) {
+          // Center it if neither side fits
+          tooltipLeft = Math.max(margin, (viewportWidth - tooltipWidth) / 2);
+        }
+      } else {
+        tooltipLeft = viewportWidth - tooltipWidth - margin;
+      }
     }
 
-    // Check vertical bounds
-    if (tooltipTop < 20) {
-      tooltipTop = 20;
-    } else if (tooltipTop + tooltipHeight > viewportHeight - 20) {
-      tooltipTop = viewportHeight - tooltipHeight - 20;
-    }
-
-    // If tooltip would still be out of bounds, try alternative positions
-    if (actualPosition === 'top' && tooltipTop < 20) {
-      // Switch to bottom
-      tooltipTop = position.top + position.height + tooltipOffset;
-      actualPosition = 'bottom';
-    } else if (actualPosition === 'bottom' && tooltipTop + tooltipHeight > viewportHeight - 20) {
-      // Switch to top
-      tooltipTop = position.top - tooltipOffset - tooltipHeight;
-      actualPosition = 'top';
+    // Check if tooltip goes out of bounds vertically
+    if (tooltipTop < margin) {
+      if (actualPosition === 'top') {
+        // Switch to bottom position if top doesn't fit
+        tooltipTop = position.top + position.height + tooltipOffset;
+      } else {
+        tooltipTop = margin;
+      }
+    } else if (tooltipTop + tooltipHeight > viewportHeight - margin) {
+      if (actualPosition === 'bottom') {
+        // Switch to top position if bottom doesn't fit
+        tooltipTop = position.top - tooltipOffset - tooltipHeight;
+        if (tooltipTop < margin) {
+          tooltipTop = margin;
+        }
+      } else {
+        tooltipTop = viewportHeight - tooltipHeight - margin;
+      }
     }
 
     setTooltipPosition({ top: tooltipTop, left: tooltipLeft });
@@ -197,10 +219,10 @@ export const OnboardingOverlay: React.FC = () => {
           left: tooltipPosition.left,
         }}
       >
-        <Card className="bg-studio-surface border-studio-border shadow-xl max-w-sm">
-          <CardContent className="p-6">
+        <Card className="bg-studio-surface border-studio-border shadow-xl max-w-sm w-80">
+          <CardContent className="p-4">
             {/* Header */}
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-3">
               <div className="flex items-center space-x-2">
                 <Badge variant="outline" className="text-xs">
                   {currentStep + 1} / {currentFlow.steps.length}
@@ -217,19 +239,19 @@ export const OnboardingOverlay: React.FC = () => {
             </div>
 
             {/* Progress */}
-            <Progress value={progress} className="mb-4 h-2" />
+            <Progress value={progress} className="mb-3 h-2" />
 
             {/* Content */}
-            <div className="space-y-3">
-              <h3 className="font-semibold text-studio-text">
+            <div className="space-y-2">
+              <h3 className="font-semibold text-studio-text text-sm">
                 {t(currentStepData.title)}
               </h3>
-              <p className="text-sm text-studio-text-muted">
+              <p className="text-xs text-studio-text-muted leading-relaxed">
                 {t(currentStepData.description)}
               </p>
               
               {currentStepData.requiresAction && (
-                <div className="bg-blue-50 border border-blue-200 rounded p-3">
+                <div className="bg-blue-50 border border-blue-200 rounded p-2">
                   <p className="text-xs text-blue-800">
                     <strong>{t('onboarding.action.required')}:</strong>{' '}
                     {currentStepData.actionDescription && t(currentStepData.actionDescription)}
@@ -239,29 +261,27 @@ export const OnboardingOverlay: React.FC = () => {
             </div>
 
             {/* Actions */}
-            <div className="flex items-center justify-between mt-6">
-              <div className="flex space-x-2">
+            <div className="flex items-center justify-between mt-4">
+              <div className="flex space-x-1">
                 {currentStep > 0 && (
-                  <Button variant="outline" size="sm" onClick={previousStep}>
-                    <ArrowLeft className="h-4 w-4 mr-1" />
+                  <Button variant="outline" size="sm" onClick={previousStep} className="text-xs px-2 py-1">
+                    <ArrowLeft className="h-3 w-3 mr-1" />
                     {t('onboarding.previous')}
                   </Button>
                 )}
               </div>
 
-              <div className="flex space-x-2">
-                <Button variant="ghost" size="sm" onClick={stopOnboarding}>
-                  <SkipForward className="h-4 w-4 mr-1" />
+              <div className="flex space-x-1">
+                <Button variant="ghost" size="sm" onClick={stopOnboarding} className="text-xs px-2 py-1">
+                  <SkipForward className="h-3 w-3 mr-1" />
                   {t('onboarding.skip')}
                 </Button>
-                <Button size="sm" onClick={handleAction}>
-                  {currentStepData.requiresAction 
-                    ? t('onboarding.try.it') 
-                    : currentStep === currentFlow.steps.length - 1
+                <Button size="sm" onClick={handleAction} className="text-xs px-2 py-1">
+                  {currentStep === currentFlow.steps.length - 1
                     ? t('onboarding.finish')
                     : t('onboarding.next')
                   }
-                  {!currentStepData.requiresAction && <ArrowRight className="h-4 w-4 ml-1" />}
+                  <ArrowRight className="h-3 w-3 ml-1" />
                 </Button>
               </div>
             </div>
