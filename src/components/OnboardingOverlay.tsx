@@ -49,14 +49,21 @@ export const OnboardingOverlay: React.FC = () => {
 
     setElementPosition(position);
 
-    // Calculate tooltip position
+    // Calculate tooltip position with viewport boundary checks
     const tooltipOffset = 20;
+    const tooltipWidth = 384; // max-w-sm = 24rem = 384px
+    const tooltipHeight = 300; // estimated height
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
     let tooltipTop = position.top;
     let tooltipLeft = position.left;
+    let actualPosition = currentStepData.position || 'bottom';
 
-    switch (currentStepData.position || 'bottom') {
+    // Initial position calculation
+    switch (actualPosition) {
       case 'top':
-        tooltipTop = position.top - tooltipOffset;
+        tooltipTop = position.top - tooltipOffset - tooltipHeight;
         tooltipLeft = position.left + position.width / 2;
         break;
       case 'bottom':
@@ -65,7 +72,7 @@ export const OnboardingOverlay: React.FC = () => {
         break;
       case 'left':
         tooltipTop = position.top + position.height / 2;
-        tooltipLeft = position.left - tooltipOffset;
+        tooltipLeft = position.left - tooltipOffset - tooltipWidth;
         break;
       case 'right':
         tooltipTop = position.top + position.height / 2;
@@ -77,6 +84,32 @@ export const OnboardingOverlay: React.FC = () => {
     if (currentStepData.offset) {
       tooltipTop += currentStepData.offset.y;
       tooltipLeft += currentStepData.offset.x;
+    }
+
+    // Viewport boundary checks and adjustments
+    // Check horizontal bounds
+    if (tooltipLeft < 20) {
+      tooltipLeft = 20;
+    } else if (tooltipLeft + tooltipWidth > viewportWidth - 20) {
+      tooltipLeft = viewportWidth - tooltipWidth - 20;
+    }
+
+    // Check vertical bounds
+    if (tooltipTop < 20) {
+      tooltipTop = 20;
+    } else if (tooltipTop + tooltipHeight > viewportHeight - 20) {
+      tooltipTop = viewportHeight - tooltipHeight - 20;
+    }
+
+    // If tooltip would still be out of bounds, try alternative positions
+    if (actualPosition === 'top' && tooltipTop < 20) {
+      // Switch to bottom
+      tooltipTop = position.top + position.height + tooltipOffset;
+      actualPosition = 'bottom';
+    } else if (actualPosition === 'bottom' && tooltipTop + tooltipHeight > viewportHeight - 20) {
+      // Switch to top
+      tooltipTop = position.top - tooltipOffset - tooltipHeight;
+      actualPosition = 'top';
     }
 
     setTooltipPosition({ top: tooltipTop, left: tooltipLeft });
@@ -162,13 +195,6 @@ export const OnboardingOverlay: React.FC = () => {
         style={{
           top: tooltipPosition.top,
           left: tooltipPosition.left,
-          transform: currentStepData.position === 'left' 
-            ? 'translate(-100%, -50%)' 
-            : currentStepData.position === 'right'
-            ? 'translate(0, -50%)'
-            : currentStepData.position === 'top'
-            ? 'translate(-50%, -100%)'
-            : 'translate(-50%, 0)',
         }}
       >
         <Card className="bg-studio-surface border-studio-border shadow-xl max-w-sm">
