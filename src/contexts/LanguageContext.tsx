@@ -319,6 +319,7 @@ const translations = {
     
     // eConsent
     'econsent.title': 'Consent',
+    'econsent.section.title': 'Informed Consent',
     'econsent.subtitle': 'Review and sign your informed consent document',
     'econsent.document.title': 'Informed Consent Form',
     'econsent.audio.play': 'Play Audio',
@@ -832,7 +833,8 @@ const translations = {
     'onboarding.cro.reports.action': 'Haz clic en Reportes para ver descargas disponibles',
     
     // eConsent
-    'econsent.title': 'Consentimiento Informado',
+    'econsent.title': 'Consentimiento',
+    'econsent.section.title': 'Consentimiento Informado',
     'econsent.subtitle': 'Revisa y firma tu documento de consentimiento informado',
     'econsent.document.title': 'Formulario de Consentimiento Informado',
     'econsent.audio.play': 'Reproducir Audio',
