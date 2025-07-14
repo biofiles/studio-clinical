@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useLanguage } from "@/contexts/LanguageContext";
+import CredentialVerificationDialog from "./CredentialVerificationDialog";
 import { Play, Pause, Square, Search, Download, FileText, Signature, CheckCircle, SkipBack, SkipForward, Clock } from "lucide-react";
 
 interface EConsentDialogProps {
@@ -45,6 +46,11 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
   const investigatorCanvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [isInvestigatorDrawing, setIsInvestigatorDrawing] = useState(false);
+  
+  // Credential verification states
+  const [showCredentialDialog, setShowCredentialDialog] = useState(false);
+  const [showInvestigatorCredentialDialog, setShowInvestigatorCredentialDialog] = useState(false);
+  const [pendingSignAction, setPendingSignAction] = useState<'participant' | 'investigator' | null>(null);
 
   const consentText = t('econsent.document.title') === 'Informed Consent Form' ? `
     INFORMED CONSENT FORM - Version 2.1
@@ -345,20 +351,31 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
 
   const handleSign = () => {
     if (fullName && agreed && canvasRef.current) {
-      const canvas = canvasRef.current;
-      const signatureData = canvas.toDataURL();
-      setSignature(signatureData);
-      setIsSigned(true);
+      setPendingSignAction('participant');
+      setShowCredentialDialog(true);
     }
   };
 
   const handleInvestigatorSign = () => {
     if (investigatorFullName && investigatorAgreed && investigatorCanvasRef.current) {
+      setPendingSignAction('investigator');
+      setShowInvestigatorCredentialDialog(true);
+    }
+  };
+
+  const handleCredentialSuccess = () => {
+    if (pendingSignAction === 'participant' && canvasRef.current) {
+      const canvas = canvasRef.current;
+      const signatureData = canvas.toDataURL();
+      setSignature(signatureData);
+      setIsSigned(true);
+    } else if (pendingSignAction === 'investigator' && investigatorCanvasRef.current) {
       const canvas = investigatorCanvasRef.current;
       const signatureData = canvas.toDataURL();
       setInvestigatorSignature(signatureData);
       setInvestigatorIsSigned(true);
     }
+    setPendingSignAction(null);
   };
 
   const handleDownloadPDF = () => {
@@ -827,6 +844,23 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
             </Card>
           ) : null}
         </div>
+
+        {/* Credential Verification Dialogs */}
+        <CredentialVerificationDialog
+          open={showCredentialDialog}
+          onOpenChange={setShowCredentialDialog}
+          onSuccess={handleCredentialSuccess}
+          title="Autenticar para Firmar Consentimiento"
+          description="Por motivos de seguridad y cumplimiento, ingrese su contraseña para firmar electrónicamente este formulario de consentimiento."
+        />
+        
+        <CredentialVerificationDialog
+          open={showInvestigatorCredentialDialog}
+          onOpenChange={setShowInvestigatorCredentialDialog}
+          onSuccess={handleCredentialSuccess}
+          title="Autenticar como Investigador"
+          description="Por motivos de seguridad y cumplimiento, ingrese su contraseña para firmar electrónicamente como investigador."
+        />
       </DialogContent>
     </Dialog>
   );
