@@ -110,6 +110,7 @@ const translations = {
     'activity.survey.completed': 'Survey completed successfully! Thank you for your participation.',
     'activity.pdf.export': 'PDF export initiated - questionnaire responses would be downloaded as a secure, de-identified document.',
     'activity.view.details': 'Ver Detalles',
+    'activity.important.notes': 'Important Notes',
     
     // Calendar
     'calendar.view.full': 'View Full Calendar',
@@ -605,6 +606,7 @@ const translations = {
     'activity.survey.completed': 'Cuestionario completado exitosamente! Gracias por su participación.',
     'activity.pdf.export': 'Exportación PDF iniciada - las respuestas del cuestionario se descargarían como un documento seguro y sin identificación.',
     'activity.view.details': 'Ver Detalles',
+    'activity.important.notes': 'Notas Importantes',
     
     // Calendar
     'calendar.view.full': 'Ver Calendario Completo',

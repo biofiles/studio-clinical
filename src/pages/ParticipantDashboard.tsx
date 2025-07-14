@@ -167,8 +167,8 @@ const ParticipantDashboard = () => {
                             <MapPin className="h-4 w-4" />
                             <span>{item.location}</span>
                           </div>
-                          {item.notes && <div className="bg-blue-50 border border-blue-200 rounded p-3 text-sm text-blue-800">
-                              <strong>Important Notes:</strong> {item.notes}
+                           {item.notes && <div className="bg-blue-50 border border-blue-200 rounded p-3 text-sm text-blue-800">
+                              <strong>{t('activity.important.notes')}:</strong> {item.notes}
                             </div>}
                         </div>
                       </div>
