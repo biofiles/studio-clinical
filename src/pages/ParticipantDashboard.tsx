@@ -229,7 +229,7 @@ const ParticipantDashboard = () => {
 
           <TabsContent value="econsent" className="space-y-4">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
-              <h3 className="text-lg font-medium text-studio-text">{t('econsent.section.title')}</h3>
+              <h3 className="text-lg sm:text-xl font-medium text-studio-text">{t('econsent.section.title')}</h3>
               <Button variant="studio" size="sm" onClick={() => setShowEConsent(true)} className="w-full sm:w-auto">
                 <Signature className="h-4 w-4 mr-2" />
                 {t('econsent.view.signed')}
@@ -338,7 +338,7 @@ const ParticipantDashboard = () => {
           </TabsContent>
 
           <TabsContent value="visits" className="space-y-4">
-            <h3 className="text-base font-medium text-studio-text">{t('visits.site.visits')}</h3>
+            <h3 className="text-lg sm:text-xl font-medium text-studio-text">{t('visits.site.visits')}</h3>
             
             <div className="space-y-3">
               <Card className="bg-gray-50 border-gray-200">
@@ -376,7 +376,7 @@ const ParticipantDashboard = () => {
           </TabsContent>
 
           <TabsContent value="contact" className="space-y-3">
-            <h3 className="text-base font-medium text-studio-text">{t('contact.info')}</h3>
+            <h3 className="text-lg sm:text-xl font-medium text-studio-text">{t('contact.info')}</h3>
             
             {/* Important Safety Note - Moved to top */}
             <div className="bg-orange-50 border border-orange-200 rounded p-2 text-xs text-orange-800">
@@ -468,7 +468,7 @@ const ParticipantDashboard = () => {
           </TabsContent>
 
           <TabsContent value="profile" className="space-y-3">
-            <h3 className="text-base font-medium text-studio-text">{t('participant.profile')}</h3>
+            <h3 className="text-lg sm:text-xl font-medium text-studio-text">{t('participant.profile')}</h3>
             
             <div className="space-y-4">
               {/* Patient ID Card */}
