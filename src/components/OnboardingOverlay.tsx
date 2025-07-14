@@ -260,23 +260,28 @@ export const OnboardingOverlay: React.FC = () => {
               )}
             </div>
 
-            {/* Actions */}
-            <div className="flex items-center justify-between mt-4">
-              <div className="flex space-x-1">
-                {currentStep > 0 && (
-                  <Button variant="outline" size="sm" onClick={previousStep} className="text-xs px-2 py-1">
-                    <ArrowLeft className="h-3 w-3 mr-1" />
-                    {t('onboarding.previous')}
-                  </Button>
-                )}
-              </div>
-
-              <div className="flex space-x-1">
+            {/* Actions - Compact Layout */}
+            <div className="flex flex-col gap-2 mt-4">
+              {/* Skip button row */}
+              <div className="flex justify-end">
                 <Button variant="ghost" size="sm" onClick={stopOnboarding} className="text-xs px-2 py-1">
                   <SkipForward className="h-3 w-3 mr-1" />
                   {t('onboarding.skip')}
                 </Button>
-                <Button size="sm" onClick={handleAction} className="text-xs px-2 py-1">
+              </div>
+              
+              {/* Navigation buttons row */}
+              <div className="flex justify-between items-center gap-2">
+                {currentStep > 0 ? (
+                  <Button variant="outline" size="sm" onClick={previousStep} className="text-xs px-2 py-1 flex-1">
+                    <ArrowLeft className="h-3 w-3 mr-1" />
+                    {t('onboarding.previous')}
+                  </Button>
+                ) : (
+                  <div className="flex-1"></div>
+                )}
+                
+                <Button size="sm" onClick={handleAction} className="text-xs px-2 py-1 flex-1">
                   {currentStep === currentFlow.steps.length - 1
                     ? t('onboarding.finish')
                     : t('onboarding.next')

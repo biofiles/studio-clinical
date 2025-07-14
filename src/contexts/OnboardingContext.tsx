@@ -223,9 +223,9 @@ const getOnboardingFlow = (role: string): OnboardingFlow | null => {
         ]
       };
 
-    case 'cro-sponsor':
+    case 'cro_sponsor':
       return {
-        role: 'cro-sponsor',
+        role: 'cro_sponsor',
         steps: [
           {
             id: 'overview',
