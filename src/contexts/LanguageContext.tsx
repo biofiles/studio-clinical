@@ -34,6 +34,8 @@ const translations = {
     'dashboard.enrollment': 'Enrollment',
     'dashboard.daily.diaries': 'Daily Diaries',
     'dashboard.site.visits': 'Visits',
+    'dashboard.barcode.scanner': 'Barcode Scanner',
+    'dashboard.fhir.interoperability': 'FHIR Interoperability',
     
     // Participant Management
     'participant.management': 'Participant Management',
@@ -345,6 +347,8 @@ const translations = {
     'consent.dashboard.days.pending': 'days pending',
     'consent.dashboard.view': 'View',
     'consent.dashboard.sign': 'Sign',
+    'consent.dashboard.reauth.title': 'Re-authenticate to Sign Consent',
+    'consent.dashboard.reauth.description': 'For security and compliance purposes, please re-enter your password to electronically sign this consent form.',
 
     // Consent Types
     'consent.type.main.icf': 'Main Informed Consent',
@@ -546,6 +550,8 @@ const translations = {
     'dashboard.enrollment': 'Inscripción',
     'dashboard.daily.diaries': 'Diarios Diarios',
     'dashboard.site.visits': 'Visitas',
+    'dashboard.barcode.scanner': 'Escáner de Códigos de Barras',
+    'dashboard.fhir.interoperability': 'Interoperabilidad FHIR',
     
     // Participant Management
     'participant.management': 'Gestión de Participantes',
@@ -848,6 +854,29 @@ const translations = {
     'econsent.status.signed': 'Firmado',
     'econsent.status.superseded': 'Reemplazado',
     'econsent.status.pending': 'Pendiente',
+    
+    // Consent Dashboard (Spanish)
+    'consent.dashboard.title': 'Gestión de Consentimientos',
+    'consent.dashboard.pending': 'Firmas Pendientes',
+    'consent.dashboard.urgent': 'Urgente',
+    'consent.dashboard.high.priority': 'Alta Prioridad',
+    'consent.dashboard.normal': 'Normal',
+    'consent.dashboard.avg.days': 'Días Promedio Pendientes',
+    'consent.dashboard.search.placeholder': 'Buscar participantes o IDs de sujeto...',
+    'consent.dashboard.no.results': 'No se encontraron firmas coincidentes',
+    'consent.dashboard.no.pending': 'No hay firmas pendientes',
+    'consent.dashboard.signed.on': 'Firmado el',
+    'consent.dashboard.days.pending': 'días pendientes',
+    'consent.dashboard.view': 'Ver',
+    'consent.dashboard.sign': 'Firmar',
+    'consent.dashboard.reauth.title': 'Re-autenticarse para Firmar Consentimiento',
+    'consent.dashboard.reauth.description': 'Por motivos de seguridad y cumplimiento, vuelva a introducir su contraseña para firmar electrónicamente este formulario de consentimiento.',
+
+    // Consent Types (Spanish)
+    'consent.type.main.icf': 'Consentimiento Informado Principal',
+    'consent.type.pharmacokinetics': 'Estudio de Farmacocinética',
+    'consent.type.biomarkers': 'Análisis de Biomarcadores',
+    'consent.type.pregnant.partner': 'Consentimiento de Pareja Embarazada',
     
     // Common
     'common.welcome': 'Bienvenido',

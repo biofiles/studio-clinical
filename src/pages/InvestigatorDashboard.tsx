@@ -259,7 +259,7 @@ const InvestigatorDashboard = () => {
                 data-onboarding="barcode-btn"
               >
                 <QrCode className="h-4 w-4 mr-2" />
-                Escáner de Códigos
+                {t('dashboard.barcode.scanner')}
               </Button>
               <StudyResultsSignup variant="investigator" />
               <Button 
@@ -269,7 +269,7 @@ const InvestigatorDashboard = () => {
                 data-onboarding="fhir-btn"
               >
                 <Globe className="h-4 w-4 mr-2" />
-                Interoperabilidad FHIR
+                {t('dashboard.fhir.interoperability')}
               </Button>
               <Button 
                 variant="studio" 

@@ -326,8 +326,8 @@ export default function InvestigatorConsentDashboard({
         open={showCredentialDialog}
         onOpenChange={setShowCredentialDialog}
         onSuccess={handleCredentialSuccess}
-        title="Re-authenticate to Sign Consent"
-        description="For security and compliance purposes, please re-enter your password to electronically sign this consent form."
+        title={t('consent.dashboard.reauth.title')}
+        description={t('consent.dashboard.reauth.description')}
       />
     </>
   );
