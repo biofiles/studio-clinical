@@ -334,32 +334,35 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="w-full max-w-4xl max-h-[95vh] mx-4 sm:mx-auto overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="flex items-center space-x-2">
-            <FileText className="h-5 w-5" />
-            <span>{t('econsent.title')} - Version {icfVersion}</span>
+      <DialogContent className="w-full max-w-4xl max-h-[95vh] mx-2 sm:mx-4 lg:mx-auto overflow-y-auto p-3 sm:p-6">
+        <DialogHeader className="pb-4">
+          <DialogTitle className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 text-base sm:text-lg">
+            <div className="flex items-center space-x-2">
+              <FileText className="h-4 w-4 sm:h-5 sm:w-5" />
+              <span>{t('econsent.title')}</span>
+            </div>
+            <span className="text-sm sm:text-base text-studio-text-muted">Version {icfVersion}</span>
           </DialogTitle>
-          <p className="text-sm text-studio-text-muted">{t('econsent.subtitle')}</p>
+          <p className="text-xs sm:text-sm text-studio-text-muted">{t('econsent.subtitle')}</p>
           <div className="flex items-center space-x-2 text-xs text-studio-text-muted">
             <span>{t('econsent.last.updated')}: December 1, 2024</span>
           </div>
         </DialogHeader>
 
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {/* ICF History and Optional ICFs */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
             <Card>
-              <CardHeader>
+              <CardHeader className="pb-2">
                 <CardTitle className="text-sm">{t('econsent.previous.signed')}</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-2">
+              <CardContent className="space-y-2 pt-0">
                 <div className="text-xs space-y-1">
-                  <div className="flex justify-between">
+                  <div className="flex justify-between items-center">
                     <span>ICF v2.0</span>
                     <span className="text-studio-text-muted">Nov 15, 2024</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between items-center">
                     <span>ICF v1.0</span>
                     <span className="text-studio-text-muted">Oct 10, 2024</span>
                   </div>
@@ -368,22 +371,22 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
             </Card>
             
             <Card>
-              <CardHeader>
+              <CardHeader className="pb-2">
                 <CardTitle className="text-sm">{t('econsent.optional.available')}</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-2">
+              <CardContent className="space-y-2 pt-0">
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <span>{t('econsent.pharmacokinetics')}</span>
-                    <Button variant="outline" size="sm">{t('econsent.sign.button')}</Button>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-1 sm:space-y-0 text-xs">
+                    <span className="flex-1">{t('econsent.pharmacokinetics')}</span>
+                    <Button variant="outline" size="sm" className="w-full sm:w-auto">{t('econsent.sign.button')}</Button>
                   </div>
-                  <div className="flex items-center justify-between text-xs">
-                    <span>{t('econsent.biomarkers')}</span>
-                    <Button variant="outline" size="sm">{t('econsent.sign.button')}</Button>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-1 sm:space-y-0 text-xs">
+                    <span className="flex-1">{t('econsent.biomarkers')}</span>
+                    <Button variant="outline" size="sm" className="w-full sm:w-auto">{t('econsent.sign.button')}</Button>
                   </div>
-                  <div className="flex items-center justify-between text-xs">
-                    <span>{t('econsent.pregnant.partner')}</span>
-                    <Button variant="outline" size="sm">{t('econsent.sign.button')}</Button>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-1 sm:space-y-0 text-xs">
+                    <span className="flex-1">{t('econsent.pregnant.partner')}</span>
+                    <Button variant="outline" size="sm" className="w-full sm:w-auto">{t('econsent.sign.button')}</Button>
                   </div>
                 </div>
               </CardContent>
@@ -392,40 +395,46 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
 
           {/* Enhanced Audio Controls */}
           <Card>
-            <CardHeader>
+            <CardHeader className="pb-2">
               <CardTitle className="text-sm">{t('econsent.audio.playback')}</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center space-x-4">
+            <CardContent className="space-y-3 sm:space-y-4 pt-0">
+              <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 sm:space-x-2">
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={handleSkipBackward}
+                  className="flex items-center justify-center"
                 >
                   <SkipBack className="h-4 w-4" />
+                  <span className="sr-only">Skip Back</span>
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={handleAudioPlay}
+                  className="flex items-center justify-center space-x-1"
                 >
                   {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-                  {isPlaying ? t('econsent.audio.pause') : t('econsent.audio.play')}
+                  <span className="hidden sm:inline">{isPlaying ? t('econsent.audio.pause') : t('econsent.audio.play')}</span>
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={handleSkipForward}
+                  className="flex items-center justify-center"
                 >
                   <SkipForward className="h-4 w-4" />
+                  <span className="sr-only">Skip Forward</span>
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={handleAudioStop}
+                  className="flex items-center justify-center space-x-1"
                 >
                   <Square className="h-4 w-4" />
-                  {t('econsent.audio.stop')}
+                  <span className="hidden sm:inline">{t('econsent.audio.stop')}</span>
                 </Button>
               </div>
               
@@ -443,10 +452,10 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
                 />
               </div>
 
-              <div className="flex items-center space-x-4">
+              <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
                 <span className="text-sm text-studio-text-muted">Speed:</span>
                 <Select value={playbackSpeed.toString()} onValueChange={handleSpeedChange}>
-                  <SelectTrigger className="w-20">
+                  <SelectTrigger className="w-full sm:w-20">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -464,12 +473,12 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
 
           {/* Search */}
           <Card>
-            <CardHeader>
+            <CardHeader className="pb-2">
               <CardTitle className="text-sm">Document Search</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="flex items-center space-x-2">
-                <Search className="h-4 w-4 text-studio-text-muted" />
+            <CardContent className="pt-0">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
+                <Search className="h-4 w-4 text-studio-text-muted mt-2 sm:mt-0" />
                 <Input
                   placeholder={t('econsent.search.placeholder')}
                   value={searchTerm}
@@ -492,11 +501,11 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
 
           {/* Document Content with Highlighting */}
           <Card>
-            <CardHeader>
-              <CardTitle>{t('econsent.document.title')}</CardTitle>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm sm:text-base">{t('econsent.document.title')}</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="prose max-w-none text-sm whitespace-pre-line bg-gray-50 p-4 rounded border max-h-60 overflow-y-auto">
+            <CardContent className="pt-0">
+              <div className="prose max-w-none text-xs sm:text-sm whitespace-pre-line bg-gray-50 p-3 sm:p-4 rounded border max-h-48 sm:max-h-60 overflow-y-auto">
                 {highlightSearchTerms(consentText)}
               </div>
             </CardContent>
@@ -505,20 +514,21 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
           {/* Electronic Signature */}
           {mode === 'sign' && !isSigned ? (
             <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <Signature className="h-5 w-5" />
+              <CardHeader className="pb-2">
+                <CardTitle className="flex items-center space-x-2 text-sm sm:text-base">
+                  <Signature className="h-4 w-4 sm:h-5 sm:w-5" />
                   <span>{t('econsent.signature.required')}</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 gap-4">
+              <CardContent className="space-y-3 sm:space-y-4 pt-0">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   <div>
                     <label className="text-sm font-medium">{t('econsent.signature.full.name')}</label>
                     <Input
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="Enter your full name"
+                      className="mt-1"
                     />
                   </div>
                   <div>
@@ -526,18 +536,20 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
                     <Input
                       value={new Date().toLocaleDateString()}
                       disabled
+                      className="mt-1"
                     />
                   </div>
                 </div>
 
                 <div>
                   <label className="text-sm font-medium mb-2 block">Electronic Signature</label>
-                  <div className="border-2 border-dashed border-gray-300 rounded p-2 overflow-hidden">
+                  <div className="border-2 border-dashed border-gray-300 rounded p-1 sm:p-2 overflow-hidden">
                     <canvas
                       ref={canvasRef}
-                      width={300}
-                      height={120}
-                      className="w-full max-w-full h-auto cursor-crosshair touch-none"
+                      width={280}
+                      height={100}
+                      className="w-full max-w-full h-20 sm:h-auto cursor-crosshair touch-none"
+                      style={{ touchAction: 'none' }}
                       onMouseDown={startDrawing}
                       onMouseMove={draw}
                       onMouseUp={stopDrawing}
@@ -545,6 +557,7 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
                       onTouchStart={(e) => {
                         e.preventDefault();
                         const touch = e.touches[0];
+                        const rect = e.currentTarget.getBoundingClientRect();
                         const mouseEvent = new MouseEvent("mousedown", {
                           clientX: touch.clientX,
                           clientY: touch.clientY
@@ -554,6 +567,7 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
                       onTouchMove={(e) => {
                         e.preventDefault();
                         const touch = e.touches[0];
+                        const rect = e.currentTarget.getBoundingClientRect();
                         const mouseEvent = new MouseEvent("mousemove", {
                           clientX: touch.clientX,
                           clientY: touch.clientY
@@ -570,19 +584,20 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
                     variant="outline"
                     size="sm"
                     onClick={clearSignature}
-                    className="mt-2"
+                    className="mt-2 w-full sm:w-auto"
                   >
                     {t('econsent.signature.clear')}
                   </Button>
                 </div>
 
-                <div className="flex items-center space-x-2">
+                <div className="flex items-start space-x-2">
                   <Checkbox
                     id="agree"
                     checked={agreed}
                     onCheckedChange={(checked) => setAgreed(checked as boolean)}
+                    className="mt-0.5"
                   />
-                  <label htmlFor="agree" className="text-sm">
+                  <label htmlFor="agree" className="text-xs sm:text-sm leading-relaxed">
                     {t('econsent.signature.agree')} - ICF Version {icfVersion}
                   </label>
                 </div>
@@ -590,7 +605,7 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
                 <Button
                   onClick={handleSign}
                   disabled={!fullName || !agreed}
-                  className="w-full"
+                  className="w-full text-sm sm:text-base"
                 >
                   <Signature className="h-4 w-4 mr-2" />
                   {t('econsent.signature.sign')}
@@ -599,24 +614,25 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
             </Card>
           ) : mode === 'view' || isSigned ? (
             <Card className="bg-green-50 border-green-200">
-              <CardContent className="p-4">
+              <CardContent className="p-3 sm:p-4">
                 <div className="flex items-center space-x-2 text-green-800">
-                  <CheckCircle className="h-5 w-5" />
-                  <span className="font-medium">
+                  <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5" />
+                  <span className="font-medium text-sm sm:text-base">
                     {mode === 'view' ? 'Documento Firmado Electrónicamente' : t('econsent.signature.complete')}
                   </span>
                 </div>
-                <p className="text-sm text-green-700 mt-1">
+                <p className="text-xs sm:text-sm text-green-700 mt-1">
                   Firmado por: {fullName} el {mode === 'view' ? '24 Nov 2024' : new Date().toLocaleDateString()}
                 </p>
                 <p className="text-xs text-green-600 mt-1">
                   ICF Version: {icfVersion} | Document ID: ICF-{mode === 'view' ? '20241124' : Date.now()}
                 </p>
-                <div className="flex space-x-2 mt-3">
+                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 mt-3">
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={handleDownloadPDF}
+                    className="w-full sm:w-auto"
                   >
                     <Download className="h-4 w-4 mr-2" />
                     {t('econsent.download.pdf')}
@@ -626,6 +642,7 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
                       variant="outline"
                       size="sm"
                       onClick={() => setIsSigned(false)}
+                      className="w-full sm:w-auto"
                     >
                       {t('econsent.view.signed')}
                     </Button>
