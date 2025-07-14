@@ -832,7 +832,7 @@ const translations = {
     'onboarding.cro.reports.action': 'Haz clic en Reportes para ver descargas disponibles',
     
     // eConsent
-    'econsent.title': 'Consentimiento',
+    'econsent.title': 'Consentimiento Informado',
     'econsent.subtitle': 'Revisa y firma tu documento de consentimiento informado',
     'econsent.document.title': 'Formulario de Consentimiento Informado',
     'econsent.audio.play': 'Reproducir Audio',
@@ -877,6 +877,17 @@ const translations = {
     'consent.type.pharmacokinetics': 'Estudio de Farmacocinética',
     'consent.type.biomarkers': 'Análisis de Biomarcadores',
     'consent.type.pregnant.partner': 'Consentimiento de Pareja Embarazada',
+    
+    // Credential Verification (Spanish)
+    'credential.verification.title': 'Re-autenticar para Firmar',
+    'credential.verification.description': 'Por motivos de seguridad y cumplimiento, vuelva a introducir su contraseña.',
+    'credential.verification.password.label': 'Contraseña',
+    'credential.verification.password.placeholder': 'Ingrese su contraseña',
+    'credential.verification.password.required': 'La contraseña es requerida',
+    'credential.verification.invalid.password': 'Contraseña inválida',
+    'credential.verification.error': 'Falló la autenticación',
+    'credential.verification.verify': 'Verificar',
+    'credential.verification.verifying': 'Verificando...',
     
     // Common
     'common.welcome': 'Bienvenido',
