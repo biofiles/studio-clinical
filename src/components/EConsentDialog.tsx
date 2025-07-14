@@ -22,10 +22,19 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
   const [isPlaying, setIsPlaying] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<number[]>([]);
+  
+  // Participant signature states
   const [signature, setSignature] = useState("");
   const [fullName, setFullName] = useState("");
   const [agreed, setAgreed] = useState(false);
   const [isSigned, setIsSigned] = useState(false);
+  
+  // Investigator signature states
+  const [investigatorSignature, setInvestigatorSignature] = useState("");
+  const [investigatorFullName, setInvestigatorFullName] = useState("");
+  const [investigatorAgreed, setInvestigatorAgreed] = useState(false);
+  const [investigatorIsSigned, setInvestigatorIsSigned] = useState(false);
+  
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(180); // 3 minutes sample
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
@@ -33,7 +42,9 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
   
   const audioRef = useRef<HTMLAudioElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const investigatorCanvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
+  const [isInvestigatorDrawing, setIsInvestigatorDrawing] = useState(false);
 
   const consentText = t('econsent.document.title') === 'Informed Consent Form' ? `
     INFORMED CONSENT FORM - Version 2.1
@@ -290,12 +301,63 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
     setSignature("");
   };
 
+  // Investigator canvas drawing functions
+  const startInvestigatorDrawing = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    setIsInvestigatorDrawing(true);
+    const canvas = investigatorCanvasRef.current;
+    if (canvas) {
+      const rect = canvas.getBoundingClientRect();
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.beginPath();
+        ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+      }
+    }
+  };
+
+  const drawInvestigator = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    if (!isInvestigatorDrawing) return;
+    const canvas = investigatorCanvasRef.current;
+    if (canvas) {
+      const rect = canvas.getBoundingClientRect();
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+        ctx.stroke();
+      }
+    }
+  };
+
+  const stopInvestigatorDrawing = () => {
+    setIsInvestigatorDrawing(false);
+  };
+
+  const clearInvestigatorSignature = () => {
+    const canvas = investigatorCanvasRef.current;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+    setInvestigatorSignature("");
+  };
+
   const handleSign = () => {
     if (fullName && agreed && canvasRef.current) {
       const canvas = canvasRef.current;
       const signatureData = canvas.toDataURL();
       setSignature(signatureData);
       setIsSigned(true);
+    }
+  };
+
+  const handleInvestigatorSign = () => {
+    if (investigatorFullName && investigatorAgreed && investigatorCanvasRef.current) {
+      const canvas = investigatorCanvasRef.current;
+      const signatureData = canvas.toDataURL();
+      setInvestigatorSignature(signatureData);
+      setInvestigatorIsSigned(true);
     }
   };
 
@@ -309,8 +371,19 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    const investigatorCanvas = investigatorCanvasRef.current;
+    
     if (canvas) {
       const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.strokeStyle = '#000';
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+      }
+    }
+    
+    if (investigatorCanvas) {
+      const ctx = investigatorCanvas.getContext('2d');
       if (ctx) {
         ctx.strokeStyle = '#000';
         ctx.lineWidth = 2;
@@ -325,10 +398,16 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
       setIsSigned(true);
       setFullName("Juan Carlos García");
       setAgreed(true);
+      setInvestigatorIsSigned(true);
+      setInvestigatorFullName("Dra. Sarah Johnson");
+      setInvestigatorAgreed(true);
     } else {
       setIsSigned(false);
       setFullName("");
       setAgreed(false);
+      setInvestigatorIsSigned(false);
+      setInvestigatorFullName("");
+      setInvestigatorAgreed(false);
     }
   }, [mode]);
 
@@ -339,7 +418,7 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
           <DialogTitle className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 text-base sm:text-lg">
             <div className="flex items-center space-x-2">
               <FileText className="h-4 w-4 sm:h-5 sm:w-5" />
-              <span>{t('econsent.title')}</span>
+              <span>Consentimiento Informado</span>
             </div>
             <span className="text-sm sm:text-base text-studio-text-muted">Version {icfVersion}</span>
           </DialogTitle>
@@ -350,48 +429,24 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
         </DialogHeader>
 
         <div className="space-y-4 sm:space-y-6">
-          {/* ICF History and Optional ICFs */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm">{t('econsent.previous.signed')}</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2 pt-0">
-                <div className="text-xs space-y-1">
-                  <div className="flex justify-between items-center">
-                    <span>ICF v2.0</span>
-                    <span className="text-studio-text-muted">Nov 15, 2024</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>ICF v1.0</span>
-                    <span className="text-studio-text-muted">Oct 10, 2024</span>
-                  </div>
+          {/* ICF History */}
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm">{t('econsent.previous.signed')}</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2 pt-0">
+              <div className="text-xs space-y-1">
+                <div className="flex justify-between items-center">
+                  <span>ICF v2.0</span>
+                  <span className="text-studio-text-muted">Nov 15, 2024</span>
                 </div>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm">{t('econsent.optional.available')}</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2 pt-0">
-                <div className="space-y-2">
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-1 sm:space-y-0 text-xs">
-                    <span className="flex-1">{t('econsent.pharmacokinetics')}</span>
-                    <Button variant="outline" size="sm" className="w-full sm:w-auto">{t('econsent.sign.button')}</Button>
-                  </div>
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-1 sm:space-y-0 text-xs">
-                    <span className="flex-1">{t('econsent.biomarkers')}</span>
-                    <Button variant="outline" size="sm" className="w-full sm:w-auto">{t('econsent.sign.button')}</Button>
-                  </div>
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-1 sm:space-y-0 text-xs">
-                    <span className="flex-1">{t('econsent.pregnant.partner')}</span>
-                    <Button variant="outline" size="sm" className="w-full sm:w-auto">{t('econsent.sign.button')}</Button>
-                  </div>
+                <div className="flex justify-between items-center">
+                  <span>ICF v1.0</span>
+                  <span className="text-studio-text-muted">Oct 10, 2024</span>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
+              </div>
+            </CardContent>
+          </Card>
 
           {/* Enhanced Audio Controls */}
           <Card>
@@ -648,6 +703,126 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
                     </Button>
                   )}
                 </div>
+              </CardContent>
+            </Card>
+          ) : null}
+
+          {/* Investigator Electronic Signature */}
+          {mode === 'sign' && isSigned && !investigatorIsSigned ? (
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="flex items-center space-x-2 text-sm sm:text-base">
+                  <Signature className="h-4 w-4 sm:h-5 sm:w-5" />
+                  <span>Firma Electrónica del Investigador</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3 sm:space-y-4 pt-0">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div>
+                    <label className="text-sm font-medium">Nombre Completo del Investigador</label>
+                    <Input
+                      value={investigatorFullName}
+                      onChange={(e) => setInvestigatorFullName(e.target.value)}
+                      placeholder="Ingrese su nombre completo"
+                      className="mt-1"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Fecha</label>
+                    <Input
+                      value={new Date().toLocaleDateString()}
+                      disabled
+                      className="mt-1"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Firma Electrónica del Investigador</label>
+                  <div className="border-2 border-dashed border-gray-300 rounded p-1 sm:p-2 overflow-hidden">
+                    <canvas
+                      ref={investigatorCanvasRef}
+                      width={280}
+                      height={100}
+                      className="w-full max-w-full h-20 sm:h-auto cursor-crosshair touch-none"
+                      style={{ touchAction: 'none' }}
+                      onMouseDown={startInvestigatorDrawing}
+                      onMouseMove={drawInvestigator}
+                      onMouseUp={stopInvestigatorDrawing}
+                      onMouseLeave={stopInvestigatorDrawing}
+                      onTouchStart={(e) => {
+                        e.preventDefault();
+                        const touch = e.touches[0];
+                        const rect = e.currentTarget.getBoundingClientRect();
+                        const mouseEvent = new MouseEvent("mousedown", {
+                          clientX: touch.clientX,
+                          clientY: touch.clientY
+                        });
+                        startInvestigatorDrawing(mouseEvent as any);
+                      }}
+                      onTouchMove={(e) => {
+                        e.preventDefault();
+                        const touch = e.touches[0];
+                        const rect = e.currentTarget.getBoundingClientRect();
+                        const mouseEvent = new MouseEvent("mousemove", {
+                          clientX: touch.clientX,
+                          clientY: touch.clientY
+                        });
+                        drawInvestigator(mouseEvent as any);
+                      }}
+                      onTouchEnd={(e) => {
+                        e.preventDefault();
+                        stopInvestigatorDrawing();
+                      }}
+                    />
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={clearInvestigatorSignature}
+                    className="mt-2 w-full sm:w-auto"
+                  >
+                    Limpiar Firma
+                  </Button>
+                </div>
+
+                <div className="flex items-start space-x-2">
+                  <Checkbox
+                    id="investigator-agree"
+                    checked={investigatorAgreed}
+                    onCheckedChange={(checked) => setInvestigatorAgreed(checked as boolean)}
+                    className="mt-0.5"
+                  />
+                  <label htmlFor="investigator-agree" className="text-xs sm:text-sm leading-relaxed">
+                    Confirmo que he explicado el estudio al participante y que todas sus preguntas han sido respondidas satisfactoriamente - ICF Version {icfVersion}
+                  </label>
+                </div>
+
+                <Button
+                  onClick={handleInvestigatorSign}
+                  disabled={!investigatorFullName || !investigatorAgreed}
+                  className="w-full text-sm sm:text-base"
+                >
+                  <Signature className="h-4 w-4 mr-2" />
+                  Firmar como Investigador
+                </Button>
+              </CardContent>
+            </Card>
+          ) : mode === 'view' || investigatorIsSigned ? (
+            <Card className="bg-blue-50 border-blue-200">
+              <CardContent className="p-3 sm:p-4">
+                <div className="flex items-center space-x-2 text-blue-800">
+                  <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5" />
+                  <span className="font-medium text-sm sm:text-base">
+                    Consentimiento Firmado por el Investigador
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm text-blue-700 mt-1">
+                  Firmado por: {investigatorFullName} el {mode === 'view' ? '24 Nov 2024' : new Date().toLocaleDateString()}
+                </p>
+                <p className="text-xs text-blue-600 mt-1">
+                  ICF Version: {icfVersion} | Investigator ID: INV-{mode === 'view' ? '20241124' : Date.now()}
+                </p>
               </CardContent>
             </Card>
           ) : null}
