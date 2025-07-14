@@ -172,17 +172,17 @@ export default function InvestigatorConsentDashboard({
   return (
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="max-w-5xl w-[95vw] max-h-[85vh] overflow-hidden bg-studio-surface border-studio-border">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-studio-text">
+        <DialogContent className="max-w-4xl w-[95vw] max-h-[90vh] overflow-hidden bg-studio-surface border-studio-border p-4 sm:p-6">
+          <DialogHeader className="pb-4">
+            <DialogTitle className="flex items-center gap-2 text-studio-text text-lg sm:text-xl">
               <FileCheck className="h-5 w-5 text-studio-accent" />
               {t('consent.dashboard.title')}
             </DialogTitle>
           </DialogHeader>
 
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {/* Summary Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
               <Card className="bg-studio-bg border-studio-border">
                 <CardContent className="p-4">
                   <div className="flex items-center gap-2">
@@ -241,7 +241,7 @@ export default function InvestigatorConsentDashboard({
             </div>
 
             {/* Signatures List */}
-            <div className="space-y-3 max-h-64 overflow-y-auto">
+            <div className="space-y-3 max-h-64 sm:max-h-80 overflow-y-auto">
               {loading ? (
                 <div className="text-center py-8 text-studio-text-muted">
                   {t('common.loading')}
@@ -254,58 +254,62 @@ export default function InvestigatorConsentDashboard({
                   </p>
                 </div>
               ) : (
-                filteredSignatures.map((signature) => (
-                  <Card key={signature.consent_id} className="bg-studio-bg border-studio-border">
-                    <CardContent className="p-4">
-                      <div className="flex justify-between items-start">
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-3">
-                            <h3 className="font-medium text-studio-text">
-                              {signature.participant_name}
-                            </h3>
-                            <Badge variant="outline" className="text-xs">
-                              {signature.subject_id}
-                            </Badge>
-                            {getPriorityBadge(signature.days_pending)}
-                          </div>
+                 filteredSignatures.map((signature) => (
+                   <Card key={signature.consent_id} className="bg-studio-bg border-studio-border">
+                     <CardContent className="p-3 sm:p-4">
+                       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 sm:gap-4">
+                         <div className="space-y-2 flex-1 min-w-0">
+                           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+                             <h3 className="font-medium text-studio-text text-sm sm:text-base">
+                               {signature.participant_name}
+                             </h3>
+                             <div className="flex items-center gap-2 flex-wrap">
+                               <Badge variant="outline" className="text-xs">
+                                 {signature.subject_id}
+                               </Badge>
+                               {getPriorityBadge(signature.days_pending)}
+                             </div>
+                           </div>
 
-                          <div className="flex items-center gap-4 text-sm text-studio-text-muted">
-                            <span>{getConsentTypeLabel(signature.consent_type)}</span>
-                            <span>•</span>
-                            <span>
-                              {t('consent.dashboard.signed.on')} {' '}
-                              {new Date(signature.participant_signed_at).toLocaleDateString()}
-                            </span>
-                            <span>•</span>
-                            <span>
-                              {signature.days_pending} {t('consent.dashboard.days.pending')}
-                            </span>
-                          </div>
-                        </div>
+                           <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 text-xs sm:text-sm text-studio-text-muted">
+                             <span className="break-words">{getConsentTypeLabel(signature.consent_type)}</span>
+                             <div className="flex items-center gap-2 sm:gap-4">
+                               <span className="hidden sm:inline">•</span>
+                               <span className="whitespace-nowrap">
+                                 {t('consent.dashboard.signed.on')} {' '}
+                                 {new Date(signature.participant_signed_at).toLocaleDateString()}
+                               </span>
+                               <span className="hidden sm:inline">•</span>
+                               <span className="whitespace-nowrap">
+                                 {signature.days_pending} {t('consent.dashboard.days.pending')}
+                               </span>
+                             </div>
+                           </div>
+                         </div>
 
-                        <div className="flex gap-2">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleViewConsent(signature)}
-                            className="border-studio-border text-studio-text hover:bg-studio-surface"
-                          >
-                            <Eye className="h-4 w-4 mr-1" />
-                            {t('consent.dashboard.view')}
-                          </Button>
-                          <Button
-                            size="sm"
-                            onClick={() => handleSignConsent(signature)}
-                            className="bg-studio-accent hover:bg-studio-accent/90 text-white"
-                          >
-                            <PenTool className="h-4 w-4 mr-1" />
-                            {t('consent.dashboard.sign')}
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))
+                         <div className="flex gap-2 flex-shrink-0 sm:flex-col lg:flex-row">
+                           <Button
+                             variant="outline"
+                             size="sm"
+                             onClick={() => handleViewConsent(signature)}
+                             className="border-studio-border text-studio-text hover:bg-studio-surface flex-1 sm:flex-none text-xs sm:text-sm"
+                           >
+                             <Eye className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
+                             {t('consent.dashboard.view')}
+                           </Button>
+                           <Button
+                             size="sm"
+                             onClick={() => handleSignConsent(signature)}
+                             className="bg-studio-accent hover:bg-studio-accent/90 text-white flex-1 sm:flex-none text-xs sm:text-sm"
+                           >
+                             <PenTool className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
+                             {t('consent.dashboard.sign')}
+                           </Button>
+                         </div>
+                       </div>
+                     </CardContent>
+                   </Card>
+                 ))
               )}
             </div>
           </div>
