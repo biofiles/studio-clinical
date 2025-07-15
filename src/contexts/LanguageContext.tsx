@@ -239,7 +239,7 @@ const translations = {
     
     // Profile
     'profile.view.settings': 'View Profile & Settings',
-    'profile.export.pdf': 'Export My Responses (PDF)',
+    'profile.export.pdf': 'Export My Data',
     'profile.privacy.security': 'Privacy & Security',
     'profile.privacy.description': 'Your data is encrypted and protected according to HIPAA standards. All responses are de-identified for analysis.',
     'details.study.progress': 'Study Progress',
@@ -740,7 +740,7 @@ const translations = {
     
     // Profile
     'profile.view.settings': 'Ver Perfil y Configuración',
-    'profile.export.pdf': 'Exportar Mis Respuestas (PDF)',
+    'profile.export.pdf': 'Exportar Mis Datos',
     'profile.privacy.security': 'Privacidad y Seguridad',
     'profile.privacy.description': 'Sus datos están encriptados y protegidos según los estándares HIPAA. Todas las respuestas son desidentificadas para el análisis.',
     
