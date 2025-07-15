@@ -210,20 +210,7 @@ const ParticipantDashboard = () => {
             </div>
 
             <div className="space-y-3">
-              <div className={`p-4 border rounded ${surveyCompleted ? 'bg-[hsl(var(--progress-success))]/5 border-[hsl(var(--progress-success))]/20' : 'bg-[hsl(var(--progress-accent))]/5 border-[hsl(var(--progress-accent))]/20'}`}>
-                <div className="flex items-center space-x-2 mb-2">
-                  {surveyCompleted ? <CheckCircle className="h-4 w-4 text-[hsl(var(--progress-success))]" /> : <Bell className="h-4 w-4 text-[hsl(var(--progress-accent))]" />}
-                    <span className={`font-medium ${surveyCompleted ? 'text-[hsl(var(--progress-success))]' : 'text-[hsl(var(--progress-accent))]'}`}>
-                      {t('questionnaire.daily.symptom')} - {surveyCompleted ? t('common.completed') : t('common.due.today')}
-                    </span>
-                </div>
-                <p className={`text-sm mb-3 ${surveyCompleted ? 'text-[hsl(var(--progress-success))]/80' : 'text-[hsl(var(--progress-accent))]/80'}`}>
-                  {surveyCompleted ? t('questionnaire.thanks.completing') : t('questionnaire.quick.survey')}
-                </p>
-                {!surveyCompleted && <Button size="sm" className="w-full sm:w-auto" onClick={handleCompleteSurvey}>
-                    {t('questionnaire.complete.now')}
-                  </Button>}
-              </div>
+              
             </div>
           </TabsContent>
 
