@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mail, Plus, X, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { useStudy } from "@/contexts/StudyContext";
+
 import { useLanguage } from "@/contexts/LanguageContext";
 
 interface StudyResultsSignupProps {
@@ -20,7 +20,7 @@ const StudyResultsSignup = ({ variant = "participant", trigger }: StudyResultsSi
   const [emails, setEmails] = useState<string[]>([""]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-  const { selectedStudy } = useStudy();
+  
   const { t } = useLanguage();
 
   const addEmailField = () => {
@@ -45,15 +45,6 @@ const StudyResultsSignup = ({ variant = "participant", trigger }: StudyResultsSi
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!selectedStudy) {
-      toast({
-        title: "Error",
-        description: "No hay estudio seleccionado",
-        variant: "destructive",
-      });
-      return;
-    }
 
     const validEmails = emails.filter(email => email.trim() && validateEmail(email.trim()));
     
@@ -75,7 +66,7 @@ const StudyResultsSignup = ({ variant = "participant", trigger }: StudyResultsSi
           .from('study_results_signups')
           .insert({
             email: email.trim(),
-            study_id: selectedStudy.id,
+            study_id: null,
           })
       );
 
