@@ -18,19 +18,6 @@ const ParticipantQuestionnaires = ({ open, onOpenChange, participantId }: Partic
   const { t } = useLanguage();
   const [questionnaires] = useState([
     {
-      id: 1,
-      title: t('questionnaire.daily.symptom.diary'),
-      status: "completed",
-      dueDate: "2024-12-08",
-      completedDate: "2024-12-08",
-      score: 85,
-      responses: {
-        "symptoms": ["Headache", "Fatigue"],
-        "severity": 6,
-        "medication_taken": "Yes, as prescribed"
-      }
-    },
-    {
       id: 2,
       title: t('questionnaire.weekly.qol.assessment'),
       status: "completed",
