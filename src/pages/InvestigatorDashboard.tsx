@@ -50,10 +50,10 @@ const InvestigatorDashboard = () => {
           diaryCompliance: 91,
           visitCompliance: 94,
           nextEvents: [
-            { date: "Jul 18, 2025", time: "9:30 AM", event: "S004 - Baseline Assessment", type: "visit" },
-            { date: "Jul 22, 2025", time: "1:15 PM", event: "S007 - ECG Monitoring", type: "lab" },
-            { date: "Jul 25, 2025", time: "11:00 AM", event: "Weekly Safety Review", type: "meeting" },
-            { date: "Aug 02, 2025", time: "3:45 PM", event: "S002 - Follow-up Visit", type: "visit" }
+            { date: "Jul 18, 2025", time: "9:30 AM", event: "S004 - " + (t ? t('dashboard.event.baseline.assessment') : 'Baseline Assessment'), type: "visit" },
+            { date: "Jul 22, 2025", time: "1:15 PM", event: "S007 - " + (t ? t('dashboard.event.ecg.monitoring') : 'ECG Monitoring'), type: "lab" },
+            { date: "Jul 25, 2025", time: "11:00 AM", event: t ? t('dashboard.event.safety.review') : 'Weekly Safety Review', type: "meeting" },
+            { date: "Aug 02, 2025", time: "3:45 PM", event: "S002 - " + (t ? t('dashboard.event.followup.visit') : 'Follow-up Visit'), type: "visit" }
           ]
         };
       case '2': // ATLAS-DM2
@@ -65,9 +65,9 @@ const InvestigatorDashboard = () => {
           diaryCompliance: 88,
           visitCompliance: 97,
           nextEvents: [
-            { date: "Jul 19, 2025", time: "10:00 AM", event: "P003 - HbA1c Test", type: "lab" },
-            { date: "Jul 24, 2025", time: "2:30 PM", event: "P008 - Dosing Visit", type: "visit" },
-            { date: "Jul 28, 2025", time: "4:00 PM", event: "DMC Safety Meeting", type: "meeting" }
+            { date: "Jul 19, 2025", time: "10:00 AM", event: "P003 - " + (t ? t('dashboard.event.hba1c.test') : 'HbA1c Test'), type: "lab" },
+            { date: "Jul 24, 2025", time: "2:30 PM", event: "P008 - " + (t ? t('dashboard.event.dosing.visit') : 'Dosing Visit'), type: "visit" },
+            { date: "Jul 28, 2025", time: "4:00 PM", event: t ? t('dashboard.event.dmc.safety.meeting') : 'DMC Safety Meeting', type: "meeting" }
           ]
         };
       case '3': // HORIZON-Onc
@@ -79,9 +79,9 @@ const InvestigatorDashboard = () => {
           diaryCompliance: 85,
           visitCompliance: 92,
           nextEvents: [
-            { date: "Jul 20, 2025", time: "8:45 AM", event: "H001 - Tumor Assessment", type: "visit" },
-            { date: "Jul 23, 2025", time: "11:30 AM", event: "H005 - Biomarker Analysis", type: "lab" },
-            { date: "Jul 26, 2025", time: "1:00 PM", event: "Oncology Team Review", type: "meeting" }
+            { date: "Jul 20, 2025", time: "8:45 AM", event: "H001 - " + (t ? t('dashboard.event.tumor.assessment') : 'Tumor Assessment'), type: "visit" },
+            { date: "Jul 23, 2025", time: "11:30 AM", event: "H005 - " + (t ? t('dashboard.event.biomarker.analysis') : 'Biomarker Analysis'), type: "lab" },
+            { date: "Jul 26, 2025", time: "1:00 PM", event: t ? t('dashboard.event.oncology.team.review') : 'Oncology Team Review', type: "meeting" }
           ]
         };
       case '4': // GUARDIAN-Ped
@@ -93,9 +93,9 @@ const InvestigatorDashboard = () => {
           diaryCompliance: 93,
           visitCompliance: 98,
           nextEvents: [
-            { date: "Jul 21, 2025", time: "3:15 PM", event: "G006 - Growth Assessment", type: "visit" },
-            { date: "Jul 24, 2025", time: "9:00 AM", event: "G012 - Safety Labs", type: "lab" },
-            { date: "Jul 27, 2025", time: "10:30 AM", event: "Pediatric Safety Review", type: "meeting" }
+            { date: "Jul 21, 2025", time: "3:15 PM", event: "G006 - " + (t ? t('dashboard.event.growth.assessment') : 'Growth Assessment'), type: "visit" },
+            { date: "Jul 24, 2025", time: "9:00 AM", event: "G012 - " + (t ? t('dashboard.event.safety.labs') : 'Safety Labs'), type: "lab" },
+            { date: "Jul 27, 2025", time: "10:30 AM", event: t ? t('dashboard.event.pediatric.safety.review') : 'Pediatric Safety Review', type: "meeting" }
           ]
         };
       default:

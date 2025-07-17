@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import jsQR from "jsqr";
+import Quagga from "@ericblade/quagga2";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -53,7 +54,7 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
       console.log("Initializing camera...");
       const hasCamera = await checkCameraSupport();
       if (!hasCamera) {
-        throw new Error(t("no_camera_available") || "No camera available");
+        throw new Error(t("barcode.no.camera.available") || "No camera available");
       }
 
       const constraints = {
@@ -78,14 +79,14 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
       }
     } catch (err: any) {
       console.error("Camera initialization error:", err);
-      let errorMessage = t("camera_access_error") || "Error accessing camera";
+      let errorMessage = t("barcode.camera.access.error") || "Error accessing camera";
       
       if (err.name === 'NotAllowedError') {
-        errorMessage = t("camera_permission_denied") || "Camera permission denied. Please allow camera access.";
+        errorMessage = t("barcode.camera.permission.denied") || "Camera permission denied. Please allow camera access.";
       } else if (err.name === 'NotFoundError') {
-        errorMessage = t("no_camera_found") || "No camera found on this device.";
+        errorMessage = t("barcode.no.camera.found") || "No camera found on this device.";
       } else if (err.name === 'NotSupportedError') {
-        errorMessage = t("camera_not_supported") || "Camera not supported in this browser.";
+        errorMessage = t("barcode.camera.not.supported") || "Camera not supported in this browser.";
       }
       
       setError(errorMessage);
@@ -96,13 +97,40 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
     }
   }, [checkCameraSupport, t]);
 
-  // Scan QR code from video stream
+  // Scan codes from video stream (both QR and barcodes)
   const startScanning = useCallback(() => {
     if (!videoRef.current || !canvasRef.current) return;
 
     const video = videoRef.current;
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
+
+    // Initialize Quagga for barcode scanning
+    const barcodeContainer = document.createElement('div');
+    barcodeContainer.style.display = 'none';
+    document.body.appendChild(barcodeContainer);
+
+    Quagga.init({
+      inputStream: {
+        name: "Live",
+        type: "LiveStream",
+        target: barcodeContainer,
+        constraints: {
+          width: 640,
+          height: 480,
+          facingMode: "environment"
+        }
+      },
+      decoder: {
+        readers: ["code_128_reader", "ean_reader", "ean_8_reader", "code_39_reader", "code_39_vin_reader", "codabar_reader", "upc_reader", "upc_e_reader", "i2of5_reader"]
+      }
+    }, (err) => {
+      if (err) {
+        console.error("Quagga initialization failed:", err);
+      } else {
+        console.log("Quagga initialized successfully");
+      }
+    });
 
     const scan = () => {
       if (!scanningRef.current) return;
@@ -112,17 +140,20 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
         canvas.height = video.videoHeight;
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
         
+        // Try QR code detection first
         const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-        const code = jsQR(imageData.data, imageData.width, imageData.height);
+        const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
         
-        if (code && code.data) {
-          console.log("QR Code detected:", code.data);
-          setScanResult(code.data);
+        if (qrCode && qrCode.data) {
+          console.log("QR Code detected:", qrCode.data);
+          setScanResult(qrCode.data);
           setIsScanning(false);
           scanningRef.current = false;
           stopCamera();
-          toast.success(t("scan_success") || "Code scanned successfully", {
-            description: `${t("result")}: ${code.data}`
+          Quagga.stop();
+          document.body.removeChild(barcodeContainer);
+          toast.success(t("barcode.scan.success") || "Code scanned successfully", {
+            description: `${t("barcode.result") || "Result"}: ${qrCode.data}`
           });
           return;
         }
@@ -133,6 +164,23 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
       }
     };
 
+    // Listen for barcode detection
+    Quagga.onDetected((result) => {
+      if (result.codeResult && result.codeResult.code) {
+        console.log("Barcode detected:", result.codeResult.code);
+        setScanResult(result.codeResult.code);
+        setIsScanning(false);
+        scanningRef.current = false;
+        stopCamera();
+        Quagga.stop();
+        document.body.removeChild(barcodeContainer);
+        toast.success(t("barcode.scan.success") || "Code scanned successfully", {
+          description: `${t("barcode.result") || "Result"}: ${result.codeResult.code}`
+        });
+      }
+    });
+
+    Quagga.start();
     scan();
   }, [t]);
 
@@ -147,6 +195,11 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
         console.log("Track stopped:", track.kind);
       });
       videoRef.current.srcObject = null;
+    }
+    try {
+      Quagga.stop();
+    } catch (e) {
+      console.log("Quagga was not running");
     }
     setIsScanning(false);
     setIsLoading(false);
@@ -189,18 +242,18 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
         if (code && code.data) {
           console.log("QR Code detected in uploaded image:", code.data);
           setScanResult(code.data);
-          toast.success(t("scan_success") || "Code scanned successfully", {
-            description: `${t("result")}: ${code.data}`
+          toast.success(t("barcode.scan.success") || "Code scanned successfully", {
+            description: `${t("barcode.result") || "Result"}: ${code.data}`
           });
         } else {
-          const errorMsg = t("no_code_found") || "No code found in the image";
+          const errorMsg = t("barcode.no.code.found") || "No code found in the image";
           setError(errorMsg);
           toast.error(errorMsg);
         }
       };
       img.onerror = () => {
         setIsLoading(false);
-        const errorMsg = t("image_load_error") || "Error loading image";
+        const errorMsg = t("barcode.image.load.error") || "Error loading image";
         setError(errorMsg);
         toast.error(errorMsg);
       };
@@ -208,7 +261,7 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
     };
     reader.onerror = () => {
       setIsLoading(false);
-      const errorMsg = t("file_read_error") || "Error reading file";
+      const errorMsg = t("barcode.file.read.error") || "Error reading file";
       setError(errorMsg);
       toast.error(errorMsg);
     };
@@ -226,7 +279,7 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
   const handleCopyResult = () => {
     if (scanResult) {
       navigator.clipboard.writeText(scanResult);
-      toast.success(t("copied_to_clipboard") || "Copied to clipboard");
+      toast.success(t("barcode.copied.to.clipboard") || "Copied to clipboard");
     }
   };
 
@@ -248,10 +301,10 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-2">
             <Camera className="h-5 w-5" />
-            <span>{t("barcode_scanner") || "Barcode Scanner"}</span>
+            <span>{t("barcode.scanner") || "Barcode Scanner"}</span>
           </DialogTitle>
           <DialogDescription>
-            {t("scan_barcode_description") || "Scan a barcode or QR code using your camera or upload an image"}
+            {t("barcode.scan.description") || "Scan a barcode or QR code using your camera or upload an image"}
           </DialogDescription>
         </DialogHeader>
 
@@ -261,11 +314,11 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="camera">
                   <Camera className="h-4 w-4 mr-2" />
-                  {t("camera") || "Camera"}
+                  {t("barcode.camera") || "Camera"}
                 </TabsTrigger>
                 <TabsTrigger value="upload">
                   <Upload className="h-4 w-4 mr-2" />
-                  {t("upload_image") || "Upload Image"}
+                  {t("barcode.upload.image") || "Upload Image"}
                 </TabsTrigger>
               </TabsList>
 
@@ -297,7 +350,7 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
                     <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded">
                       <div className="text-white text-center">
                         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto mb-2"></div>
-                        <p className="text-sm">{t("initializing_camera") || "Initializing camera..."}</p>
+                        <p className="text-sm">{t("barcode.initializing.camera") || "Initializing camera..."}</p>
                       </div>
                     </div>
                   )}
@@ -306,7 +359,7 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
                 {isScanning && (
                   <div className="text-center">
                     <p className="text-sm text-muted-foreground">
-                      {t("scanning_instructions") || "Scanning... Position the code within the frame"}
+                      {t("barcode.scanning.instructions") || "Scanning... Position the code within the frame"}
                     </p>
                   </div>
                 )}
@@ -314,7 +367,7 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
                 {!isScanning && !error && !isLoading && (
                   <Button onClick={initializeCamera} className="w-full">
                     <Camera className="h-4 w-4 mr-2" />
-                    {t("start_camera") || "Start Camera"}
+                    {t("barcode.start.camera") || "Start Camera"}
                   </Button>
                 )}
               </TabsContent>
@@ -323,7 +376,7 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
                 <Alert>
                   <Upload className="h-4 w-4" />
                   <AlertDescription>
-                    {t("select_image_instruction") || "Select an image containing a barcode or QR code."}
+                    {t("barcode.select.image.instruction") || "Select an image containing a barcode or QR code."}
                   </AlertDescription>
                 </Alert>
 
@@ -347,7 +400,7 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
                     <div className="flex items-center space-x-2">
                       <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
                       <span className="text-sm text-muted-foreground">
-                        {t("processing_image") || "Processing image..."}
+                        {t("barcode.processing.image") || "Processing image..."}
                       </span>
                     </div>
                   )}
@@ -362,7 +415,7 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
               <Alert>
                 <CheckCircle className="h-4 w-4 text-green-600" />
                 <AlertDescription>
-                  <strong>{t("scan_success") || "Code scanned successfully:"}</strong>
+                  <strong>{t("barcode.scan.success") || "Code scanned successfully:"}</strong>
                 </AlertDescription>
               </Alert>
 
@@ -379,7 +432,7 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
                   className="flex-1"
                 >
                   <Copy className="h-4 w-4 mr-2" />
-                  {t("copy_result") || "Copy Result"}
+                  {t("barcode.copy.result") || "Copy Result"}
                 </Button>
                 <Button 
                   onClick={() => {
@@ -392,7 +445,7 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
                   variant="outline"
                   className="flex-1"
                 >
-                  {t("scan_another") || "Scan Another"}
+                  {t("barcode.scan.another") || "Scan Another"}
                 </Button>
               </div>
             </div>
@@ -401,7 +454,7 @@ const BarcodeScanner = ({ open, onOpenChange }: BarcodeScannerProps) => {
           <div className="flex justify-end space-x-2">
             <Button onClick={handleClose} variant="outline">
               <X className="h-4 w-4 mr-2" />
-              {t("close") || "Close"}
+              {t("barcode.close") || "Close"}
             </Button>
           </div>
         </div>
