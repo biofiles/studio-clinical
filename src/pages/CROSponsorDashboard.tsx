@@ -82,8 +82,8 @@ const CROSponsorDashboard = () => {
 
     // Simulate PDF generation process
     await new Promise(resolve => setTimeout(resolve, 3000));
-    toast.success("Questionnaire PDF Report Generated", {
-      description: "Complete questionnaire data exported for regulatory submission"
+    toast.success(t('cro.pdf.report.generated'), {
+      description: t('cro.pdf.report.description')
     });
     setIsGeneratingPDF(false);
   };
@@ -531,10 +531,10 @@ const CROSponsorDashboard = () => {
               <Button onClick={handlePDFGeneration} disabled={isGeneratingPDF} variant="outline" size="sm" className="flex items-center space-x-2">
                 {isGeneratingPDF ? <>
                     <div className="animate-spin h-3 w-3 border border-primary border-t-transparent rounded-full" />
-                    <span>Generating PDF...</span>
+                    <span>{t('cro.generating.pdf')}</span>
                   </> : <>
                     <FileText className="h-3 w-3" />
-                    <span>Generate Questionnaire PDF Report</span>
+                    <span>{t('cro.generate.pdf.report')}</span>
                   </>}
               </Button>
             </div>

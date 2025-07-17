@@ -568,7 +568,11 @@ const translations = {
     'alert.site.activation': 'New site activated in Boston Medical Center',
     'alert.data.validation': 'Data validation issues resolved',
     'alert.regulatory.submission': 'Regulatory submission prepared',
-    'alert.biomarker.analysis': 'Biomarker analysis milestone completed'
+    'alert.biomarker.analysis': 'Biomarker analysis milestone completed',
+    'cro.generate.pdf.report': 'Generate Questionnaire PDF Report',
+    'cro.generating.pdf': 'Generating PDF...',
+    'cro.pdf.report.generated': 'Questionnaire PDF Report Generated',
+    'cro.pdf.report.description': 'Complete questionnaire data exported for regulatory submission'
   },
   spanish: {
     // Header
@@ -1090,6 +1094,10 @@ const translations = {
     'cro.validate.cdisc': 'Validar Estándares CDISC',
     'cro.validate.cdisc.description': 'Validar contra el Modelo de Tabulación de Datos de Estudio CDISC',
     'cro.advanced.analytics': 'Análisis Avanzado',
+    'cro.generate.pdf.report': 'Generar Reporte PDF de Cuestionarios',
+    'cro.generating.pdf': 'Generando PDF...',
+    'cro.pdf.report.generated': 'Reporte PDF de Cuestionarios Generado',
+    'cro.pdf.report.description': 'Datos completos de cuestionarios exportados para envío regulatorio',
     
     // Study Details Attributes
     'study.protocol': 'Protocolo',
