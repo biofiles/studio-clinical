@@ -35,6 +35,10 @@ const translations = {
     'dashboard.site.visits': 'Visits',
     'dashboard.barcode.scanner': 'Barcode Scanner',
     'dashboard.fhir.interoperability': 'FHIR Interoperability',
+    'dashboard.at': 'at',
+    'dashboard.event.type.visit': 'visit',
+    'dashboard.event.type.lab': 'lab', 
+    'dashboard.event.type.meeting': 'meeting',
     
     // Participant Management
     'participant.management': 'Participant Management',
@@ -552,6 +556,10 @@ const translations = {
     'dashboard.site.visits': 'Visitas',
     'dashboard.barcode.scanner': 'Escáner de Códigos de Barras',
     'dashboard.fhir.interoperability': 'Interoperabilidad FHIR',
+    'dashboard.at': 'a las',
+    'dashboard.event.type.visit': 'visita',
+    'dashboard.event.type.lab': 'laboratorio',
+    'dashboard.event.type.meeting': 'reunión',
     
     // Participant Management
     'participant.management': 'Gestión de Participantes',

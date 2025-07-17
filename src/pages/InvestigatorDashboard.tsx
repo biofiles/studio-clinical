@@ -197,7 +197,7 @@ const InvestigatorDashboard = () => {
                 <div key={index} className="flex justify-between items-center p-3 bg-studio-bg rounded">
                   <div>
                     <p className="font-medium text-studio-text">{item.event}</p>
-                    <p className="text-sm text-studio-text-muted">{item.date} at {item.time}</p>
+                    <p className="text-sm text-studio-text-muted">{item.date} {t('dashboard.at')} {item.time}</p>
                   </div>
                   <div className="text-right">
                     <span className={`px-2 py-1 text-xs rounded border ${
@@ -205,7 +205,7 @@ const InvestigatorDashboard = () => {
                       item.type === 'lab' ? 'bg-[hsl(var(--progress-success))]/10 text-[hsl(var(--progress-success))] border-[hsl(var(--progress-success))]/20' :
                       'bg-[hsl(var(--progress-accent))]/10 text-[hsl(var(--progress-accent))] border-[hsl(var(--progress-accent))]/20'
                     }`}>
-                      {item.type}
+                      {t(`dashboard.event.type.${item.type}`)}
                     </span>
                   </div>
                 </div>
