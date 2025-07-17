@@ -572,7 +572,13 @@ const translations = {
     'cro.generate.pdf.report': 'Generate Questionnaire PDF Report',
     'cro.generating.pdf': 'Generating PDF...',
     'cro.pdf.report.generated': 'Questionnaire PDF Report Generated',
-    'cro.pdf.report.description': 'Complete questionnaire data exported for regulatory submission'
+    'cro.pdf.report.description': 'Complete questionnaire data exported for regulatory submission',
+    'cro.performance.trends': 'Performance Trends',
+    'cro.performance.trends.description': 'Cross-study performance analysis and benchmarking',
+    'cro.site.comparisons': 'Site Comparisons',
+    'cro.site.comparisons.description': 'Comparative analysis across all study sites',
+    'cro.regulatory.readiness': 'Regulatory Readiness',
+    'cro.regulatory.readiness.description': 'Compliance status and regulatory submission preparation',
   },
   spanish: {
     // Header
@@ -1098,6 +1104,12 @@ const translations = {
     'cro.generating.pdf': 'Generando PDF...',
     'cro.pdf.report.generated': 'Reporte PDF de Cuestionarios Generado',
     'cro.pdf.report.description': 'Datos completos de cuestionarios exportados para envío regulatorio',
+    'cro.performance.trends': 'Tendencias de Rendimiento',
+    'cro.performance.trends.description': 'Análisis de rendimiento entre estudios y benchmarking',
+    'cro.site.comparisons': 'Comparaciones de Sitios',
+    'cro.site.comparisons.description': 'Análisis comparativo entre todos los sitios de estudio',
+    'cro.regulatory.readiness': 'Preparación Regulatoria',
+    'cro.regulatory.readiness.description': 'Estado de cumplimiento y preparación para envío regulatorio',
     
     // Study Details Attributes
     'study.protocol': 'Protocolo',

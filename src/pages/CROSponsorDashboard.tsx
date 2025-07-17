@@ -822,18 +822,18 @@ const CROSponsorDashboard = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="text-center p-4 bg-studio-bg rounded">
                     <TrendingUp className="h-8 w-8 mx-auto mb-2 text-primary" />
-                    <h4 className="font-medium text-studio-text">Performance Trends</h4>
-                    <p className="text-sm text-studio-text-muted mt-1">Cross-study performance analysis and benchmarking</p>
+                    <h4 className="font-medium text-studio-text">{t('cro.performance.trends')}</h4>
+                    <p className="text-sm text-studio-text-muted mt-1">{t('cro.performance.trends.description')}</p>
                   </div>
                   <div className="text-center p-4 bg-studio-bg rounded">
                     <Users className="h-8 w-8 mx-auto mb-2 text-primary" />
-                    <h4 className="font-medium text-studio-text">Site Comparisons</h4>
-                    <p className="text-sm text-studio-text-muted mt-1">Comparative analysis across all study sites</p>
+                    <h4 className="font-medium text-studio-text">{t('cro.site.comparisons')}</h4>
+                    <p className="text-sm text-studio-text-muted mt-1">{t('cro.site.comparisons.description')}</p>
                   </div>
                   <div className="text-center p-4 bg-studio-bg rounded">
                     <FileText className="h-8 w-8 mx-auto mb-2 text-primary" />
-                    <h4 className="font-medium text-studio-text">Regulatory Readiness</h4>
-                    <p className="text-sm text-studio-text-muted mt-1">Compliance status and regulatory submission preparation</p>
+                    <h4 className="font-medium text-studio-text">{t('cro.regulatory.readiness')}</h4>
+                    <p className="text-sm text-studio-text-muted mt-1">{t('cro.regulatory.readiness.description')}</p>
                   </div>
                 </div>
               </CardContent>
