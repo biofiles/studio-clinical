@@ -108,12 +108,12 @@ const CROSponsorDashboard = () => {
           schedule: [
             { event: "Primer Sitio Iniciado", protocol: selectedStudy.protocol, date: "Oct 2024", type: "milestone", status: "completed" },
             { event: "Primer Sitio Activado", protocol: selectedStudy.protocol, date: "Nov 2024", type: "milestone", status: "completed" },
-            { event: "First Patient First Visit (FPFV)", protocol: selectedStudy.protocol, date: "Dec 2024", type: "milestone", status: "completed" },
-            { event: "First Patient Last Visit (FPLV)", protocol: selectedStudy.protocol, date: "Mar 2025", type: "milestone", status: "pending" },
-            { event: "Last Patient First Visit (LPFV)", protocol: selectedStudy.protocol, date: "May 2025", type: "milestone", status: "pending" },
-            { event: "Last Patient Last Visit (LPLV)", protocol: selectedStudy.protocol, date: "Sep 2025", type: "milestone", status: "pending" },
-            { event: "Database Lock", protocol: selectedStudy.protocol, date: "Jun 2025", type: "regulatory", status: "pending" },
-            { event: "Statistical Analysis Plan", protocol: selectedStudy.protocol, date: "Jul 2025", type: "regulatory", status: "pending" }
+            { event: t('milestone.first.patient.first.visit'), protocol: selectedStudy.protocol, date: "Dec 2024", type: "milestone", status: "completed" },
+            { event: t('milestone.first.patient.last.visit'), protocol: selectedStudy.protocol, date: "Mar 2025", type: "milestone", status: "pending" },
+            { event: t('milestone.last.patient.first.visit'), protocol: selectedStudy.protocol, date: "May 2025", type: "milestone", status: "pending" },
+            { event: t('milestone.last.patient.last.visit'), protocol: selectedStudy.protocol, date: "Sep 2025", type: "milestone", status: "pending" },
+            { event: t('milestone.database.lock'), protocol: selectedStudy.protocol, date: "Jun 2025", type: "regulatory", status: "pending" },
+            { event: t('milestone.statistical.analysis.plan'), protocol: selectedStudy.protocol, date: "Jul 2025", type: "regulatory", status: "pending" }
           ],
           participants: {
             enrollment: { current: 385, target: 450, percentage: 86 },
@@ -145,10 +145,10 @@ const CROSponsorDashboard = () => {
           schedule: [
             { event: "Primer Sitio Iniciado", protocol: selectedStudy.protocol, date: "Jan 2025", type: "milestone", status: "completed" },
             { event: "Primer Sitio Activado", protocol: selectedStudy.protocol, date: "Feb 2025", type: "milestone", status: "completed" },
-            { event: "First Patient First Visit (FPFV)", protocol: selectedStudy.protocol, date: "Mar 2025", type: "milestone", status: "completed" },
-            { event: "Mid-study Analysis", protocol: selectedStudy.protocol, date: "Aug 2025", type: "regulatory", status: "pending" },
-            { event: "Last Patient First Visit (LPFV)", protocol: selectedStudy.protocol, date: "Oct 2025", type: "milestone", status: "pending" },
-            { event: "Safety Review", protocol: selectedStudy.protocol, date: "Sep 2025", type: "regulatory", status: "pending" }
+            { event: t('milestone.first.patient.first.visit'), protocol: selectedStudy.protocol, date: "Mar 2025", type: "milestone", status: "completed" },
+            { event: t('milestone.mid.study.analysis'), protocol: selectedStudy.protocol, date: "Aug 2025", type: "regulatory", status: "pending" },
+            { event: t('milestone.last.patient.first.visit'), protocol: selectedStudy.protocol, date: "Oct 2025", type: "milestone", status: "pending" },
+            { event: t('milestone.safety.review'), protocol: selectedStudy.protocol, date: "Sep 2025", type: "regulatory", status: "pending" }
           ],
           participants: {
             enrollment: { current: 162, target: 200, percentage: 81 },
@@ -180,11 +180,11 @@ const CROSponsorDashboard = () => {
           schedule: [
             { event: "Primer Sitio Iniciado", protocol: selectedStudy.protocol, date: "May 2024", type: "milestone", status: "completed" },
             { event: "Primer Sitio Activado", protocol: selectedStudy.protocol, date: "Jun 2024", type: "milestone", status: "completed" },
-            { event: "First Patient First Visit (FPFV)", protocol: selectedStudy.protocol, date: "Jul 2024", type: "milestone", status: "completed" },
-            { event: "First Patient Last Visit (FPLV)", protocol: selectedStudy.protocol, date: "Feb 2025", type: "milestone", status: "completed" },
-            { event: "Interim Safety Analysis", protocol: selectedStudy.protocol, date: "Oct 2025", type: "regulatory", status: "pending" },
-            { event: "Last Patient Last Visit (LPLV)", protocol: selectedStudy.protocol, date: "Dec 2025", type: "milestone", status: "pending" },
-            { event: "Biomarker Analysis Complete", protocol: selectedStudy.protocol, date: "Nov 2025", type: "regulatory", status: "pending" }
+            { event: t('milestone.first.patient.first.visit'), protocol: selectedStudy.protocol, date: "Jul 2024", type: "milestone", status: "completed" },
+            { event: t('milestone.first.patient.last.visit'), protocol: selectedStudy.protocol, date: "Feb 2025", type: "milestone", status: "completed" },
+            { event: t('milestone.interim.safety.analysis'), protocol: selectedStudy.protocol, date: "Oct 2025", type: "regulatory", status: "pending" },
+            { event: t('milestone.last.patient.last.visit'), protocol: selectedStudy.protocol, date: "Dec 2025", type: "milestone", status: "pending" },
+            { event: t('milestone.biomarker.analysis.complete'), protocol: selectedStudy.protocol, date: "Nov 2025", type: "regulatory", status: "pending" }
           ],
           participants: {
             enrollment: { current: 94, target: 120, percentage: 78 },
@@ -216,12 +216,12 @@ const CROSponsorDashboard = () => {
           schedule: [
             { event: "Primer Sitio Iniciado", protocol: selectedStudy.protocol, date: "Mar 2024", type: "milestone", status: "completed" },
             { event: "Primer Sitio Activado", protocol: selectedStudy.protocol, date: "Apr 2024", type: "milestone", status: "completed" },
-            { event: "First Patient First Visit (FPFV)", protocol: selectedStudy.protocol, date: "May 2024", type: "milestone", status: "completed" },
-            { event: "First Patient Last Visit (FPLV)", protocol: selectedStudy.protocol, date: "Jan 2025", type: "milestone", status: "completed" },
-            { event: "Last Patient First Visit (LPFV)", protocol: selectedStudy.protocol, date: "Jul 2025", type: "milestone", status: "pending" },
-            { event: "Pediatric Safety Review", protocol: selectedStudy.protocol, date: "Sep 2025", type: "regulatory", status: "pending" },
-            { event: "Last Patient Last Visit (LPLV)", protocol: selectedStudy.protocol, date: "Nov 2025", type: "milestone", status: "pending" },
-            { event: "Growth Assessment Analysis", protocol: selectedStudy.protocol, date: "Dec 2025", type: "regulatory", status: "pending" }
+            { event: t('milestone.first.patient.first.visit'), protocol: selectedStudy.protocol, date: "May 2024", type: "milestone", status: "completed" },
+            { event: t('milestone.first.patient.last.visit'), protocol: selectedStudy.protocol, date: "Jan 2025", type: "milestone", status: "completed" },
+            { event: t('milestone.last.patient.first.visit'), protocol: selectedStudy.protocol, date: "Jul 2025", type: "milestone", status: "pending" },
+            { event: t('milestone.pediatric.safety.review'), protocol: selectedStudy.protocol, date: "Sep 2025", type: "regulatory", status: "pending" },
+            { event: t('milestone.last.patient.last.visit'), protocol: selectedStudy.protocol, date: "Nov 2025", type: "milestone", status: "pending" },
+            { event: t('milestone.growth.assessment.analysis'), protocol: selectedStudy.protocol, date: "Dec 2025", type: "regulatory", status: "pending" }
           ],
           participants: {
             enrollment: { current: 278, target: 320, percentage: 87 },

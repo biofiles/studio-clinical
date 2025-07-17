@@ -1129,7 +1129,21 @@ const translations = {
     'alert.site.activation': 'Nuevo sitio activado en Boston Medical Center',
     'alert.data.validation': 'Problemas de validación de datos resueltos',
     'alert.regulatory.submission': 'Envío regulatorio preparado',
-    'alert.biomarker.analysis': 'Hito de análisis de biomarcadores completado'
+    'alert.biomarker.analysis': 'Hito de análisis de biomarcadores completado',
+    
+    // Milestone Events (Spanish)
+    'milestone.first.patient.first.visit': 'Primera Visita del Primer Paciente (FPFV)',
+    'milestone.first.patient.last.visit': 'Última Visita del Primer Paciente (FPLV)',
+    'milestone.last.patient.first.visit': 'Primera Visita del Último Paciente (LPFV)',
+    'milestone.last.patient.last.visit': 'Última Visita del Último Paciente (LPLV)',
+    'milestone.database.lock': 'Bloqueo de Base de Datos',
+    'milestone.statistical.analysis.plan': 'Plan de Análisis Estadístico',
+    'milestone.mid.study.analysis': 'Análisis de Medio Estudio',
+    'milestone.safety.review': 'Revisión de Seguridad',
+    'milestone.interim.safety.analysis': 'Análisis Intermedio de Seguridad',
+    'milestone.biomarker.analysis.complete': 'Análisis de Biomarcadores Completado',
+    'milestone.pediatric.safety.review': 'Revisión de Seguridad Pediátrica',
+    'milestone.growth.assessment.analysis': 'Análisis de Evaluación de Crecimiento'
   }
 };
 
