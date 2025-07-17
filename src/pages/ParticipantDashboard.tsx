@@ -248,7 +248,7 @@ const ParticipantDashboard = () => {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between p-2 bg-[hsl(var(--progress-success))]/5 border border-[hsl(var(--progress-success))]/20 rounded">
                     <div className="flex items-center space-x-2">
-                      <CheckCircle className="h-4 w-4 text-[hsl(var(--progress-success))]" />
+                      <CheckCircle className="h-4 w-4 shrink-0 text-[hsl(var(--progress-success))]" />
                       <div>
                         <p className="text-sm font-medium">{language === 'spanish' ? 'Formulario de consentimiento informado Principal v2.0' : 'Main Informed Consent Form v2.0'}</p>
                         <p className="text-xs text-studio-text-muted">Firmado el 24 Nov 2024</p>
@@ -264,7 +264,7 @@ const ParticipantDashboard = () => {
                   
                   <div className="flex items-center justify-between p-2 bg-gray-50 border border-gray-200 rounded">
                     <div className="flex items-center space-x-2">
-                      <CheckCircle className="h-4 w-4 text-gray-600" />
+                      <CheckCircle className="h-4 w-4 shrink-0 text-gray-600" />
                       <div>
                         <p className="text-sm font-medium">{language === 'spanish' ? 'Formulario de consentimiento informado Principal v1.0' : 'Main Informed Consent Form v1.0'}</p>
                         <p className="text-xs text-studio-text-muted">Firmado el 15 Oct 2024</p>
@@ -280,7 +280,7 @@ const ParticipantDashboard = () => {
 
                   <div className="flex items-center justify-between p-2 bg-yellow-50 border border-yellow-200 rounded">
                     <div className="flex items-center space-x-2">
-                      <Clock className="h-4 w-4 text-yellow-600" />
+                      <Clock className="h-4 w-4 shrink-0 text-yellow-600" />
                       <div>
                         <p className="text-sm font-medium">Adenda de Seguridad v1.0</p>
                         <p className="text-xs text-studio-text-muted">Disponible para firma</p>
