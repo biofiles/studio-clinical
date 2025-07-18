@@ -18,7 +18,6 @@ const CROSponsorDashboard = () => {
   const [selectedStudyLocal, setSelectedStudyLocal] = useState<string | null>(null);
   const [showFHIRExport, setShowFHIRExport] = useState(false);
   const [showCDISCExport, setShowCDISCExport] = useState(false);
-  const [showCDISCExport, setShowCDISCExport] = useState(false);
   const [favoriteStudyId, setFavoriteStudyId] = useState<string | null>(null);
   const {
     selectedStudy,
