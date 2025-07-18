@@ -4,12 +4,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import Header from "@/components/Header";
-import { Users, FileCheck, AlertTriangle, BarChart3, Calendar, UserCheck, MessageCircle, Download, Settings, QrCode, Globe } from "lucide-react";
+import { Users, FileCheck, AlertTriangle, BarChart3, Calendar, UserCheck, MessageCircle, Download, Settings, QrCode, Globe, Database } from "lucide-react";
 import ParticipantList from "@/components/ParticipantList";
 import AIChatbot from "@/components/AIChatbot";
 import CalendarManagement from "@/components/CalendarManagement";
 import BarcodeScanner from "@/components/BarcodeScanner";
 import FHIRExportDialog from "@/components/FHIRExportDialog";
+import { CDISCExportDialog } from "@/components/CDISCExportDialog";
 import InvestigatorQuestionnaires from "@/components/InvestigatorQuestionnaires";
 import InvestigatorConsentDashboard from "@/components/InvestigatorConsentDashboard";
 import StudyResultsSignup from "@/components/StudyResultsSignup";
@@ -23,6 +24,7 @@ const InvestigatorDashboard = () => {
   const [showCalendarManagement, setShowCalendarManagement] = useState(false);
   const [showBarcodeScanner, setShowBarcodeScanner] = useState(false);
   const [showFHIRExport, setShowFHIRExport] = useState(false);
+  const [showCDISCExport, setShowCDISCExport] = useState(false);
   const [showQuestionnaires, setShowQuestionnaires] = useState(false);
   const [showConsentDashboard, setShowConsentDashboard] = useState(false);
   const { t } = useLanguage();
@@ -274,6 +276,15 @@ const InvestigatorDashboard = () => {
               <Button 
                 variant="studio" 
                 className="w-full justify-start"
+                onClick={() => setShowCDISCExport(true)}
+                data-onboarding="cdisc-btn"
+              >
+                <Database className="h-4 w-4 mr-2" />
+                {t('dashboard.cdisc.export') || 'Export CDISC Data'}
+              </Button>
+              <Button 
+                variant="studio" 
+                className="w-full justify-start"
                 onClick={handleExportQuestionnaires}
               >
                 <Download className="h-4 w-4 mr-2" />
@@ -380,6 +391,13 @@ const InvestigatorDashboard = () => {
       <FHIRExportDialog 
         open={showFHIRExport} 
         onOpenChange={setShowFHIRExport} 
+      />
+
+      <CDISCExportDialog 
+        open={showCDISCExport}
+        onOpenChange={setShowCDISCExport}
+        studyId={selectedStudy?.id || ''}
+        studyName={selectedStudy?.name || ''}
       />
 
       <InvestigatorQuestionnaires
