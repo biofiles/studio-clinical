@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import StudyDropdown from "@/components/StudyDropdown";
 import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, FileText, Calendar, Users, Settings, Download } from "lucide-react";
 import FHIRExportDialog from "@/components/FHIRExportDialog";
+import { CDISCExportDialog } from "@/components/CDISCExportDialog";
 import StudySignupsReportDialog from "@/components/StudySignupsReportDialog";
 import { toast } from "sonner";
 import { useStudy } from "@/contexts/StudyContext";
@@ -16,6 +17,8 @@ const CROSponsorDashboard = () => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [selectedStudyLocal, setSelectedStudyLocal] = useState<string | null>(null);
   const [showFHIRExport, setShowFHIRExport] = useState(false);
+  const [showCDISCExport, setShowCDISCExport] = useState(false);
+  const [showCDISCExport, setShowCDISCExport] = useState(false);
   const [favoriteStudyId, setFavoriteStudyId] = useState<string | null>(null);
   const {
     selectedStudy,
@@ -798,12 +801,12 @@ const CROSponsorDashboard = () => {
                     <Button 
                       variant="outline" 
                       className="w-full justify-start h-auto py-3 px-4"
-                      onClick={() => toast.success("Connecting to CDISC API...", { description: "Validating study data against CDISC STDM standards" })}
+                      onClick={() => setShowCDISCExport(true)}
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
-                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.validate.cdisc')}</span>
+                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.export.cdisc')}</span>
                         <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
-                          {t('cro.validate.cdisc.description')}
+                          {t('cro.export.cdisc.description')}
                         </span>
                       </div>
                       <Shield className="h-4 w-4 flex-shrink-0" />
@@ -846,6 +849,14 @@ const CROSponsorDashboard = () => {
       <FHIRExportDialog 
         open={showFHIRExport}
         onOpenChange={setShowFHIRExport}
+      />
+
+      {/* CDISC Export Dialog */}
+      <CDISCExportDialog 
+        open={showCDISCExport}
+        onOpenChange={setShowCDISCExport}
+        studyId={selectedStudy?.id || ''}
+        studyName={selectedStudy?.name || ''}
       />
     </div>;
 };

@@ -8,6 +8,18 @@ import {
   FHIRQuestionnaireResponse,
   FHIRBundle 
 } from "@/types/fhir";
+import { 
+  CDISCODMStudy, 
+  CDISCExportRequest, 
+  CDISCValidationResult, 
+  CDISCSDTMDomain,
+  CDISCDMRecord,
+  CDISCAERecord,
+  CDISCQSRecord,
+  CDISCVSRecord,
+  CDISCDSRecord,
+  CDISCFHIRMapping
+} from "@/types/cdisc";
 
 export class FHIRClient {
   private baseUrl: string;
@@ -280,6 +292,208 @@ export class FHIRClient {
       return await response.json();
     } catch (error) {
       console.error('FHIR Query Error:', error);
+      throw error;
+    }
+  }
+
+  // ==== CDISC INTEROPERABILITY METHODS ====
+
+  // Convert FHIR Bundle to CDISC ODM
+  static fhirBundleToCDISCODM(bundle: FHIRBundle, studyOid: string): CDISCODMStudy {
+    const odmStudy: CDISCODMStudy = {
+      oid: studyOid,
+      name: `Study ${studyOid}`,
+      protocolName: studyOid,
+      metaDataVersion: {
+        oid: `${studyOid}.v1.0`,
+        name: `Study ${studyOid} Metadata v1.0`,
+        studyEventDefs: [
+          {
+            oid: "SE.SCREENING",
+            name: "Screening",
+            repeating: "No",
+            type: "Scheduled",
+            formRefs: [
+              { formOid: "FORM.DM", mandatory: "Yes" },
+              { formOid: "FORM.QS", mandatory: "No" }
+            ]
+          }
+        ],
+        formDefs: [
+          {
+            oid: "FORM.DM",
+            name: "Demographics",
+            repeating: "No",
+            itemGroupRefs: [{ itemGroupOid: "IG.DM", mandatory: "Yes" }]
+          },
+          {
+            oid: "FORM.QS",
+            name: "Questionnaires",
+            repeating: "Yes",
+            itemGroupRefs: [{ itemGroupOid: "IG.QS", mandatory: "Yes" }]
+          }
+        ],
+        itemGroupDefs: [
+          {
+            oid: "IG.DM",
+            name: "Demographics",
+            repeating: "No",
+            domain: "DM",
+            purpose: "Tabulation",
+            itemRefs: [
+              { itemOid: "IT.USUBJID", mandatory: "Yes", keySequence: 1 },
+              { itemOid: "IT.AGE", mandatory: "No" },
+              { itemOid: "IT.SEX", mandatory: "No" },
+              { itemOid: "IT.RACE", mandatory: "No" }
+            ]
+          },
+          {
+            oid: "IG.QS",
+            name: "Questionnaire Responses",
+            repeating: "Yes",
+            domain: "QS",
+            purpose: "Tabulation",
+            itemRefs: [
+              { itemOid: "IT.USUBJID", mandatory: "Yes", keySequence: 1 },
+              { itemOid: "IT.QSTEST", mandatory: "Yes" },
+              { itemOid: "IT.QSORRES", mandatory: "No" }
+            ]
+          }
+        ],
+        itemDefs: [
+          { oid: "IT.USUBJID", name: "Unique Subject Identifier", dataType: "text", length: 50 },
+          { oid: "IT.AGE", name: "Age", dataType: "integer" },
+          { oid: "IT.SEX", name: "Sex", dataType: "text", codeListRef: "CL.SEX" },
+          { oid: "IT.RACE", name: "Race", dataType: "text" },
+          { oid: "IT.QSTEST", name: "Question Name", dataType: "text" },
+          { oid: "IT.QSORRES", name: "Result or Finding in Original Units", dataType: "text" }
+        ],
+        codeListDefs: [
+          {
+            oid: "CL.SEX",
+            name: "Sex",
+            dataType: "text",
+            codeListItems: [
+              { codedValue: "M", decode: "Male" },
+              { codedValue: "F", decode: "Female" },
+              { codedValue: "U", decode: "Unknown" }
+            ]
+          }
+        ]
+      }
+    };
+
+    return odmStudy;
+  }
+
+  // Convert participant data to CDISC DM domain
+  static participantToCDISCDM(participant: any, studyId: string): CDISCDMRecord {
+    return {
+      STUDYID: studyId,
+      DOMAIN: "DM",
+      USUBJID: participant.subjectId || participant.id,
+      SITEID: "001",
+      AGE: participant.dateOfBirth ? 
+        Math.floor((Date.now() - new Date(participant.dateOfBirth).getTime()) / (365.25 * 24 * 60 * 60 * 1000)) : 
+        undefined,
+      AGEU: participant.dateOfBirth ? "YEARS" : undefined,
+      SEX: participant.gender?.toUpperCase().charAt(0) || "U",
+      RACE: participant.race || "NOT REPORTED",
+      ETHNIC: participant.ethnicity || "NOT REPORTED",
+      COUNTRY: participant.country || "USA",
+      RFSTDTC: participant.enrollmentDate,
+      RFENDTC: participant.completionDate
+    };
+  }
+
+  // Convert questionnaire response to CDISC QS domain
+  static questionnaireResponseToCDISCQS(response: any, studyId: string): CDISCQSRecord[] {
+    if (!response.answers) return [];
+
+    return Object.entries(response.answers).map(([questionId, answer], index) => ({
+      STUDYID: studyId,
+      DOMAIN: "QS",
+      USUBJID: response.participantId,
+      QSSEQ: index + 1,
+      QSCAT: response.title || "QUESTIONNAIRE",
+      QSTEST: questionId,
+      QSTESTCD: questionId.toUpperCase().substring(0, 8),
+      QSORRES: typeof answer === 'string' ? answer : JSON.stringify(answer),
+      QSSTRESC: typeof answer === 'string' ? answer : JSON.stringify(answer),
+      QSDTC: response.submittedAt || new Date().toISOString().split('T')[0],
+      VISITNUM: 1,
+      VISIT: "SCREENING"
+    }));
+  }
+
+  // Export study data to CDISC format
+  async exportToCDISC(request: CDISCExportRequest): Promise<any> {
+    try {
+      const authHeaders = await this.getAuthHeaders();
+      const response = await fetch(`${this.baseUrl}/cdisc-export`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...authHeaders
+        },
+        body: JSON.stringify(request)
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      return await response.json();
+    } catch (error) {
+      console.error('CDISC Export Error:', error);
+      throw error;
+    }
+  }
+
+  // Validate CDISC data
+  async validateCDISCData(domains: CDISCSDTMDomain[]): Promise<CDISCValidationResult> {
+    try {
+      const authHeaders = await this.getAuthHeaders();
+      const response = await fetch(`${this.baseUrl}/cdisc-validate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...authHeaders
+        },
+        body: JSON.stringify({ domains })
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      return await response.json();
+    } catch (error) {
+      console.error('CDISC Validation Error:', error);
+      throw error;
+    }
+  }
+
+  // Transform FHIR to CDISC
+  async transformFHIRToCDISC(bundle: FHIRBundle, mappings: CDISCFHIRMapping[]): Promise<CDISCSDTMDomain[]> {
+    try {
+      const authHeaders = await this.getAuthHeaders();
+      const response = await fetch(`${this.baseUrl}/cdisc-transform`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...authHeaders
+        },
+        body: JSON.stringify({ bundle, mappings })
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      return await response.json();
+    } catch (error) {
+      console.error('CDISC Transform Error:', error);
       throw error;
     }
   }
