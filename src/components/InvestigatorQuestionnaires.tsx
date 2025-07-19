@@ -144,7 +144,7 @@ const InvestigatorQuestionnaires = ({ open, onOpenChange }: InvestigatorQuestion
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed': return 'bg-[hsl(var(--progress-success))]/10 text-[hsl(var(--progress-success))] border-[hsl(var(--progress-success))]/20';
-      case 'in-progress': return 'bg-[hsl(var(--progress-accent))]/10 text-[hsl(var(--progress-accent))] border-[hsl(var(--progress-accent))]/20';
+      case 'in-progress': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
       case 'pending': return 'bg-[hsl(var(--progress-info))]/10 text-[hsl(var(--progress-info))] border-[hsl(var(--progress-info))]/20';
       case 'overdue': return 'bg-destructive/10 text-destructive border-destructive/20';
       default: return 'bg-muted text-muted-foreground border-border';
@@ -220,10 +220,10 @@ const InvestigatorQuestionnaires = ({ open, onOpenChange }: InvestigatorQuestion
                 <div className="text-sm text-[hsl(var(--progress-success))]/80">{t('questionnaire.list.completed.count')}</div>
               </CardContent>
             </Card>
-            <Card className="bg-[hsl(var(--progress-accent))]/5 border-[hsl(var(--progress-accent))]/20">
+            <Card className="bg-yellow-50 border-yellow-200">
               <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-[hsl(var(--progress-accent))]">{inProgressCount}</div>
-                <div className="text-sm text-[hsl(var(--progress-accent))]/80">{t('questionnaire.list.in.progress.count')}</div>
+                <div className="text-2xl font-bold text-yellow-800">{inProgressCount}</div>
+                <div className="text-sm text-yellow-700">{t('questionnaire.list.in.progress.count')}</div>
               </CardContent>
             </Card>
             <Card className="bg-[hsl(var(--progress-info))]/5 border-[hsl(var(--progress-info))]/20">

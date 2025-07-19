@@ -221,12 +221,12 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
                   <div className="text-sm text-[hsl(var(--progress-info))]/80">{t('questionnaire.pending')}</div>
                 </CardContent>
               </Card>
-              <Card className="bg-[hsl(var(--progress-accent))]/5 border-[hsl(var(--progress-accent))]/20">
+              <Card className="bg-yellow-50 border-yellow-200">
                 <CardContent className="p-4 text-center">
-                  <div className="text-2xl font-bold text-[hsl(var(--progress-accent))]">
+                  <div className="text-2xl font-bold text-yellow-800">
                     {questionnaires.filter(q => q.status === 'in-progress').length}
                   </div>
-                  <div className="text-sm text-[hsl(var(--progress-accent))]/80">{t('questionnaire.status.in.progress')}</div>
+                  <div className="text-sm text-yellow-700">{t('questionnaire.status.in.progress')}</div>
                 </CardContent>
               </Card>
               <Card className="bg-[hsl(var(--progress-success))]/5 border-[hsl(var(--progress-success))]/20">
