@@ -626,6 +626,15 @@ const translations = {
     'cro.site.comparisons.description': 'Comparative analysis across all study sites',
     'cro.regulatory.readiness': 'Regulatory Readiness',
     'cro.regulatory.readiness.description': 'Compliance status and regulatory submission preparation',
+    
+    // Calendar Management
+    'calendar.management.title': 'Study Calendar Management',
+    'calendar.study.calendar': 'Study Calendar',
+    'calendar.upcoming.events': 'Upcoming Study Events',
+    'calendar.edit': 'Edit',
+    'calendar.participant': 'Participant:',
+    'calendar.note.title': 'Note:',
+    'calendar.note.description': 'Calendar management allows you to view and coordinate all study events. Days with scheduled events are highlighted in blue.',
   },
   spanish: {
     // Header
@@ -1257,7 +1266,16 @@ const translations = {
     'milestone.interim.safety.analysis': 'Análisis Intermedio de Seguridad',
     'milestone.biomarker.analysis.complete': 'Análisis de Biomarcadores Completado',
     'milestone.pediatric.safety.review': 'Revisión de Seguridad Pediátrica',
-    'milestone.growth.assessment.analysis': 'Análisis de Evaluación de Crecimiento'
+    'milestone.growth.assessment.analysis': 'Análisis de Evaluación de Crecimiento',
+    
+    // Calendar Management
+    'calendar.management.title': 'Gestión del Calendario del Estudio',
+    'calendar.study.calendar': 'Calendario del Estudio',
+    'calendar.upcoming.events': 'Próximos Eventos del Estudio',
+    'calendar.edit': 'Editar',
+    'calendar.participant': 'Participante:',
+    'calendar.note.title': 'Nota:',
+    'calendar.note.description': 'La gestión del calendario te permite ver y coordinar todos los eventos del estudio. Los días con eventos programados están resaltados en azul.'
   }
 };
 

@@ -62,14 +62,14 @@ const CalendarManagement = ({ open, onOpenChange }: CalendarManagementProps) => 
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-2">
             <CalendarIcon className="h-5 w-5" />
-            <span>Study Calendar Management</span>
+            <span>{t('calendar.management.title')}</span>
           </DialogTitle>
         </DialogHeader>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <Card>
             <CardHeader>
-              <CardTitle className="text-sm">Study Calendar</CardTitle>
+              <CardTitle className="text-sm">{t('calendar.study.calendar')}</CardTitle>
             </CardHeader>
             <CardContent>
               <Calendar
@@ -93,7 +93,7 @@ const CalendarManagement = ({ open, onOpenChange }: CalendarManagementProps) => 
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-sm">Upcoming Study Events</CardTitle>
+              <CardTitle className="text-sm">{t('calendar.upcoming.events')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 max-h-96 overflow-y-auto">
               {studyEvents.map((event) => (
@@ -113,12 +113,12 @@ const CalendarManagement = ({ open, onOpenChange }: CalendarManagementProps) => 
                     </div>
                     {event.participant && (
                       <div className="text-xs text-blue-600 mt-1">
-                        Participant: {event.participant}
+                        {t('calendar.participant')} {event.participant}
                       </div>
                     )}
                   </div>
                   <Button size="sm" variant="outline">
-                    Edit
+                    {t('calendar.edit')}
                   </Button>
                 </div>
               ))}
@@ -127,8 +127,7 @@ const CalendarManagement = ({ open, onOpenChange }: CalendarManagementProps) => 
         </div>
 
         <div className="text-xs text-studio-text-muted bg-blue-50 p-3 rounded">
-          <strong>Note:</strong> Calendar management allows you to view and coordinate all study events. 
-          Days with scheduled events are highlighted in blue.
+          <strong>{t('calendar.note.title')}</strong> {t('calendar.note.description')}
         </div>
       </DialogContent>
     </Dialog>
