@@ -113,6 +113,7 @@ const translations = {
     
     // Participant specific
     'participant.profile': 'Profile',
+    'participant.schedule': 'Calendar',
     'participant.your.schedule': 'Your Schedule',
     'participant.days.remaining': 'days remaining',
     'participant.token': 'Participant Token',
@@ -162,6 +163,7 @@ const translations = {
     'calendar.view.full': 'View Full Calendar',
     
     // Questionnaires
+    'questionnaire.surveys': 'Questionnaires',
     'questionnaire.your.surveys': 'Your Questionnaires',
     'questionnaire.view.all': 'View All Questionnaires',
     'questionnaire.pending': 'Pending',
@@ -668,7 +670,8 @@ const translations = {
     'participant.view.questionnaires': 'Ver Cuestionarios',
     'participant.schedule.visit': 'Programar Visita',
     'participant.barcode.click': 'Haga clic para ver el código de barras',
-    'participant.profile': 'Perfil',
+     'participant.profile': 'Perfil',
+    'participant.schedule': 'Calendario',
     'participant.your.schedule': 'Tu Agenda',
     'participant.days.remaining': 'días restantes',
     'participant.token': 'Token de Participante',
@@ -718,6 +721,7 @@ const translations = {
     'calendar.view.full': 'Ver Calendario Completo',
     
     // Questionnaires
+    'questionnaire.surveys': 'Cuestionarios',
     'questionnaire.your.surveys': 'Sus Cuestionarios',
     'questionnaire.view.all': 'Ver Todos los Cuestionarios',
     'questionnaire.pending': 'Pendientes',
