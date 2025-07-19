@@ -381,7 +381,7 @@ const ParticipantDashboard = () => {
               <strong>{t('contact.safety.note')}:</strong> {t('contact.safety.description')}
             </div>
             
-            <div className="space-y-4">
+            <div className="space-y-4 lg:grid lg:grid-cols-3 lg:gap-4 lg:space-y-0">
               {/* Site Staff Contact */}
               <Card className="bg-studio-surface border-studio-border">
                 <CardHeader>
