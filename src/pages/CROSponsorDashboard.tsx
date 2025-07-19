@@ -888,12 +888,6 @@ const CROSponsorDashboard = () => {
                   })}>
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
                         <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.site.users.report')}</span>
-                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{
-                        wordBreak: 'break-word',
-                        overflowWrap: 'break-word'
-                      }}>
-                          {t('cro.site.users.report.description')}
-                        </span>
                       </div>
                       <Download className="h-4 w-4 flex-shrink-0" />
                     </Button>
@@ -903,12 +897,6 @@ const CROSponsorDashboard = () => {
                   })}>
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
                         <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.questionnaire.report')}</span>
-                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{
-                        wordBreak: 'break-word',
-                        overflowWrap: 'break-word'
-                      }}>
-                          {t('cro.questionnaire.report.description')}
-                        </span>
                       </div>
                       <Download className="h-4 w-4 flex-shrink-0" />
                     </Button>
@@ -918,12 +906,6 @@ const CROSponsorDashboard = () => {
                   })}>
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
                         <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.milestones.report')}</span>
-                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{
-                        wordBreak: 'break-word',
-                        overflowWrap: 'break-word'
-                      }}>
-                          {t('cro.milestones.report.description')}
-                        </span>
                       </div>
                       <Download className="h-4 w-4 flex-shrink-0" />
                     </Button>
@@ -949,12 +931,6 @@ const CROSponsorDashboard = () => {
                     <Button variant="outline" className="w-full justify-start h-auto py-3 px-4" onClick={() => setShowFHIRExport(true)}>
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
                         <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.export.fhir')}</span>
-                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{
-                        wordBreak: 'break-word',
-                        overflowWrap: 'break-word'
-                      }}>
-                          {t('cro.export.fhir.description')}
-                        </span>
                       </div>
                       <Globe className="h-4 w-4 flex-shrink-0" />
                     </Button>
@@ -964,12 +940,6 @@ const CROSponsorDashboard = () => {
                   })}>
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
                         <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.export.hl7')}</span>
-                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{
-                        wordBreak: 'break-word',
-                        overflowWrap: 'break-word'
-                      }}>
-                          {t('cro.export.hl7.description')}
-                        </span>
                       </div>
                       <FileText className="h-4 w-4 flex-shrink-0" />
                     </Button>
@@ -977,12 +947,6 @@ const CROSponsorDashboard = () => {
                     <Button variant="outline" className="w-full justify-start h-auto py-3 px-4" onClick={() => setShowCDISCExport(true)}>
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
                         <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.export.cdisc')}</span>
-                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{
-                        wordBreak: 'break-word',
-                        overflowWrap: 'break-word'
-                      }}>
-                          {t('cro.export.cdisc.description')}
-                        </span>
                       </div>
                       <Shield className="h-4 w-4 flex-shrink-0" />
                     </Button>
