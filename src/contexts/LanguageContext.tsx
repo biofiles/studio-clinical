@@ -313,14 +313,18 @@ const translations = {
     
     // Visits
     'visits.site.visits': 'Visits',
+    'visits.baseline.title': 'Baseline Visit',
     'visits.baseline.completed': 'Baseline Visit - Completed',
     'visits.baseline.procedures': 'Blood draw, vital signs, questionnaires completed',
     'visits.notes': 'Visit Notes',
     'visits.baseline.notes': 'All procedures completed successfully. Blood pressure slightly elevated, will monitor at next visit. Patient reported no adverse events.',
+    'visits.week4.title': 'Week 4 Visit',
     'visits.week4.scheduled': 'Week 4 Visit - Scheduled',
     'visits.week4.procedures': 'Blood draw, safety evaluation, questionnaires',
     'visits.preparation.notes': 'Preparation Notes',
     'visits.week4.notes': 'Please fast for 12 hours before the visit. Bring your medication diary and any questions you may have.',
+    'visits.status.completed': 'Completed',
+    'visits.status.scheduled': 'Scheduled',
     
     // Profile
     'profile.view.settings': 'View Profile & Settings',
@@ -931,14 +935,18 @@ const translations = {
     
     // Visits
     'visits.site.visits': 'Visitas',
+    'visits.baseline.title': 'Visita Basal',
     'visits.baseline.completed': 'Visita Basal - Completada',
     'visits.baseline.procedures': 'Extracción de sangre, signos vitales, cuestionarios completados',
     'visits.notes': 'Notas de la Visita',
     'visits.baseline.notes': 'Todos los procedimientos completados exitosamente. Presión arterial ligeramente elevada, se monitoreará en la próxima visita. El paciente no reportó eventos adversos.',
+    'visits.week4.title': 'Visita Semana 4',
     'visits.week4.scheduled': 'Visita Semana 4 - Programada',
     'visits.week4.procedures': 'Extracción de sangre, evaluación de seguridad, cuestionarios',
     'visits.preparation.notes': 'Notas de Preparación',
     'visits.week4.notes': 'Por favor ayune durante 12 horas antes de la visita. Traiga su diario de medicamentos y cualquier pregunta que pueda tener.',
+    'visits.status.completed': 'Completada',
+    'visits.status.scheduled': 'Programada',
     
     // Profile
     'profile.view.settings': 'Ver Perfil y Configuración',

@@ -333,7 +333,12 @@ const ParticipantDashboard = () => {
                   <div className="flex items-start space-x-3">
                     <CheckCircle className="h-5 w-5 text-gray-600 mt-0.5" />
                     <div className="flex-1">
-                      <p className="font-medium text-gray-800">{t('visits.baseline.completed')}</p>
+                      <div className="flex items-center space-x-2 mb-1">
+                        <p className="font-medium text-gray-800">{t('visits.baseline.title')}</p>
+                        <Badge className="bg-green-100 text-green-800 rounded-full px-2 py-0.5 text-xs">
+                          {t('visits.status.completed')}
+                        </Badge>
+                      </div>
                       <p className="text-sm text-gray-600">15 Nov 2024 a las 2:00 PM</p>
                       <p className="text-xs text-gray-600 mt-1">{t('visits.baseline.procedures')}</p>
                       <div className="bg-gray-100 border border-gray-300 rounded p-2 text-xs text-gray-700 mt-2">
@@ -349,7 +354,12 @@ const ParticipantDashboard = () => {
                   <div className="flex items-start space-x-3">
                     <Clock className="h-5 w-5 text-gray-600 mt-0.5" />
                     <div className="flex-1">
-                      <p className="font-medium text-gray-800">{t('visits.week4.scheduled')}</p>
+                      <div className="flex items-center space-x-2 mb-1">
+                        <p className="font-medium text-gray-800">{t('visits.week4.title')}</p>
+                        <Badge className="bg-blue-100 text-blue-800 rounded-full px-2 py-0.5 text-xs">
+                          {t('visits.status.scheduled')}
+                        </Badge>
+                      </div>
                       <p className="text-sm text-gray-600">15 Dic 2024 a las 2:00 PM</p>
                       <p className="text-xs text-gray-600 mt-1">{t('visits.week4.procedures')}</p>
                       <div className="bg-gray-50 border border-gray-200 rounded p-2 text-xs text-gray-700 mt-2">
