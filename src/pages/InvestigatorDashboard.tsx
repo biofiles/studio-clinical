@@ -188,6 +188,67 @@ const InvestigatorDashboard = () => {
           </Card>
         </div>
 
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6" data-onboarding="progress-cards">
+          <Card className="bg-studio-surface border-studio-border">
+            <CardHeader>
+              <CardTitle className="text-studio-text">{t('dashboard.study.progress')}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                <div className="flex justify-between">
+                  <span className="text-studio-text-muted">{t('dashboard.enrollment')}</span>
+                  <span className="text-studio-text">
+                    {studyData ? `${studyData.enrolled.current}/${studyData.enrolled.total} (${studyData.enrolled.percentage}%)` : '0/0 (0%)'}
+                  </span>
+                </div>
+                <Progress 
+                  value={studyData ? studyData.enrolled.percentage : 0} 
+                  color="primary"
+                  className="h-2"
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-studio-surface border-studio-border">
+            <CardHeader>
+              <CardTitle className="text-studio-text">{t('dashboard.diary.compliance')}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                <div className="flex justify-between">
+                  <span className="text-studio-text-muted">{t('dashboard.daily.diaries')}</span>
+                  <span className="text-studio-text">{studyData ? studyData.diaryCompliance : 0}%</span>
+                </div>
+                <Progress 
+                  value={studyData ? studyData.diaryCompliance : 0} 
+                  color={studyData && studyData.diaryCompliance < 90 ? 'warning' : 'success'}
+                  className="h-2"
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-studio-surface border-studio-border">
+            <CardHeader>
+              <CardTitle className="text-studio-text">{t('dashboard.visit.compliance')}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                <div className="flex justify-between">
+                  <span className="text-studio-text-muted">{t('dashboard.site.visits')}</span>
+                  <span className="text-studio-text">{studyData ? studyData.visitCompliance : 0}%</span>
+                </div>
+                <Progress 
+                  value={studyData ? studyData.visitCompliance : 0} 
+                  color={studyData && studyData.visitCompliance < 90 ? 'warning' : 'success'}
+                  className="h-2"
+                />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <Card className="bg-studio-surface border-studio-border lg:col-span-2">
             <CardHeader>
@@ -289,67 +350,6 @@ const InvestigatorDashboard = () => {
                 <Download className="h-4 w-4 mr-2" />
                 {t('dashboard.export.questionnaires')}
               </Button>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6" data-onboarding="progress-cards">
-          <Card className="bg-studio-surface border-studio-border">
-            <CardHeader>
-              <CardTitle className="text-studio-text">{t('dashboard.study.progress')}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-studio-text-muted">{t('dashboard.enrollment')}</span>
-                  <span className="text-studio-text">
-                    {studyData ? `${studyData.enrolled.current}/${studyData.enrolled.total} (${studyData.enrolled.percentage}%)` : '0/0 (0%)'}
-                  </span>
-                </div>
-                <Progress 
-                  value={studyData ? studyData.enrolled.percentage : 0} 
-                  color="primary"
-                  className="h-2"
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-studio-surface border-studio-border">
-            <CardHeader>
-              <CardTitle className="text-studio-text">{t('dashboard.diary.compliance')}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-studio-text-muted">{t('dashboard.daily.diaries')}</span>
-                  <span className="text-studio-text">{studyData ? studyData.diaryCompliance : 0}%</span>
-                </div>
-                <Progress 
-                  value={studyData ? studyData.diaryCompliance : 0} 
-                  color={studyData && studyData.diaryCompliance < 90 ? 'warning' : 'success'}
-                  className="h-2"
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-studio-surface border-studio-border">
-            <CardHeader>
-              <CardTitle className="text-studio-text">{t('dashboard.visit.compliance')}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-studio-text-muted">{t('dashboard.site.visits')}</span>
-                  <span className="text-studio-text">{studyData ? studyData.visitCompliance : 0}%</span>
-                </div>
-                <Progress 
-                  value={studyData ? studyData.visitCompliance : 0} 
-                  color={studyData && studyData.visitCompliance < 90 ? 'warning' : 'success'}
-                  className="h-2"
-                />
-              </div>
             </CardContent>
           </Card>
         </div>
