@@ -635,6 +635,13 @@ const translations = {
     'calendar.participant': 'Participant:',
     'calendar.note.title': 'Note:',
     'calendar.note.description': 'Calendar management allows you to view and coordinate all study events. Days with scheduled events are highlighted in blue.',
+    
+    // Calendar Event Titles
+    'calendar.event.site.visit': 'Site Visit',
+    'calendar.event.blood.draw': 'Blood Draw', 
+    'calendar.event.team.meeting': 'Monthly Team Meeting',
+    'calendar.event.followup.call': 'Follow-up Call',
+    'calendar.event.assessment': 'Assessment',
   },
   spanish: {
     // Header
@@ -1275,7 +1282,14 @@ const translations = {
     'calendar.edit': 'Editar',
     'calendar.participant': 'Participante:',
     'calendar.note.title': 'Nota:',
-    'calendar.note.description': 'La gestión del calendario te permite ver y coordinar todos los eventos del estudio. Los días con eventos programados están resaltados en azul.'
+    'calendar.note.description': 'La gestión del calendario te permite ver y coordinar todos los eventos del estudio. Los días con eventos programados están resaltados en azul.',
+    
+    // Calendar Event Titles  
+    'calendar.event.site.visit': 'Visita del Sitio',
+    'calendar.event.blood.draw': 'Extracción de Sangre',
+    'calendar.event.team.meeting': 'Reunión Mensual del Equipo', 
+    'calendar.event.followup.call': 'Llamada de Seguimiento',
+    'calendar.event.assessment': 'Evaluación',
   }
 };
 

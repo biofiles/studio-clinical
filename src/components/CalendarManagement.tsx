@@ -19,11 +19,11 @@ const CalendarManagement = ({ open, onOpenChange }: CalendarManagementProps) => 
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
 
   const studyEvents = [
-    { id: 1, date: "2024-12-15", time: "2:00 PM", title: "P001 - Site Visit", type: "visit", participant: "P001" },
-    { id: 2, date: "2024-12-16", time: "10:00 AM", title: "P002 - Blood Draw", type: "lab", participant: "P002" },
-    { id: 3, date: "2024-12-18", time: "3:00 PM", title: "Monthly Team Meeting", type: "meeting", participant: null },
-    { id: 4, date: "2024-12-20", time: "11:00 AM", title: "P003 - Follow-up Call", type: "call", participant: "P003" },
-    { id: 5, date: "2024-12-22", time: "9:00 AM", title: "P004 - Assessment", type: "assessment", participant: "P004" }
+    { id: 1, date: "2024-12-15", time: "2:00 PM", titleKey: "calendar.event.site.visit", type: "visit", participant: "P001" },
+    { id: 2, date: "2024-12-16", time: "10:00 AM", titleKey: "calendar.event.blood.draw", type: "lab", participant: "P002" },
+    { id: 3, date: "2024-12-18", time: "3:00 PM", titleKey: "calendar.event.team.meeting", type: "meeting", participant: null },
+    { id: 4, date: "2024-12-20", time: "11:00 AM", titleKey: "calendar.event.followup.call", type: "call", participant: "P003" },
+    { id: 5, date: "2024-12-22", time: "9:00 AM", titleKey: "calendar.event.assessment", type: "assessment", participant: "P004" }
   ];
 
   const getEventTypeColor = (type: string) => {
@@ -103,7 +103,7 @@ const CalendarManagement = ({ open, onOpenChange }: CalendarManagementProps) => 
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center space-x-2 mb-1">
-                      <h4 className="font-medium text-sm">{event.title}</h4>
+                      <h4 className="font-medium text-sm">{event.participant ? `${event.participant} - ${t(event.titleKey)}` : t(event.titleKey)}</h4>
                       <Badge className={getEventTypeColor(event.type)}>
                         {t(`activity.${event.type}`)}
                       </Badge>
