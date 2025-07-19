@@ -119,6 +119,20 @@ const translations = {
     'participant.token': 'Participant Token',
     'participant.id.card': 'Patient ID Card',
     'participant.investigative.site': 'Investigative Site',
+
+    // User Profile Dialog
+    'profile.dialog.title': 'Participant Profile',
+    'profile.study.information': 'Study Information',
+    'profile.study.id': 'Study ID',
+    'profile.phase': 'Phase',
+    'profile.enrollment.date': 'Enrollment Date',
+    'profile.secure.token': 'Your Secure Token',
+    'profile.token.description': 'This unique token protects your identity and ensures data privacy compliance.',
+    'profile.token.confidential': 'Keep this token confidential',
+    'profile.token.data.linking': 'Used for secure data linking',
+    'profile.token.hipaa': 'HIPAA compliant anonymization',
+    'profile.token.copied': 'Token copied to clipboard',
+    'profile.close': 'Close',
     
     // Questionnaires
     'questionnaire.daily.symptom': 'Daily Symptom Diary',
@@ -679,6 +693,20 @@ const translations = {
     'participant.token': 'Token de Participante',
     'participant.id.card': 'Tarjeta de Identificación del Paciente',
     'participant.investigative.site': 'Centro de investigación',
+
+    // User Profile Dialog
+    'profile.dialog.title': 'Perfil del Participante',
+    'profile.study.information': 'Información del Estudio',
+    'profile.study.id': 'ID del Estudio',
+    'profile.phase': 'Fase',
+    'profile.enrollment.date': 'Fecha de Inscripción',
+    'profile.secure.token': 'Su Token Seguro',
+    'profile.token.description': 'Este token único protege su identidad y garantiza el cumplimiento de la privacidad de datos.',
+    'profile.token.confidential': 'Mantenga este token confidencial',
+    'profile.token.data.linking': 'Utilizado para enlace seguro de datos',
+    'profile.token.hipaa': 'Anonimización compatible con HIPAA',
+    'profile.token.copied': 'Token copiado al portapapeles',
+    'profile.close': 'Cerrar',
     
     // Questionnaires
     'questionnaire.daily.symptom': 'Diario de Síntomas Diarios',
