@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { Calendar as CalendarIcon, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { es } from "date-fns/locale";
 
 interface Activity {
   date: string;
@@ -91,6 +92,7 @@ const CalendarView = ({ open, onOpenChange, activities }: CalendarViewProps) => 
                   mode="single"
                   selected={selectedDate}
                   onSelect={setSelectedDate}
+                  locale={language === 'spanish' ? es : undefined}
                   className="rounded-md border [&_.has-activity]:relative [&_.has-activity]:after:absolute [&_.has-activity]:after:top-1 [&_.has-activity]:after:right-1 [&_.has-activity]:after:w-2 [&_.has-activity]:after:h-2 [&_.has-activity]:after:rounded-full [&_.has-visit]:after:bg-red-600 [&_.has-questionnaire]:after:bg-blue-600 [&_.has-diary]:after:bg-green-600 [&_.has-call]:after:bg-purple-600 [&_.has-assessment]:after:bg-orange-600 [&_.has-activity]:after:content-['']"
                   modifiers={{
                     hasActivity: isDayWithActivity,
