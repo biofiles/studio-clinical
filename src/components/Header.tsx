@@ -64,9 +64,8 @@ const Header = ({
             <Button variant="outline" size="icon" onClick={handleStartTutorial} disabled={!userRole}>
               <HelpCircle className="h-4 w-4" />
             </Button>
-            <Button variant="outline" size="sm" onClick={handleSettings}>
-              <Settings className="h-4 w-4 mr-2" />
-              {t('header.settings')}
+            <Button variant="outline" size="icon" onClick={handleSettings}>
+              <Settings className="h-4 w-4" />
             </Button>
             <Button variant="outline" size="icon" onClick={handleLogout}>
               <LogOut className="h-4 w-4" />
