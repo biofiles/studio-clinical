@@ -28,15 +28,14 @@ const InvestigatorDashboard = () => {
   const [showQuestionnaires, setShowQuestionnaires] = useState(false);
   const [showConsentDashboard, setShowConsentDashboard] = useState(false);
   const { t } = useLanguage();
-  const { selectedStudy } = useStudy();
-  const navigate = useNavigate();
+  const { selectedStudy, setSelectedStudy, studies } = useStudy();
 
-  // Redirect to study selection if no study is selected
+  // Auto-select first study if no study is selected
   useEffect(() => {
-    if (!selectedStudy) {
-      navigate('/select-study');
+    if (!selectedStudy && studies && studies.length > 0) {
+      setSelectedStudy(studies[0]); // Select the first study automatically
     }
-  }, [selectedStudy, navigate]);
+  }, [selectedStudy, setSelectedStudy, studies]);
 
   // Dynamic data based on selected study
   const getStudyData = () => {
