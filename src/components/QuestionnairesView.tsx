@@ -158,7 +158,7 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending': return 'bg-[hsl(var(--progress-info))]/10 text-[hsl(var(--progress-info))] border-[hsl(var(--progress-info))]/20';
-      case 'in-progress': return 'bg-[hsl(var(--progress-accent))]/10 text-[hsl(var(--progress-accent))] border-[hsl(var(--progress-accent))]/20';
+      case 'in-progress': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
       case 'completed': return 'bg-[hsl(var(--progress-success))]/10 text-[hsl(var(--progress-success))] border-[hsl(var(--progress-success))]/20';
       default: return 'bg-muted text-muted-foreground border-border';
     }
