@@ -573,6 +573,8 @@ const translations = {
     'cro.export.hl7.description': 'Generate HL7 messages for healthcare system integration', 
     'cro.validate.cdisc': 'Validate CDISC Standards',
     'cro.validate.cdisc.description': 'Validate against CDISC Study Data Tabulation Model',
+    'cro.export.cdisc': 'Export CDISC Data',
+    'cro.export.cdisc.description': 'Export study data in CDISC format for regulatory submission and analysis',
     'cro.advanced.analytics': 'Advanced Analytics',
     
     // Study Details Attributes
@@ -1189,6 +1191,8 @@ const translations = {
     'cro.export.hl7.description': 'Generar mensajes HL7 para integración de sistemas de salud',
     'cro.validate.cdisc': 'Validar Estándares CDISC',
     'cro.validate.cdisc.description': 'Validar contra el Modelo de Tabulación de Datos de Estudio CDISC',
+    'cro.export.cdisc': 'Exportar Datos CDISC',
+    'cro.export.cdisc.description': 'Exportar datos del estudio en formato CDISC para envío regulatorio y análisis',
     'cro.advanced.analytics': 'Análisis Avanzado',
     'cro.generate.pdf.report': 'Generar Reporte PDF de Cuestionarios',
     'cro.generating.pdf': 'Generando PDF...',
