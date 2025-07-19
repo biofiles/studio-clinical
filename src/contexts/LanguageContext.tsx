@@ -242,6 +242,8 @@ const translations = {
     'questionnaire.list.responses.for': 'Responses for',
     'questionnaire.list.data.privacy': 'Data Privacy',
     'questionnaire.list.privacy.note': 'All questionnaire responses are encrypted and stored securely. Access is limited to authorized study personnel and complies with HIPAA regulations.',
+    'questionnaire.due': 'Due',
+    'questionnaire.est.time': 'Est. time',
     
     // Questionnaire Status
     'questionnaire.status.completed': 'Completed',
@@ -864,6 +866,8 @@ const translations = {
     'questionnaire.list.responses.for': 'Respuestas para',
     'questionnaire.list.data.privacy': 'Privacidad de Datos',
     'questionnaire.list.privacy.note': 'Todas las respuestas de cuestionarios están encriptadas y almacenadas de forma segura. El acceso está limitado al personal autorizado del estudio y cumple con las regulaciones HIPAA.',
+    'questionnaire.due': 'Vence',
+    'questionnaire.est.time': 'Tiempo est.',
     
     // Questionnaire Status
     'questionnaire.status.completed': 'Completado',

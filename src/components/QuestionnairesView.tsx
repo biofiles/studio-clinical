@@ -261,8 +261,8 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
                         </p>
                         
                         <div className="flex items-center space-x-4 text-xs text-studio-text-muted">
-                          <span>Due: {questionnaire.dueDate}</span>
-                          <span>Est. time: {questionnaire.estimatedTime}</span>
+                          <span>{t('questionnaire.due')}: {questionnaire.dueDate}</span>
+                          <span>{t('questionnaire.est.time')}: {questionnaire.estimatedTime}</span>
                         </div>
                         
                          {questionnaire.status === 'in-progress' && (
