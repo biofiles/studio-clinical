@@ -248,12 +248,12 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
                       <div className="flex-1">
                         <div className="flex items-center space-x-2 mb-2">
                           <h3 className="font-medium text-studio-text">{questionnaire.title}</h3>
-                           <span className={`px-2 py-1 text-xs rounded border ${getStatusColor(questionnaire.status)}`}>
-                             <div className="flex items-center space-x-1">
-                               {getStatusIcon(questionnaire.status)}
-                               <span className="capitalize">{t(`questionnaire.status.${questionnaire.status.replace('-', '.')}`)}</span>
-                             </div>
-                           </span>
+                           <Badge className={`rounded-full ${getStatusColor(questionnaire.status)}`}>
+                              <div className="flex items-center space-x-1">
+                                {getStatusIcon(questionnaire.status)}
+                                <span className="capitalize">{t(`questionnaire.status.${questionnaire.status.replace('-', '.')}`)}</span>
+                              </div>
+                            </Badge>
                         </div>
                         
                         <p className="text-sm text-studio-text-muted mb-3">
