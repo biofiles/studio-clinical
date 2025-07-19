@@ -257,18 +257,18 @@ const InvestigatorDashboard = () => {
             <CardContent className="space-y-4">
               {studyData && studyData.nextEvents.map((item, index) => (
                 <div key={index} className="flex justify-between items-center p-3 bg-studio-bg rounded">
-                  <div className="flex items-center space-x-3">
-                    <div>
+                  <div>
+                    <div className="flex items-center space-x-2 mb-1">
                       <p className="font-medium text-studio-text">{item.event}</p>
-                      <p className="text-sm text-studio-text-muted">{item.date} {t('dashboard.at')} {item.time}</p>
+                      <span className={`px-2 py-0.5 text-xs rounded-full border ${
+                        item.type === 'visit' ? 'bg-[hsl(var(--progress-info))]/10 text-[hsl(var(--progress-info))] border-[hsl(var(--progress-info))]/20' :
+                        item.type === 'lab' ? 'bg-[hsl(var(--progress-success))]/10 text-[hsl(var(--progress-success))] border-[hsl(var(--progress-success))]/20' :
+                        'bg-[hsl(var(--progress-accent))]/10 text-[hsl(var(--progress-accent))] border-[hsl(var(--progress-accent))]/20'
+                      }`}>
+                        {t(`dashboard.event.type.${item.type}`)}
+                      </span>
                     </div>
-                    <span className={`px-2 py-1 text-xs rounded-full border ${
-                      item.type === 'visit' ? 'bg-[hsl(var(--progress-info))]/10 text-[hsl(var(--progress-info))] border-[hsl(var(--progress-info))]/20' :
-                      item.type === 'lab' ? 'bg-[hsl(var(--progress-success))]/10 text-[hsl(var(--progress-success))] border-[hsl(var(--progress-success))]/20' :
-                      'bg-[hsl(var(--progress-accent))]/10 text-[hsl(var(--progress-accent))] border-[hsl(var(--progress-accent))]/20'
-                    }`}>
-                      {t(`dashboard.event.type.${item.type}`)}
-                    </span>
+                    <p className="text-sm text-studio-text-muted">{item.date} {t('dashboard.at')} {item.time}</p>
                   </div>
                 </div>
               ))}
