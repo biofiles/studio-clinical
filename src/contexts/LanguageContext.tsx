@@ -117,6 +117,7 @@ const translations = {
     'participant.your.schedule': 'Your Schedule',
     'participant.days.remaining': 'days remaining',
     'participant.token': 'Participant Token',
+    'participant.id.card': 'Patient ID Card',
     
     // Questionnaires
     'questionnaire.daily.symptom': 'Daily Symptom Diary',
@@ -675,6 +676,7 @@ const translations = {
     'participant.your.schedule': 'Tu Agenda',
     'participant.days.remaining': 'días restantes',
     'participant.token': 'Token de Participante',
+    'participant.id.card': 'Tarjeta de Identificación del Paciente',
     
     // Questionnaires
     'questionnaire.daily.symptom': 'Diario de Síntomas Diarios',

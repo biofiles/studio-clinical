@@ -464,7 +464,7 @@ const ParticipantDashboard = () => {
                   <div className="flex items-center justify-between">
                     <div className="space-y-2">
                       
-                      <p className="text-sm opacity-90">Patient ID Card</p>
+                      <p className="text-base opacity-90">{t('participant.id.card')}</p>
                       <div className="space-y-1">
                         <p className="text-xs opacity-75">Protocolo: NVS-4578-301</p>
                         <p className="text-xs opacity-75">Site: Metro General Hospital</p>
