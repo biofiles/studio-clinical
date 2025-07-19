@@ -245,6 +245,14 @@ const translations = {
     'questionnaire.due': 'Due',
     'questionnaire.est.time': 'Est. time',
     
+    // Calendar View
+    'calendar.study.calendar': 'Study Calendar - Read Only',
+    'calendar.select.date': 'Select Date',
+    'calendar.upcoming.activities': 'Upcoming Activities',
+    'calendar.note.readonly': 'Note:',
+    'calendar.readonly.description': 'This calendar is read-only. Contact your study coordinator to reschedule appointments.',
+    'calendar.timezone.note': 'All dates and times are displayed in your local timezone. Days with activities are highlighted in blue.',
+    
     // Questionnaire Status
     'questionnaire.status.completed': 'Completed',
     'questionnaire.status.in.progress': 'In Progress', 
@@ -635,7 +643,7 @@ const translations = {
     
     // Calendar Management
     'calendar.management.title': 'Study Calendar Management',
-    'calendar.study.calendar': 'Study Calendar',
+    'calendar.management.calendar': 'Study Calendar',
     'calendar.upcoming.events': 'Upcoming Study Events',
     'calendar.edit': 'Edit',
     'calendar.participant': 'Participant:',
@@ -868,6 +876,14 @@ const translations = {
     'questionnaire.list.privacy.note': 'Todas las respuestas de cuestionarios están encriptadas y almacenadas de forma segura. El acceso está limitado al personal autorizado del estudio y cumple con las regulaciones HIPAA.',
     'questionnaire.due': 'Vence',
     'questionnaire.est.time': 'Tiempo est.',
+    
+    // Calendar View
+    'calendar.study.calendar': 'Calendario del Estudio - Solo Lectura',
+    'calendar.select.date': 'Seleccionar Fecha',
+    'calendar.upcoming.activities': 'Actividades Próximas',
+    'calendar.note.readonly': 'Nota:',
+    'calendar.readonly.description': 'Este calendario es de solo lectura. Contacte a su coordinador del estudio para reprogramar citas.',
+    'calendar.timezone.note': 'Todas las fechas y horas se muestran en su zona horaria local. Los días con actividades están resaltados en azul.',
     
     // Questionnaire Status
     'questionnaire.status.completed': 'Completado',
@@ -1289,7 +1305,7 @@ const translations = {
     
     // Calendar Management
     'calendar.management.title': 'Gestión del Calendario del Estudio',
-    'calendar.study.calendar': 'Calendario del Estudio',
+    'calendar.management.calendar': 'Calendario del Estudio',
     'calendar.upcoming.events': 'Próximos Eventos del Estudio',
     'calendar.edit': 'Editar',
     'calendar.participant': 'Participante:',

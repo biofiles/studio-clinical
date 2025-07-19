@@ -76,7 +76,7 @@ const CalendarView = ({ open, onOpenChange, activities }: CalendarViewProps) => 
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-2">
             <CalendarIcon className="h-5 w-5" />
-            <span>Study Calendar - Read Only</span>
+            <span>{t('calendar.study.calendar')}</span>
           </DialogTitle>
         </DialogHeader>
         
@@ -84,7 +84,7 @@ const CalendarView = ({ open, onOpenChange, activities }: CalendarViewProps) => 
           <div>
             <Card className="bg-studio-surface border-studio-border">
               <CardHeader>
-                <CardTitle className="text-studio-text text-sm">Select Date</CardTitle>
+                <CardTitle className="text-studio-text text-sm">{t('calendar.select.date')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <Calendar
@@ -116,7 +116,7 @@ const CalendarView = ({ open, onOpenChange, activities }: CalendarViewProps) => 
           <div>
             <Card className="bg-studio-surface border-studio-border">
               <CardHeader>
-                <CardTitle className="text-studio-text text-sm">Upcoming Activities</CardTitle>
+                <CardTitle className="text-studio-text text-sm">{t('calendar.upcoming.activities')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4 max-h-80 overflow-y-auto">
                 {upcomingVisits.map((visit, index) => (
@@ -151,8 +151,8 @@ const CalendarView = ({ open, onOpenChange, activities }: CalendarViewProps) => 
         </div>
 
         <div className="text-xs text-studio-text-muted bg-blue-50 p-3 rounded">
-          <strong>Note:</strong> This calendar is read-only. Contact your study coordinator to reschedule appointments.
-          All dates and times are displayed in your local timezone. Days with activities are highlighted in blue.
+          <strong>{t('calendar.note.readonly')}</strong> {t('calendar.readonly.description')}
+          {' '}{t('calendar.timezone.note')}
         </div>
       </DialogContent>
     </Dialog>
