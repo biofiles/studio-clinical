@@ -13,7 +13,7 @@ import AIChatbot from "@/components/AIChatbot";
 import EConsentDialog from "@/components/EConsentDialog";
 import StudyResultsSignup from "@/components/StudyResultsSignup";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, BookOpen, MapPin, Stethoscope, Barcode, Signature, Building, Settings, Scale } from "lucide-react";
+import { Calendar, FileText, Bell, Activity, Download, Sparkles, User, Shield, Clock, CheckCircle, BookOpen, MapPin, Stethoscope, Barcode, Signature, Building, Settings, Scale } from "lucide-react";
 const ParticipantDashboard = () => {
   const {
     t,
@@ -541,7 +541,7 @@ const ParticipantDashboard = () => {
 
       <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6">
         <Button onClick={() => setShowChatbot(true)} className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg" size="icon">
-          <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+          <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
         </Button>
       </div>
 
