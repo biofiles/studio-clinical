@@ -775,9 +775,7 @@ const CROSponsorDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {studyData && studyData.schedule.map((milestone, index) => <div key={index} className="flex justify-between items-center p-3 bg-studio-bg rounded border-l-4 border-l-transparent" style={{
-                  borderLeftColor: milestone.status === 'completed' ? 'hsl(var(--primary))' : milestone.type === 'milestone' ? 'hsl(var(--progress-success))' : 'hsl(var(--progress-accent))'
-                }}>
+                  {studyData && studyData.schedule.map((milestone, index) => <div key={index} className="flex justify-between items-center p-3 bg-studio-bg rounded">
                       <div className="flex-1">
                         <div className="flex items-center space-x-2">
                           <p className="font-medium text-studio-text">{milestone.event}</p>
