@@ -715,8 +715,8 @@ const CROSponsorDashboard = () => {
                       onClick={() => toast.success("Generating Site Users Report...", { description: "Report will be available for download shortly" })}
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
-                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.site.users.report')}</span>
-                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                        <span className="font-medium text-sm sm:text-base w-full text-left truncate">{t('cro.site.users.report')}</span>
+                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left line-clamp-2">
                           {t('cro.site.users.report.description')}
                         </span>
                       </div>
@@ -729,8 +729,8 @@ const CROSponsorDashboard = () => {
                       onClick={() => toast.success("Generating Questionnaire Report...", { description: "Comprehensive questionnaire data compilation started" })}
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
-                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.questionnaire.report')}</span>
-                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                        <span className="font-medium text-sm sm:text-base w-full text-left truncate">{t('cro.questionnaire.report')}</span>
+                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left line-clamp-2">
                           {t('cro.questionnaire.report.description')}
                         </span>
                       </div>
@@ -743,8 +743,8 @@ const CROSponsorDashboard = () => {
                       onClick={() => toast.success("Generating Milestones Report...", { description: "Study timeline and milestone tracking report in progress" })}
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
-                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.milestones.report')}</span>
-                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                        <span className="font-medium text-sm sm:text-base w-full text-left truncate">{t('cro.milestones.report')}</span>
+                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left line-clamp-2">
                           {t('cro.milestones.report.description')}
                         </span>
                       </div>
@@ -775,8 +775,8 @@ const CROSponsorDashboard = () => {
                       onClick={() => setShowFHIRExport(true)}
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
-                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.export.fhir')}</span>
-                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                        <span className="font-medium text-sm sm:text-base w-full text-left truncate">{t('cro.export.fhir')}</span>
+                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left line-clamp-2">
                           {t('cro.export.fhir.description')}
                         </span>
                       </div>
@@ -789,8 +789,8 @@ const CROSponsorDashboard = () => {
                       onClick={() => toast.success("Initiating HL7 Export...", { description: "HL7 message format export for healthcare systems integration" })}
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
-                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.export.hl7')}</span>
-                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                        <span className="font-medium text-sm sm:text-base w-full text-left truncate">{t('cro.export.hl7')}</span>
+                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left line-clamp-2">
                           {t('cro.export.hl7.description')}
                         </span>
                       </div>
@@ -803,8 +803,8 @@ const CROSponsorDashboard = () => {
                       onClick={() => setShowCDISCExport(true)}
                     >
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
-                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.export.cdisc')}</span>
-                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                        <span className="font-medium text-sm sm:text-base w-full text-left truncate">{t('cro.export.cdisc')}</span>
+                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left line-clamp-2">
                           {t('cro.export.cdisc.description')}
                         </span>
                       </div>
