@@ -206,7 +206,7 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
           <DialogHeader>
             <DialogTitle className="flex items-center space-x-2">
               <FileText className="h-5 w-5" />
-              <span>{t('questionnaire.your.surveys')}</span>
+              <span>{t('questionnaire.surveys')}</span>
             </DialogTitle>
           </DialogHeader>
           
