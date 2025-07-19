@@ -133,6 +133,29 @@ const translations = {
     'profile.token.hipaa': 'HIPAA compliant anonymization',
     'profile.token.copied': 'Token copied to clipboard',
     'profile.close': 'Close',
+
+    // AI Chatbot
+    'ai.title': 'AI Protocol Assistant',
+    'ai.welcome': "Hello! I'm your AI assistant for study protocol questions. I can help you understand procedures, timelines, and requirements. What would you like to know?",
+    'ai.quick.questions': 'Quick questions',
+    'ai.input.placeholder': 'Ask about the study protocol...',
+    'ai.note': 'Note',
+    'ai.note.description': 'This AI assistant provides general study information only. For medical emergencies or urgent concerns, contact your study coordinator immediately.',
+    'ai.default.response': 'I understand your question. For specific medical concerns or detailed protocol information, please contact your study coordinator directly. I can help with general study timeline and procedure questions.',
+    
+    // AI Quick Questions
+    'ai.question.upcoming.visits': 'What are my upcoming visits?',
+    'ai.question.daily.diary': 'How do I complete the daily diary?',
+    'ai.question.side.effects': 'What side effects should I report?',
+    'ai.question.blood.draw': 'When is my next blood draw?',
+    'ai.question.study.duration': 'How long is the study?',
+    
+    // AI Responses
+    'ai.response.upcoming.visits': 'Based on your schedule, you have a site visit on December 15th at 2:00 PM for a blood draw, and a follow-up call on December 22nd at 3:00 PM.',
+    'ai.response.daily.diary': 'Complete your daily diary by logging into the questionnaires section. Record any symptoms, side effects, or changes in how you feel. It takes about 5 minutes.',
+    'ai.response.side.effects': 'Report any new or worsening symptoms immediately through the app or call your study coordinator. Serious side effects should be reported within 24 hours.',
+    'ai.response.blood.draw': 'Your next blood draw is scheduled for December 15th at 2:00 PM. Please fast for 8 hours beforehand and bring your ID.',
+    'ai.response.study.duration': 'This study runs for approximately 6 months. You are currently 65% complete with about 30 days remaining.',
     
     // Questionnaires
     'questionnaire.daily.symptom': 'Daily Symptom Diary',
@@ -707,6 +730,29 @@ const translations = {
     'profile.token.hipaa': 'Anonimización compatible con HIPAA',
     'profile.token.copied': 'Token copiado al portapapeles',
     'profile.close': 'Cerrar',
+
+    // AI Chatbot
+    'ai.title': 'Asistente de Protocolo AI',
+    'ai.welcome': '¡Hola! Soy tu asistente de IA para preguntas sobre el protocolo del estudio. Puedo ayudarte a entender procedimientos, cronogramas y requisitos. ¿Qué te gustaría saber?',
+    'ai.quick.questions': 'Preguntas rápidas',
+    'ai.input.placeholder': 'Pregunta sobre el protocolo del estudio...',
+    'ai.note': 'Nota',
+    'ai.note.description': 'Este asistente de IA proporciona solo información general del estudio. Para emergencias médicas o preocupaciones urgentes, contacta a tu coordinador de estudio inmediatamente.',
+    'ai.default.response': 'Entiendo tu pregunta. Para preocupaciones médicas específicas o información detallada del protocolo, por favor contacta directamente a tu coordinador de estudio. Puedo ayudar con preguntas generales sobre cronograma y procedimientos del estudio.',
+    
+    // AI Quick Questions
+    'ai.question.upcoming.visits': '¿Cuáles son mis próximas visitas?',
+    'ai.question.daily.diary': '¿Cómo completo el diario diario?',
+    'ai.question.side.effects': '¿Qué efectos secundarios debo reportar?',
+    'ai.question.blood.draw': '¿Cuándo es mi próxima extracción de sangre?',
+    'ai.question.study.duration': '¿Cuánto dura el estudio?',
+    
+    // AI Responses
+    'ai.response.upcoming.visits': 'Según tu horario, tienes una visita al sitio el 15 de diciembre a las 2:00 PM para extracción de sangre, y una llamada de seguimiento el 22 de diciembre a las 3:00 PM.',
+    'ai.response.daily.diary': 'Completa tu diario diario iniciando sesión en la sección de cuestionarios. Registra cualquier síntoma, efecto secundario o cambio en cómo te sientes. Toma unos 5 minutos.',
+    'ai.response.side.effects': 'Reporta cualquier síntoma nuevo o que empeore inmediatamente a través de la aplicación o llama a tu coordinador de estudio. Los efectos secundarios graves deben reportarse dentro de 24 horas.',
+    'ai.response.blood.draw': 'Tu próxima extracción de sangre está programada para el 15 de diciembre a las 2:00 PM. Por favor ayuna por 8 horas antes y trae tu identificación.',
+    'ai.response.study.duration': 'Este estudio dura aproximadamente 6 meses. Actualmente estás 65% completo con unos 30 días restantes.',
     
     // Questionnaires
     'questionnaire.daily.symptom': 'Diario de Síntomas Diarios',

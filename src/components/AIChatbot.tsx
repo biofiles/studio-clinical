@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { MessageCircle, Send, Bot, User } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface AIChatbotProps {
   open: boolean;
@@ -19,10 +20,12 @@ interface Message {
 }
 
 const AIChatbot = ({ open, onOpenChange }: AIChatbotProps) => {
+  const { t } = useLanguage();
+  
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      content: "Hello! I'm your AI assistant for study protocol questions. I can help you understand procedures, timelines, and requirements. What would you like to know?",
+      content: t('ai.welcome'),
       sender: 'bot',
       timestamp: new Date()
     }
@@ -30,19 +33,25 @@ const AIChatbot = ({ open, onOpenChange }: AIChatbotProps) => {
   const [inputMessage, setInputMessage] = useState("");
 
   const commonQuestions = [
-    "What are my upcoming visits?",
-    "How do I complete the daily diary?",
-    "What side effects should I report?",
-    "When is my next blood draw?",
-    "How long is the study?"
+    t('ai.question.upcoming.visits'),
+    t('ai.question.daily.diary'),
+    t('ai.question.side.effects'),
+    t('ai.question.blood.draw'),
+    t('ai.question.study.duration')
   ];
 
   const botResponses = {
-    "upcoming visits": "Based on your schedule, you have a site visit on December 15th at 2:00 PM for a blood draw, and a follow-up call on December 22nd at 3:00 PM.",
-    "daily diary": "Complete your daily diary by logging into the questionnaires section. Record any symptoms, side effects, or changes in how you feel. It takes about 5 minutes.",
-    "side effects": "Report any new or worsening symptoms immediately through the app or call your study coordinator. Serious side effects should be reported within 24 hours.",
-    "blood draw": "Your next blood draw is scheduled for December 15th at 2:00 PM. Please fast for 8 hours beforehand and bring your ID.",
-    "study duration": "This study runs for approximately 6 months. You're currently 65% complete with about 30 days remaining."
+    "upcoming visits": t('ai.response.upcoming.visits'),
+    "daily diary": t('ai.response.daily.diary'),
+    "side effects": t('ai.response.side.effects'),
+    "blood draw": t('ai.response.blood.draw'),
+    "study duration": t('ai.response.study.duration'),
+    "próximas visitas": t('ai.response.upcoming.visits'),
+    "diario diario": t('ai.response.daily.diary'),
+    "efectos secundarios": t('ai.response.side.effects'),
+    "extracción de sangre": t('ai.response.blood.draw'),
+    "duración del estudio": t('ai.response.study.duration'),
+    "dura el estudio": t('ai.response.study.duration')
   };
 
   const handleSendMessage = () => {
@@ -56,7 +65,7 @@ const AIChatbot = ({ open, onOpenChange }: AIChatbotProps) => {
     };
 
     // Simple response matching
-    let botResponse = "I understand your question. For specific medical concerns or detailed protocol information, please contact your study coordinator directly. I can help with general study timeline and procedure questions.";
+    let botResponse = t('ai.default.response');
     
     const lowerInput = inputMessage.toLowerCase();
     for (const [key, response] of Object.entries(botResponses)) {
@@ -87,7 +96,7 @@ const AIChatbot = ({ open, onOpenChange }: AIChatbotProps) => {
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-2">
             <MessageCircle className="h-5 w-5" />
-            <span>AI Protocol Assistant</span>
+            <span>{t('ai.title')}</span>
           </DialogTitle>
         </DialogHeader>
         
@@ -125,7 +134,7 @@ const AIChatbot = ({ open, onOpenChange }: AIChatbotProps) => {
 
           {/* Quick Questions */}
           <div className="space-y-2">
-            <p className="text-xs text-studio-text-muted">Quick questions:</p>
+            <p className="text-xs text-studio-text-muted">{t('ai.quick.questions')}:</p>
             <div className="flex flex-wrap gap-2">
               {commonQuestions.map((question, index) => (
                 <Button
@@ -146,7 +155,7 @@ const AIChatbot = ({ open, onOpenChange }: AIChatbotProps) => {
             <Input
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
-              placeholder="Ask about the study protocol..."
+              placeholder={t('ai.input.placeholder')}
               onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
               className="flex-1"
             />
@@ -156,8 +165,7 @@ const AIChatbot = ({ open, onOpenChange }: AIChatbotProps) => {
           </div>
 
           <div className="text-xs text-studio-text-muted bg-yellow-50 p-2 rounded">
-            <strong>Note:</strong> This AI assistant provides general study information only. 
-            For medical emergencies or urgent concerns, contact your study coordinator immediately.
+            <strong>{t('ai.note')}:</strong> {t('ai.note.description')}
           </div>
         </div>
       </DialogContent>
