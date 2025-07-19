@@ -3,34 +3,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Header from "@/components/Header";
-import { Globe, LogOut, ArrowLeft, Play } from "lucide-react";
+import { Globe, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useAuth } from "@/contexts/AuthContext";
-import { useOnboarding } from "@/contexts/OnboardingContext";
 
 const Settings = () => {
   const navigate = useNavigate();
   const { language, setLanguage, t } = useLanguage();
-  const { signOut, user, userRole } = useAuth();
-  const { startOnboarding } = useOnboarding();
-
-  const handleLogout = async () => {
-    try {
-      await signOut();
-      navigate('/');
-    } catch (error) {
-      console.error('Error during logout:', error);
-    }
-  };
 
   const handleBack = () => {
     navigate(-1);
-  };
-
-  const handleStartTutorial = () => {
-    startOnboarding(userRole);
-    navigate(-1); // Go back to the dashboard to start tutorial
   };
 
   return (
@@ -83,63 +65,6 @@ const Settings = () => {
             </CardContent>
           </Card>
 
-          <Card className="bg-studio-surface border-studio-border">
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2 text-studio-text">
-                <Play className="h-5 w-5" />
-                <span>{t('settings.tutorial.section')}</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-4">
-                <div>
-                  <h4 className="text-sm font-medium text-studio-text mb-2">
-                    {t('settings.start.tutorial')}
-                  </h4>
-                  <p className="text-xs text-studio-text-muted mb-3">
-                    {t('settings.tutorial.description')}
-                  </p>
-                  <Button
-                    variant="outline"
-                    onClick={handleStartTutorial}
-                    disabled={!userRole}
-                    className="flex items-center space-x-2"
-                  >
-                    <Play className="h-4 w-4" />
-                    <span>{t('settings.start.tutorial')}</span>
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-studio-surface border-studio-border">
-            <CardHeader>
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
-                <CardTitle className="flex items-center space-x-2 text-studio-text">
-                  <LogOut className="h-5 w-5" />
-                  <span>{t('settings.account.actions')}</span>
-                </CardTitle>
-                <Button
-                  variant="outline"
-                  onClick={handleLogout}
-                  className="flex items-center space-x-2 text-red-600 border-red-200 hover:bg-red-50 w-full sm:w-auto"
-                >
-                  <LogOut className="h-4 w-4" />
-                  <span>{t('settings.sign.out')}</span>
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-4">
-                <div>
-                  <p className="text-xs text-studio-text-muted">
-                    {t('settings.sign.out.note')}
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </main>
     </div>

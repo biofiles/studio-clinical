@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { Settings, LogOut } from "lucide-react";
+import { Settings, LogOut, HelpCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useOnboarding } from "@/contexts/OnboardingContext";
 import StudyDropdown from "@/components/StudyDropdown";
 
 interface HeaderProps {
@@ -18,7 +19,8 @@ const Header = ({
   const navigate = useNavigate();
   const { t } = useLanguage();
   const { selectedStudy } = useStudy();
-  const { signOut } = useAuth();
+  const { signOut, userRole } = useAuth();
+  const { startOnboarding } = useOnboarding();
 
   const handleSettings = () => {
     navigate('/settings');
@@ -31,6 +33,10 @@ const Header = ({
     } catch (error) {
       console.error('Error during logout:', error);
     }
+  };
+
+  const handleStartTutorial = () => {
+    startOnboarding(userRole);
   };
 
   const getRoleDisplay = (role: string) => {
@@ -55,9 +61,15 @@ const Header = ({
           </div>
 
           <div className="flex items-center space-x-3">
+            <Button variant="outline" size="icon" onClick={handleStartTutorial} disabled={!userRole}>
+              <HelpCircle className="h-4 w-4" />
+            </Button>
             <Button variant="outline" size="sm" onClick={handleSettings}>
               <Settings className="h-4 w-4 mr-2" />
               {t('header.settings')}
+            </Button>
+            <Button variant="outline" size="icon" onClick={handleLogout}>
+              <LogOut className="h-4 w-4" />
             </Button>
           </div>
         </div>
