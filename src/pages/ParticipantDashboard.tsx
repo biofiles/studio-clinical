@@ -382,19 +382,19 @@ const ParticipantDashboard = () => {
                 <CardContent className="space-y-3">
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-sm text-studio-text-muted">{t('contact.principal.investigator')}:</span>
+                      <span className="text-sm text-studio-text-muted">{t('contact.principal.investigator')}</span>
                       <span className="text-sm font-medium">Dr. Carlos Mendoza</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm text-studio-text-muted">{t('contact.study.coordinator')}:</span>
+                      <span className="text-sm text-studio-text-muted">{t('contact.study.coordinator')}</span>
                       <span className="text-sm font-medium">Lic. Sofía Gutierrez</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm text-studio-text-muted">{t('contact.phone')}:</span>
+                      <span className="text-sm text-studio-text-muted">{t('contact.phone')}</span>
                       <a href="tel:+541148765432" className="text-sm text-blue-600 hover:underline">+54 11 4876-5432</a>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm text-studio-text-muted">{t('contact.email')}:</span>
+                      <span className="text-sm text-studio-text-muted">{t('contact.email')}</span>
                       <a href="mailto:estudio@hospital.com.ar" className="text-sm text-blue-600 hover:underline">estudio@hospital.com.ar</a>
                     </div>
                     
@@ -413,7 +413,7 @@ const ParticipantDashboard = () => {
                 <CardContent className="space-y-3">
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-sm text-studio-text-muted">ANMAT (Argentina):</span>
+                      <span className="text-sm text-studio-text-muted">ANMAT (Argentina)</span>
                       <a href="tel:+541143401400" className="text-sm text-blue-600 hover:underline">+54 11 4340-1400</a>
                     </div>
                     
@@ -433,19 +433,19 @@ const ParticipantDashboard = () => {
                 <CardContent className="space-y-3">
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-sm text-studio-text-muted">Comité:</span>
+                      <span className="text-sm text-studio-text-muted">Comité</span>
                       <span className="text-sm font-medium">CEI Hospital Metro General</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm text-studio-text-muted">Presidente:</span>
+                      <span className="text-sm text-studio-text-muted">Presidente</span>
                       <span className="text-sm font-medium">Dr. María Elena Rodriguez</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm text-studio-text-muted">{t('contact.phone')}:</span>
+                      <span className="text-sm text-studio-text-muted">{t('contact.phone')}</span>
                       <a href="tel:+541148765450" className="text-sm text-blue-600 hover:underline">+54 11 4876-5450</a>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm text-studio-text-muted">{t('contact.email')}:</span>
+                      <span className="text-sm text-studio-text-muted">{t('contact.email')}</span>
                       <a href="mailto:cei@hospital.com.ar" className="text-sm text-blue-600 hover:underline">cei@hospital.com.ar</a>
                     </div>
                   </div>
