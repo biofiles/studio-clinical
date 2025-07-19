@@ -138,9 +138,9 @@ const ParticipantDashboard = () => {
           </TabsList>
 
           <TabsContent value="schedule" className="space-y-3">{/* Reduced spacing */}
-            <div className="flex flex-col space-y-2">{/* Mobile first layout */}
-              <h3 className="text-lg sm:text-xl font-medium text-studio-text">{t('participant.your.schedule')}</h3>
-              <Button variant="studio" size="sm" onClick={() => setShowCalendar(true)} className="w-full text-sm">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
+              <h3 className="text-lg sm:text-xl font-medium text-studio-text">{t('participant.schedule')}</h3>
+              <Button variant="studio" size="sm" onClick={() => setShowCalendar(true)} className="w-full sm:w-auto">
                 <Calendar className="h-4 w-4 mr-2" />
                 {t('calendar.view.full')}
               </Button>
@@ -180,9 +180,9 @@ const ParticipantDashboard = () => {
           </TabsContent>
 
           <TabsContent value="questionnaires" className="space-y-4">
-            <div className="flex flex-col space-y-2">
-              <h3 className="text-lg sm:text-xl font-medium text-studio-text">{t('questionnaire.your.surveys')}</h3>
-              <Button variant="studio" size="sm" onClick={() => setShowQuestionnaires(true)} className="w-full text-sm">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
+              <h3 className="text-lg sm:text-xl font-medium text-studio-text">{t('questionnaire.surveys')}</h3>
+              <Button variant="studio" size="sm" onClick={() => setShowQuestionnaires(true)} className="w-full sm:w-auto">
                 <FileText className="h-4 w-4 mr-2" />
                 {t('questionnaire.view.all')}
               </Button>
