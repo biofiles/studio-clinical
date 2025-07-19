@@ -463,7 +463,7 @@ const ParticipantDashboard = () => {
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div className="space-y-2">
-                      <h4 className="text-lg font-bold">STUDIO Clinical Trial</h4>
+                      
                       <p className="text-sm opacity-90">Patient ID Card</p>
                       <div className="space-y-1">
                         <p className="text-xs opacity-75">Protocolo: NVS-4578-301</p>
