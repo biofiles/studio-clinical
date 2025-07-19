@@ -6,6 +6,7 @@ import { Progress } from "@/components/ui/progress";
 import { useState } from "react";
 import { FileText, CheckCircle, Clock, AlertCircle, Eye, Users, Filter } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { formatDate } from "@/lib/utils";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 
@@ -32,7 +33,7 @@ interface InvestigatorQuestionnairesProps {
 }
 
 const InvestigatorQuestionnaires = ({ open, onOpenChange }: InvestigatorQuestionnairesProps) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [filterStatus, setFilterStatus] = useState<string>("all");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -294,11 +295,11 @@ const InvestigatorQuestionnaires = ({ open, onOpenChange }: InvestigatorQuestion
                           
                           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm text-studio-text-muted">
                             <div>
-                              <span className="font-medium">{t('questionnaire.list.due.date')}:</span> {new Date(questionnaire.dueDate).toLocaleDateString()}
+                              <span className="font-medium">{t('questionnaire.list.due.date')}:</span> {formatDate(questionnaire.dueDate, language)}
                             </div>
                             {questionnaire.completedDate && (
                               <div>
-                                <span className="font-medium">{t('questionnaire.list.completed.date')}:</span> {new Date(questionnaire.completedDate).toLocaleDateString()}
+                                <span className="font-medium">{t('questionnaire.list.completed.date')}:</span> {formatDate(questionnaire.completedDate, language)}
                               </div>
                             )}
                             {questionnaire.score && (

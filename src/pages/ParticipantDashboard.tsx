@@ -13,6 +13,7 @@ import AIChatbot from "@/components/AIChatbot";
 import EConsentDialog from "@/components/EConsentDialog";
 import StudyResultsSignup from "@/components/StudyResultsSignup";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { formatDate } from "@/lib/utils";
 import { Calendar, FileText, Bell, Activity, Download, Sparkles, User, Shield, Clock, CheckCircle, BookOpen, MapPin, Stethoscope, Barcode, Signature, Building, Settings, Scale } from "lucide-react";
 const ParticipantDashboard = () => {
   const {
@@ -307,8 +308,8 @@ const ParticipantDashboard = () => {
                       <strong>Adenda de Seguridad v1.0</strong> - Disponible para firma
                     </p>
                     <div className="text-xs text-blue-600 mt-2 space-y-1">
-                      <p>• Documento disponible desde: 1 Dic 2024</p>
-                      <p>• Plazo para firmar: Hasta 15 Dic 2024</p>
+                      <p>• Documento disponible desde: {formatDate('2024-12-01', language)}</p>
+                      <p>• Plazo para firmar: Hasta {formatDate('2024-12-15', language)}</p>
                       <p>• Modalidad: Firma electrónica con audio disponible</p>
                     </div>
                     <Button size="sm" className="mt-3" onClick={() => {
@@ -339,7 +340,7 @@ const ParticipantDashboard = () => {
                           {t('visits.status.completed')}
                         </Badge>
                       </div>
-                      <p className="text-sm text-gray-600">15 Nov 2024 a las 2:00 PM</p>
+                      <p className="text-sm text-gray-600">{formatDate('2024-11-15', language)} a las 2:00 PM</p>
                       <p className="text-xs text-gray-600 mt-1">{t('visits.baseline.procedures')}</p>
                       <div className="bg-gray-100 border border-gray-300 rounded p-2 text-xs text-gray-700 mt-2">
                         <strong>{t('visits.notes')}:</strong> {t('visits.baseline.notes')}
@@ -360,7 +361,7 @@ const ParticipantDashboard = () => {
                           {t('visits.status.scheduled')}
                         </Badge>
                       </div>
-                      <p className="text-sm text-gray-600">15 Dic 2024 a las 2:00 PM</p>
+                      <p className="text-sm text-gray-600">{formatDate('2024-12-15', language)} a las 2:00 PM</p>
                       <p className="text-xs text-gray-600 mt-1">{t('visits.week4.procedures')}</p>
                       <div className="bg-gray-50 border border-gray-200 rounded p-2 text-xs text-gray-700 mt-2">
                         <strong>{t('visits.preparation.notes')}:</strong> {t('visits.week4.notes')}

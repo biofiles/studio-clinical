@@ -17,6 +17,7 @@ import {
 import { useAuth } from "@/contexts/AuthContext";
 import { useStudy } from "@/contexts/StudyContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { formatDate } from "@/lib/utils";
 import EConsentDialog from "./EConsentDialog";
 import CredentialVerificationDialog from "./CredentialVerificationDialog";
 
@@ -48,7 +49,7 @@ export default function InvestigatorConsentDashboard({
   const [consentToSign, setConsentToSign] = useState<ConsentSignature | null>(null);
   const { user } = useAuth();
   const { selectedStudy } = useStudy();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   useEffect(() => {
     if (open && user?.id) {
@@ -277,7 +278,7 @@ export default function InvestigatorConsentDashboard({
                                <span className="hidden sm:inline">•</span>
                                <span className="whitespace-nowrap">
                                  {t('consent.dashboard.signed.on')} {' '}
-                                 {new Date(signature.participant_signed_at).toLocaleDateString()}
+                                 {formatDate(signature.participant_signed_at, language)}
                                </span>
                                <span className="hidden sm:inline">•</span>
                                <span className="whitespace-nowrap">

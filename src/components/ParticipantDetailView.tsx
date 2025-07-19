@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { User, Calendar, FileText, Activity, AlertTriangle, Signature, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
+import { formatDate } from "@/lib/utils";
 
 interface ParticipantDetailViewProps {
   open: boolean;
@@ -13,7 +14,7 @@ interface ParticipantDetailViewProps {
 }
 
 const ParticipantDetailView = ({ open, onOpenChange, participantId }: ParticipantDetailViewProps) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { selectedStudy } = useStudy();
 
   if (!participantId || !selectedStudy) return null;
@@ -235,7 +236,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-studio-text-muted">{t('participant.enrollment')} Date:</span>
-                  <span>{new Date(participantDetails.enrollmentDate).toLocaleDateString()}</span>
+                  <span>{formatDate(participantDetails.enrollmentDate, language)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-studio-text-muted">{t('participant.visit.status')}:</span>
@@ -245,11 +246,11 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-studio-text-muted">Last Visit:</span>
-                  <span>{new Date(participantDetails.lastVisit).toLocaleDateString()}</span>
+                  <span>{formatDate(participantDetails.lastVisit, language)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-studio-text-muted">{t('participant.next.visit')}:</span>
-                  <span>{new Date(participantDetails.nextVisit).toLocaleDateString()}</span>
+                  <span>{formatDate(participantDetails.nextVisit, language)}</span>
                 </div>
               </CardContent>
             </Card>
@@ -290,7 +291,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
               </div>
               <div className="flex justify-between">
                 <span className="text-sm text-studio-text-muted">{t('details.icf.signed.date')}:</span>
-                <span>{new Date(participantDetails.icfDetails.signedDate).toLocaleDateString()}</span>
+                <span>{formatDate(participantDetails.icfDetails.signedDate, language)}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-sm text-studio-text-muted">{t('details.icf.status')}:</span>
@@ -377,7 +378,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                     <div>
                       <div className="font-medium text-sm">{activity.activity}</div>
                       <div className="text-xs text-studio-text-muted">
-                        {new Date(activity.date).toLocaleDateString()}
+                        {formatDate(activity.date, language)}
                       </div>
                     </div>
                     <Badge className={getActivityTypeColor(activity.type)}>
@@ -401,7 +402,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                     <div>
                       <div className="font-medium text-sm">{event.activity}</div>
                       <div className="text-xs text-studio-text-muted">
-                        {new Date(event.date).toLocaleDateString()} at {event.time}
+                        {formatDate(event.date, language)} at {event.time}
                       </div>
                     </div>
                   </div>

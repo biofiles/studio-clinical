@@ -7,6 +7,7 @@ import { Progress } from "@/components/ui/progress";
 import { useState } from "react";
 import { FileText, CheckCircle, Clock, AlertCircle, Eye } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { formatDate } from "@/lib/utils";
 
 interface ParticipantQuestionnairesProps {
   open: boolean;
@@ -15,7 +16,7 @@ interface ParticipantQuestionnairesProps {
 }
 
 const ParticipantQuestionnaires = ({ open, onOpenChange, participantId }: ParticipantQuestionnairesProps) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [questionnaires] = useState([
     {
       id: 2,
@@ -165,11 +166,11 @@ const ParticipantQuestionnaires = ({ open, onOpenChange, participantId }: Partic
                       
                       <div className="grid grid-cols-2 gap-4 text-sm text-studio-text-muted mb-3">
                         <div>
-                          <span className="font-medium">{t('questionnaire.list.due.date')}:</span> {new Date(questionnaire.dueDate).toLocaleDateString()}
+                          <span className="font-medium">{t('questionnaire.list.due.date')}:</span> {formatDate(questionnaire.dueDate, language)}
                         </div>
                         {questionnaire.completedDate && (
                           <div>
-                            <span className="font-medium">{t('questionnaire.list.completed.date')}:</span> {new Date(questionnaire.completedDate).toLocaleDateString()}
+                            <span className="font-medium">{t('questionnaire.list.completed.date')}:</span> {formatDate(questionnaire.completedDate, language)}
                           </div>
                         )}
                         {questionnaire.score && (

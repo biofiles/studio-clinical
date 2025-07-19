@@ -11,6 +11,7 @@ import ParticipantDetailView from "./ParticipantDetailView";
 import ParticipantScheduler from "./ParticipantScheduler";
 import ParticipantQuestionnaires from "./ParticipantQuestionnaires";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { formatDate } from "@/lib/utils";
 import { useStudy } from "@/contexts/StudyContext";
 
 interface ParticipantListProps {
@@ -37,7 +38,7 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
   const [showDetailView, setShowDetailView] = useState(false);
   const [showScheduler, setShowScheduler] = useState(false);
   const [showQuestionnaires, setShowQuestionnaires] = useState(false);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { selectedStudy } = useStudy();
 
   // Dynamic participant data based on selected study
@@ -305,7 +306,7 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
                           </div>
                         </TableCell>
                         <TableCell>
-                          {new Date(participant.enrollmentDate).toLocaleDateString()}
+                          {formatDate(participant.enrollmentDate, language)}
                         </TableCell>
                         <TableCell>
                           <Badge className={getStatusColor(participant.visitStatus)}>
@@ -330,7 +331,7 @@ const ParticipantList = ({ open, onOpenChange }: ParticipantListProps) => {
                           </span>
                         </TableCell>
                         <TableCell>
-                          {new Date(participant.nextVisit).toLocaleDateString()}
+                          {formatDate(participant.nextVisit, language)}
                         </TableCell>
                         <TableCell>
                           <div className="flex space-x-1 relative">

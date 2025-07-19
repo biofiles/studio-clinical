@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Calendar as CalendarIcon, Clock, Users, FileText, Activity } from "lucide-react";
 import { format } from "date-fns";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { formatDate } from "@/lib/utils";
 
 interface CalendarManagementProps {
   open: boolean;
@@ -15,7 +16,7 @@ interface CalendarManagementProps {
 }
 
 const CalendarManagement = ({ open, onOpenChange }: CalendarManagementProps) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
 
   const studyEvents = [
@@ -109,7 +110,7 @@ const CalendarManagement = ({ open, onOpenChange }: CalendarManagementProps) => 
                       </Badge>
                     </div>
                     <div className="text-xs text-studio-text-muted">
-                      {new Date(event.date).toLocaleDateString()} at {event.time}
+                      {formatDate(event.date, language)} at {event.time}
                     </div>
                     {event.participant && (
                       <div className="text-xs text-blue-600 mt-1">
