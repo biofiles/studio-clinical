@@ -118,6 +118,7 @@ const translations = {
     'participant.days.remaining': 'days remaining',
     'participant.token': 'Participant Token',
     'participant.id.card': 'Patient ID Card',
+    'participant.investigative.site': 'Investigative Site',
     
     // Questionnaires
     'questionnaire.daily.symptom': 'Daily Symptom Diary',
@@ -677,6 +678,7 @@ const translations = {
     'participant.days.remaining': 'días restantes',
     'participant.token': 'Token de Participante',
     'participant.id.card': 'Tarjeta de Identificación del Paciente',
+    'participant.investigative.site': 'Centro de investigación',
     
     // Questionnaires
     'questionnaire.daily.symptom': 'Diario de Síntomas Diarios',

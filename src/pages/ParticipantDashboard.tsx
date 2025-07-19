@@ -467,7 +467,7 @@ const ParticipantDashboard = () => {
                       <p className="text-base opacity-90">{t('participant.id.card')}</p>
                       <div className="space-y-1">
                         <p className="text-xs opacity-75">Protocolo: NVS-4578-301</p>
-                        <p className="text-xs opacity-75">Site: Metro General Hospital</p>
+                        <p className="text-xs opacity-75">{t('participant.investigative.site')}: Metro General Hospital</p>
                       </div>
                     </div>
                     <div className="text-right space-y-1">
