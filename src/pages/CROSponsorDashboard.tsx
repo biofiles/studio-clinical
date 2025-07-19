@@ -24,9 +24,11 @@ const CROSponsorDashboard = () => {
     studies,
     setSelectedStudy
   } = useStudy();
-  const { t } = useLanguage();
+  const {
+    t
+  } = useLanguage();
   const navigate = useNavigate();
-  
+
   // Load favorite study from localStorage on mount
   useEffect(() => {
     const saved = localStorage.getItem('favoriteStudyId');
@@ -92,9 +94,9 @@ const CROSponsorDashboard = () => {
   // Get dynamic data based on selected study
   const getStudySpecificData = () => {
     if (!selectedStudy) return null;
-    
     switch (selectedStudy.id) {
-      case '1': // Novartis PARADIGM-CV
+      case '1':
+        // Novartis PARADIGM-CV
         return {
           questionnaires: {
             dailySymptom: 91,
@@ -107,31 +109,84 @@ const CROSponsorDashboard = () => {
             rate: 12.5,
             siteActivationDays: 45
           },
-          schedule: [
-            { event: "Primer Sitio Iniciado", protocol: selectedStudy.protocol, date: "Oct 2024", type: "milestone", status: "completed" },
-            { event: "Primer Sitio Activado", protocol: selectedStudy.protocol, date: "Nov 2024", type: "milestone", status: "completed" },
-            { event: t('milestone.first.patient.first.visit'), protocol: selectedStudy.protocol, date: "Dec 2024", type: "milestone", status: "completed" },
-            { event: t('milestone.first.patient.last.visit'), protocol: selectedStudy.protocol, date: "Mar 2025", type: "milestone", status: "pending" },
-            { event: t('milestone.last.patient.first.visit'), protocol: selectedStudy.protocol, date: "May 2025", type: "milestone", status: "pending" },
-            { event: t('milestone.last.patient.last.visit'), protocol: selectedStudy.protocol, date: "Sep 2025", type: "milestone", status: "pending" },
-            { event: t('milestone.database.lock'), protocol: selectedStudy.protocol, date: "Jun 2025", type: "regulatory", status: "pending" },
-            { event: t('milestone.statistical.analysis.plan'), protocol: selectedStudy.protocol, date: "Jul 2025", type: "regulatory", status: "pending" }
-          ],
+          schedule: [{
+            event: "Primer Sitio Iniciado",
+            protocol: selectedStudy.protocol,
+            date: "Oct 2024",
+            type: "milestone",
+            status: "completed"
+          }, {
+            event: "Primer Sitio Activado",
+            protocol: selectedStudy.protocol,
+            date: "Nov 2024",
+            type: "milestone",
+            status: "completed"
+          }, {
+            event: t('milestone.first.patient.first.visit'),
+            protocol: selectedStudy.protocol,
+            date: "Dec 2024",
+            type: "milestone",
+            status: "completed"
+          }, {
+            event: t('milestone.first.patient.last.visit'),
+            protocol: selectedStudy.protocol,
+            date: "Mar 2025",
+            type: "milestone",
+            status: "pending"
+          }, {
+            event: t('milestone.last.patient.first.visit'),
+            protocol: selectedStudy.protocol,
+            date: "May 2025",
+            type: "milestone",
+            status: "pending"
+          }, {
+            event: t('milestone.last.patient.last.visit'),
+            protocol: selectedStudy.protocol,
+            date: "Sep 2025",
+            type: "milestone",
+            status: "pending"
+          }, {
+            event: t('milestone.database.lock'),
+            protocol: selectedStudy.protocol,
+            date: "Jun 2025",
+            type: "regulatory",
+            status: "pending"
+          }, {
+            event: t('milestone.statistical.analysis.plan'),
+            protocol: selectedStudy.protocol,
+            date: "Jul 2025",
+            type: "regulatory",
+            status: "pending"
+          }],
           participants: {
-            enrollment: { current: 385, target: 450, percentage: 86 },
+            enrollment: {
+              current: 385,
+              target: 450,
+              percentage: 86
+            },
             retention: 96.2,
             compliance: 94.1
           },
           reports: {
-            budget: { spent: 2.8, total: 3.5, percentage: 80 },
+            budget: {
+              spent: 2.8,
+              total: 3.5,
+              percentage: 80
+            },
             timeline: 72,
-            alerts: [
-              { type: "info", message: t('alert.cardiology.milestone'), time: "1 hour ago" },
-              { type: "success", message: t('alert.interim.analysis'), time: "3 days ago" }
-            ]
+            alerts: [{
+              type: "info",
+              message: t('alert.cardiology.milestone'),
+              time: "1 hour ago"
+            }, {
+              type: "success",
+              message: t('alert.interim.analysis'),
+              time: "3 days ago"
+            }]
           }
         };
-      case '2': // Pfizer ATLAS-DM2
+      case '2':
+        // Pfizer ATLAS-DM2
         return {
           questionnaires: {
             dailySymptom: 87,
@@ -144,29 +199,72 @@ const CROSponsorDashboard = () => {
             rate: 8.3,
             siteActivationDays: 62
           },
-          schedule: [
-            { event: "Primer Sitio Iniciado", protocol: selectedStudy.protocol, date: "Jan 2025", type: "milestone", status: "completed" },
-            { event: "Primer Sitio Activado", protocol: selectedStudy.protocol, date: "Feb 2025", type: "milestone", status: "completed" },
-            { event: t('milestone.first.patient.first.visit'), protocol: selectedStudy.protocol, date: "Mar 2025", type: "milestone", status: "completed" },
-            { event: t('milestone.mid.study.analysis'), protocol: selectedStudy.protocol, date: "Aug 2025", type: "regulatory", status: "pending" },
-            { event: t('milestone.last.patient.first.visit'), protocol: selectedStudy.protocol, date: "Oct 2025", type: "milestone", status: "pending" },
-            { event: t('milestone.safety.review'), protocol: selectedStudy.protocol, date: "Sep 2025", type: "regulatory", status: "pending" }
-          ],
+          schedule: [{
+            event: "Primer Sitio Iniciado",
+            protocol: selectedStudy.protocol,
+            date: "Jan 2025",
+            type: "milestone",
+            status: "completed"
+          }, {
+            event: "Primer Sitio Activado",
+            protocol: selectedStudy.protocol,
+            date: "Feb 2025",
+            type: "milestone",
+            status: "completed"
+          }, {
+            event: t('milestone.first.patient.first.visit'),
+            protocol: selectedStudy.protocol,
+            date: "Mar 2025",
+            type: "milestone",
+            status: "completed"
+          }, {
+            event: t('milestone.mid.study.analysis'),
+            protocol: selectedStudy.protocol,
+            date: "Aug 2025",
+            type: "regulatory",
+            status: "pending"
+          }, {
+            event: t('milestone.last.patient.first.visit'),
+            protocol: selectedStudy.protocol,
+            date: "Oct 2025",
+            type: "milestone",
+            status: "pending"
+          }, {
+            event: t('milestone.safety.review'),
+            protocol: selectedStudy.protocol,
+            date: "Sep 2025",
+            type: "regulatory",
+            status: "pending"
+          }],
           participants: {
-            enrollment: { current: 162, target: 200, percentage: 81 },
+            enrollment: {
+              current: 162,
+              target: 200,
+              percentage: 81
+            },
             retention: 93.8,
             compliance: 96.7
           },
           reports: {
-            budget: { spent: 1.6, total: 2.2, percentage: 73 },
+            budget: {
+              spent: 1.6,
+              total: 2.2,
+              percentage: 73
+            },
             timeline: 68,
-            alerts: [
-              { type: "warning", message: t('alert.enrollment.target'), time: "4 hours ago" },
-              { type: "info", message: t('alert.safety.review'), time: "2 days ago" }
-            ]
+            alerts: [{
+              type: "warning",
+              message: t('alert.enrollment.target'),
+              time: "4 hours ago"
+            }, {
+              type: "info",
+              message: t('alert.safety.review'),
+              time: "2 days ago"
+            }]
           }
         };
-      case '3': // Roche HORIZON-Onc
+      case '3':
+        // Roche HORIZON-Onc
         return {
           questionnaires: {
             dailySymptom: 83,
@@ -179,30 +277,78 @@ const CROSponsorDashboard = () => {
             rate: 6.7,
             siteActivationDays: 89
           },
-          schedule: [
-            { event: "Primer Sitio Iniciado", protocol: selectedStudy.protocol, date: "May 2024", type: "milestone", status: "completed" },
-            { event: "Primer Sitio Activado", protocol: selectedStudy.protocol, date: "Jun 2024", type: "milestone", status: "completed" },
-            { event: t('milestone.first.patient.first.visit'), protocol: selectedStudy.protocol, date: "Jul 2024", type: "milestone", status: "completed" },
-            { event: t('milestone.first.patient.last.visit'), protocol: selectedStudy.protocol, date: "Feb 2025", type: "milestone", status: "completed" },
-            { event: t('milestone.interim.safety.analysis'), protocol: selectedStudy.protocol, date: "Oct 2025", type: "regulatory", status: "pending" },
-            { event: t('milestone.last.patient.last.visit'), protocol: selectedStudy.protocol, date: "Dec 2025", type: "milestone", status: "pending" },
-            { event: t('milestone.biomarker.analysis.complete'), protocol: selectedStudy.protocol, date: "Nov 2025", type: "regulatory", status: "pending" }
-          ],
+          schedule: [{
+            event: "Primer Sitio Iniciado",
+            protocol: selectedStudy.protocol,
+            date: "May 2024",
+            type: "milestone",
+            status: "completed"
+          }, {
+            event: "Primer Sitio Activado",
+            protocol: selectedStudy.protocol,
+            date: "Jun 2024",
+            type: "milestone",
+            status: "completed"
+          }, {
+            event: t('milestone.first.patient.first.visit'),
+            protocol: selectedStudy.protocol,
+            date: "Jul 2024",
+            type: "milestone",
+            status: "completed"
+          }, {
+            event: t('milestone.first.patient.last.visit'),
+            protocol: selectedStudy.protocol,
+            date: "Feb 2025",
+            type: "milestone",
+            status: "completed"
+          }, {
+            event: t('milestone.interim.safety.analysis'),
+            protocol: selectedStudy.protocol,
+            date: "Oct 2025",
+            type: "regulatory",
+            status: "pending"
+          }, {
+            event: t('milestone.last.patient.last.visit'),
+            protocol: selectedStudy.protocol,
+            date: "Dec 2025",
+            type: "milestone",
+            status: "pending"
+          }, {
+            event: t('milestone.biomarker.analysis.complete'),
+            protocol: selectedStudy.protocol,
+            date: "Nov 2025",
+            type: "regulatory",
+            status: "pending"
+          }],
           participants: {
-            enrollment: { current: 94, target: 120, percentage: 78 },
+            enrollment: {
+              current: 94,
+              target: 120,
+              percentage: 78
+            },
             retention: 91.5,
             compliance: 89.3
           },
           reports: {
-            budget: { spent: 1.9, total: 2.8, percentage: 68 },
+            budget: {
+              spent: 1.9,
+              total: 2.8,
+              percentage: 68
+            },
             timeline: 61,
-            alerts: [
-              { type: "warning", message: t('alert.site.activation'), time: "6 hours ago" },
-              { type: "success", message: t('alert.biomarker.analysis'), time: "1 week ago" }
-            ]
+            alerts: [{
+              type: "warning",
+              message: t('alert.site.activation'),
+              time: "6 hours ago"
+            }, {
+              type: "success",
+              message: t('alert.biomarker.analysis'),
+              time: "1 week ago"
+            }]
           }
         };
-      case '4': // J&J GUARDIAN-Ped
+      case '4':
+        // J&J GUARDIAN-Ped
         return {
           questionnaires: {
             dailySymptom: 95,
@@ -215,37 +361,87 @@ const CROSponsorDashboard = () => {
             rate: 15.2,
             siteActivationDays: 38
           },
-          schedule: [
-            { event: "Primer Sitio Iniciado", protocol: selectedStudy.protocol, date: "Mar 2024", type: "milestone", status: "completed" },
-            { event: "Primer Sitio Activado", protocol: selectedStudy.protocol, date: "Apr 2024", type: "milestone", status: "completed" },
-            { event: t('milestone.first.patient.first.visit'), protocol: selectedStudy.protocol, date: "May 2024", type: "milestone", status: "completed" },
-            { event: t('milestone.first.patient.last.visit'), protocol: selectedStudy.protocol, date: "Jan 2025", type: "milestone", status: "completed" },
-            { event: t('milestone.last.patient.first.visit'), protocol: selectedStudy.protocol, date: "Jul 2025", type: "milestone", status: "pending" },
-            { event: t('milestone.pediatric.safety.review'), protocol: selectedStudy.protocol, date: "Sep 2025", type: "regulatory", status: "pending" },
-            { event: t('milestone.last.patient.last.visit'), protocol: selectedStudy.protocol, date: "Nov 2025", type: "milestone", status: "pending" },
-            { event: t('milestone.growth.assessment.analysis'), protocol: selectedStudy.protocol, date: "Dec 2025", type: "regulatory", status: "pending" }
-          ],
+          schedule: [{
+            event: "Primer Sitio Iniciado",
+            protocol: selectedStudy.protocol,
+            date: "Mar 2024",
+            type: "milestone",
+            status: "completed"
+          }, {
+            event: "Primer Sitio Activado",
+            protocol: selectedStudy.protocol,
+            date: "Apr 2024",
+            type: "milestone",
+            status: "completed"
+          }, {
+            event: t('milestone.first.patient.first.visit'),
+            protocol: selectedStudy.protocol,
+            date: "May 2024",
+            type: "milestone",
+            status: "completed"
+          }, {
+            event: t('milestone.first.patient.last.visit'),
+            protocol: selectedStudy.protocol,
+            date: "Jan 2025",
+            type: "milestone",
+            status: "completed"
+          }, {
+            event: t('milestone.last.patient.first.visit'),
+            protocol: selectedStudy.protocol,
+            date: "Jul 2025",
+            type: "milestone",
+            status: "pending"
+          }, {
+            event: t('milestone.pediatric.safety.review'),
+            protocol: selectedStudy.protocol,
+            date: "Sep 2025",
+            type: "regulatory",
+            status: "pending"
+          }, {
+            event: t('milestone.last.patient.last.visit'),
+            protocol: selectedStudy.protocol,
+            date: "Nov 2025",
+            type: "milestone",
+            status: "pending"
+          }, {
+            event: t('milestone.growth.assessment.analysis'),
+            protocol: selectedStudy.protocol,
+            date: "Dec 2025",
+            type: "regulatory",
+            status: "pending"
+          }],
           participants: {
-            enrollment: { current: 278, target: 320, percentage: 87 },
+            enrollment: {
+              current: 278,
+              target: 320,
+              percentage: 87
+            },
             retention: 98.1,
             compliance: 97.4
           },
           reports: {
-            budget: { spent: 2.1, total: 2.9, percentage: 72 },
+            budget: {
+              spent: 2.1,
+              total: 2.9,
+              percentage: 72
+            },
             timeline: 79,
-            alerts: [
-              { type: "success", message: t('alert.enrollment.target'), time: "2 hours ago" },
-              { type: "info", message: t('alert.regulatory.submission'), time: "1 day ago" }
-            ]
+            alerts: [{
+              type: "success",
+              message: t('alert.enrollment.target'),
+              time: "2 hours ago"
+            }, {
+              type: "info",
+              message: t('alert.regulatory.submission'),
+              time: "1 day ago"
+            }]
           }
         };
       default:
         return null;
     }
   };
-
   const studyData = getStudySpecificData();
-  
   const getContextTitle = () => {
     if (selectedStudy) {
       return `${selectedStudy.protocol} | ${selectedStudy.name}`;
@@ -359,30 +555,23 @@ const CROSponsorDashboard = () => {
               <CardHeader>
                 <CardTitle className="text-studio-text flex items-center justify-between">
                   <span>{selectedStudy ? selectedStudy.name : t('cro.select.study')}</span>
-                  {selectedStudy && (
-                    <Button
-                      variant={favoriteStudyId === selectedStudy.id ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => {
-                        if (favoriteStudyId === selectedStudy.id) {
-                          setFavoriteStudyId(null);
-                          localStorage.removeItem('favoriteStudyId');
-                          toast.success(t('cro.remove.favorite'));
-                        } else {
-                          setFavoriteStudyId(selectedStudy.id);
-                          localStorage.setItem('favoriteStudyId', selectedStudy.id);
-                          toast.success(t('cro.set.favorite'));
-                        }
-                      }}
-                    >
+                  {selectedStudy && <Button variant={favoriteStudyId === selectedStudy.id ? "default" : "outline"} size="sm" onClick={() => {
+                  if (favoriteStudyId === selectedStudy.id) {
+                    setFavoriteStudyId(null);
+                    localStorage.removeItem('favoriteStudyId');
+                    toast.success(t('cro.remove.favorite'));
+                  } else {
+                    setFavoriteStudyId(selectedStudy.id);
+                    localStorage.setItem('favoriteStudyId', selectedStudy.id);
+                    toast.success(t('cro.set.favorite'));
+                  }
+                }}>
                       {favoriteStudyId === selectedStudy.id ? t('cro.remove.favorite') : t('cro.set.favorite')}
-                    </Button>
-                  )}
+                    </Button>}
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                {selectedStudy ? (
-                  <div className="space-y-6">
+                {selectedStudy ? <div className="space-y-6">
                     {/* Basic Study Information - Mobile responsive grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">{/* Responsive: 1 col mobile, 2 cols tablet, 3 cols desktop */}
                       <div className="space-y-2">
@@ -396,8 +585,7 @@ const CROSponsorDashboard = () => {
                       <div className="space-y-2 row-span-3">
                         <span className="text-sm text-studio-text-muted">{t('study.recent.alerts')}</span>
                         <div className="space-y-2">
-                          {studyData && studyData.reports.alerts.slice(0, 2).map((alert, index) => (
-                            <div key={index} className="flex items-start space-x-2">
+                          {studyData && studyData.reports.alerts.slice(0, 2).map((alert, index) => <div key={index} className="flex items-start space-x-2">
                               {alert.type === 'success' && <CheckCircle className="h-3 w-3 text-primary mt-0.5 flex-shrink-0" />}
                               {alert.type === 'info' && <AlertCircle className="h-3 w-3 text-studio-text-muted mt-0.5 flex-shrink-0" />}
                               {alert.type === 'warning' && <AlertCircle className="h-3 w-3 text-destructive mt-0.5 flex-shrink-0" />}
@@ -405,8 +593,7 @@ const CROSponsorDashboard = () => {
                                 <p className="text-xs text-studio-text leading-tight">{alert.message}</p>
                                 <p className="text-xs text-studio-text-muted">{alert.time}</p>
                               </div>
-                            </div>
-                          ))}
+                            </div>)}
                         </div>
                       </div>
                       <div className="space-y-2">
@@ -428,8 +615,7 @@ const CROSponsorDashboard = () => {
                     </div>
 
                     {/* Study Performance Metrics */}
-                    {studyData && (
-                      <div className="space-y-4">
+                    {studyData && <div className="space-y-4">
                         <h4 className="text-md font-medium text-studio-text border-b border-studio-border pb-2">{t('cro.performance.metrics')}</h4>
                         
                         {/* Recruitment and Site Metrics */}
@@ -489,8 +675,9 @@ const CROSponsorDashboard = () => {
                                   </span>
                                 </div>
                                 <div className="w-full bg-muted rounded-full h-2">
-                                  <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" 
-                                       style={{ width: `${studyData.reports.budget.percentage}%` }}></div>
+                                  <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" style={{
+                              width: `${studyData.reports.budget.percentage}%`
+                            }}></div>
                                 </div>
                               </div>
                             </CardContent>
@@ -507,22 +694,19 @@ const CROSponsorDashboard = () => {
                                   <span className="text-studio-text text-sm">{studyData.reports.timeline}%</span>
                                 </div>
                                 <div className="w-full bg-muted rounded-full h-2">
-                                  <div className="bg-[hsl(var(--progress-accent))] h-2 rounded-full" 
-                                       style={{ width: `${studyData.reports.timeline}%` }}></div>
+                                  <div className="bg-[hsl(var(--progress-accent))] h-2 rounded-full" style={{
+                              width: `${studyData.reports.timeline}%`
+                            }}></div>
                                 </div>
                               </div>
                             </CardContent>
                           </Card>
                         </div>
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <div className="text-center py-8 text-studio-text-muted">
+                      </div>}
+                  </div> : <div className="text-center py-8 text-studio-text-muted">
                     <Building2 className="h-12 w-12 mx-auto mb-4 opacity-50" />
                     <p>Select a study from the dropdown to view details</p>
-                  </div>
-                )}
+                  </div>}
               </CardContent>
             </Card>
           </TabsContent>
@@ -591,22 +775,14 @@ const CROSponsorDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {studyData && studyData.schedule.map((milestone, index) => (
-                    <div key={index} className="flex justify-between items-center p-3 bg-studio-bg rounded border-l-4 border-l-transparent" 
-                         style={{
-                           borderLeftColor: milestone.status === 'completed' ? 'hsl(var(--primary))' : 
-                                          milestone.type === 'milestone' ? 'hsl(var(--progress-success))' : 
-                                          'hsl(var(--progress-accent))'
-                         }}>
+                  {studyData && studyData.schedule.map((milestone, index) => <div key={index} className="flex justify-between items-center p-3 bg-studio-bg rounded border-l-4 border-l-transparent" style={{
+                  borderLeftColor: milestone.status === 'completed' ? 'hsl(var(--primary))' : milestone.type === 'milestone' ? 'hsl(var(--progress-success))' : 'hsl(var(--progress-accent))'
+                }}>
                       <div className="flex-1">
                         <div className="flex items-center space-x-2">
                           <p className="font-medium text-studio-text">{milestone.event}</p>
-                          {milestone.status === 'completed' && (
-                            <CheckCircle className="h-4 w-4 text-primary" />
-                          )}
-                          {milestone.status === 'pending' && (
-                            <Clock className="h-4 w-4 text-studio-text-muted" />
-                          )}
+                          {milestone.status === 'completed' && <CheckCircle className="h-4 w-4 text-primary" />}
+                          {milestone.status === 'pending' && <Clock className="h-4 w-4 text-studio-text-muted" />}
                         </div>
                         <p className="text-sm text-studio-text-muted">{milestone.protocol}</p>
                         <div className="flex items-center space-x-2 mt-1">
@@ -619,14 +795,11 @@ const CROSponsorDashboard = () => {
                         </div>
                       </div>
                       <span className="text-studio-text font-medium">{milestone.date}</span>
-                    </div>
-                  ))}
-                  {!studyData && (
-                    <div className="text-center py-8 text-studio-text-muted">
+                    </div>)}
+                  {!studyData && <div className="text-center py-8 text-studio-text-muted">
                       <Calendar className="h-12 w-12 mx-auto mb-4 opacity-50" />
                       <p>Select a study to view milestones</p>
-                    </div>
-                  )}
+                    </div>}
                 </div>
               </CardContent>
             </Card>
@@ -647,8 +820,9 @@ const CROSponsorDashboard = () => {
                       </span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" 
-                           style={{ width: `${studyData ? studyData.participants.enrollment.percentage : 83}%` }}></div>
+                      <div className="bg-[hsl(var(--progress-primary))] h-2 rounded-full" style={{
+                      width: `${studyData ? studyData.participants.enrollment.percentage : 83}%`
+                    }}></div>
                     </div>
                   </div>
                 </CardContent>
@@ -665,8 +839,9 @@ const CROSponsorDashboard = () => {
                       <span className="text-studio-text">{studyData ? studyData.participants.retention : 94.2}%</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-[hsl(var(--progress-success))] h-2 rounded-full" 
-                           style={{ width: `${studyData ? studyData.participants.retention : 94}%` }}></div>
+                      <div className="bg-[hsl(var(--progress-success))] h-2 rounded-full" style={{
+                      width: `${studyData ? studyData.participants.retention : 94}%`
+                    }}></div>
                     </div>
                   </div>
                 </CardContent>
@@ -683,8 +858,9 @@ const CROSponsorDashboard = () => {
                       <span className="text-studio-text">{studyData ? studyData.participants.compliance : 98.5}%</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-[hsl(var(--progress-info))] h-2 rounded-full" 
-                           style={{ width: `${studyData ? studyData.participants.compliance : 98}%` }}></div>
+                      <div className="bg-[hsl(var(--progress-info))] h-2 rounded-full" style={{
+                      width: `${studyData ? studyData.participants.compliance : 98}%`
+                    }}></div>
                     </div>
                   </div>
                 </CardContent>
@@ -695,7 +871,7 @@ const CROSponsorDashboard = () => {
           <TabsContent value="reports" className="space-y-6">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-lg font-medium text-studio-text">{t('cro.reports')} & {t('cro.advanced.analytics')}</h3>
-              <p className="text-sm text-studio-text-muted">{t('cro.download.reports')}</p>
+              
             </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -709,35 +885,47 @@ const CROSponsorDashboard = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-3">
-                    <Button 
-                      variant="outline" 
-                      className="w-full justify-start h-auto py-3 px-4"
-                      onClick={() => toast.success("Generating Site Users Report...", { description: "Report will be available for download shortly" })}
-                    >
+                    <Button variant="outline" className="w-full justify-start h-auto py-3 px-4" onClick={() => toast.success("Generating Site Users Report...", {
+                    description: "Report will be available for download shortly"
+                  })}>
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
-                        <span className="font-medium text-sm sm:text-base w-full text-left truncate">{t('cro.site.users.report')}</span>
+                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.site.users.report')}</span>
+                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{
+                        wordBreak: 'break-word',
+                        overflowWrap: 'break-word'
+                      }}>
+                          {t('cro.site.users.report.description')}
+                        </span>
                       </div>
                       <Download className="h-4 w-4 flex-shrink-0" />
                     </Button>
                     
-                    <Button 
-                      variant="outline" 
-                      className="w-full justify-start h-auto py-3 px-4"
-                      onClick={() => toast.success("Generating Questionnaire Report...", { description: "Comprehensive questionnaire data compilation started" })}
-                    >
+                    <Button variant="outline" className="w-full justify-start h-auto py-3 px-4" onClick={() => toast.success("Generating Questionnaire Report...", {
+                    description: "Comprehensive questionnaire data compilation started"
+                  })}>
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
-                        <span className="font-medium text-sm sm:text-base w-full text-left truncate">{t('cro.questionnaire.report')}</span>
+                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.questionnaire.report')}</span>
+                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{
+                        wordBreak: 'break-word',
+                        overflowWrap: 'break-word'
+                      }}>
+                          {t('cro.questionnaire.report.description')}
+                        </span>
                       </div>
                       <Download className="h-4 w-4 flex-shrink-0" />
                     </Button>
                     
-                    <Button 
-                      variant="outline" 
-                      className="w-full justify-start h-auto py-3 px-4"
-                      onClick={() => toast.success("Generating Milestones Report...", { description: "Study timeline and milestone tracking report in progress" })}
-                    >
+                    <Button variant="outline" className="w-full justify-start h-auto py-3 px-4" onClick={() => toast.success("Generating Milestones Report...", {
+                    description: "Study timeline and milestone tracking report in progress"
+                  })}>
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
-                        <span className="font-medium text-sm sm:text-base w-full text-left truncate">{t('cro.milestones.report')}</span>
+                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.milestones.report')}</span>
+                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{
+                        wordBreak: 'break-word',
+                        overflowWrap: 'break-word'
+                      }}>
+                          {t('cro.milestones.report.description')}
+                        </span>
                       </div>
                       <Download className="h-4 w-4 flex-shrink-0" />
                     </Button>
@@ -760,35 +948,43 @@ const CROSponsorDashboard = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-3">
-                    <Button 
-                      variant="outline" 
-                      className="w-full justify-start h-auto py-3 px-4"
-                      onClick={() => setShowFHIRExport(true)}
-                    >
+                    <Button variant="outline" className="w-full justify-start h-auto py-3 px-4" onClick={() => setShowFHIRExport(true)}>
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
-                        <span className="font-medium text-sm sm:text-base w-full text-left truncate">{t('cro.export.fhir')}</span>
+                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.export.fhir')}</span>
+                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{
+                        wordBreak: 'break-word',
+                        overflowWrap: 'break-word'
+                      }}>
+                          {t('cro.export.fhir.description')}
+                        </span>
                       </div>
                       <Globe className="h-4 w-4 flex-shrink-0" />
                     </Button>
                     
-                    <Button 
-                      variant="outline" 
-                      className="w-full justify-start h-auto py-3 px-4"
-                      onClick={() => toast.success("Initiating HL7 Export...", { description: "HL7 message format export for healthcare systems integration" })}
-                    >
+                    <Button variant="outline" className="w-full justify-start h-auto py-3 px-4" onClick={() => toast.success("Initiating HL7 Export...", {
+                    description: "HL7 message format export for healthcare systems integration"
+                  })}>
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
-                        <span className="font-medium text-sm sm:text-base w-full text-left truncate">{t('cro.export.hl7')}</span>
+                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.export.hl7')}</span>
+                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{
+                        wordBreak: 'break-word',
+                        overflowWrap: 'break-word'
+                      }}>
+                          {t('cro.export.hl7.description')}
+                        </span>
                       </div>
                       <FileText className="h-4 w-4 flex-shrink-0" />
                     </Button>
                     
-                    <Button 
-                      variant="outline" 
-                      className="w-full justify-start h-auto py-3 px-4"
-                      onClick={() => setShowCDISCExport(true)}
-                    >
+                    <Button variant="outline" className="w-full justify-start h-auto py-3 px-4" onClick={() => setShowCDISCExport(true)}>
                       <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
-                        <span className="font-medium text-sm sm:text-base w-full text-left truncate">{t('cro.export.cdisc')}</span>
+                        <span className="font-medium text-sm sm:text-base w-full text-left">{t('cro.export.cdisc')}</span>
+                        <span className="text-xs sm:text-sm text-studio-text-muted w-full text-left leading-relaxed hyphens-auto" style={{
+                        wordBreak: 'break-word',
+                        overflowWrap: 'break-word'
+                      }}>
+                          {t('cro.export.cdisc.description')}
+                        </span>
                       </div>
                       <Shield className="h-4 w-4 flex-shrink-0" />
                     </Button>
@@ -805,17 +1001,17 @@ const CROSponsorDashboard = () => {
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="text-center p-4 bg-studio-bg rounded">
-                    <TrendingUp className="h-8 w-8 mx-auto mb-2 text-studio-text" />
+                    <TrendingUp className="h-8 w-8 mx-auto mb-2 text-primary" />
                     <h4 className="font-medium text-studio-text">{t('cro.performance.trends')}</h4>
                     <p className="text-sm text-studio-text-muted mt-1">{t('cro.performance.trends.description')}</p>
                   </div>
                   <div className="text-center p-4 bg-studio-bg rounded">
-                    <Users className="h-8 w-8 mx-auto mb-2 text-studio-text" />
+                    <Users className="h-8 w-8 mx-auto mb-2 text-primary" />
                     <h4 className="font-medium text-studio-text">{t('cro.site.comparisons')}</h4>
                     <p className="text-sm text-studio-text-muted mt-1">{t('cro.site.comparisons.description')}</p>
                   </div>
                   <div className="text-center p-4 bg-studio-bg rounded">
-                    <FileText className="h-8 w-8 mx-auto mb-2 text-studio-text" />
+                    <FileText className="h-8 w-8 mx-auto mb-2 text-primary" />
                     <h4 className="font-medium text-studio-text">{t('cro.regulatory.readiness')}</h4>
                     <p className="text-sm text-studio-text-muted mt-1">{t('cro.regulatory.readiness.description')}</p>
                   </div>
@@ -827,18 +1023,10 @@ const CROSponsorDashboard = () => {
       </main>
 
       {/* FHIR Export Dialog */}
-      <FHIRExportDialog 
-        open={showFHIRExport}
-        onOpenChange={setShowFHIRExport}
-      />
+      <FHIRExportDialog open={showFHIRExport} onOpenChange={setShowFHIRExport} />
 
       {/* CDISC Export Dialog */}
-      <CDISCExportDialog 
-        open={showCDISCExport}
-        onOpenChange={setShowCDISCExport}
-        studyId={selectedStudy?.id || ''}
-        studyName={selectedStudy?.name || ''}
-      />
+      <CDISCExportDialog open={showCDISCExport} onOpenChange={setShowCDISCExport} studyId={selectedStudy?.id || ''} studyName={selectedStudy?.name || ''} />
     </div>;
 };
 export default CROSponsorDashboard;
