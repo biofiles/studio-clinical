@@ -253,6 +253,14 @@ const translations = {
     'calendar.readonly.description': 'This calendar is read-only. Contact your study coordinator to reschedule appointments.',
     'calendar.timezone.note': 'All dates and times are displayed in your local timezone. Days with activities are highlighted in blue.',
     
+    // Calendar Activity Titles
+    'calendar.activity.weekly.survey': 'Weekly Survey',
+    'calendar.activity.site.visit.blood.draw': 'Site Visit - Blood Draw',
+    'calendar.activity.daily.diary.entry': 'Daily Diary Entry',
+    'calendar.activity.followup.call': 'Follow-up Call',
+    'calendar.activity.monthly.assessment': 'Monthly Assessment',
+    'calendar.activity.any.time': 'Any time',
+    
     // Questionnaire Status
     'questionnaire.status.completed': 'Completed',
     'questionnaire.status.in.progress': 'In Progress', 
@@ -884,6 +892,14 @@ const translations = {
     'calendar.note.readonly': 'Nota:',
     'calendar.readonly.description': 'Este calendario es de solo lectura. Contacte a su coordinador del estudio para reprogramar citas.',
     'calendar.timezone.note': 'Todas las fechas y horas se muestran en su zona horaria local. Los días con actividades están resaltados en azul.',
+    
+    // Calendar Activity Titles
+    'calendar.activity.weekly.survey': 'Encuesta Semanal',
+    'calendar.activity.site.visit.blood.draw': 'Visita del Sitio - Extracción de Sangre',
+    'calendar.activity.daily.diary.entry': 'Entrada de Diario Diario',
+    'calendar.activity.followup.call': 'Llamada de Seguimiento',
+    'calendar.activity.monthly.assessment': 'Evaluación Mensual',
+    'calendar.activity.any.time': 'Cualquier momento',
     
     // Questionnaire Status
     'questionnaire.status.completed': 'Completado',

@@ -21,16 +21,16 @@ interface CalendarViewProps {
 }
 
 const CalendarView = ({ open, onOpenChange, activities }: CalendarViewProps) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
 
   // Mock upcoming visits for calendar display
   const upcomingVisits = [
-    { date: new Date(2025, 6, 14), title: "Weekly Survey", time: "10:00 AM", type: "questionnaire" },
-    { date: new Date(2025, 6, 22), title: "Site Visit - Blood Draw", time: "2:00 PM", type: "visit" },
-    { date: new Date(2025, 7, 5), title: "Daily Diary Entry", time: "Any time", type: "diary" },
-    { date: new Date(2025, 8, 12), title: "Follow-up Call", time: "3:00 PM", type: "call" },
-    { date: new Date(2025, 9, 8), title: "Monthly Assessment", time: "9:00 AM", type: "assessment" }
+    { date: new Date(2025, 6, 14), titleKey: "calendar.activity.weekly.survey", time: "10:00 AM", type: "questionnaire" },
+    { date: new Date(2025, 6, 22), titleKey: "calendar.activity.site.visit.blood.draw", time: "2:00 PM", type: "visit" },
+    { date: new Date(2025, 7, 5), titleKey: "calendar.activity.daily.diary.entry", timeKey: "calendar.activity.any.time", type: "diary" },
+    { date: new Date(2025, 8, 12), titleKey: "calendar.activity.followup.call", time: "3:00 PM", type: "call" },
+    { date: new Date(2025, 9, 8), titleKey: "calendar.activity.monthly.assessment", time: "9:00 AM", type: "assessment" }
   ];
 
   // Get activity dates for highlighting
@@ -127,20 +127,20 @@ const CalendarView = ({ open, onOpenChange, activities }: CalendarViewProps) => 
                           {visit.date.getDate()}
                         </div>
                         <div className="text-xs text-studio-text-muted">
-                          {visit.date.toLocaleDateString('en-US', { month: 'short' })}
+                          {visit.date.toLocaleDateString(language === 'spanish' ? 'es-ES' : 'en-US', { month: 'short' })}
                         </div>
                       </div>
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center space-x-2 mb-1">
-                        <h4 className="font-medium text-studio-text">{visit.title}</h4>
+                        <h4 className="font-medium text-studio-text">{t(visit.titleKey)}</h4>
                         <Badge className={getActivityTypeColor(visit.type)}>
                           {t(`activity.${visit.type}`)}
                         </Badge>
                       </div>
                       <div className="flex items-center space-x-1 text-sm text-studio-text-muted">
                         <Clock className="h-3 w-3" />
-                        <span>{visit.time}</span>
+                        <span>{visit.timeKey ? t(visit.timeKey) : visit.time}</span>
                       </div>
                     </div>
                   </div>
