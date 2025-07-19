@@ -92,7 +92,7 @@ const AIChatbot = ({ open, onOpenChange }: AIChatbotProps) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md max-h-[80vh] flex flex-col">
+      <DialogContent className="max-w-lg max-h-[85vh] flex flex-col">{/* Increased width */}
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-2">
             <MessageCircle className="h-5 w-5" />
@@ -164,8 +164,8 @@ const AIChatbot = ({ open, onOpenChange }: AIChatbotProps) => {
             </Button>
           </div>
 
-          <div className="text-xs text-studio-text-muted bg-yellow-50 p-2 rounded">
-            <strong>{t('ai.note')}:</strong> {t('ai.note.description')}
+          <div className="text-xs text-studio-text-muted bg-yellow-50 p-2 rounded leading-relaxed">
+            <strong>{t('ai.note')}:</strong> <span className="break-words">{t('ai.note.description')}</span>
           </div>
         </div>
       </DialogContent>
