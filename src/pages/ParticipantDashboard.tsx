@@ -13,7 +13,7 @@ import AIChatbot from "@/components/AIChatbot";
 import EConsentDialog from "@/components/EConsentDialog";
 import StudyResultsSignup from "@/components/StudyResultsSignup";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, Users, MapPin, Stethoscope, Barcode, Signature, Building, Settings, Scale } from "lucide-react";
+import { Calendar, FileText, Bell, Activity, Download, MessageCircle, User, Shield, Clock, CheckCircle, BookOpen, MapPin, Stethoscope, Barcode, Signature, Building, Settings, Scale } from "lucide-react";
 const ParticipantDashboard = () => {
   const {
     t,
@@ -128,7 +128,7 @@ const ParticipantDashboard = () => {
               <span className="text-xs sm:text-xs">{t('dashboard.site.visits')}</span>
             </TabsTrigger>
             <TabsTrigger value="contact" data-tab="contact" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
-              <Users className="h-5 w-5 sm:h-4 sm:w-4" />
+              <BookOpen className="h-5 w-5 sm:h-4 sm:w-4" />
               <span className="text-xs sm:text-xs">{t('contact.info')}</span>
             </TabsTrigger>
             <TabsTrigger value="profile" data-tab="profile" className="flex flex-col items-center space-y-0.5 h-14 sm:h-10 sm:flex-row sm:space-y-0 sm:space-x-2 text-sm">
