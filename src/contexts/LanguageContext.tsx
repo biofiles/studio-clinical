@@ -464,6 +464,9 @@ const translations = {
     // Common
     'common.welcome': 'Welcome',
     'common.loading': 'Loading...',
+    'auth.redirecting': 'Redirecting...',
+    'auth.setting.up.dashboard': 'Setting up dashboard...',
+    'auth.signing.in': 'Signing in...',
     'common.save': 'Save',
     'common.cancel': 'Cancel',
     'common.close': 'Close',
@@ -1075,6 +1078,9 @@ const translations = {
     // Common
     'common.welcome': 'Bienvenido',
     'common.loading': 'Cargando...',
+    'auth.redirecting': 'Redirigiendo...',
+    'auth.setting.up.dashboard': 'Configurando panel de control...',
+    'auth.signing.in': 'Iniciando sesión...',
     'common.save': 'Guardar',
     'common.cancel': 'Cancelar',
     'common.close': 'Cerrar',

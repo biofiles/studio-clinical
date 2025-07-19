@@ -1,8 +1,10 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useEffect } from 'react';
 
 const Index = () => {
+  const { t } = useLanguage();
   const { user, userRole, roleLoading } = useAuth();
   const [redirecting, setRedirecting] = useState(false);
 
@@ -26,7 +28,7 @@ const Index = () => {
   if (redirecting || roleLoading) {
     return (
       <div className="min-h-screen bg-studio-bg flex items-center justify-center">
-        <div className="text-studio-text">Redirecting...</div>
+        <div className="text-studio-text">{t('auth.redirecting')}</div>
       </div>
     );
   }

@@ -6,10 +6,12 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { useToast } from '@/hooks/use-toast';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import { Eye, EyeOff, Lock, User, Copy } from 'lucide-react';
 const Auth = () => {
+  const { t } = useLanguage();
   const {
     user,
     signIn,
@@ -96,7 +98,7 @@ const Auth = () => {
           <div className="text-4xl font-light tracking-widest text-studio-text mb-8">
             STUDIO
           </div>
-          <LoadingSpinner size="lg" message="Redirecting..." className="text-studio-text justify-center" />
+          <LoadingSpinner size="lg" message={t('auth.redirecting')} className="text-studio-text justify-center" />
         </div>
       </div>
     );
@@ -123,7 +125,7 @@ const Auth = () => {
                 <Skeleton className="h-10 w-full" />
               </div>
               <div className="text-center">
-                <LoadingSpinner size="md" message="Setting up dashboard..." className="text-studio-text justify-center" />
+                <LoadingSpinner size="md" message={t('auth.setting.up.dashboard')} className="text-studio-text justify-center" />
               </div>
             </CardContent>
           </Card>
@@ -166,7 +168,7 @@ const Auth = () => {
 
               <Button type="submit" className="w-full" disabled={loading || !email || !password}>
                 {loading ? (
-                  <LoadingSpinner size="sm" message="Signing in..." />
+                  <LoadingSpinner size="sm" message={t('auth.signing.in')} />
                 ) : (
                   <>
                     <Lock className="h-4 w-4 mr-2" />
