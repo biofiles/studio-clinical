@@ -8,6 +8,7 @@ import { useState } from "react";
 import { FileText, Clock, CheckCircle, AlertCircle, RotateCcw } from "lucide-react";
 import QuestionnaireForm from "./QuestionnaireForm";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { formatDate } from "@/lib/utils";
 
 interface QuestionnairesViewProps {
   open: boolean;
@@ -15,7 +16,7 @@ interface QuestionnairesViewProps {
 }
 
 const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [questionnaires, setQuestionnaires] = useState([
     {
       id: 1,
@@ -173,6 +174,37 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
     }
   };
 
+  const formatDueDate = (dueDate: string) => {
+    if (dueDate === "Today") {
+      return t("common.today");
+    }
+    if (dueDate === "Tomorrow") {
+      return t("common.tomorrow");
+    }
+    if (dueDate.startsWith("Completed")) {
+      // For completed dates like "Completed Nov 20", extract the date part
+      const dateMatch = dueDate.match(/(\w+ \d+)/);
+      if (dateMatch) {
+        try {
+          const dateStr = dateMatch[1] + ", 2024"; // Assuming current year
+          const date = new Date(dateStr);
+          return `${t("common.completed")} ${formatDate(date, language)}`;
+        } catch {
+          return dueDate; // Fallback to original if parsing fails
+        }
+      }
+      return dueDate;
+    }
+    // For other date formats like "Dec 16"
+    try {
+      const dateStr = dueDate + ", 2024"; // Assuming current year
+      const date = new Date(dateStr);
+      return formatDate(date, language);
+    } catch {
+      return dueDate; // Fallback to original if parsing fails
+    }
+  };
+
   const handleStartQuestionnaire = (questionnaire: any) => {
     setSelectedQuestionnaire(questionnaire);
     setShowForm(true);
@@ -261,7 +293,7 @@ const QuestionnairesView = ({ open, onOpenChange }: QuestionnairesViewProps) => 
                         </p>
                         
                         <div className="flex items-center space-x-4 text-xs text-studio-text-muted">
-                          <span>{t('questionnaire.due')}: {questionnaire.dueDate}</span>
+                          <span>{t('questionnaire.due')}: {formatDueDate(questionnaire.dueDate)}</span>
                           <span>{t('questionnaire.est.time')}: {questionnaire.estimatedTime}</span>
                         </div>
                         
