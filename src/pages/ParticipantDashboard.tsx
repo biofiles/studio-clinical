@@ -162,7 +162,7 @@ const ParticipantDashboard = () => {
                               {t(`activity.${item.type}`)}
                             </Badge>
                           </div>
-                          <p className="text-sm sm:text-base text-studio-text-muted mb-2">{item.date} {t('dashboard.at')} {item.time}</p>
+                          <p className="text-sm sm:text-base text-studio-text-muted mb-2">{formatDate(new Date(item.date), language)} {t('dashboard.at')} {item.time}</p>
                           <p className="text-sm sm:text-base text-studio-text mb-2">{item.details}</p>
                           <div className="flex items-center space-x-1 text-sm text-studio-text-muted mb-2">
                             <MapPin className="h-4 w-4" />
