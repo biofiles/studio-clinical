@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { formatDate } from "@/lib/utils";
 import CredentialVerificationDialog from "./CredentialVerificationDialog";
 import { Play, Pause, Square, Search, Download, FileText, Signature, CheckCircle, SkipBack, SkipForward, Clock } from "lucide-react";
 
@@ -19,7 +20,7 @@ interface EConsentDialogProps {
 }
 
 const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogProps) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [isPlaying, setIsPlaying] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<number[]>([]);
@@ -441,7 +442,7 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
           </DialogTitle>
           <p className="text-xs sm:text-sm text-studio-text-muted">{t('econsent.subtitle')}</p>
           <div className="flex items-center space-x-2 text-xs text-studio-text-muted">
-            <span>{t('econsent.last.updated')}: December 1, 2024</span>
+            <span>{t('econsent.last.updated')}: {formatDate(new Date('2024-12-01'), language)}</span>
           </div>
         </DialogHeader>
 
