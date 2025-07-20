@@ -298,10 +298,10 @@ export default function InvestigatorConsentDashboard({
                              <Eye className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
                              {t('consent.dashboard.view')}
                            </Button>
-                           <Button
-                             size="sm"
-                             onClick={() => handleSignConsent(signature)}
-                             className="bg-studio-accent hover:bg-studio-accent/90 text-white flex-1 sm:flex-none text-xs sm:text-sm"
+                            <Button
+                              size="sm"
+                              onClick={() => handleSignConsent(signature)}
+                              className="border-studio-border text-studio-text hover:bg-studio-surface flex-1 sm:flex-none text-xs sm:text-sm"
                            >
                              <PenTool className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
                              {t('consent.dashboard.sign')}
