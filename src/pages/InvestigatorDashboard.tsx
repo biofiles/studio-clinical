@@ -17,6 +17,7 @@ import StudyResultsSignup from "@/components/StudyResultsSignup";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
 import { useNavigate } from "react-router-dom";
+import { formatDate } from "@/lib/utils";
 
 const InvestigatorDashboard = () => {
   const [showParticipantList, setShowParticipantList] = useState(false);
@@ -27,7 +28,7 @@ const InvestigatorDashboard = () => {
   const [showCDISCExport, setShowCDISCExport] = useState(false);
   const [showQuestionnaires, setShowQuestionnaires] = useState(false);
   const [showConsentDashboard, setShowConsentDashboard] = useState(false);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { selectedStudy, setSelectedStudy, studies } = useStudy();
 
   // Auto-select first study if no study is selected
@@ -268,7 +269,7 @@ const InvestigatorDashboard = () => {
                         {t(`dashboard.event.type.${item.type}`)}
                       </span>
                     </div>
-                    <p className="text-sm text-studio-text-muted">{item.date} {t('dashboard.at')} {item.time}</p>
+                    <p className="text-sm text-studio-text-muted">{formatDate(new Date(item.date), language)} {t('dashboard.at')} {item.time}</p>
                   </div>
                 </div>
               ))}
