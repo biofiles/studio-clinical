@@ -666,6 +666,16 @@ const translations = {
     'calendar.event.team.meeting': 'Monthly Team Meeting',
     'calendar.event.followup.call': 'Follow-up Call',
     'calendar.event.assessment': 'Assessment',
+    
+    // Electronic Signature
+    'electronic.signature.label': 'Electronic Signature',
+    'electronic.signature.placeholder': 'Type your full name as electronic signature',
+    'signature.reason.label': 'Reason for Signature',
+    'signature.reason.placeholder': 'Select reason for signature',
+    'signature.reason.conducted.process': 'Person who conducted the signature process',
+    'signature.reason.witness': 'Witness to the process',
+    'signature.reason.supervisor.approval': 'Supervisor approval',
+    'signature.reason.quality.review': 'Quality review',
   },
   spanish: {
     // Header
@@ -1338,6 +1348,16 @@ const translations = {
     'calendar.event.team.meeting': 'Reunión Mensual del Equipo', 
     'calendar.event.followup.call': 'Llamada de Seguimiento',
     'calendar.event.assessment': 'Evaluación',
+    
+    // Electronic Signature
+    'electronic.signature.label': 'Firma Electrónica',
+    'electronic.signature.placeholder': 'Escriba su nombre completo como firma electrónica',
+    'signature.reason.label': 'Razón de la Firma',
+    'signature.reason.placeholder': 'Seleccione la razón de la firma',
+    'signature.reason.conducted.process': 'Persona que condujo el proceso de firma',
+    'signature.reason.witness': 'Testigo del proceso',
+    'signature.reason.supervisor.approval': 'Aprobación de supervisor',
+    'signature.reason.quality.review': 'Revisión de calidad',
   }
 };
 

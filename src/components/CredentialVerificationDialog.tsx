@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Lock, AlertCircle } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
@@ -24,6 +25,8 @@ export default function CredentialVerificationDialog({
   description
 }: CredentialVerificationDialogProps) {
   const [password, setPassword] = useState("");
+  const [electronicSignature, setElectronicSignature] = useState("");
+  const [signatureReason, setSignatureReason] = useState("");
   const [isVerifying, setIsVerifying] = useState(false);
   const [error, setError] = useState("");
   const { user, signIn } = useAuth();
@@ -32,6 +35,16 @@ export default function CredentialVerificationDialog({
   const handleVerification = async () => {
     if (!password) {
       setError('Please enter your password');
+      return;
+    }
+    
+    if (!electronicSignature) {
+      setError('Please provide your electronic signature');
+      return;
+    }
+    
+    if (!signatureReason) {
+      setError('Please select a reason for signature');
       return;
     }
 
@@ -44,6 +57,8 @@ export default function CredentialVerificationDialog({
         onSuccess();
         onOpenChange(false);
         setPassword("");
+        setElectronicSignature("");
+        setSignatureReason("");
       } else {
         setError('Invalid password. Try "demo123" or any password with 6+ characters');
       }
@@ -53,6 +68,8 @@ export default function CredentialVerificationDialog({
 
   const handleClose = () => {
     setPassword("");
+    setElectronicSignature("");
+    setSignatureReason("");
     setError("");
     onOpenChange(false);
   };
@@ -91,6 +108,50 @@ export default function CredentialVerificationDialog({
               />
             </div>
 
+            <div>
+              <Label htmlFor="electronic-signature" className="text-studio-text">
+                {t('electronic.signature.label')}
+              </Label>
+              <Input
+                id="electronic-signature"
+                type="text"
+                value={electronicSignature}
+                onChange={(e) => setElectronicSignature(e.target.value)}
+                placeholder={t('electronic.signature.placeholder')}
+                className="bg-studio-bg border-studio-border text-studio-text"
+                disabled={isVerifying}
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="signature-reason" className="text-studio-text">
+                {t('signature.reason.label')}
+              </Label>
+              <Select 
+                value={signatureReason} 
+                onValueChange={setSignatureReason}
+                disabled={isVerifying}
+              >
+                <SelectTrigger className="bg-studio-bg border-studio-border text-studio-text">
+                  <SelectValue placeholder={t('signature.reason.placeholder')} />
+                </SelectTrigger>
+                <SelectContent className="bg-studio-surface border-studio-border">
+                  <SelectItem value="conducted-process" className="text-studio-text">
+                    {t('signature.reason.conducted.process')}
+                  </SelectItem>
+                  <SelectItem value="witness" className="text-studio-text">
+                    {t('signature.reason.witness')}
+                  </SelectItem>
+                  <SelectItem value="supervisor-approval" className="text-studio-text">
+                    {t('signature.reason.supervisor.approval')}
+                  </SelectItem>
+                  <SelectItem value="quality-review" className="text-studio-text">
+                    {t('signature.reason.quality.review')}
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
             {error && (
               <Alert className="border-red-500/20 bg-red-500/10">
                 <AlertCircle className="h-4 w-4 text-red-500" />
@@ -112,7 +173,7 @@ export default function CredentialVerificationDialog({
             </Button>
             <Button
               onClick={handleVerification}
-              disabled={isVerifying || !password}
+              disabled={isVerifying || !password || !electronicSignature || !signatureReason}
               className="bg-studio-accent hover:bg-studio-accent/90 text-white"
             >
               {isVerifying ? t('credential.verification.verifying') : t('credential.verification.verify')}
