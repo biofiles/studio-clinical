@@ -32,14 +32,14 @@ const ParticipantDashboard = () => {
   const daysLeft = 30;
   const participantToken = "PTK-9283-WZ1";
   const upcomingActivities = [{
-    date: t('common.next'),
+    date: "2024-12-21",
     activity: t('activity.weekly.survey'),
     time: "10:00 AM",
     type: "questionnaire",
     details: t('activity.weekly.survey.details'),
     location: t('activity.online.location')
   }, {
-    date: "15 Dic",
+    date: "2024-12-15",
     activity: t('activity.site.visit.blood'),
     time: "2:00 PM",
     type: "visit",
@@ -47,7 +47,7 @@ const ParticipantDashboard = () => {
     location: t('activity.hospital.location'),
     notes: t('activity.site.visit.notes')
   }, {
-    date: "20 Dic",
+    date: "2024-12-20",
     activity: t('activity.daily.diary'),
     time: t('activity.anytime'),
     type: "diary",
@@ -162,7 +162,7 @@ const ParticipantDashboard = () => {
                               {t(`activity.${item.type}`)}
                             </Badge>
                           </div>
-                          <p className="text-sm sm:text-base text-studio-text-muted mb-2">{item.date} {t('dashboard.at')} {item.time}</p>
+                          <p className="text-sm sm:text-base text-studio-text-muted mb-2">{formatDate(new Date(item.date), language)} {t('dashboard.at')} {item.time}</p>
                           <p className="text-sm sm:text-base text-studio-text mb-2">{item.details}</p>
                           <div className="flex items-center space-x-1 text-sm text-studio-text-muted mb-2">
                             <MapPin className="h-4 w-4" />
