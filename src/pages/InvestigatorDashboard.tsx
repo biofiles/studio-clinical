@@ -197,7 +197,6 @@ const InvestigatorDashboard = () => {
             <CardContent>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-studio-text-muted">{t('dashboard.enrollment')}</span>
                   <span className="text-studio-text">
                     {studyData ? `${studyData.enrolled.current}/${studyData.enrolled.total} (${studyData.enrolled.percentage}%)` : '0/0 (0%)'}
                   </span>
