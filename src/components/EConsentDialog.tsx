@@ -472,43 +472,50 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
               <CardTitle className="text-sm">{t('econsent.audio.playback')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 sm:space-y-4 pt-0">
-              <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 sm:space-x-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleSkipBackward}
-                  className="flex items-center justify-center"
-                >
-                  <SkipBack className="h-4 w-4" />
-                  <span className="sr-only">Skip Back</span>
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleAudioPlay}
-                  className="flex items-center justify-center space-x-1"
-                >
-                  {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-                  <span className="hidden sm:inline">{isPlaying ? t('econsent.audio.pause') : t('econsent.audio.play')}</span>
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleSkipForward}
-                  className="flex items-center justify-center"
-                >
-                  <SkipForward className="h-4 w-4" />
-                  <span className="sr-only">Skip Forward</span>
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleAudioStop}
-                  className="flex items-center justify-center space-x-1"
-                >
-                  <Square className="h-4 w-4" />
-                  <span className="hidden sm:inline">{t('econsent.audio.stop')}</span>
-                </Button>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:space-x-2">
+                {/* Play button centered on mobile */}
+                <div className="flex justify-center sm:order-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleAudioPlay}
+                    className="flex items-center justify-center space-x-1"
+                  >
+                    {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+                    <span className="hidden sm:inline">{isPlaying ? t('econsent.audio.pause') : t('econsent.audio.play')}</span>
+                  </Button>
+                </div>
+                
+                {/* Other controls on mobile */}
+                <div className="grid grid-cols-3 gap-2 sm:flex sm:order-1 sm:order-3">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleSkipBackward}
+                    className="flex items-center justify-center"
+                  >
+                    <SkipBack className="h-4 w-4" />
+                    <span className="sr-only">Skip Back</span>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleSkipForward}
+                    className="flex items-center justify-center"
+                  >
+                    <SkipForward className="h-4 w-4" />
+                    <span className="sr-only">Skip Forward</span>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleAudioStop}
+                    className="flex items-center justify-center space-x-1"
+                  >
+                    <Square className="h-4 w-4" />
+                    <span className="hidden sm:inline">{t('econsent.audio.stop')}</span>
+                  </Button>
+                </div>
               </div>
               
               <div className="space-y-2">
