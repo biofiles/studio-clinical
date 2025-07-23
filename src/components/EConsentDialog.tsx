@@ -436,7 +436,7 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
           <DialogTitle className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 text-base sm:text-lg">
             <div className="flex items-center space-x-2">
               <FileText className="h-4 w-4 sm:h-5 sm:w-5" />
-              <span>Consentimiento Informado</span>
+              <span>{language === 'spanish' ? 'Formulario de consentimiento informado Principal' : 'Main Informed Consent Form'}</span>
             </div>
             <span className="text-sm sm:text-base text-studio-text-muted">Version {icfVersion}</span>
           </DialogTitle>
