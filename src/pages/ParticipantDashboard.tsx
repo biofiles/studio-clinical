@@ -218,10 +218,7 @@ const ParticipantDashboard = () => {
           <TabsContent value="econsent" className="space-y-4">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
               <h3 className="text-lg sm:text-xl font-medium text-studio-text">{t('econsent.section.title')}</h3>
-              <Button variant="studio" size="sm" onClick={() => setShowEConsent(true)} className="w-full sm:w-auto">
-                <Signature className="h-4 w-4 mr-2" />
-                {t('econsent.view.signed')}
-              </Button>
+              
             </div>
 
             {/* Consent Signature Dates Widget */}
@@ -305,7 +302,7 @@ const ParticipantDashboard = () => {
                   <div className="flex-1">
                     <p className="font-medium text-blue-800">Próximo Consentimiento Pendiente</p>
                     <p className="text-sm text-blue-700 mt-1">
-                      <strong>Adenda de Seguridad v1.0</strong> - Disponible para firma
+                      <strong>Formulario de consentimiento informado Principal v2.1</strong> - Disponible para firma
                     </p>
                     <div className="text-xs text-blue-600 mt-2 space-y-1">
                       <p>• Documento disponible desde: {formatDate('2024-12-01', language)}</p>
