@@ -244,52 +244,43 @@ const ParticipantDashboard = () => {
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between p-2 bg-[hsl(var(--progress-success))]/5 border border-[hsl(var(--progress-success))]/20 rounded">
-                    <div className="flex items-center space-x-2">
-                      <CheckCircle className="h-4 w-4 shrink-0 text-[hsl(var(--progress-success))]" />
-                      <div>
+                  <div className="flex items-center p-2 bg-[hsl(var(--progress-success))]/5 border border-[hsl(var(--progress-success))]/20 rounded">
+                    <CheckCircle className="h-4 w-4 shrink-0 text-[hsl(var(--progress-success))] mr-2" />
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2">
                         <p className="text-sm font-medium">{language === 'spanish' ? 'Formulario de consentimiento informado Principal v2.0' : 'Main Informed Consent Form v2.0'}</p>
-                        <p className="text-xs text-studio-text-muted">Firmado el 24 Nov 2024</p>
+                        <Badge className="bg-[hsl(var(--progress-success))]/10 text-[hsl(var(--progress-success))] border border-[hsl(var(--progress-success))]/20">
+                          {t('econsent.status.signed')}
+                        </Badge>
                       </div>
+                      <p className="text-xs text-studio-text-muted">Firmado el 24 Nov 2024</p>
                     </div>
-                    <Badge className="bg-[hsl(var(--progress-success))]/10 text-[hsl(var(--progress-success))] border border-[hsl(var(--progress-success))]/20 cursor-pointer hover:bg-[hsl(var(--progress-success))]/20 transition-colors" onClick={() => {
-                    setEConsentMode('view');
-                    setShowEConsent(true);
-                  }}>
-                      {t('econsent.status.signed')}
-                    </Badge>
                   </div>
                   
-                  <div className="flex items-center justify-between p-2 bg-gray-50 border border-gray-200 rounded">
-                    <div className="flex items-center space-x-2">
-                      <CheckCircle className="h-4 w-4 shrink-0 text-gray-600" />
-                      <div>
+                  <div className="flex items-center p-2 bg-gray-50 border border-gray-200 rounded">
+                    <CheckCircle className="h-4 w-4 shrink-0 text-gray-600 mr-2" />
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2">
                         <p className="text-sm font-medium">{language === 'spanish' ? 'Formulario de consentimiento informado Principal v1.0' : 'Main Informed Consent Form v1.0'}</p>
-                        <p className="text-xs text-studio-text-muted">Firmado el 15 Oct 2024</p>
+                        <Badge className="bg-gray-100 text-gray-800">
+                          {t('econsent.status.superseded')}
+                        </Badge>
                       </div>
+                      <p className="text-xs text-studio-text-muted">Firmado el 15 Oct 2024</p>
                     </div>
-                    <Badge className="bg-gray-100 text-gray-800 cursor-pointer hover:bg-gray-200 transition-colors" onClick={() => {
-                    setEConsentMode('view');
-                    setShowEConsent(true);
-                  }}>
-                      {t('econsent.status.superseded')}
-                    </Badge>
                   </div>
 
-                  <div className="flex items-center justify-between p-2 bg-yellow-50 border border-yellow-200 rounded">
-                    <div className="flex items-center space-x-2">
-                      <Clock className="h-4 w-4 shrink-0 text-yellow-600" />
-                      <div>
+                  <div className="flex items-center p-2 bg-yellow-50 border border-yellow-200 rounded">
+                    <Clock className="h-4 w-4 shrink-0 text-yellow-600 mr-2" />
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2">
                         <p className="text-sm font-medium">Adenda de Seguridad v1.0</p>
-                        <p className="text-xs text-studio-text-muted">Disponible para firma</p>
+                        <Badge className="bg-yellow-100 text-yellow-800">
+                          {t('econsent.status.pending')}
+                        </Badge>
                       </div>
+                      <p className="text-xs text-studio-text-muted">Disponible para firma</p>
                     </div>
-                    <Badge className="bg-yellow-100 text-yellow-800 cursor-pointer hover:bg-yellow-200 transition-colors" onClick={() => {
-                    setEConsentMode('sign');
-                    setShowEConsent(true);
-                  }}>
-                      {t('econsent.status.pending')}
-                    </Badge>
                   </div>
                 </div>
               </CardContent>
