@@ -274,7 +274,7 @@ const ParticipantDashboard = () => {
                     <Clock className="h-4 w-4 shrink-0 text-yellow-600 mr-2" />
                     <div className="flex-1">
                       <div className="flex items-center space-x-2">
-                        <p className="text-sm font-medium">Adenda de Seguridad v1.0</p>
+                        <p className="text-sm font-medium">Formulario de consentimiento informado Principal v2.1</p>
                         <Badge className="bg-yellow-100 text-yellow-800">
                           {t('econsent.status.pending')}
                         </Badge>
