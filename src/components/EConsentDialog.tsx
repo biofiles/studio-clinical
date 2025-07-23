@@ -526,7 +526,7 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
               </div>
 
               <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
-                <span className="text-sm text-studio-text-muted">Speed:</span>
+                <span className="text-sm text-studio-text-muted">{language === 'spanish' ? 'Velocidad:' : 'Speed:'}</span>
                 <Select value={playbackSpeed.toString()} onValueChange={handleSpeedChange}>
                   <SelectTrigger className="w-full sm:w-20">
                     <SelectValue />
@@ -547,7 +547,7 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
           {/* Search */}
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm">Document Search</CardTitle>
+              <CardTitle className="text-sm">{language === 'spanish' ? 'Búsqueda en el documento' : 'Document Search'}</CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
               <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
