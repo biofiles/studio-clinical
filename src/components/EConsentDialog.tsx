@@ -455,11 +455,11 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
             <CardContent className="space-y-2 pt-0">
               <div className="text-xs space-y-1">
                 <div className="flex justify-between items-center">
-                  <span>ICF v2.0</span>
+                  <span>{language === 'spanish' ? 'Formulario de consentimiento informado Principal v2.0' : 'Main Informed Consent Form v2.0'}</span>
                   <span className="text-studio-text-muted">Nov 15, 2024</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span>ICF v1.0</span>
+                  <span>{language === 'spanish' ? 'Formulario de consentimiento informado Principal v1.0' : 'Main Informed Consent Form v1.0'}</span>
                   <span className="text-studio-text-muted">Oct 10, 2024</span>
                 </div>
               </div>
