@@ -306,7 +306,7 @@ const ParticipantDashboard = () => {
                     </p>
                     <div className="text-xs text-blue-600 mt-2 space-y-1">
                       <p>• Documento disponible desde: {formatDate('2024-12-01', language)}</p>
-                      <p>• Plazo para firmar: Hasta {formatDate('2024-12-15', language)}</p>
+                      
                       <p>• Modalidad: Firma electrónica con audio disponible</p>
                     </div>
                     <Button size="sm" className="mt-3" onClick={() => {
