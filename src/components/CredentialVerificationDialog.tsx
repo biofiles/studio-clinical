@@ -186,7 +186,7 @@ export default function CredentialVerificationDialog({
             <Button
               onClick={handleVerification}
               disabled={isVerifying || !password || !electronicSignature || !signatureReason}
-              className="bg-studio-accent hover:bg-studio-accent/90 text-white"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground border border-primary"
             >
               {isVerifying ? t('credential.verification.verifying') : t('credential.verification.verify')}
             </Button>
