@@ -90,7 +90,7 @@ const ParticipantDashboard = () => {
 
         {/* Progress Overview - Mobile optimized */}
         <Card className="bg-studio-surface border-studio-border mb-4" data-onboarding="progress-card">{/* Reduced margin */}
-          <CardContent className="p-4 sm:p-6">
+          <CardContent className="p-3 sm:p-6">
             <div className="space-y-4 sm:space-y-0 sm:flex sm:items-center sm:justify-between">
               <div className="flex-1 sm:mr-6">
                 <div className="flex justify-between items-center mb-3">
