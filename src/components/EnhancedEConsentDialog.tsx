@@ -54,6 +54,7 @@ export default function EnhancedEConsentDialog({
   const [showCredentialVerification, setShowCredentialVerification] = useState(false);
   const [consentData, setConsentData] = useState<ConsentSignatureData | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isAlreadySigned, setIsAlreadySigned] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { toast } = useToast();
   const { t } = useLanguage();
@@ -62,8 +63,10 @@ export default function EnhancedEConsentDialog({
   useEffect(() => {
     if (open && (mode === 'investigator-sign' || mode === 'investigator-view') && consentId) {
       fetchConsentData();
+    } else if (open && mode === 'participant' && participantId) {
+      checkParticipantSignatureStatus();
     }
-  }, [open, mode, consentId]);
+  }, [open, mode, consentId, participantId]);
 
   const fetchConsentData = async () => {
     if (!consentId) return;
@@ -96,6 +99,33 @@ export default function EnhancedEConsentDialog({
         description: 'Error loading consent data',
         variant: "destructive",
       });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const checkParticipantSignatureStatus = async () => {
+    if (!participantId) return;
+
+    setLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('consent_signatures')
+        .select('participant_signed_at, status')
+        .eq('participant_id', participantId)
+        .eq('consent_type', 'main_icf')
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .single();
+
+      if (data && data.participant_signed_at) {
+        setIsAlreadySigned(true);
+      } else {
+        setIsAlreadySigned(false);  
+      }
+    } catch (error) {
+      // No existing signature found, participant can sign
+      setIsAlreadySigned(false);
     } finally {
       setLoading(false);
     }
@@ -290,6 +320,8 @@ export default function EnhancedEConsentDialog({
       return t('investigator.signature.title');
     } else if (mode === 'investigator-view') {
       return t('consent.dashboard.view');
+    } else if (mode === 'participant') {
+      return t('econsent.participant.signature.title');
     }
     return t('econsent.title');
   };
@@ -509,7 +541,7 @@ export default function EnhancedEConsentDialog({
             )}
 
             {/* Electronic Signature */}
-            {mode !== 'investigator-view' && (
+            {mode !== 'investigator-view' && !isAlreadySigned && (
               <Card className="bg-studio-bg border-studio-border">
                 <CardContent className="p-6 space-y-4">
                   <div className="flex items-center gap-2">
@@ -520,13 +552,19 @@ export default function EnhancedEConsentDialog({
                   <div className="space-y-4">
                     <div>
                       <Label htmlFor="full-name" className="text-studio-text">
-                        {t('signature.name.label')}
+                        {mode === 'participant' 
+                          ? t('signature.participant.name.label')
+                          : t('signature.name.label')
+                        }
                       </Label>
                       <Input
                         id="full-name"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
-                        placeholder={t('signature.name.placeholder')}
+                        placeholder={mode === 'participant' 
+                          ? t('signature.participant.name.placeholder')
+                          : t('signature.name.placeholder')
+                        }
                         className="mt-1 bg-studio-surface border-studio-border text-studio-text"
                       />
                     </div>
@@ -561,8 +599,27 @@ export default function EnhancedEConsentDialog({
               </Card>
             )}
 
+            {/* Already Signed Message */}
+            {mode === 'participant' && isAlreadySigned && (
+              <Card className="bg-[hsl(var(--progress-success))]/10 border-[hsl(var(--progress-success))]/20">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="h-6 w-6 text-[hsl(var(--progress-success))]" />
+                    <div>
+                      <h3 className="text-lg font-semibold text-[hsl(var(--progress-success))]">
+                        {t('econsent.already.signed.title')}
+                      </h3>
+                      <p className="text-sm text-studio-text-muted mt-1">
+                        {t('econsent.already.signed.description')}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
             {/* Actions */}
-            {mode !== 'investigator-view' && (
+            {mode !== 'investigator-view' && !isAlreadySigned && (
               <div className="flex justify-end space-x-3 pt-4">
                 <Button
                   variant="outline"
@@ -612,6 +669,7 @@ export default function EnhancedEConsentDialog({
         open={showCredentialVerification}
         onOpenChange={setShowCredentialVerification}
         onSuccess={handleCredentialVerified}
+        userRole={mode === 'participant' ? 'participant' : 'investigator'}
         title={mode === 'investigator-sign' 
           ? t('investigator.signature.title')
           : t('credential.verification.title')

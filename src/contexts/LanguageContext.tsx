@@ -676,6 +676,14 @@ const translations = {
     'signature.reason.witness': 'Witness to the process',
     'signature.reason.supervisor.approval': 'Supervisor approval',
     'signature.reason.quality.review': 'Quality review',
+    'signature.reason.study.participation': 'Study participation',
+    
+    // Participant-specific e-consent labels
+    'econsent.participant.signature.title': 'Participant Electronic Signature',
+    'signature.participant.name.label': 'Participant Full Name',
+    'signature.participant.name.placeholder': 'Enter your full name',
+    'econsent.already.signed.title': 'Document Already Signed',
+    'econsent.already.signed.description': 'You have already signed this consent document. You cannot sign the same document multiple times.',
   },
   spanish: {
     // Header
@@ -1358,6 +1366,14 @@ const translations = {
     'signature.reason.witness': 'Testigo del proceso',
     'signature.reason.supervisor.approval': 'Aprobación de supervisor',
     'signature.reason.quality.review': 'Revisión de calidad',
+    'signature.reason.study.participation': 'Participación en el estudio',
+    
+    // Participant-specific e-consent labels (Spanish)
+    'econsent.participant.signature.title': 'Firma Electrónica del Participante',
+    'signature.participant.name.label': 'Nombre Completo del Participante',
+    'signature.participant.name.placeholder': 'Ingrese su nombre completo',
+    'econsent.already.signed.title': 'Documento Ya Firmado',
+    'econsent.already.signed.description': 'Ya ha firmado este documento de consentimiento. No puede firmar el mismo documento múltiples veces.',
   }
 };
 

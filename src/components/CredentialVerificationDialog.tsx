@@ -15,6 +15,7 @@ interface CredentialVerificationDialogProps {
   onSuccess: () => void;
   title?: string;
   description?: string;
+  userRole?: 'participant' | 'investigator' | 'admin';
 }
 
 export default function CredentialVerificationDialog({
@@ -22,7 +23,8 @@ export default function CredentialVerificationDialog({
   onOpenChange,
   onSuccess,
   title,
-  description
+  description,
+  userRole = 'investigator'
 }: CredentialVerificationDialogProps) {
   const [password, setPassword] = useState("");
   const [electronicSignature, setElectronicSignature] = useState("");
@@ -72,6 +74,23 @@ export default function CredentialVerificationDialog({
     setSignatureReason("");
     setError("");
     onOpenChange(false);
+  };
+
+  // Get filtered signature reasons based on user role
+  const getSignatureReasons = () => {
+    if (userRole === 'participant') {
+      return [
+        { value: 'study-participation', label: t('signature.reason.study.participation') }
+      ];
+    }
+    
+    // For investigators and other roles, show all options
+    return [
+      { value: 'conducted-process', label: t('signature.reason.conducted.process') },
+      { value: 'witness', label: t('signature.reason.witness') },
+      { value: 'supervisor-approval', label: t('signature.reason.supervisor.approval') },
+      { value: 'quality-review', label: t('signature.reason.quality.review') }
+    ];
   };
 
   return (
@@ -136,18 +155,11 @@ export default function CredentialVerificationDialog({
                   <SelectValue placeholder={t('signature.reason.placeholder')} />
                 </SelectTrigger>
                 <SelectContent className="bg-studio-surface border-studio-border">
-                  <SelectItem value="conducted-process" className="text-studio-text">
-                    {t('signature.reason.conducted.process')}
-                  </SelectItem>
-                  <SelectItem value="witness" className="text-studio-text">
-                    {t('signature.reason.witness')}
-                  </SelectItem>
-                  <SelectItem value="supervisor-approval" className="text-studio-text">
-                    {t('signature.reason.supervisor.approval')}
-                  </SelectItem>
-                  <SelectItem value="quality-review" className="text-studio-text">
-                    {t('signature.reason.quality.review')}
-                  </SelectItem>
+                  {getSignatureReasons().map((reason) => (
+                    <SelectItem key={reason.value} value={reason.value} className="text-studio-text">
+                      {reason.label}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
