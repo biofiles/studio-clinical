@@ -121,7 +121,7 @@ const InvestigatorDashboard = () => {
         role="investigator"
       />
 
-      <main className="p-6 max-w-6xl mx-auto space-y-6">
+      <main className="p-3 sm:p-6 max-w-6xl mx-auto space-y-3 sm:space-y-6">
         <div className="space-y-2">
           <h2 className="text-xl font-medium text-studio-text">
             {t('dashboard.title')}
@@ -131,9 +131,9 @@ const InvestigatorDashboard = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" data-onboarding="study-metrics">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4" data-onboarding="study-metrics">
           <Card className="bg-studio-surface border-studio-border">
-            <CardContent className="p-6">
+            <CardContent className="p-3 sm:p-6">
               <div className="flex items-center space-x-2">
                 <Users className="h-5 w-5 text-studio-text-muted" />
                 <span className="text-2xl font-semibold text-studio-text">
@@ -147,7 +147,7 @@ const InvestigatorDashboard = () => {
           </Card>
 
           <Card className="bg-studio-surface border-studio-border">
-            <CardContent className="p-6">
+            <CardContent className="p-3 sm:p-6">
               <div className="flex items-center space-x-2">
                 <FileCheck className="h-5 w-5 text-studio-text-muted" />
                 <span className="text-2xl font-semibold text-studio-text">
@@ -161,7 +161,7 @@ const InvestigatorDashboard = () => {
           </Card>
 
           <Card className="bg-studio-surface border-studio-border">
-            <CardContent className="p-6">
+            <CardContent className="p-3 sm:p-6">
               <div className="flex items-center space-x-2">
                 <AlertTriangle className="h-5 w-5 text-studio-text-muted" />
                 <span className="text-2xl font-semibold text-studio-text">
@@ -175,7 +175,7 @@ const InvestigatorDashboard = () => {
           </Card>
 
           <Card className="bg-studio-surface border-studio-border">
-            <CardContent className="p-6">
+            <CardContent className="p-3 sm:p-6">
               <div className="flex items-center space-x-2">
                 <Calendar className="h-5 w-5 text-studio-text-muted" />
                 <span className="text-2xl font-semibold text-studio-text">
@@ -189,7 +189,7 @@ const InvestigatorDashboard = () => {
           </Card>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6" data-onboarding="progress-cards">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-6" data-onboarding="progress-cards">
           <Card className="bg-studio-surface border-studio-border">
             <CardHeader>
               <CardTitle className="text-studio-text">{t('dashboard.study.progress')}</CardTitle>
@@ -249,7 +249,7 @@ const InvestigatorDashboard = () => {
           </Card>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-6">
           <Card className="bg-studio-surface border-studio-border lg:col-span-2">
             <CardHeader>
               <CardTitle className="text-studio-text">{t('dashboard.next.events')}</CardTitle>
