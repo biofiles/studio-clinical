@@ -94,7 +94,7 @@ const ParticipantDashboard = () => {
             <div className="space-y-4 sm:space-y-0 sm:flex sm:items-center sm:justify-between">
               <div className="flex-1 sm:mr-6">
                 <div className="flex justify-between items-center mb-3">
-                  <span className="text-base sm:text-lg font-medium text-studio-text-muted">Study Completion</span>
+                  <span className="text-base sm:text-lg font-medium text-studio-text-muted">{t('dashboard.study.progress')}</span>
                   <span className="text-xl sm:text-2xl font-bold text-studio-text">{studyProgress}%</span>
                 </div>
                 <Progress value={studyProgress} color="gray" className="h-4 mb-1" />
