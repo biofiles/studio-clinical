@@ -703,7 +703,7 @@ const translations = {
     'dashboard.manage.calendar': 'Calendario',
     'dashboard.questionnaires': 'Cuestionarios',
     'dashboard.export.questionnaires': 'Exportar Cuestionarios',
-    'dashboard.study.progress': 'Finalización del Estudio',
+    'dashboard.study.progress': 'Progreso del Estudio',
     'dashboard.diary.compliance': 'Cumplimiento de Cuestionarios',
     'dashboard.visit.compliance': 'Cumplimiento de Visitas',
     'dashboard.enrollment': 'Inscripción',
