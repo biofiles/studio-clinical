@@ -27,11 +27,11 @@ const CalendarView = ({ open, onOpenChange, activities }: CalendarViewProps) => 
 
   // Mock upcoming visits for calendar display
   const upcomingVisits = [
-    { date: new Date(2025, 6, 14), titleKey: "calendar.activity.weekly.survey", time: "10:00 AM", type: "questionnaire" },
-    { date: new Date(2025, 6, 22), titleKey: "calendar.activity.site.visit.blood.draw", time: "2:00 PM", type: "visit" },
-    { date: new Date(2025, 7, 5), titleKey: "calendar.activity.daily.diary.entry", timeKey: "calendar.activity.any.time", type: "diary" },
-    { date: new Date(2025, 8, 12), titleKey: "calendar.activity.followup.call", time: "3:00 PM", type: "call" },
-    { date: new Date(2025, 9, 8), titleKey: "calendar.activity.monthly.assessment", time: "9:00 AM", type: "assessment" }
+    { date: new Date(2025, 7, 5), titleKey: "calendar.activity.weekly.survey", time: "10:00 AM", type: "questionnaire" },
+    { date: new Date(2025, 7, 12), titleKey: "calendar.activity.site.visit.blood.draw", time: "2:00 PM", type: "visit" },
+    { date: new Date(2025, 7, 20), titleKey: "calendar.activity.daily.diary.entry", timeKey: "calendar.activity.any.time", type: "diary" },
+    { date: new Date(2025, 8, 2), titleKey: "calendar.activity.followup.call", time: "3:00 PM", type: "call" },
+    { date: new Date(2025, 8, 15), titleKey: "calendar.activity.monthly.assessment", time: "9:00 AM", type: "assessment" }
   ];
 
   // Get activity dates for highlighting

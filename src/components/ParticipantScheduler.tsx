@@ -27,9 +27,9 @@ const ParticipantScheduler = ({ open, onOpenChange, participantId }: Participant
   const [eventTitle, setEventTitle] = useState("");
   const [eventNotes, setEventNotes] = useState("");
   const [upcomingEvents, setUpcomingEvents] = useState([
-    { id: 1, date: "2024-12-15", time: "2:00 PM", title: "Site Visit - Blood Draw", type: "visit" },
-    { id: 2, date: "2024-12-18", time: "End of day", title: "Weekly Survey Due", type: "questionnaire" },
-    { id: 3, date: "2024-12-20", time: "10:00 AM", title: "Follow-up Call", type: "call" }
+    { id: 1, date: "2025-08-05", time: "2:00 PM", title: "Site Visit - Blood Draw", type: "visit" },
+    { id: 2, date: "2025-08-12", time: "End of day", title: "Weekly Survey Due", type: "questionnaire" },
+    { id: 3, date: "2025-08-20", time: "10:00 AM", title: "Follow-up Call", type: "call" }
   ]);
 
   if (!participantId) return null;

@@ -32,14 +32,14 @@ const ParticipantDashboard = () => {
   const daysLeft = 30;
   const participantToken = "PTK-9283-WZ1";
   const upcomingActivities = [{
-    date: "2024-12-21",
+    date: "2025-08-05",
     activity: t('activity.weekly.survey'),
     time: "10:00 AM",
     type: "questionnaire",
     details: t('activity.weekly.survey.details'),
     location: t('activity.online.location')
   }, {
-    date: "2024-12-15",
+    date: "2025-08-12",
     activity: t('activity.site.visit.blood'),
     time: "2:00 PM",
     type: "visit",
@@ -47,7 +47,7 @@ const ParticipantDashboard = () => {
     location: t('activity.hospital.location'),
     notes: t('activity.site.visit.notes')
   }, {
-    date: "2024-12-20",
+    date: "2025-08-20",
     activity: t('activity.daily.diary'),
     time: t('activity.anytime'),
     type: "diary",
@@ -299,7 +299,7 @@ const ParticipantDashboard = () => {
                       <strong>Formulario de consentimiento informado Principal v2.1</strong> - Disponible para firma
                     </p>
                     <div className="text-xs text-blue-600 mt-2 space-y-1">
-                      <p>• Documento disponible desde: {formatDate('2024-12-01', language)}</p>
+                      <p>• Documento disponible desde: {formatDate('2025-08-01', language)}</p>
                       
                       <p>• Modalidad: Firma electrónica con audio disponible</p>
                     </div>
@@ -352,7 +352,7 @@ const ParticipantDashboard = () => {
                           {t('visits.status.scheduled')}
                         </Badge>
                       </div>
-                      <p className="text-sm text-gray-600">{formatDate('2024-12-15', language)} {t('dashboard.at')} 2:00 PM</p>
+                      <p className="text-sm text-gray-600">{formatDate('2025-08-25', language)} {t('dashboard.at')} 2:00 PM</p>
                       <p className="text-xs text-gray-600 mt-1">{t('visits.week4.procedures')}</p>
                       <div className="bg-gray-50 border border-gray-200 rounded p-2 text-xs text-gray-700 mt-2">
                         <strong>{t('visits.preparation.notes')}:</strong> {t('visits.week4.notes')}

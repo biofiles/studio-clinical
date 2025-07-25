@@ -20,11 +20,11 @@ const CalendarManagement = ({ open, onOpenChange }: CalendarManagementProps) => 
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
 
   const studyEvents = [
-    { id: 1, date: "2024-12-15", time: "2:00 PM", titleKey: "calendar.event.site.visit", type: "visit", participant: "P001" },
-    { id: 2, date: "2024-12-16", time: "10:00 AM", titleKey: "calendar.event.blood.draw", type: "lab", participant: "P002" },
-    { id: 3, date: "2024-12-18", time: "3:00 PM", titleKey: "calendar.event.team.meeting", type: "meeting", participant: null },
-    { id: 4, date: "2024-12-20", time: "11:00 AM", titleKey: "calendar.event.followup.call", type: "call", participant: "P003" },
-    { id: 5, date: "2024-12-22", time: "9:00 AM", titleKey: "calendar.event.assessment", type: "assessment", participant: "P004" }
+    { id: 1, date: "2025-08-05", time: "2:00 PM", titleKey: "calendar.event.site.visit", type: "visit", participant: "P001" },
+    { id: 2, date: "2025-08-12", time: "10:00 AM", titleKey: "calendar.event.blood.draw", type: "lab", participant: "P002" },
+    { id: 3, date: "2025-08-18", time: "3:00 PM", titleKey: "calendar.event.team.meeting", type: "meeting", participant: null },
+    { id: 4, date: "2025-08-20", time: "11:00 AM", titleKey: "calendar.event.followup.call", type: "call", participant: "P003" },
+    { id: 5, date: "2025-08-25", time: "9:00 AM", titleKey: "calendar.event.assessment", type: "assessment", participant: "P004" }
   ];
 
   const getEventTypeColor = (type: string) => {

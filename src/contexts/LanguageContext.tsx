@@ -151,10 +151,10 @@ const translations = {
     'ai.question.study.duration': 'How long is the study?',
     
     // AI Responses
-    'ai.response.upcoming.visits': 'Based on your schedule, you have a site visit on December 15th at 2:00 PM for a blood draw, and a follow-up call on December 22nd at 3:00 PM.',
+    'ai.response.upcoming.visits': 'Based on your schedule, you have a site visit on August 5th at 2:00 PM for a blood draw, and a follow-up call on August 20th at 10:00 AM.',
     'ai.response.daily.diary': 'Complete your daily diary by logging into the questionnaires section. Record any symptoms, side effects, or changes in how you feel. It takes about 5 minutes.',
     'ai.response.side.effects': 'Report any new or worsening symptoms immediately through the app or call your study coordinator. Serious side effects should be reported within 24 hours.',
-    'ai.response.blood.draw': 'Your next blood draw is scheduled for December 15th at 2:00 PM. Please fast for 8 hours beforehand and bring your ID.',
+    'ai.response.blood.draw': 'Your next blood draw is scheduled for August 12th at 2:00 PM. Please fast for 8 hours beforehand and bring your ID.',
     'ai.response.study.duration': 'This study runs for approximately 6 months. You are currently 65% complete with about 30 days remaining.',
     
     // Questionnaires
@@ -811,10 +811,10 @@ const translations = {
     'ai.question.study.duration': '¿Cuánto dura el estudio?',
     
     // AI Responses
-    'ai.response.upcoming.visits': 'Según tu horario, tienes una visita al sitio el 15 de diciembre a las 2:00 PM para extracción de sangre, y una llamada de seguimiento el 22 de diciembre a las 3:00 PM.',
+    'ai.response.upcoming.visits': 'Según tu horario, tienes una visita al sitio el 5 de agosto a las 2:00 PM para extracción de sangre, y una llamada de seguimiento el 20 de agosto a las 10:00 AM.',
     'ai.response.daily.diary': 'Completa tu diario diario iniciando sesión en la sección de cuestionarios. Registra cualquier síntoma, efecto secundario o cambio en cómo te sientes. Toma unos 5 minutos.',
     'ai.response.side.effects': 'Reporta cualquier síntoma nuevo o que empeore inmediatamente a través de la aplicación o llama a tu coordinador de estudio. Los efectos secundarios graves deben reportarse dentro de 24 horas.',
-    'ai.response.blood.draw': 'Tu próxima extracción de sangre está programada para el 15 de diciembre a las 2:00 PM. Por favor ayuna por 8 horas antes y trae tu identificación.',
+    'ai.response.blood.draw': 'Tu próxima extracción de sangre está programada para el 12 de agosto a las 2:00 PM. Por favor ayuna por 8 horas antes y trae tu identificación.',
     'ai.response.study.duration': 'Este estudio dura aproximadamente 6 meses. Actualmente estás 65% completo con unos 30 días restantes.',
     
     // Questionnaires
