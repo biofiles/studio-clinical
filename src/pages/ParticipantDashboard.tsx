@@ -94,12 +94,15 @@ const ParticipantDashboard = () => {
             <div className="space-y-4 sm:space-y-0 sm:flex sm:items-center sm:justify-between">
               <div className="flex-1 sm:mr-6">
                 <div className="flex justify-between items-center mb-3">
-                  <span className="text-base sm:text-lg font-medium text-studio-text-muted">{t('dashboard.study.progress')}</span>
+                  <span className="text-base sm:text-lg font-medium text-studio-text-muted">Study Completion</span>
                   <span className="text-xl sm:text-2xl font-bold text-studio-text">{studyProgress}%</span>
                 </div>
                 <Progress value={studyProgress} color="gray" className="h-4 mb-1" />
+                <div className="sm:hidden mt-2">
+                  <p className="text-xl font-bold text-studio-text">{daysLeft} <span className="text-sm font-medium text-studio-text-muted">{t('participant.days.remaining')}</span></p>
+                </div>
               </div>
-              <div className="flex items-center justify-between sm:block sm:text-right bg-studio-surface/50 rounded-lg p-3 sm:bg-transparent sm:p-0">
+              <div className="hidden sm:block sm:text-right">
                 <div className="sm:text-center">
                   <p className="text-4xl sm:text-5xl font-bold text-studio-text">{daysLeft}</p>
                   <p className="text-base sm:text-lg text-studio-text-muted font-medium">{t('participant.days.remaining')}</p>
