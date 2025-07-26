@@ -314,6 +314,21 @@ const translations = {
     'questionnaire.option.cost': 'Cost',
     'questionnaire.option.other': 'Other',
     
+    // Response Field Names
+    'questionnaire.response.symptoms': 'Symptoms',
+    'questionnaire.response.severity': 'Severity',
+    'questionnaire.response.medication_taken': 'Medication Taken',
+    'questionnaire.response.physical_health': 'Physical Health',
+    'questionnaire.response.emotional_wellbeing': 'Emotional Well-being',
+    'questionnaire.response.daily_activities': 'Daily Activities',
+    'questionnaire.response.sleep_quality': 'Sleep Quality',
+    'questionnaire.response.doses_missed': 'Doses Missed',
+    'questionnaire.response.adherence_rate': 'Adherence Rate',
+    'questionnaire.response.overall_health': 'Overall Health',
+    'questionnaire.response.energy_level': 'Energy Level',
+    'questionnaire.response.mood': 'Mood',
+    
+    
     // eConsent Signature
     'econsent.signature.canvas.instruction': 'Please sign in the box below',
     'econsent.signature.clear.confirm': 'Are you sure you want to clear your signature?',
@@ -978,6 +993,21 @@ const translations = {
     'questionnaire.option.too.busy': 'Muy ocupado',
     'questionnaire.option.cost': 'Costo',
     'questionnaire.option.other': 'Otro',
+    
+    // Response Field Names
+    'questionnaire.response.symptoms': 'Síntomas',
+    'questionnaire.response.severity': 'Severidad',
+    'questionnaire.response.medication_taken': 'Medicamento Tomado',
+    'questionnaire.response.physical_health': 'Salud Física',
+    'questionnaire.response.emotional_wellbeing': 'Bienestar Emocional',
+    'questionnaire.response.daily_activities': 'Actividades Diarias',
+    'questionnaire.response.sleep_quality': 'Calidad del Sueño',
+    'questionnaire.response.doses_missed': 'Dosis Perdidas',
+    'questionnaire.response.adherence_rate': 'Tasa de Adherencia',
+    'questionnaire.response.overall_health': 'Salud General',
+    'questionnaire.response.energy_level': 'Nivel de Energía',
+    'questionnaire.response.mood': 'Estado de Ánimo',
+    
     
     // eConsent Signature
     'econsent.signature.canvas.instruction': 'Por favor firme en el recuadro de abajo',

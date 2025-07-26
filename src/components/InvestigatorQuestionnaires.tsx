@@ -9,6 +9,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { formatDate } from "@/lib/utils";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
+import QuestionnaireResponseDialog from "./QuestionnaireResponseDialog";
 
 interface Questionnaire {
   id: number;
@@ -36,6 +37,10 @@ const InvestigatorQuestionnaires = ({ open, onOpenChange }: InvestigatorQuestion
   const { t, language } = useLanguage();
   const [filterStatus, setFilterStatus] = useState<string>("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedResponse, setSelectedResponse] = useState<{
+    participant: Participant;
+    questionnaire: Questionnaire;
+  } | null>(null);
 
   const [participants] = useState<Participant[]>([
     {
@@ -145,7 +150,7 @@ const InvestigatorQuestionnaires = ({ open, onOpenChange }: InvestigatorQuestion
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed': return 'bg-[hsl(var(--progress-success))]/10 text-[hsl(var(--progress-success))] border-[hsl(var(--progress-success))]/20';
-      case 'in-progress': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+      case 'in-progress': return 'bg-[hsl(var(--progress-warning))]/10 text-[hsl(var(--progress-warning))] border-[hsl(var(--progress-warning))]/20';
       case 'pending': return 'bg-[hsl(var(--progress-info))]/10 text-[hsl(var(--progress-info))] border-[hsl(var(--progress-info))]/20';
       case 'overdue': return 'bg-destructive/10 text-destructive border-destructive/20';
       default: return 'bg-muted text-muted-foreground border-border';
@@ -173,15 +178,7 @@ const InvestigatorQuestionnaires = ({ open, onOpenChange }: InvestigatorQuestion
   };
 
   const handleViewResponses = (participant: Participant, questionnaire: Questionnaire) => {
-    if (questionnaire.responses) {
-      const responseText = Object.entries(questionnaire.responses)
-        .map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join(', ') : value}`)
-        .join('\n');
-      
-      alert(`${t('questionnaire.list.responses.for')} "${questionnaire.title}" - ${participant.name}:\n\n${responseText}`);
-    } else {
-      alert(t('questionnaire.list.no.responses'));
-    }
+    setSelectedResponse({ participant, questionnaire });
   };
 
   const filteredParticipants = participants.filter(participant => {
@@ -221,10 +218,10 @@ const InvestigatorQuestionnaires = ({ open, onOpenChange }: InvestigatorQuestion
                 <div className="text-sm text-[hsl(var(--progress-success))]/80">{t('questionnaire.list.completed.count')}</div>
               </CardContent>
             </Card>
-            <Card className="bg-yellow-50 border-yellow-200">
+            <Card className="bg-[hsl(var(--progress-warning))]/5 border-[hsl(var(--progress-warning))]/20">
               <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-yellow-800">{inProgressCount}</div>
-                <div className="text-sm text-yellow-700">{t('questionnaire.list.in.progress.count')}</div>
+                <div className="text-2xl font-bold text-[hsl(var(--progress-warning))]">{inProgressCount}</div>
+                <div className="text-sm text-[hsl(var(--progress-warning))]/80">{t('questionnaire.list.in.progress.count')}</div>
               </CardContent>
             </Card>
             <Card className="bg-[hsl(var(--progress-info))]/5 border-[hsl(var(--progress-info))]/20">
@@ -348,10 +345,18 @@ const InvestigatorQuestionnaires = ({ open, onOpenChange }: InvestigatorQuestion
             </Card>
           )}
 
-          <div className="text-xs text-studio-text-muted bg-blue-50 p-3 rounded">
+          <div className="text-xs text-studio-text-muted bg-primary/5 p-3 rounded border border-primary/20">
             <strong>{t('questionnaire.list.data.privacy')}:</strong> {t('questionnaire.list.privacy.note')}
           </div>
         </div>
+
+        <QuestionnaireResponseDialog
+          open={!!selectedResponse}
+          onOpenChange={(open) => !open && setSelectedResponse(null)}
+          participantName={selectedResponse?.participant.name || ""}
+          questionnaireTitle={selectedResponse?.questionnaire.title || ""}
+          responses={selectedResponse?.questionnaire.responses || null}
+        />
       </DialogContent>
     </Dialog>
   );
