@@ -875,7 +875,7 @@ const translations = {
     // Questionnaire Form
     'questionnaire.form.question': 'Pregunta',
     'questionnaire.form.of': 'de',
-    'questionnaire.form.complete': 'Completar',
+    'questionnaire.form.complete': 'Completo',
     'questionnaire.form.completed': '¡Cuestionario Completado!',
     'questionnaire.form.thank.you': 'Gracias por completar',
     'questionnaire.form.responses.saved': 'Sus respuestas han sido guardadas.',

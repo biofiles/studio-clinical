@@ -43,7 +43,7 @@ const QuestionnaireForm = ({ open, onOpenChange, questionnaire, onComplete }: Qu
   if (!questionnaire) return null;
 
   const currentQuestion = questionnaire.questions[currentQuestionIndex];
-  const progress = ((currentQuestionIndex + 1) / questionnaire.questions.length) * 100;
+  const progress = (currentQuestionIndex / questionnaire.questions.length) * 100;
 
   const handleNext = () => {
     if (currentQuestionIndex < questionnaire.questions.length - 1) {
