@@ -349,7 +349,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                    <div className="text-2xl font-bold text-purple-600">
                      {participantDetails.studyProgress.complianceRate}%
                    </div>
-                   <div className="text-sm text-studio-text-muted">{t('participant.compliance')} Rate</div>
+                   <div className="text-sm text-studio-text-muted">{t('participant.compliance')}</div>
                    <div className="w-full bg-muted rounded-full h-2 mt-2">
                      <div 
                        className="bg-progress-accent h-2 rounded-full" 
