@@ -137,14 +137,14 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
     },
     studyProgress: participant.studyProgress,
     recentActivity: [
-      { date: participant.lastVisit, activity: "Site Visit - Blood Draw", type: "visit" },
-      { date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], activity: "Weekly Survey", type: "questionnaire" },
-      { date: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], activity: "Follow-up Call", type: "call" },
-      { date: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], activity: "Safety Assessment", type: "questionnaire" }
+      { date: "2025-08-15", activityKey: "activity.site.visit.blood.draw", type: "visit" },
+      { date: "2025-08-20", activityKey: "activity.weekly.survey", type: "questionnaire" },
+      { date: "2025-08-25", activityKey: "activity.follow.up.call", type: "call" },
+      { date: "2025-08-28", activityKey: "activity.safety.assessment", type: "questionnaire" }
     ],
     upcomingEvents: [
-      { date: participant.nextVisit, activity: "Site Visit", time: "2:00 PM" },
-      { date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], activity: "Weekly Survey Due", time: "End of day" }
+      { date: "2025-09-05", activityKey: "activity.site.visit", time: "2:00 PM" },
+      { date: "2025-09-12", activityKey: "activity.weekly.survey.due", time: "End of day" }
     ],
     alerts: participant.visitStatus === 'overdue' 
       ? [
@@ -376,7 +376,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                 {participantDetails.recentActivity.map((activity, index) => (
                   <div key={index} className="flex items-center justify-between p-2 bg-studio-bg rounded">
                     <div>
-                      <div className="font-medium text-sm">{activity.activity}</div>
+                      <div className="font-medium text-sm">{t(activity.activityKey)}</div>
                       <div className="text-xs text-studio-text-muted">
                         {formatDate(activity.date, language)}
                       </div>
@@ -400,7 +400,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                 {participantDetails.upcomingEvents.map((event, index) => (
                   <div key={index} className="flex items-center justify-between p-2 bg-studio-bg rounded">
                     <div>
-                      <div className="font-medium text-sm">{event.activity}</div>
+                      <div className="font-medium text-sm">{t(event.activityKey)}</div>
                       <div className="text-xs text-studio-text-muted">
                         {formatDate(event.date, language)} at {event.time}
                       </div>
