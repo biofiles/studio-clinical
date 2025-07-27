@@ -89,6 +89,16 @@ const translations = {
     'participant.patient.id': 'Patient ID',
     'participant.enrollment': 'Enrollment',
     'participant.visit.status': 'Visit Status',
+    'participant.last.visit': 'Last Visit',
+    
+    // Demographics values
+    'demographics.male': 'Male',
+    'demographics.female': 'Female',
+    'demographics.caucasian': 'Caucasian',
+    'demographics.hispanic': 'Hispanic/Latino',
+    'demographics.african.american': 'African American',
+    'demographics.asian': 'Asian',
+    'demographics.native.american': 'Native American',
     'participant.compliance': 'Compliance',
     'participant.next.visit': 'Next Visit',
     'participant.actions': 'Actions',
@@ -785,6 +795,16 @@ const translations = {
     'participant.patient.id': 'ID del Paciente',
     'participant.enrollment': 'Inscripción',
     'participant.visit.status': 'Estado de Visita',
+    'participant.last.visit': 'Última Visita',
+    
+    // Demographics values
+    'demographics.male': 'Masculino',
+    'demographics.female': 'Femenino',
+    'demographics.caucasian': 'Caucásico',
+    'demographics.hispanic': 'Hispano/Latino',
+    'demographics.african.american': 'Afroamericano',
+    'demographics.asian': 'Asiático',
+    'demographics.native.american': 'Nativo Americano',
     'participant.compliance': 'Cumplimiento',
     'participant.next.visit': 'Próxima Visita',
     'participant.actions': 'Acciones',

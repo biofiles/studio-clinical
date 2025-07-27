@@ -245,7 +245,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                   </Badge>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-studio-text-muted">Last Visit:</span>
+                  <span className="text-sm text-studio-text-muted">{t('participant.last.visit')}:</span>
                   <span>{formatDate(participantDetails.lastVisit, language)}</span>
                 </div>
                 <div className="flex justify-between">
@@ -266,11 +266,21 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-studio-text-muted">{t('details.gender')}:</span>
-                  <span>{participantDetails.demographics.gender}</span>
+                  <span>{t(`demographics.${participantDetails.demographics.gender.toLowerCase()}`)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-studio-text-muted">{t('details.ethnicity')}:</span>
-                  <span>{participantDetails.demographics.ethnicity}</span>
+                  <span>{(() => {
+                    const ethnicity = participantDetails.demographics.ethnicity;
+                    const mapping: Record<string, string> = {
+                      'Caucasian': 'caucasian',
+                      'Hispanic/Latino': 'hispanic',
+                      'African American': 'african.american',
+                      'Asian': 'asian',
+                      'Native American': 'native.american'
+                    };
+                    return t(`demographics.${mapping[ethnicity] || ethnicity.toLowerCase()}`);
+                  })()}</span>
                 </div>
               </CardContent>
             </Card>
