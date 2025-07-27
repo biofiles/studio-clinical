@@ -98,6 +98,14 @@ All colors MUST be HSL.
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 215 20% 75%;
+
+    /* Studio-specific dark mode tokens */
+    --studio-bg: 222.2 84% 4.9%;
+    --studio-surface: 217.2 32.6% 17.5%;
+    --studio-border: 217.2 32.6% 25%;
+    --studio-text: 210 40% 98%;
+    --studio-text-muted: 215 20.2% 65.1%;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 210 70% 55%;

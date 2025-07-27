@@ -1,15 +1,20 @@
 
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Header from "@/components/Header";
-import { Globe, ArrowLeft } from "lucide-react";
+import { Globe, ArrowLeft, Moon, Sun, Wifi, WifiOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "next-themes";
 
 const Settings = () => {
   const navigate = useNavigate();
   const { language, setLanguage, t } = useLanguage();
+  const { theme, setTheme } = useTheme();
+  const [offlineMode, setOfflineMode] = useState(false);
 
   const handleBack = () => {
     navigate(-1);
@@ -61,6 +66,56 @@ const Settings = () => {
                 <p className="text-xs text-studio-text-muted">
                   {t('settings.language.note')}
                 </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-studio-surface border-studio-border">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2 text-studio-text">
+                {theme === 'dark' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+                <span>Display Preferences</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <label className="text-sm font-medium text-studio-text">
+                    Dark Mode
+                  </label>
+                  <p className="text-xs text-studio-text-muted">
+                    Toggle between light and dark theme
+                  </p>
+                </div>
+                <Switch
+                  checked={theme === 'dark'}
+                  onCheckedChange={(checked) => setTheme(checked ? 'dark' : 'light')}
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-studio-surface border-studio-border">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2 text-studio-text">
+                {offlineMode ? <WifiOff className="h-5 w-5" /> : <Wifi className="h-5 w-5" />}
+                <span>Connection Settings</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <label className="text-sm font-medium text-studio-text">
+                    Offline Mode
+                  </label>
+                  <p className="text-xs text-studio-text-muted">
+                    Work offline with cached data (Demo feature)
+                  </p>
+                </div>
+                <Switch
+                  checked={offlineMode}
+                  onCheckedChange={setOfflineMode}
+                />
               </div>
             </CardContent>
           </Card>
