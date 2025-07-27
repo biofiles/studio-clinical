@@ -12,6 +12,7 @@ import StudySignupsReportDialog from "@/components/StudySignupsReportDialog";
 import { toast } from "sonner";
 import { useStudy } from "@/contexts/StudyContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { formatDate } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 const CROSponsorDashboard = () => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
@@ -25,9 +26,28 @@ const CROSponsorDashboard = () => {
     setSelectedStudy
   } = useStudy();
   const {
-    t
+    t,
+    language
   } = useLanguage();
   const navigate = useNavigate();
+
+  // Helper function to convert milestone date strings to formatted dates
+  const formatMilestoneDate = (dateStr: string) => {
+    // Convert "Month Year" format to proper date
+    const [month, year] = dateStr.split(' ');
+    const monthIndex = {
+      'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5,
+      'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
+    }[month];
+    
+    if (monthIndex !== undefined && year) {
+      // Use the first day of the month
+      const date = new Date(parseInt(year), monthIndex, 1);
+      return formatDate(date, language);
+    }
+    
+    return dateStr; // Fallback to original string if parsing fails
+  };
 
   // Load favorite study from localStorage on mount
   useEffect(() => {
@@ -792,7 +812,7 @@ const CROSponsorDashboard = () => {
                           </Badge>
                         </div>
                       </div>
-                      <span className="text-studio-text font-medium">{milestone.date}</span>
+                      <span className="text-studio-text font-medium">{formatMilestoneDate(milestone.date)}</span>
                     </div>)}
                   {!studyData && <div className="text-center py-8 text-studio-text-muted">
                       <Calendar className="h-12 w-12 mx-auto mb-4 opacity-50" />
