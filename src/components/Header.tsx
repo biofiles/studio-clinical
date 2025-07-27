@@ -75,7 +75,7 @@ const Header = ({
       </div>
       
       {(role === 'investigator' || role === 'cro-sponsor') && (
-        <div className="px-6 py-2 border-t border-studio-border bg-white">
+        <div className="px-6 py-2 border-t border-studio-border bg-studio-surface">
           <StudyDropdown />
         </div>
       )}
