@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -196,7 +195,7 @@ const InvestigatorDashboard = () => {
             <CardHeader>
               <CardTitle className="text-studio-text">{t('dashboard.study.progress')}</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="flex flex-col justify-end h-full">
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-studio-text">
@@ -216,10 +215,9 @@ const InvestigatorDashboard = () => {
             <CardHeader>
               <CardTitle className="text-studio-text">{t('dashboard.diary.compliance')}</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="flex flex-col justify-end h-full">
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-studio-text-muted">{t('dashboard.daily.diaries')}</span>
                   <span className="text-studio-text">{studyData ? studyData.diaryCompliance : 0}%</span>
                 </div>
                 <Progress 
@@ -235,10 +233,9 @@ const InvestigatorDashboard = () => {
             <CardHeader>
               <CardTitle className="text-studio-text">{t('dashboard.visit.compliance')}</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="flex flex-col justify-end h-full">
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-studio-text-muted">{t('dashboard.site.visits')}</span>
                   <span className="text-studio-text">{studyData ? studyData.visitCompliance : 0}%</span>
                 </div>
                 <Progress 
