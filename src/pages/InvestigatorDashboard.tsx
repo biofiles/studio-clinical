@@ -14,6 +14,7 @@ import { CDISCExportDialog } from "@/components/CDISCExportDialog";
 import InvestigatorQuestionnaires from "@/components/InvestigatorQuestionnaires";
 import InvestigatorConsentDashboard from "@/components/InvestigatorConsentDashboard";
 import StudyResultsSignup from "@/components/StudyResultsSignup";
+import DocumentRepository from "@/components/DocumentRepository";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useStudy } from "@/contexts/StudyContext";
 import { useNavigate } from "react-router-dom";
@@ -28,6 +29,7 @@ const InvestigatorDashboard = () => {
   const [showCDISCExport, setShowCDISCExport] = useState(false);
   const [showQuestionnaires, setShowQuestionnaires] = useState(false);
   const [showConsentDashboard, setShowConsentDashboard] = useState(false);
+  const [showDocumentRepository, setShowDocumentRepository] = useState(false);
   const { t, language } = useLanguage();
   const { selectedStudy, setSelectedStudy, studies } = useStudy();
 
@@ -317,6 +319,14 @@ const InvestigatorDashboard = () => {
               <Button 
                 variant="studio" 
                 className="w-full justify-start"
+                onClick={() => setShowDocumentRepository(true)}
+              >
+                <FileCheck className="h-4 w-4 mr-2" />
+                {t('documents.title')}
+              </Button>
+              <Button 
+                variant="studio" 
+                className="w-full justify-start"
                 onClick={() => setShowBarcodeScanner(true)}
                 data-onboarding="barcode-btn"
               >
@@ -407,6 +417,12 @@ const InvestigatorDashboard = () => {
       <InvestigatorConsentDashboard
         open={showConsentDashboard}
         onOpenChange={setShowConsentDashboard}
+      />
+      
+      <DocumentRepository 
+        open={showDocumentRepository} 
+        onOpenChange={setShowDocumentRepository} 
+        userRole="investigator"
       />
     </div>
   );

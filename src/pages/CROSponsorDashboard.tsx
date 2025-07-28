@@ -9,6 +9,7 @@ import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, 
 import FHIRExportDialog from "@/components/FHIRExportDialog";
 import { CDISCExportDialog } from "@/components/CDISCExportDialog";
 import StudySignupsReportDialog from "@/components/StudySignupsReportDialog";
+import DocumentRepository from "@/components/DocumentRepository";
 import { toast } from "sonner";
 import { useStudy } from "@/contexts/StudyContext";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -19,6 +20,7 @@ const CROSponsorDashboard = () => {
   const [selectedStudyLocal, setSelectedStudyLocal] = useState<string | null>(null);
   const [showFHIRExport, setShowFHIRExport] = useState(false);
   const [showCDISCExport, setShowCDISCExport] = useState(false);
+  const [showDocumentRepository, setShowDocumentRepository] = useState(false);
   const [favoriteStudyId, setFavoriteStudyId] = useState<string | null>(null);
   const {
     selectedStudy,
@@ -892,7 +894,30 @@ const CROSponsorDashboard = () => {
               
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Documents */}
+              <Card className="bg-studio-surface border-studio-border">
+                <CardHeader>
+                  <CardTitle className="text-studio-text flex items-center space-x-2">
+                    <FileText className="h-5 w-5" />
+                    <span>{t('documents.title')}</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-sm text-studio-text-muted">{t('documents.description')}</p>
+                  <Button 
+                    variant="outline" 
+                    className="w-full justify-start h-auto py-3 px-4" 
+                    onClick={() => setShowDocumentRepository(true)}
+                  >
+                    <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
+                      <span className="font-medium text-sm sm:text-base w-full text-left">{t('documents.title')}</span>
+                    </div>
+                    <FileText className="h-4 w-4 flex-shrink-0" />
+                  </Button>
+                </CardContent>
+              </Card>
+
               {/* Downloadable Reports */}
               <Card className="bg-studio-surface border-studio-border">
                 <CardHeader>
@@ -1009,6 +1034,13 @@ const CROSponsorDashboard = () => {
 
       {/* CDISC Export Dialog */}
       <CDISCExportDialog open={showCDISCExport} onOpenChange={setShowCDISCExport} studyId={selectedStudy?.id || ''} studyName={selectedStudy?.name || ''} />
+      
+      {/* Document Repository Dialog */}
+      <DocumentRepository 
+        open={showDocumentRepository} 
+        onOpenChange={setShowDocumentRepository} 
+        userRole="cro-sponsor"
+      />
     </div>;
 };
 export default CROSponsorDashboard;
