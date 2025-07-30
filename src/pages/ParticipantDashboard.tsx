@@ -14,6 +14,7 @@ import EConsentDialog from "@/components/EConsentDialog";
 import StudyResultsSignup from "@/components/StudyResultsSignup";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { formatDate } from "@/lib/utils";
+import InspirationalMessage from "@/components/InspirationalMessage";
 import { Calendar, FileText, Bell, Activity, Download, Sparkles, User, Shield, Clock, CheckCircle, BookOpen, MapPin, Stethoscope, Barcode, Signature, Building, Settings, Scale } from "lucide-react";
 const ParticipantDashboard = () => {
   const {
@@ -78,6 +79,9 @@ const ParticipantDashboard = () => {
 
 
       <main className="p-3 sm:p-4 max-w-6xl mx-auto">{/* Reduced padding for mobile */}
+        {/* Inspirational Message */}
+        <InspirationalMessage />
+        
         {/* Welcome Section - Mobile first */}
         <div className="space-y-1 mb-4" data-onboarding="welcome-section">
           <h2 className="text-xl sm:text-2xl font-medium text-studio-text">
