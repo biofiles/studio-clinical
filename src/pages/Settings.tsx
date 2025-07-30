@@ -116,9 +116,9 @@ const Settings = () => {
                     <SelectValue placeholder="Select font size" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="small">Small</SelectItem>
-                    <SelectItem value="medium">Medium</SelectItem>
-                    <SelectItem value="large">Large</SelectItem>
+                    <SelectItem value="small">{t('settings.display.font.size.small')}</SelectItem>
+                    <SelectItem value="medium">{t('settings.display.font.size.medium')}</SelectItem>
+                    <SelectItem value="large">{t('settings.display.font.size.large')}</SelectItem>
                   </SelectContent>
                 </Select>
                 <p className="text-xs text-studio-text-muted">
