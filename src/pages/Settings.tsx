@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -15,7 +15,20 @@ const Settings = () => {
   const { language, setLanguage, t } = useLanguage();
   const { theme, setTheme } = useTheme();
   const [offlineMode, setOfflineMode] = useState(false);
-  const [fontSize, setFontSize] = useState("medium");
+  const [fontSize, setFontSize] = useState(() => {
+    return localStorage.getItem('fontSize') || 'medium';
+  });
+
+  useEffect(() => {
+    // Apply font size to document root
+    const applyFontSize = (size: string) => {
+      document.documentElement.classList.remove('font-size-small', 'font-size-medium', 'font-size-large');
+      document.documentElement.classList.add(`font-size-${size}`);
+    };
+
+    applyFontSize(fontSize);
+    localStorage.setItem('fontSize', fontSize);
+  }, [fontSize]);
 
   const handleBack = () => {
     navigate(-1);
