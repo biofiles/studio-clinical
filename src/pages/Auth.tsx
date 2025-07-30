@@ -95,7 +95,7 @@ const Auth = () => {
     return (
       <div className="min-h-screen bg-studio-bg flex items-center justify-center">
         <div className="text-center space-y-4">
-          <div className="text-4xl font-light tracking-widest text-studio-text mb-8">
+          <div className="text-4xl font-light tracking-widest text-studio-text mb-8" style={{ fontSize: '2.25rem' }}>
             STUDIO
           </div>
           <LoadingSpinner size="lg" message={t('auth.redirecting')} className="text-studio-text justify-center" />
@@ -110,7 +110,7 @@ const Auth = () => {
       <div className="min-h-screen bg-studio-bg flex items-center justify-center p-4">
         <div className="w-full max-w-md space-y-8">
           <div className="text-center">
-            <h1 className="text-4xl font-light tracking-widest text-studio-text mb-2">
+            <h1 className="text-4xl font-light tracking-widest text-studio-text mb-2" style={{ fontSize: '2.25rem' }}>
               STUDIO
             </h1>
           </div>
@@ -136,7 +136,7 @@ const Auth = () => {
   return <div className="min-h-screen bg-studio-bg flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
-          <h1 className="text-4xl font-light tracking-widest text-studio-text mb-2">
+          <h1 className="text-4xl font-light tracking-widest text-studio-text mb-2" style={{ fontSize: '2.25rem' }}>
             STUDIO
           </h1>
           
