@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Header from "@/components/Header";
-import { Globe, ArrowLeft, Moon, Sun, Wifi, WifiOff } from "lucide-react";
+import { Globe, ArrowLeft, Moon, Sun, Wifi, WifiOff, Type } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "next-themes";
@@ -15,6 +15,7 @@ const Settings = () => {
   const { language, setLanguage, t } = useLanguage();
   const { theme, setTheme } = useTheme();
   const [offlineMode, setOfflineMode] = useState(false);
+  const [fontSize, setFontSize] = useState("medium");
 
   const handleBack = () => {
     navigate(-1);
@@ -74,23 +75,42 @@ const Settings = () => {
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-studio-text">
                 {theme === 'dark' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
-                <span>Display Preferences</span>
+                <span>{t('settings.display.preferences')}</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <label className="text-sm font-medium text-studio-text">
-                    Dark Mode
+                    {t('settings.display.dark.mode')}
                   </label>
                   <p className="text-xs text-studio-text-muted">
-                    Toggle between light and dark theme
+                    {t('settings.display.dark.mode.description')}
                   </p>
                 </div>
                 <Switch
                   checked={theme === 'dark'}
                   onCheckedChange={(checked) => setTheme(checked ? 'dark' : 'light')}
                 />
+              </div>
+              
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-studio-text">
+                  {t('settings.display.font.size')}
+                </label>
+                <Select value={fontSize} onValueChange={setFontSize}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select font size" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="small">Small</SelectItem>
+                    <SelectItem value="medium">Medium</SelectItem>
+                    <SelectItem value="large">Large</SelectItem>
+                  </SelectContent>
+                </Select>
+                <p className="text-xs text-studio-text-muted">
+                  {t('settings.display.font.size.description')}
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -99,17 +119,17 @@ const Settings = () => {
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-studio-text">
                 {offlineMode ? <WifiOff className="h-5 w-5" /> : <Wifi className="h-5 w-5" />}
-                <span>Connection Settings</span>
+                <span>{t('settings.connection.settings')}</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <label className="text-sm font-medium text-studio-text">
-                    Offline Mode
+                    {t('settings.connection.offline.mode')}
                   </label>
                   <p className="text-xs text-studio-text-muted">
-                    Work offline with cached data (Demo feature)
+                    {t('settings.connection.offline.mode.description')}
                   </p>
                 </div>
                 <Switch
