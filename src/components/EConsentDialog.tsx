@@ -675,7 +675,7 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
                     id="agree"
                     checked={agreed}
                     onCheckedChange={(checked) => setAgreed(checked as boolean)}
-                    className="mt-0.5"
+                    className="mt-0.5 border-2 border-gray-400 data-[state=checked]:border-primary"
                   />
                   <label htmlFor="agree" className="text-xs sm:text-sm leading-relaxed">
                     {t('econsent.signature.agree')} - ICF Version {icfVersion}
