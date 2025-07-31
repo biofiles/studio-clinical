@@ -244,6 +244,32 @@ const ParticipantDashboard = () => {
               </Card>
             </div>
 
+            <Card className="bg-blue-50 border-blue-200">
+              <CardContent className="p-4">
+                <div className="flex items-start space-x-3">
+                  <Clock className="h-6 w-6 text-blue-600 mt-1" />
+                  <div className="flex-1">
+                    <p className="font-medium text-blue-800">Próximo Consentimiento Pendiente</p>
+                    <p className="text-sm text-blue-700 mt-1">
+                      <strong>Formulario de consentimiento informado Principal v2.1</strong> - Disponible para firma
+                    </p>
+                    <div className="text-xs text-blue-600 mt-2 space-y-1">
+                      <p>• Documento disponible desde: {formatDate('2025-08-01', language)}</p>
+                      
+                      <p>• Modalidad: Firma electrónica con audio disponible</p>
+                    </div>
+                    <Button size="sm" className="mt-3" onClick={() => {
+                    setEConsentMode('sign');
+                    setShowEConsent(true);
+                  }}>
+                      <Signature className="h-4 w-4 mr-2" />
+                      Firmar Ahora
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Consent History */}
             <Card className="bg-studio-surface border-studio-border">
               <CardHeader>
@@ -288,32 +314,6 @@ const ParticipantDashboard = () => {
                       </div>
                       <p className="text-xs text-studio-text-muted">Firmado el 15 Oct 2024</p>
                     </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-blue-50 border-blue-200">
-              <CardContent className="p-4">
-                <div className="flex items-start space-x-3">
-                  <Clock className="h-6 w-6 text-blue-600 mt-1" />
-                  <div className="flex-1">
-                    <p className="font-medium text-blue-800">Próximo Consentimiento Pendiente</p>
-                    <p className="text-sm text-blue-700 mt-1">
-                      <strong>Formulario de consentimiento informado Principal v2.1</strong> - Disponible para firma
-                    </p>
-                    <div className="text-xs text-blue-600 mt-2 space-y-1">
-                      <p>• Documento disponible desde: {formatDate('2025-08-01', language)}</p>
-                      
-                      <p>• Modalidad: Firma electrónica con audio disponible</p>
-                    </div>
-                    <Button size="sm" className="mt-3" onClick={() => {
-                    setEConsentMode('sign');
-                    setShowEConsent(true);
-                  }}>
-                      <Signature className="h-4 w-4 mr-2" />
-                      Firmar Ahora
-                    </Button>
                   </div>
                 </div>
               </CardContent>
