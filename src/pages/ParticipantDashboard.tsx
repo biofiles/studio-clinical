@@ -79,9 +79,6 @@ const ParticipantDashboard = () => {
 
 
       <main className="p-3 sm:p-4 max-w-6xl mx-auto">{/* Reduced padding for mobile */}
-        {/* Inspirational Message */}
-        <InspirationalMessage />
-        
         {/* Welcome Section - Mobile first */}
         <div className="space-y-1 mb-4" data-onboarding="welcome-section">
           <h2 className="text-xl sm:text-2xl font-medium text-studio-text">
@@ -115,6 +112,9 @@ const ParticipantDashboard = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Inspirational Message */}
+        <InspirationalMessage />
 
         {/* Main Sections - Mobile-first tabs */}
         <Tabs defaultValue="schedule" className="space-y-3">{/* Reduced spacing */}
