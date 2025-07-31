@@ -369,10 +369,10 @@ const InvestigatorDashboard = () => {
       <div className="fixed bottom-6 right-6">
         <Button
           onClick={() => setShowChatbot(true)}
-          size="icon"
-          className="h-14 w-14 rounded-full bg-primary hover:bg-primary/90 shadow-lg"
+          className="h-12 px-4 rounded-full bg-primary hover:bg-primary/90 shadow-lg flex items-center space-x-2"
         >
-          <MessageCircle className="h-6 w-6" />
+          <MessageCircle className="h-5 w-5" />
+          <span className="font-medium">{t('ai.virtual.assistant')}</span>
         </Button>
       </div>
 

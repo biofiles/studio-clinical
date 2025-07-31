@@ -546,8 +546,9 @@ const ParticipantDashboard = () => {
       </main>
 
       <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6">
-        <Button onClick={() => setShowChatbot(true)} className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg" size="icon">
-          <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+        <Button onClick={() => setShowChatbot(true)} className="h-12 px-4 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg flex items-center space-x-2">
+          <Sparkles className="h-5 w-5 text-white" />
+          <span className="text-white font-medium">{t('ai.virtual.assistant')}</span>
         </Button>
       </div>
 

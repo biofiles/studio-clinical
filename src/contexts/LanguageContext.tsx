@@ -174,6 +174,7 @@ const translations = {
     'profile.close': 'Close',
 
     // AI Chatbot
+    'ai.virtual.assistant': 'Virtual Assistant',
     'ai.title': 'AI Protocol Assistant',
     'ai.welcome': "Hello! I'm your AI assistant for study protocol questions. I can help you understand procedures, timelines, and requirements. What would you like to know?",
     'ai.quick.questions': 'Quick questions',
@@ -904,6 +905,7 @@ const translations = {
     'profile.close': 'Cerrar',
 
     // AI Chatbot
+    'ai.virtual.assistant': 'Asistente Virtual',
     'ai.title': 'Asistente de Protocolo AI',
     'ai.welcome': '¡Hola! Soy tu asistente de IA para preguntas sobre el protocolo del estudio. Puedo ayudarte a entender procedimientos, cronogramas y requisitos. ¿Qué te gustaría saber?',
     'ai.quick.questions': 'Preguntas rápidas',
