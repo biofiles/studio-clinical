@@ -258,7 +258,7 @@ const ParticipantDashboard = () => {
                       
                       <p>• Modalidad: Firma electrónica con audio disponible</p>
                     </div>
-                    <Button size="sm" className="mt-3" onClick={() => {
+                    <Button size="sm" className="mt-3 border border-blue-300 hover:border-blue-400" onClick={() => {
                     setEConsentMode('sign');
                     setShowEConsent(true);
                   }}>
