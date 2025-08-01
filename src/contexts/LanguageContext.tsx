@@ -17,6 +17,29 @@ const translations = {
     // Common
     'common.at': 'at',
     
+    // Scheduler
+    'scheduler.title': 'Schedule Management',
+    'scheduler.schedule.new.event': 'Schedule New Event',
+    'scheduler.upcoming.events': 'Upcoming Events',
+    'scheduler.select.date': 'Select Date',
+    'scheduler.event.type': 'Event Type',
+    'scheduler.event.title': 'Event Title',
+    'scheduler.time.optional': 'Time (Optional)',
+    'scheduler.notes.optional': 'Notes (Optional)',
+    'scheduler.schedule.event': 'Schedule Event',
+    'scheduler.remove': 'Remove',
+    'scheduler.select.event.type': 'Select event type',
+    'scheduler.enter.event.title': 'Enter event title',
+    'scheduler.additional.notes': 'Additional notes or instructions',
+    'scheduler.note.title': 'Note:',
+    'scheduler.note.description': 'All scheduled events will be automatically synced to the participant\'s calendar. Participants will receive notifications based on their communication preferences.',
+    'scheduler.event.types.site.visit': 'Site Visit',
+    'scheduler.event.types.lab.work': 'Lab Work',
+    'scheduler.event.types.follow.up.call': 'Follow-up Call',
+    'scheduler.event.types.questionnaire.due': 'Questionnaire Due',
+    'scheduler.event.types.assessment': 'Assessment',
+    'scheduler.event.scheduled.alert': 'Scheduled "{eventTitle}" for {participantId} on {date}',
+    
     // Dashboard
     'dashboard.title': 'Study Management Dashboard',
     'dashboard.protocol': 'Protocol: PROTO-2024-001 | Site: Metro General Hospital',
@@ -771,6 +794,29 @@ const translations = {
     
     // Common
     'common.at': 'a las',
+    
+    // Scheduler
+    'scheduler.title': 'Gestión de Horarios',
+    'scheduler.schedule.new.event': 'Programar Nuevo Evento',
+    'scheduler.upcoming.events': 'Eventos Próximos',
+    'scheduler.select.date': 'Seleccionar Fecha',
+    'scheduler.event.type': 'Tipo de Evento',
+    'scheduler.event.title': 'Título del Evento',
+    'scheduler.time.optional': 'Hora (Opcional)',
+    'scheduler.notes.optional': 'Notas (Opcional)',
+    'scheduler.schedule.event': 'Programar Evento',
+    'scheduler.remove': 'Eliminar',
+    'scheduler.select.event.type': 'Seleccionar tipo de evento',
+    'scheduler.enter.event.title': 'Ingrese el título del evento',
+    'scheduler.additional.notes': 'Notas adicionales o instrucciones',
+    'scheduler.note.title': 'Nota:',
+    'scheduler.note.description': 'Todos los eventos programados se sincronizarán automáticamente con el calendario del participante. Los participantes recibirán notificaciones según sus preferencias de comunicación.',
+    'scheduler.event.types.site.visit': 'Visita del Sitio',
+    'scheduler.event.types.lab.work': 'Trabajo de Laboratorio',
+    'scheduler.event.types.follow.up.call': 'Llamada de Seguimiento',
+    'scheduler.event.types.questionnaire.due': 'Cuestionario Pendiente',
+    'scheduler.event.types.assessment': 'Evaluación',
+    'scheduler.event.scheduled.alert': 'Programado "{eventTitle}" para {participantId} el {date}',
     
     // Dashboard
     'dashboard.title': 'Panel de Gestión del Estudio',

@@ -53,7 +53,7 @@ const ParticipantScheduler = ({ open, onOpenChange, participantId }: Participant
     setEventTitle("");
     setEventNotes("");
     
-    alert(`Scheduled "${eventTitle}" for ${participantId} on ${format(selectedDate, 'PPP')}`);
+    alert(`${t('scheduler.event.scheduled.alert').replace('{eventTitle}', eventTitle).replace('{participantId}', participantId).replace('{date}', format(selectedDate, 'PPP'))}`);
   };
 
   const handleRemoveEvent = (eventId: number) => {
@@ -76,7 +76,7 @@ const ParticipantScheduler = ({ open, onOpenChange, participantId }: Participant
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-2">
             <CalendarIcon className="h-5 w-5" />
-            <span>Schedule Management - {participantId}</span>
+            <span>{t('scheduler.title')} - {participantId}</span>
           </DialogTitle>
         </DialogHeader>
 
@@ -86,12 +86,12 @@ const ParticipantScheduler = ({ open, onOpenChange, participantId }: Participant
             <CardHeader>
               <CardTitle className="text-sm flex items-center space-x-2">
                 <Plus className="h-4 w-4" />
-                <span>Schedule New Event</span>
+                <span>{t('scheduler.schedule.new.event')}</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <Label htmlFor="event-date" className="text-sm font-medium">Select Date</Label>
+                <Label htmlFor="event-date" className="text-sm font-medium">{t('scheduler.select.date')}</Label>
                 <Calendar
                   mode="single"
                   selected={selectedDate}
@@ -103,34 +103,34 @@ const ParticipantScheduler = ({ open, onOpenChange, participantId }: Participant
 
               <div className="space-y-3">
                 <div>
-                  <Label htmlFor="event-type" className="text-sm font-medium">Event Type</Label>
+                  <Label htmlFor="event-type" className="text-sm font-medium">{t('scheduler.event.type')}</Label>
                   <Select value={eventType} onValueChange={setEventType}>
                     <SelectTrigger className="w-full mt-1">
-                      <SelectValue placeholder="Select event type" />
+                      <SelectValue placeholder={t('scheduler.select.event.type')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="visit">Site Visit</SelectItem>
-                      <SelectItem value="lab">Lab Work</SelectItem>
-                      <SelectItem value="call">Follow-up Call</SelectItem>
-                      <SelectItem value="questionnaire">Questionnaire Due</SelectItem>
-                      <SelectItem value="assessment">Assessment</SelectItem>
+                      <SelectItem value="visit">{t('scheduler.event.types.site.visit')}</SelectItem>
+                      <SelectItem value="lab">{t('scheduler.event.types.lab.work')}</SelectItem>
+                      <SelectItem value="call">{t('scheduler.event.types.follow.up.call')}</SelectItem>
+                      <SelectItem value="questionnaire">{t('scheduler.event.types.questionnaire.due')}</SelectItem>
+                      <SelectItem value="assessment">{t('scheduler.event.types.assessment')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div>
-                  <Label htmlFor="event-title" className="text-sm font-medium">Event Title</Label>
+                  <Label htmlFor="event-title" className="text-sm font-medium">{t('scheduler.event.title')}</Label>
                   <Input
                     id="event-title"
                     value={eventTitle}
                     onChange={(e) => setEventTitle(e.target.value)}
-                    placeholder="Enter event title"
+                    placeholder={t('scheduler.enter.event.title')}
                     className="mt-1"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="event-time" className="text-sm font-medium">Time (Optional)</Label>
+                  <Label htmlFor="event-time" className="text-sm font-medium">{t('scheduler.time.optional')}</Label>
                   <Input
                     id="event-time"
                     type="time"
@@ -141,12 +141,12 @@ const ParticipantScheduler = ({ open, onOpenChange, participantId }: Participant
                 </div>
 
                 <div>
-                  <Label htmlFor="event-notes" className="text-sm font-medium">Notes (Optional)</Label>
+                  <Label htmlFor="event-notes" className="text-sm font-medium">{t('scheduler.notes.optional')}</Label>
                   <Textarea
                     id="event-notes"
                     value={eventNotes}
                     onChange={(e) => setEventNotes(e.target.value)}
-                    placeholder="Additional notes or instructions"
+                    placeholder={t('scheduler.additional.notes')}
                     className="mt-1"
                     rows={3}
                   />
@@ -158,7 +158,7 @@ const ParticipantScheduler = ({ open, onOpenChange, participantId }: Participant
                   disabled={!selectedDate || !eventType || !eventTitle}
                 >
                   <Plus className="h-4 w-4 mr-2" />
-                  Schedule Event
+                  {t('scheduler.schedule.event')}
                 </Button>
               </div>
             </CardContent>
@@ -169,7 +169,7 @@ const ParticipantScheduler = ({ open, onOpenChange, participantId }: Participant
             <CardHeader>
               <CardTitle className="text-sm flex items-center space-x-2">
                 <Clock className="h-4 w-4" />
-                <span>Upcoming Events</span>
+                <span>{t('scheduler.upcoming.events')}</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 max-h-96 overflow-y-auto">
@@ -183,7 +183,7 @@ const ParticipantScheduler = ({ open, onOpenChange, participantId }: Participant
                       </span>
                     </div>
                     <div className="text-xs text-studio-text-muted">
-                      {new Date(event.date).toLocaleDateString()} at {event.time}
+                      {new Date(event.date).toLocaleDateString()} {t('common.at')} {event.time}
                     </div>
                   </div>
                   <Button
@@ -192,7 +192,7 @@ const ParticipantScheduler = ({ open, onOpenChange, participantId }: Participant
                     onClick={() => handleRemoveEvent(event.id)}
                     className="text-red-600 hover:text-red-700"
                   >
-                    Remove
+                    {t('scheduler.remove')}
                   </Button>
                 </div>
               ))}
@@ -201,8 +201,7 @@ const ParticipantScheduler = ({ open, onOpenChange, participantId }: Participant
         </div>
 
         <div className="text-xs text-studio-text-muted bg-blue-50 p-3 rounded">
-          <strong>Note:</strong> All scheduled events will be automatically synced to the participant's calendar. 
-          Participants will receive notifications based on their communication preferences.
+          <strong>{t('scheduler.note.title')}</strong> {t('scheduler.note.description')}
         </div>
       </DialogContent>
     </Dialog>
