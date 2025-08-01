@@ -11,6 +11,7 @@ import { useState } from "react";
 import { Calendar as CalendarIcon, Clock, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+import { es } from "date-fns/locale";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ParticipantSchedulerProps {
@@ -20,16 +21,16 @@ interface ParticipantSchedulerProps {
 }
 
 const ParticipantScheduler = ({ open, onOpenChange, participantId }: ParticipantSchedulerProps) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [eventType, setEventType] = useState("");
   const [eventTime, setEventTime] = useState("");
   const [eventTitle, setEventTitle] = useState("");
   const [eventNotes, setEventNotes] = useState("");
   const [upcomingEvents, setUpcomingEvents] = useState([
-    { id: 1, date: "2025-08-05", time: "2:00 PM", title: "Site Visit - Blood Draw", type: "visit" },
-    { id: 2, date: "2025-08-12", time: "End of day", title: "Weekly Survey Due", type: "questionnaire" },
-    { id: 3, date: "2025-08-20", time: "10:00 AM", title: "Follow-up Call", type: "call" }
+    { id: 1, date: "2025-08-05", time: "2:00 PM", title: t('scheduler.default.events.site.visit.blood.draw'), type: "visit" },
+    { id: 2, date: "2025-08-12", time: "End of day", title: t('scheduler.default.events.weekly.survey.due'), type: "questionnaire" },
+    { id: 3, date: "2025-08-20", time: "10:00 AM", title: t('scheduler.default.events.follow.up.call'), type: "call" }
   ]);
 
   if (!participantId) return null;
@@ -63,8 +64,8 @@ const ParticipantScheduler = ({ open, onOpenChange, participantId }: Participant
   const getEventTypeColor = (type: string) => {
     switch (type) {
       case 'visit': return 'bg-destructive/10 text-destructive border-destructive/20';
-      case 'questionnaire': return 'bg-[hsl(var(--progress-info))]/10 text-[hsl(var(--progress-info))] border-[hsl(var(--progress-info))]/20';
-      case 'call': return 'bg-[hsl(var(--progress-accent))]/10 text-[hsl(var(--progress-accent))] border-[hsl(var(--progress-accent))]/20';
+      case 'questionnaire': return 'bg-[hsl(var(--progress-info))]/10 text-[hsl(var(--progress-info))] border-[hsl(var(--progress-info))]/20 rounded-full';
+      case 'call': return 'bg-[hsl(var(--progress-accent))]/10 text-[hsl(var(--progress-accent))] border-[hsl(var(--progress-accent))]/20 rounded-full';
       case 'lab': return 'bg-[hsl(var(--progress-success))]/10 text-[hsl(var(--progress-success))] border-[hsl(var(--progress-success))]/20';
       default: return 'bg-muted text-muted-foreground border-border';
     }
@@ -96,8 +97,9 @@ const ParticipantScheduler = ({ open, onOpenChange, participantId }: Participant
                   mode="single"
                   selected={selectedDate}
                   onSelect={setSelectedDate}
-                  className="rounded-md border mt-2"
+                  className="rounded-md border mt-2 pointer-events-auto"
                   disabled={(date) => date < new Date()}
+                  locale={language === 'spanish' ? es : undefined}
                 />
               </div>
 
@@ -183,7 +185,11 @@ const ParticipantScheduler = ({ open, onOpenChange, participantId }: Participant
                       </span>
                     </div>
                     <div className="text-xs text-studio-text-muted">
-                      {new Date(event.date).toLocaleDateString()} {t('common.at')} {event.time}
+                      {new Date(event.date).toLocaleDateString(language === 'spanish' ? 'es-ES' : 'en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      })} {t('common.at')} {event.time}
                     </div>
                   </div>
                   <Button

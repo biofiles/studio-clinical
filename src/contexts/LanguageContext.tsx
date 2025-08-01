@@ -39,6 +39,9 @@ const translations = {
     'scheduler.event.types.questionnaire.due': 'Questionnaire Due',
     'scheduler.event.types.assessment': 'Assessment',
     'scheduler.event.scheduled.alert': 'Scheduled "{eventTitle}" for {participantId} on {date}',
+    'scheduler.default.events.site.visit.blood.draw': 'Site Visit - Blood Draw',
+    'scheduler.default.events.weekly.survey.due': 'Weekly Survey Due',
+    'scheduler.default.events.follow.up.call': 'Follow-up Call',
     
     // Dashboard
     'dashboard.title': 'Study Management Dashboard',
@@ -817,6 +820,9 @@ const translations = {
     'scheduler.event.types.questionnaire.due': 'Cuestionario Pendiente',
     'scheduler.event.types.assessment': 'Evaluación',
     'scheduler.event.scheduled.alert': 'Programado "{eventTitle}" para {participantId} el {date}',
+    'scheduler.default.events.site.visit.blood.draw': 'Visita del Sitio - Extracción de Sangre',
+    'scheduler.default.events.weekly.survey.due': 'Encuesta Semanal Pendiente',
+    'scheduler.default.events.follow.up.call': 'Llamada de Seguimiento',
     
     // Dashboard
     'dashboard.title': 'Panel de Gestión del Estudio',
