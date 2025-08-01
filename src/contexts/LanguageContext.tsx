@@ -150,6 +150,11 @@ const translations = {
     'details.icf.action.required': 'Action Required',
     'details.icf.updated.schedule': 'ICF has been updated to v2.1. Please schedule re-consent visit.',
     
+    // ICF Status badges
+    'icf.status.signed': 'Signed',
+    'icf.status.re-consent-required': 'Re-consent Required',
+    'icf.status.pending': 'Pending',
+    
     // Participant specific
     'participant.profile': 'Profile',
     'participant.schedule': 'Calendar',
@@ -1154,6 +1159,11 @@ const translations = {
     'details.icf.status': 'Estado',
     'details.icf.action.required': 'Acción Requerida',
     'details.icf.updated.schedule': 'ICF ha sido actualizado a v2.1. Por favor programe una visita de re-consentimiento.',
+    
+    // ICF Status badges
+    'icf.status.signed': 'Firmado',
+    'icf.status.re-consent-required': 'Re-consentimiento Requerido',
+    'icf.status.pending': 'Pendiente',
     'details.study.progress': 'Progreso del Estudio',
     'details.recent.activity': 'Actividad Reciente',
     'details.upcoming.events': 'Eventos Próximos',

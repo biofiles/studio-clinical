@@ -306,7 +306,15 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
               <div className="flex justify-between">
                 <span className="text-sm text-studio-text-muted">{t('details.icf.status')}:</span>
                 <Badge className={getICFStatusColor(participantDetails.icfDetails.status)}>
-                  {participantDetails.icfDetails.status}
+                  {(() => {
+                    const status = participantDetails.icfDetails.status;
+                    const mapping: Record<string, string> = {
+                      'Signed': 'icf.status.signed',
+                      'Re-consent Required': 'icf.status.re-consent-required',
+                      'Pending': 'icf.status.pending'
+                    };
+                    return t(mapping[status] || status);
+                  })()}
                 </Badge>
               </div>
               {participantDetails.icfDetails.status === "Re-consent Required" && (
