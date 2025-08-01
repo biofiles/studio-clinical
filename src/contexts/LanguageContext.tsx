@@ -14,6 +14,9 @@ const translations = {
     'header.settings': 'Settings',
     'header.logout': 'Logout',
     
+    // Common
+    'common.at': 'at',
+    
     // Dashboard
     'dashboard.title': 'Study Management Dashboard',
     'dashboard.protocol': 'Protocol: PROTO-2024-001 | Site: Metro General Hospital',
@@ -765,6 +768,9 @@ const translations = {
     // Header
     'header.settings': 'Configuración',
     'header.logout': 'Cerrar Sesión',
+    
+    // Common
+    'common.at': 'a las',
     
     // Dashboard
     'dashboard.title': 'Panel de Gestión del Estudio',

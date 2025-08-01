@@ -364,7 +364,7 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
                    </div>
                  </div>
                  <div className="text-center">
-                   <div className="text-2xl font-bold text-purple-600">
+                   <div className="text-2xl font-bold text-blue-600">
                      {participantDetails.studyProgress.complianceRate}%
                    </div>
                    <div className="text-sm text-studio-text-muted">{t('participant.compliance')}</div>
@@ -417,12 +417,12 @@ const ParticipantDetailView = ({ open, onOpenChange, participantId }: Participan
               <CardContent className="space-y-3">
                 {participantDetails.upcomingEvents.map((event, index) => (
                   <div key={index} className="flex items-center justify-between p-2 bg-studio-bg rounded">
-                    <div>
-                      <div className="font-medium text-sm">{t(event.activityKey)}</div>
-                      <div className="text-xs text-studio-text-muted">
-                        {formatDate(event.date, language)} at {event.time}
-                      </div>
-                    </div>
+                     <div>
+                       <div className="font-medium text-sm">{t(event.activityKey)}</div>
+                       <div className="text-xs text-studio-text-muted">
+                         {formatDate(event.date, language)} {t('common.at')} {event.time}
+                       </div>
+                     </div>
                   </div>
                 ))}
               </CardContent>
