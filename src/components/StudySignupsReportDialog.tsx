@@ -85,14 +85,9 @@ const StudySignupsReportDialog = () => {
       onClick={handleDownloadReport}
       disabled={isDownloading}
     >
-      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0">
-        <span className="font-medium text-sm sm:text-base truncate pr-2">
-          {isDownloading ? "Descargando..." : "Reporte de Suscripciones a Resumen del Estudio"}
-        </span>
-        <span className="text-xs text-studio-text-muted line-clamp-2 break-words">
-          Lista de emails suscritos para recibir resumenes de resultados
-        </span>
-      </div>
+      <span className="font-medium text-xs sm:text-sm md:text-base truncate flex-1 min-w-0">
+        {isDownloading ? "Descargando..." : "Reporte de Suscripciones a Resumen del Estudio"}
+      </span>
       <Download className="h-4 w-4 ml-2 flex-shrink-0" />
     </Button>
   );
