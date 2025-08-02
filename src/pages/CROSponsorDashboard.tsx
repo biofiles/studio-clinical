@@ -796,7 +796,51 @@ const CROSponsorDashboard = () => {
                 <CardTitle className="text-studio-text">{t('cro.milestone.schedule')}</CardTitle>
               </CardHeader>
               <CardContent>
+                {/* Timeline */}
+                {studyData && (
+                  <div className="mb-8">
+                    <h3 className="text-lg font-semibold text-studio-text mb-4">{t('cro.milestone.timeline')}</h3>
+                    <div className="relative">
+                      {/* Horizontal line */}
+                      <div className="absolute top-6 left-8 right-8 h-0.5 bg-studio-border"></div>
+                      
+                      {/* Timeline points */}
+                      <div className="flex justify-between items-start relative">
+                        {studyData.schedule.map((milestone, index) => (
+                          <div key={index} className="flex flex-col items-center min-w-0 flex-1 px-2">
+                            {/* Point */}
+                            <div className={`w-4 h-4 rounded-full border-2 z-10 ${
+                              milestone.status === 'completed' 
+                                ? 'bg-primary border-primary' 
+                                : 'bg-studio-surface border-studio-border'
+                            }`}></div>
+                            
+                            {/* Date */}
+                            <div className="text-xs font-medium text-studio-text mt-2 text-center">
+                              {formatMilestoneDate(milestone.date)}
+                            </div>
+                            
+                            {/* Event name */}
+                            <div className="text-xs text-studio-text-muted mt-1 text-center line-clamp-2 max-w-24">
+                              {milestone.event}
+                            </div>
+                            
+                            {/* Status badge */}
+                            <Badge 
+                              variant={milestone.status === 'completed' ? 'default' : 'secondary'} 
+                              className="text-xs mt-2"
+                            >
+                              {milestone.status === 'completed' ? t('cro.milestone.completed') : t('cro.milestone.pending')}
+                            </Badge>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-studio-text">{t('cro.milestone.detailed.list')}</h3>
                   {studyData && studyData.schedule.map((milestone, index) => <div key={index} className="flex justify-between items-center p-3 bg-studio-bg rounded">
                       <div className="flex-1">
                         <div className="flex items-center space-x-2">
