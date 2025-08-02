@@ -802,38 +802,50 @@ const CROSponsorDashboard = () => {
                     <h3 className="text-lg font-semibold text-studio-text mb-4">{t('cro.milestone.timeline')}</h3>
                     <div className="relative">
                       {/* Horizontal line */}
-                      <div className="absolute top-6 left-8 right-8 h-0.5 bg-studio-border"></div>
+                      <div className="absolute top-1/2 left-8 right-8 h-0.5 bg-studio-border transform -translate-y-1/2"></div>
                       
                       {/* Timeline points */}
-                      <div className="flex justify-between items-start relative">
-                        {studyData.schedule.map((milestone, index) => (
-                          <div key={index} className="flex flex-col items-center min-w-0 flex-1 px-2">
-                            {/* Point */}
-                            <div className={`w-4 h-4 rounded-full border-2 z-10 ${
-                              milestone.status === 'completed' 
-                                ? 'bg-primary border-primary' 
-                                : 'bg-studio-surface border-studio-border'
-                            }`}></div>
-                            
-                            {/* Date */}
-                            <div className="text-xs font-medium text-studio-text mt-2 text-center">
-                              {formatMilestoneDate(milestone.date)}
+                      <div className="flex justify-between items-center relative py-8">
+                        {studyData.schedule.map((milestone, index) => {
+                          const getAbbreviatedName = (eventName: string) => {
+                            if (eventName.includes('Primer Sitio Iniciado')) return 'PSI';
+                            if (eventName.includes('Primer Sitio Activado')) return 'PSA';
+                            if (eventName.includes('first.patient.first.visit')) return 'FPFV';
+                            if (eventName.includes('first.patient.last.visit')) return 'FPLV';
+                            if (eventName.includes('last.patient.first.visit')) return 'LPFV';
+                            if (eventName.includes('last.patient.last.visit')) return 'LPLV';
+                            if (eventName.includes('database.lock')) return 'DBL';
+                            if (eventName.includes('statistical.analysis')) return 'SAP';
+                            if (eventName.includes('mid.study.analysis')) return 'MSA';
+                            if (eventName.includes('safety.review')) return 'SR';
+                            if (eventName.includes('interim.safety')) return 'ISA';
+                            if (eventName.includes('biomarker.analysis')) return 'BA';
+                            if (eventName.includes('pediatric.safety')) return 'PSR';
+                            if (eventName.includes('growth.assessment')) return 'GAA';
+                            return eventName.substring(0, 3).toUpperCase();
+                          };
+
+                          return (
+                            <div key={index} className="flex flex-col items-center min-w-0 flex-1 px-2">
+                              {/* Point */}
+                              <div className={`w-4 h-4 rounded-full border-2 z-10 ${
+                                milestone.status === 'completed' 
+                                  ? 'bg-primary border-primary' 
+                                  : 'bg-studio-surface border-studio-border'
+                              }`}></div>
+                              
+                              {/* Date */}
+                              <div className="text-xs font-medium text-studio-text mt-4 text-center">
+                                {formatMilestoneDate(milestone.date)}
+                              </div>
+                              
+                              {/* Abbreviated event name */}
+                              <div className="text-xs text-studio-text-muted mt-1 text-center">
+                                {getAbbreviatedName(milestone.event)}
+                              </div>
                             </div>
-                            
-                            {/* Event name */}
-                            <div className="text-xs text-studio-text-muted mt-1 text-center line-clamp-2 max-w-24">
-                              {milestone.event}
-                            </div>
-                            
-                            {/* Status badge */}
-                            <Badge 
-                              variant={milestone.status === 'completed' ? 'default' : 'secondary'} 
-                              className="text-xs mt-2"
-                            >
-                              {milestone.status === 'completed' ? t('cro.milestone.completed') : t('cro.milestone.pending')}
-                            </Badge>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
