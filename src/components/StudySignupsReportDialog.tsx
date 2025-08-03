@@ -81,14 +81,16 @@ const StudySignupsReportDialog = () => {
   return (
     <Button 
       variant="outline" 
-      className="w-full justify-start h-auto py-3"
+      className="w-full justify-start h-auto py-3 px-4"
       onClick={handleDownloadReport}
       disabled={isDownloading}
     >
-      <span className="font-medium text-xs sm:text-sm md:text-base truncate flex-1 min-w-0">
-        {isDownloading ? "Descargando..." : "Reporte de Suscripciones a Resumen del Estudio"}
-      </span>
-      <Download className="h-4 w-4 ml-2 flex-shrink-0" />
+      <div className="flex flex-col items-start space-y-1 flex-1 min-w-0 mr-3">
+        <span className="font-medium text-sm sm:text-base w-full text-left">
+          {isDownloading ? "Descargando..." : "Reporte de Suscripciones a Resumen del Estudio"}
+        </span>
+      </div>
+      <Download className="h-4 w-4 flex-shrink-0" />
     </Button>
   );
 };

@@ -956,9 +956,7 @@ const CROSponsorDashboard = () => {
                     </Button>
                     
                     {/* Fantasy button for study results signups report */}
-                    <div className="pt-2 border-t border-studio-border">
-                      <StudySignupsReportDialog />
-                    </div>
+                    <StudySignupsReportDialog />
                   </div>
                 </CardContent>
               </Card>
