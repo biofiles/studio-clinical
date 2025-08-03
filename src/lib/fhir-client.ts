@@ -426,34 +426,245 @@ export class FHIRClient {
     }));
   }
 
-  // Export study data to CDISC format
+  // Export study data to CDISC format (Prototype with mock data)
   async exportToCDISC(request: CDISCExportRequest): Promise<any> {
     try {
-      // Import supabase client for edge function calls
-      const { createClient } = await import('@supabase/supabase-js');
-      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-      const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+      // Simulate processing delay for realistic UX
+      await new Promise(resolve => setTimeout(resolve, 2000));
       
-      if (!supabaseUrl || !supabaseAnonKey) {
-        throw new Error('Supabase configuration is missing');
+      // Generate mock CDISC data based on the requested format
+      let exportData: any = {};
+      
+      if (request.format === 'ODM') {
+        exportData = this.generateMockODMData(request);
+      } else if (request.format === 'SDTM') {
+        exportData = this.generateMockSDTMData(request);
+      } else if (request.format === 'ADaM') {
+        exportData = this.generateMockADaMData(request);
       }
       
-      const supabase = createClient(supabaseUrl, supabaseAnonKey);
-      
-      const { data, error } = await supabase.functions.invoke('cdisc-export', {
-        body: request
-      });
-      
-      if (error) {
-        console.error('Supabase function error:', error);
-        throw new Error(`CDISC Export failed: ${error.message}`);
+      // Add metadata if requested
+      if (request.includeMetadata) {
+        exportData.metadata = {
+          studyId: request.studyId,
+          studyName: "Clinical Study Prototype",
+          protocol: "PROTO-001",
+          exportDate: new Date().toISOString(),
+          format: request.format,
+          domains: request.domains,
+          participantCount: 50,
+          responseCount: 125
+        };
       }
       
-      return data;
+      // Add Define.xml if requested and format is SDTM
+      if (request.includeDefineXML && request.format === 'SDTM') {
+        exportData.defineXML = this.generateMockDefineXML(request.domains);
+      }
+      
+      return exportData;
     } catch (error) {
       console.error('CDISC Export Error:', error);
       throw error;
     }
+  }
+
+  // Generate mock ODM data
+  private generateMockODMData(request: CDISCExportRequest): any {
+    return {
+      ODM: {
+        '@_FileOID': `ODM.${request.studyId}`,
+        '@_FileType': 'Snapshot',
+        '@_CreationDateTime': new Date().toISOString(),
+        '@_ODMVersion': '1.3.2',
+        Study: {
+          '@_OID': request.studyId,
+          GlobalVariables: {
+            StudyName: "Clinical Study Prototype",
+            StudyDescription: "Sample clinical study for CDISC export demonstration",
+            ProtocolName: "PROTO-001"
+          },
+          MetaDataVersion: {
+            '@_OID': `${request.studyId}.v1.0`,
+            '@_Name': "Study Metadata v1.0",
+            StudyEventDef: [{
+              '@_OID': 'SE.SCREENING',
+              '@_Name': 'Screening',
+              '@_Repeating': 'No',
+              '@_Type': 'Scheduled'
+            }],
+            FormDef: [{
+              '@_OID': 'FORM.DM',
+              '@_Name': 'Demographics',
+              '@_Repeating': 'No'
+            }]
+          }
+        }
+      }
+    };
+  }
+
+  // Generate mock SDTM data
+  private generateMockSDTMData(request: CDISCExportRequest): any {
+    const domains: any = {};
+    
+    // Generate DM (Demographics) domain
+    if (request.domains.includes('DM')) {
+      domains.DM = Array.from({ length: 50 }, (_, i) => ({
+        STUDYID: "PROTO-001",
+        DOMAIN: "DM",
+        USUBJID: `SUBJ-${String(i + 1).padStart(3, '0')}`,
+        SITEID: "001",
+        AGE: Math.floor(Math.random() * 40) + 25,
+        AGEU: "YEARS",
+        SEX: Math.random() > 0.5 ? 'M' : 'F',
+        RACE: "WHITE",
+        ETHNIC: "NOT HISPANIC OR LATINO",
+        COUNTRY: "USA",
+        RFSTDTC: "2024-01-15",
+        RFENDTC: null
+      }));
+    }
+    
+    // Generate QS (Questionnaire) domain
+    if (request.domains.includes('QS')) {
+      domains.QS = Array.from({ length: 150 }, (_, i) => ({
+        STUDYID: "PROTO-001",
+        DOMAIN: "QS",
+        USUBJID: `SUBJ-${String(Math.floor(i / 3) + 1).padStart(3, '0')}`,
+        QSSEQ: (i % 3) + 1,
+        QSCAT: "QUALITY OF LIFE",
+        QSTEST: `Question ${(i % 10) + 1}`,
+        QSTESTCD: `Q${(i % 10) + 1}`,
+        QSORRES: `Response ${Math.floor(Math.random() * 5) + 1}`,
+        QSSTRESC: `${Math.floor(Math.random() * 5) + 1}`,
+        QSDTC: "2024-02-01",
+        VISITNUM: 1,
+        VISIT: "SCREENING"
+      }));
+    }
+    
+    // Generate DS (Disposition) domain
+    if (request.domains.includes('DS')) {
+      domains.DS = Array.from({ length: 50 }, (_, i) => ({
+        STUDYID: "PROTO-001",
+        DOMAIN: "DS",
+        USUBJID: `SUBJ-${String(i + 1).padStart(3, '0')}`,
+        DSSEQ: 1,
+        DSTERM: "ONGOING",
+        DSDECOD: "ONGOING",
+        DSCAT: "DISPOSITION EVENT",
+        DSSTDTC: "2024-01-15"
+      }));
+    }
+    
+    return {
+      domains,
+      summary: {
+        studyId: request.studyId,
+        totalDomains: Object.keys(domains).length,
+        totalRecords: Object.values(domains).reduce((sum: number, domain: any) => sum + domain.length, 0),
+        generatedDomains: Object.keys(domains)
+      }
+    };
+  }
+
+  // Generate mock ADaM data
+  private generateMockADaMData(request: CDISCExportRequest): any {
+    const adsl = Array.from({ length: 50 }, (_, i) => ({
+      STUDYID: "PROTO-001",
+      USUBJID: `SUBJ-${String(i + 1).padStart(3, '0')}`,
+      SUBJID: `SUBJ-${String(i + 1).padStart(3, '0')}`,
+      SITEID: "001",
+      AGE: Math.floor(Math.random() * 40) + 25,
+      AGEGR1: Math.random() > 0.5 ? '<65' : '>=65',
+      SEX: Math.random() > 0.5 ? 'M' : 'F',
+      RACE: "WHITE",
+      ETHNIC: "NOT HISPANIC OR LATINO",
+      COUNTRY: "USA",
+      RFSTDTC: "2024-01-15",
+      DTHFL: "N",
+      SAFFL: "Y",
+      ITTFL: "Y",
+      EFFFL: "Y",
+      TRT01P: Math.random() > 0.5 ? "TREATMENT A" : "TREATMENT B",
+      TRT01A: Math.random() > 0.5 ? "TREATMENT A" : "TREATMENT B"
+    }));
+    
+    return {
+      datasets: {
+        ADSL: adsl
+      },
+      summary: {
+        studyId: request.studyId,
+        totalDatasets: 1,
+        totalSubjects: adsl.length,
+        generatedDatasets: ['ADSL']
+      }
+    };
+  }
+
+  // Generate mock Define.xml
+  private generateMockDefineXML(domains: string[]): any {
+    return {
+      ODM: {
+        '@_xmlns': 'http://www.cdisc.org/ns/odm/v1.3',
+        '@_xmlns:def': 'http://www.cdisc.org/ns/def/v2.0',
+        '@_FileOID': 'Define.PROTO-001',
+        '@_FileType': 'Snapshot',
+        '@_CreationDateTime': new Date().toISOString(),
+        '@_ODMVersion': '1.3.2',
+        Study: {
+          '@_OID': 'PROTO-001',
+          GlobalVariables: {
+            StudyName: "Clinical Study Prototype",
+            StudyDescription: "Sample clinical study for CDISC export demonstration",
+            ProtocolName: "PROTO-001"
+          },
+          MetaDataVersion: {
+            '@_OID': 'PROTO-001.define.v1.0',
+            '@_Name': 'Study Define Metadata v1.0',
+            '@_DefineVersion': '2.0.0',
+            ItemGroupDef: domains.map(domain => ({
+              '@_OID': `IG.${domain}`,
+              '@_Name': this.getDomainName(domain),
+              '@_Repeating': 'Yes',
+              '@_Domain': domain,
+              '@_Purpose': 'Tabulation',
+              '@_def:Structure': 'One record per event',
+              '@_def:Class': this.getDomainClass(domain)
+            }))
+          }
+        }
+      }
+    };
+  }
+
+  // Helper methods for domain names and classes
+  private getDomainName(domain: string): string {
+    const domainNames: { [key: string]: string } = {
+      'DM': 'Demographics',
+      'QS': 'Questionnaires',
+      'DS': 'Disposition',
+      'AE': 'Adverse Events',
+      'CM': 'Concomitant Medications',
+      'VS': 'Vital Signs',
+      'LB': 'Laboratory Test Results'
+    };
+    return domainNames[domain] || domain;
+  }
+
+  private getDomainClass(domain: string): string {
+    const domainClasses: { [key: string]: string } = {
+      'DM': 'SPECIAL PURPOSE',
+      'QS': 'QUESTIONNAIRES',
+      'DS': 'SPECIAL PURPOSE',
+      'AE': 'EVENTS',
+      'CM': 'INTERVENTIONS',
+      'VS': 'FINDINGS',
+      'LB': 'FINDINGS'
+    };
+    return domainClasses[domain] || 'FINDINGS';
   }
 
   // Validate CDISC data
