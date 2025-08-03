@@ -429,21 +429,27 @@ export class FHIRClient {
   // Export study data to CDISC format
   async exportToCDISC(request: CDISCExportRequest): Promise<any> {
     try {
-      const authHeaders = await this.getAuthHeaders();
-      const response = await fetch(`${this.baseUrl}/cdisc-export`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...authHeaders
-        },
-        body: JSON.stringify(request)
-      });
+      // Import supabase client for edge function calls
+      const { createClient } = await import('@supabase/supabase-js');
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
       
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (!supabaseUrl || !supabaseAnonKey) {
+        throw new Error('Supabase configuration is missing');
       }
       
-      return await response.json();
+      const supabase = createClient(supabaseUrl, supabaseAnonKey);
+      
+      const { data, error } = await supabase.functions.invoke('cdisc-export', {
+        body: request
+      });
+      
+      if (error) {
+        console.error('Supabase function error:', error);
+        throw new Error(`CDISC Export failed: ${error.message}`);
+      }
+      
+      return data;
     } catch (error) {
       console.error('CDISC Export Error:', error);
       throw error;
