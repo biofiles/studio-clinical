@@ -9,6 +9,7 @@ import { Building2, Globe, TrendingUp, Shield, AlertCircle, CheckCircle, Clock, 
 import FHIRExportDialog from "@/components/FHIRExportDialog";
 import { CDISCExportDialog } from "@/components/CDISCExportDialog";
 import StudySignupsReportDialog from "@/components/StudySignupsReportDialog";
+import { ParticipantsReportDialog } from "@/components/ParticipantsReportDialog";
 import DocumentRepository from "@/components/DocumentRepository";
 import { toast } from "sonner";
 import { useStudy } from "@/contexts/StudyContext";
@@ -957,6 +958,9 @@ const CROSponsorDashboard = () => {
                     
                     {/* Fantasy button for study results signups report */}
                     <StudySignupsReportDialog />
+                    
+                    {/* Participants report */}
+                    <ParticipantsReportDialog />
                   </div>
                 </CardContent>
               </Card>
