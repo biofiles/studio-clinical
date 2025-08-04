@@ -336,6 +336,10 @@ const ParticipantDashboard = () => {
                         </Badge>
                       </div>
                       <p className="text-sm text-gray-600">{formatDate('2024-11-15', language)} {t('dashboard.at')} 2:00 PM</p>
+                      <div className="flex items-center space-x-1 text-xs text-gray-600 mt-1">
+                        <Building className="h-3 w-3" />
+                        <span>Hospital Metro General - Av. Rivadavia 2358, CABA, Argentina</span>
+                      </div>
                       <p className="text-xs text-gray-600 mt-1">{t('visits.baseline.procedures')}</p>
                       <div className="bg-gray-100 border border-gray-300 rounded p-2 text-xs text-gray-700 mt-2">
                         <strong>{t('visits.notes')}:</strong> {t('visits.baseline.notes')}
@@ -357,6 +361,10 @@ const ParticipantDashboard = () => {
                         </Badge>
                       </div>
                       <p className="text-sm text-gray-600">{formatDate('2025-08-25', language)} {t('dashboard.at')} 2:00 PM</p>
+                      <div className="flex items-center space-x-1 text-xs text-gray-600 mt-1">
+                        <Building className="h-3 w-3" />
+                        <span>Hospital Metro General - Av. Rivadavia 2358, CABA, Argentina</span>
+                      </div>
                       <p className="text-xs text-gray-600 mt-1">{t('visits.week4.procedures')}</p>
                       <div className="bg-gray-50 border border-gray-200 rounded p-2 text-xs text-gray-700 mt-2">
                         <strong>{t('visits.preparation.notes')}:</strong> {t('visits.week4.notes')}
