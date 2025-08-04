@@ -139,10 +139,10 @@ const Settings = () => {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <label className="text-sm font-medium text-studio-text">
-                    WiFi Only Mode
+                    {t('settings.connection.wifi.only.mode')}
                   </label>
                   <p className="text-xs text-studio-text-muted">
-                    Allow data transfer only when connected to WiFi network
+                    {t('settings.connection.wifi.only.mode.description')}
                   </p>
                 </div>
                 <Switch
