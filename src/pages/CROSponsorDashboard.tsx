@@ -52,20 +52,28 @@ const CROSponsorDashboard = () => {
     return dateStr; // Fallback to original string if parsing fails
   };
 
-  // Load favorite study from localStorage on mount
+  // Auto-select default study on mount
   useEffect(() => {
-    const saved = localStorage.getItem('favoriteStudyId');
-    if (saved) {
-      setFavoriteStudyId(saved);
-      // If no study is currently selected, select the favorite one
-      if (!selectedStudy) {
-        const favoriteStudy = studies.find(s => s.id === saved);
-        if (favoriteStudy) {
-          setSelectedStudy(favoriteStudy);
-        }
+    if (studies.length > 0 && !selectedStudy) {
+      const saved = localStorage.getItem('favoriteStudyId');
+      let defaultStudy;
+      
+      if (saved) {
+        // First priority: favorite study
+        defaultStudy = studies.find(s => s.id === saved);
+        setFavoriteStudyId(saved);
+      }
+      
+      if (!defaultStudy) {
+        // Second priority: first study (NVS)
+        defaultStudy = studies[0];
+      }
+      
+      if (defaultStudy) {
+        setSelectedStudy(defaultStudy);
       }
     }
-  }, [selectedStudy, studies, setSelectedStudy]);
+  }, [studies, selectedStudy, setSelectedStudy]);
   const localStudies = [{
     id: "PROTO-2024-001",
     title: "Phase II Oncology Trial",
