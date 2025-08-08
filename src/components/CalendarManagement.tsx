@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { Calendar as CalendarIcon, Clock, Users, FileText, Activity } from "lucide-react";
 import { format } from "date-fns";
+import { es } from "date-fns/locale";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { formatDate } from "@/lib/utils";
 
@@ -78,6 +79,7 @@ const CalendarManagement = ({ open, onOpenChange }: CalendarManagementProps) => 
                 selected={selectedDate}
                 onSelect={setSelectedDate}
                 className="rounded-md border"
+                locale={language === 'spanish' ? es : undefined}
                 modifiers={{
                   hasEvent: isDayWithEvent
                 }}
