@@ -142,7 +142,7 @@ const Settings = () => {
                     {t('settings.connection.offline.mode')}
                   </label>
                   <p className="text-xs text-studio-text-muted">
-                    {t('settings.connection.offline.mode.description')}
+                    Los datos se transferirán cuando se conecte a una red WiFi
                   </p>
                 </div>
                 <Switch
