@@ -265,7 +265,7 @@ const InvestigatorDashboard = () => {
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-studio-text">
-                    {studyData ? `${studyData.enrolled.current}/${studyData.enrolled.total} (${studyData.enrolled.percentage}%)` : '0/0 (0%)'}
+                    {studyData ? `${studyData.enrolled.percentage}%` : '0%'}
                   </span>
                 </div>
                 <Progress value={studyData ? studyData.enrolled.percentage : 0} color="primary" className="h-2" />
