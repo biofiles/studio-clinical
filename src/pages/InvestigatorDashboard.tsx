@@ -275,7 +275,7 @@ const InvestigatorDashboard = () => {
 
           <Card className="bg-studio-surface border-studio-border">
             <CardHeader>
-              <CardTitle className="text-studio-text">{t('dashboard.diary.compliance')}</CardTitle>
+              <CardTitle className="text-studio-text">{t('dashboard.questionnaires')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
@@ -290,7 +290,7 @@ const InvestigatorDashboard = () => {
 
           <Card className="bg-studio-surface border-studio-border">
             <CardHeader>
-              <CardTitle className="text-studio-text">{t('dashboard.visit.compliance')}</CardTitle>
+              <CardTitle className="text-studio-text">{t('dashboard.upcoming.visits')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
