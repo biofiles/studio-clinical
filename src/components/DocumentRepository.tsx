@@ -49,31 +49,31 @@ const DocumentRepository = ({ open, onOpenChange, userRole }: DocumentRepository
     const baseDocuments: Document[] = [
       {
         id: "1",
-        name: "Study Protocol",
+        name: t('documents.name.study.protocol'),
         type: "protocol",
         version: "2.1",
         uploadDate: "2024-01-15",
-        uploadedBy: "Dr. Sarah Johnson",
+        uploadedBy: "Ana Patricia Mendoza",
         fileSize: "2.3 MB",
         studyId: selectedStudy.id
       },
       {
         id: "2", 
-        name: "Informed Consent Form",
+        name: t('documents.name.icf'),
         type: "icf",
         version: "1.5",
         uploadDate: "2024-02-10",
-        uploadedBy: "Dr. Michael Chen",
+        uploadedBy: "Carlos Eduardo Fernández",
         fileSize: "845 KB",
         studyId: selectedStudy.id
       },
       {
         id: "3",
-        name: "Safety Monitoring Plan",
+        name: t('documents.name.safety.monitoring'),
         type: "safety",
         version: "1.0",
         uploadDate: "2024-01-20",
-        uploadedBy: "Dr. Emily Rodriguez",
+        uploadedBy: "María Soledad Vázquez",
         fileSize: "1.2 MB",
         studyId: selectedStudy.id
       }
@@ -86,21 +86,21 @@ const DocumentRepository = ({ open, onOpenChange, userRole }: DocumentRepository
           ...baseDocuments,
           {
             id: "4",
-            name: "Cardiovascular Endpoint Adjudication Charter",
+            name: t('documents.name.cv.endpoint.charter'),
             type: "regulatory",
             version: "1.3",
             uploadDate: "2024-02-15",
-            uploadedBy: "Dr. James Wilson",
+            uploadedBy: "Joaquín Alberto Ramos",
             fileSize: "956 KB",
             studyId: selectedStudy.id
           },
           {
             id: "5",
-            name: "Protocol Amendment 1 - ECG Monitoring",
+            name: t('documents.name.protocol.amendment.ecg'),
             type: "amendment",
             version: "1.0",
             uploadDate: "2024-03-01",
-            uploadedBy: "Dr. Sarah Johnson",
+            uploadedBy: "Ana Patricia Mendoza",
             fileSize: "623 KB",
             studyId: selectedStudy.id
           }
@@ -110,21 +110,21 @@ const DocumentRepository = ({ open, onOpenChange, userRole }: DocumentRepository
           ...baseDocuments,
           {
             id: "4",
-            name: "Diabetes Management Guidelines",
+            name: t('documents.name.diabetes.guidelines'),
             type: "regulatory",
             version: "2.0",
             uploadDate: "2024-02-20",
-            uploadedBy: "Dr. Lisa Wang",
+            uploadedBy: "Lucía Esperanza Morales",
             fileSize: "1.8 MB",
             studyId: selectedStudy.id
           },
           {
             id: "5",
-            name: "HbA1c Laboratory Manual",
+            name: t('documents.name.hba1c.manual'),
             type: "other",
             version: "1.2",
             uploadDate: "2024-02-25",
-            uploadedBy: "Lab Director",
+            uploadedBy: "Director de Laboratorio",
             fileSize: "743 KB",
             studyId: selectedStudy.id
           }
@@ -134,21 +134,21 @@ const DocumentRepository = ({ open, onOpenChange, userRole }: DocumentRepository
           ...baseDocuments,
           {
             id: "4",
-            name: "Tumor Assessment Guidelines",
+            name: t('documents.name.tumor.assessment'),
             type: "regulatory",
             version: "1.1",
             uploadDate: "2024-02-18",
-            uploadedBy: "Dr. Patricia Davis",
+            uploadedBy: "Patricia Alejandra Domínguez",
             fileSize: "1.5 MB",
             studyId: selectedStudy.id
           },
           {
             id: "5",
-            name: "Biomarker Analysis Protocol",
+            name: t('documents.name.biomarker.protocol'),
             type: "other",
             version: "1.0",
             uploadDate: "2024-03-05",
-            uploadedBy: "Dr. Robert Kim",
+            uploadedBy: "Roberto Enrique Paz",
             fileSize: "892 KB",
             studyId: selectedStudy.id
           }
@@ -158,21 +158,21 @@ const DocumentRepository = ({ open, onOpenChange, userRole }: DocumentRepository
           ...baseDocuments,
           {
             id: "4",
-            name: "Pediatric Safety Guidelines",
+            name: t('documents.name.pediatric.safety'),
             type: "safety",
             version: "1.4",
             uploadDate: "2024-02-12",
-            uploadedBy: "Dr. Maria Garcia",
+            uploadedBy: "María Fernanda García",
             fileSize: "1.1 MB",
             studyId: selectedStudy.id
           },
           {
             id: "5",
-            name: "Growth Assessment Manual",
+            name: t('documents.name.growth.assessment'),
             type: "other",
             version: "1.0",
             uploadDate: "2024-02-28",
-            uploadedBy: "Pediatric Team",
+            uploadedBy: "Equipo Pediátrico",
             fileSize: "675 KB",
             studyId: selectedStudy.id
           }
