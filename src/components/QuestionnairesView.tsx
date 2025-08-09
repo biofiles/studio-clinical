@@ -196,7 +196,7 @@ const QuestionnairesView = ({
   };
   return <>
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="max-w-3xl sm:max-w-2xl md:max-w-3xl max-h-[80vh] overflow-y-auto mx-4 sm:mx-6">
+        <DialogContent className="max-w-sm sm:max-w-xl md:max-w-2xl lg:max-w-3xl max-h-[80vh] overflow-y-auto mx-2 sm:mx-4 md:mx-6">
           <DialogHeader>
             <DialogTitle className="flex items-center space-x-2">
               <FileText className="h-5 w-5" />
