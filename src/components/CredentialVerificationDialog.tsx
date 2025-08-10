@@ -129,7 +129,7 @@ export default function CredentialVerificationDialog({
 
             <div>
               <Label htmlFor="electronic-signature" className="text-studio-text">
-                {t('electronic.signature.label')}
+                Name
               </Label>
               <Input
                 id="electronic-signature"
