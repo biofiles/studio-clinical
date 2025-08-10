@@ -80,7 +80,8 @@ export default function CredentialVerificationDialog({
   const getSignatureReasons = () => {
     if (userRole === 'participant') {
       return [
-        { value: 'study-participation', label: t('signature.reason.study.participation') }
+        { value: 'participant', label: t('signature.reason.participant') },
+        { value: 'caregiver', label: t('signature.reason.caregiver') }
       ];
     }
     
