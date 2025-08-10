@@ -26,7 +26,7 @@ const QuestionnairesView = ({
     description: "Record your daily symptoms and side effects",
     status: "pending",
     dueDate: "Today",
-    estimatedTime: "5 min",
+    estimatedTime: "3 min",
     progress: 0,
     questions: [{
       id: "symptoms",
@@ -52,7 +52,7 @@ const QuestionnairesView = ({
     description: "Assess your overall well-being and quality of life",
     status: "pending",
     dueDate: "Tomorrow",
-    estimatedTime: "15 min",
+    estimatedTime: "5 min",
     progress: 0,
     questions: [{
       id: "physical_health",
@@ -82,7 +82,7 @@ const QuestionnairesView = ({
     description: "Report on your medication compliance",
     status: "in-progress",
     dueDate: "Dec 16",
-    estimatedTime: "10 min",
+    estimatedTime: "3 min",
     progress: 60,
     questions: [{
       id: "doses_missed",
@@ -102,7 +102,7 @@ const QuestionnairesView = ({
     description: "Comprehensive health and wellness questionnaire",
     status: "completed",
     dueDate: "Completed Nov 20",
-    estimatedTime: "20 min",
+    estimatedTime: "5 min",
     progress: 100,
     questions: [{
       id: "overall_health",
