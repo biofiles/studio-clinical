@@ -32,7 +32,7 @@ export default function CredentialVerificationDialog({
   const [isVerifying, setIsVerifying] = useState(false);
   const [error, setError] = useState("");
   const { user, signIn } = useAuth();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const handleVerification = async () => {
     if (!password) {
@@ -129,7 +129,7 @@ export default function CredentialVerificationDialog({
 
             <div>
               <Label htmlFor="electronic-signature" className="text-studio-text">
-                Name
+                {t('signature.participant.name.label') || (language === 'spanish' ? 'Nombre completo' : 'Name')}
               </Label>
               <Input
                 id="electronic-signature"
