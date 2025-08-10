@@ -800,6 +800,8 @@ const translations = {
     'econsent.participant.signature.title': 'Participant Electronic Signature',
     'signature.participant.name.label': 'Participant Full Name',
     'signature.participant.name.placeholder': 'Enter your full name',
+    'econsent.signature.title': 'Electronic Signature',
+    'econsent.agree.fci': 'I have read and understood this informed consent form (FCI)',
     'econsent.already.signed.title': 'Document Already Signed',
     'econsent.already.signed.description': 'You have already signed this consent document. You cannot sign the same document multiple times.',
   },
@@ -1608,6 +1610,8 @@ const translations = {
     'econsent.participant.signature.title': 'Firma Electrónica del Participante',
     'signature.participant.name.label': 'Nombre Completo del Participante',
     'signature.participant.name.placeholder': 'Ingrese su nombre completo',
+    'econsent.signature.title': 'Firma Electrónica',
+    'econsent.agree.fci': 'He leído y entendido este formulario de consentimiento informado (FCI)',
     'econsent.already.signed.title': 'Documento Ya Firmado',
     'econsent.already.signed.description': 'Ya ha firmado este documento de consentimiento. No puede firmar el mismo documento múltiples veces.',
   }

@@ -603,11 +603,11 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
               <CardContent className="space-y-3 sm:space-y-4 pt-0">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   <div>
-                    <label className="text-sm font-medium">{t('econsent.signature.full.name')}</label>
+                    <label className="text-sm font-medium">{t('signature.participant.name.label')}</label>
                     <Input
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      placeholder="Enter your full name"
+                      placeholder={t('signature.participant.name.placeholder')}
                       className="mt-1"
                     />
                   </div>
@@ -622,7 +622,7 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Electronic Signature</label>
+                  <label className="text-sm font-medium mb-2 block">{t('econsent.signature.title')}</label>
                   <div className="border-2 border-dashed border-gray-300 rounded p-1 sm:p-2 overflow-hidden">
                     <canvas
                       ref={canvasRef}
@@ -678,7 +678,7 @@ const EConsentDialog = ({ open, onOpenChange, mode = 'sign' }: EConsentDialogPro
                     className="mt-0.5 border-2 border-gray-400 data-[state=checked]:border-primary"
                   />
                   <label htmlFor="agree" className="text-xs sm:text-sm leading-relaxed">
-                    {t('econsent.signature.agree')} - ICF Version {icfVersion}
+                    {t('econsent.agree.fci')} - {language === 'spanish' ? 'FCI' : 'ICF'} Version {icfVersion}
                   </label>
                 </div>
 
