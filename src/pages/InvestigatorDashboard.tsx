@@ -295,7 +295,6 @@ const InvestigatorDashboard = () => {
             <CardContent>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-studio-text-muted">{t('dashboard.site.visits')}</span>
                   <span className="text-studio-text">{studyData ? studyData.visitCompliance : 0}%</span>
                 </div>
                 <Progress value={studyData ? studyData.visitCompliance : 0} color={studyData && studyData.visitCompliance < 90 ? 'warning' : 'success'} className="h-2" />
