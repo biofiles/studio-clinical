@@ -12,7 +12,10 @@ import {
   CheckCircle, 
   AlertTriangle,
   Eye,
-  PenTool
+  PenTool,
+  Settings,
+  Lock,
+  Unlock
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useStudy } from "@/contexts/StudyContext";
@@ -47,6 +50,8 @@ export default function InvestigatorConsentDashboard({
   const [showConsentDialog, setShowConsentDialog] = useState(false);
   const [showCredentialDialog, setShowCredentialDialog] = useState(false);
   const [consentToSign, setConsentToSign] = useState<ConsentSignature | null>(null);
+  const [signatureEnabled, setSignatureEnabled] = useState(true);
+  const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
   const { user } = useAuth();
   const { selectedStudy } = useStudy();
   const { t, language } = useLanguage();
@@ -170,6 +175,11 @@ export default function InvestigatorConsentDashboard({
     }
   };
 
+  const handleToggleSignature = () => {
+    setSignatureEnabled(!signatureEnabled);
+    setShowConfirmationDialog(true);
+  };
+
   return (
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
@@ -228,6 +238,45 @@ export default function InvestigatorConsentDashboard({
                   </div>
                 </CardContent>
               </Card>
+            </div>
+
+            {/* Signature Management Control */}
+            <div className="flex justify-between items-center p-4 bg-studio-bg border border-studio-border rounded-lg">
+              <div className="flex items-center gap-3">
+                {signatureEnabled ? (
+                  <Unlock className="h-5 w-5 text-green-500" />
+                ) : (
+                  <Lock className="h-5 w-5 text-red-500" />
+                )}
+                <div>
+                  <h3 className="font-medium text-studio-text">
+                    {language === 'es' ? 'Firma de Participantes' : 'Participant Signatures'}
+                  </h3>
+                  <p className="text-sm text-studio-text-muted">
+                    {signatureEnabled 
+                      ? (language === 'es' ? 'Las firmas están habilitadas' : 'Signatures are enabled')
+                      : (language === 'es' ? 'Las firmas están deshabilitadas' : 'Signatures are disabled')
+                    }
+                  </p>
+                </div>
+              </div>
+              <Button
+                variant={signatureEnabled ? "destructive" : "default"}
+                onClick={handleToggleSignature}
+                className="flex items-center gap-2"
+              >
+                {signatureEnabled ? (
+                  <>
+                    <Lock className="h-4 w-4" />
+                    {language === 'es' ? 'Deshabilitar' : 'Disable'}
+                  </>
+                ) : (
+                  <>
+                    <Unlock className="h-4 w-4" />
+                    {language === 'es' ? 'Habilitar' : 'Enable'}
+                  </>
+                )}
+              </Button>
             </div>
 
             {/* Search */}
@@ -334,6 +383,40 @@ export default function InvestigatorConsentDashboard({
         title={t('consent.dashboard.reauth.title')}
         description={t('consent.dashboard.reauth.description')}
       />
+
+      {/* Confirmation Dialog */}
+      <Dialog open={showConfirmationDialog} onOpenChange={setShowConfirmationDialog}>
+        <DialogContent className="max-w-md bg-studio-surface border-studio-border">
+          <DialogHeader>
+            <DialogTitle className="text-studio-text">
+              {language === 'es' ? 'Configuración Actualizada' : 'Settings Updated'}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="py-4">
+            <Alert className="border-studio-border">
+              <CheckCircle className="h-4 w-4" />
+              <AlertDescription className="text-studio-text">
+                {signatureEnabled 
+                  ? (language === 'es' 
+                      ? 'Las firmas de participantes han sido habilitadas exitosamente.' 
+                      : 'Participant signatures have been enabled successfully.')
+                  : (language === 'es' 
+                      ? 'Las firmas de participantes han sido deshabilitadas exitosamente.' 
+                      : 'Participant signatures have been disabled successfully.')
+                }
+              </AlertDescription>
+            </Alert>
+          </div>
+          <div className="flex justify-end">
+            <Button 
+              onClick={() => setShowConfirmationDialog(false)}
+              className="bg-studio-accent text-white hover:bg-studio-accent/90"
+            >
+              {language === 'es' ? 'Entendido' : 'OK'}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
