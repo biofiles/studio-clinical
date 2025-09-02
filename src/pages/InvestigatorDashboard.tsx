@@ -290,7 +290,7 @@ const InvestigatorDashboard = () => {
 
           <Card className="bg-studio-surface border-studio-border">
             <CardHeader>
-              <CardTitle className="text-studio-text">{language === 'es' ? 'Visitas' : 'Visits'}</CardTitle>
+              <CardTitle className="text-studio-text">{t('dashboard.visits')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
