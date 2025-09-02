@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import Header from "@/components/Header";
-import { Users, FileCheck, AlertTriangle, BarChart3, Calendar, UserCheck, MessageCircle, Download, Settings, QrCode, Globe, Database } from "lucide-react";
+import { Users, FileCheck, AlertTriangle, BarChart3, Calendar, UserCheck, Sparkles, Download, Settings, QrCode, Globe, Database } from "lucide-react";
 import ParticipantList from "@/components/ParticipantList";
 import AIChatbot from "@/components/AIChatbot";
 import CalendarManagement from "@/components/CalendarManagement";
@@ -372,9 +372,12 @@ const InvestigatorDashboard = () => {
 
       {/* AI Chatbot Button */}
       <div className="fixed bottom-6 right-6">
-        <Button onClick={() => setShowChatbot(true)} className="h-12 px-4 rounded-full bg-primary hover:bg-primary/90 shadow-lg flex items-center space-x-2">
-          <MessageCircle className="h-5 w-5" />
-          <span className="font-medium">{t('ai.virtual.assistant')}</span>
+        <Button onClick={() => setShowChatbot(true)} className="h-16 px-4 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg flex items-center space-x-3">
+          <Sparkles className="h-5 w-5 text-white flex-shrink-0" />
+          <div className="flex flex-col text-white">
+            <span className="text-xs font-medium leading-tight">Asistente</span>
+            <span className="text-xs font-medium leading-tight">Virtual</span>
+          </div>
         </Button>
       </div>
 
