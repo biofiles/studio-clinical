@@ -290,7 +290,7 @@ const InvestigatorDashboard = () => {
 
           <Card className="bg-studio-surface border-studio-border">
             <CardHeader>
-              <CardTitle className="text-studio-text">{t('dashboard.visits')}</CardTitle>
+              <CardTitle className="text-studio-text">{t('dashboard.site.visits')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
